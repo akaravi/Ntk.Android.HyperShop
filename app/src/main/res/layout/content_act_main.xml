@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="ltr">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/RecyclerToolbarActMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" />
+
+    <ntk.android.academy.library.ahbottomnavigation.AHBottomNavigation
+        android:id="@+id/bottomNavMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+
+    <View
+        android:id="@+id/LineBottomActMain"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_above="@id/bottomNavMenu"
+        android:background="@color/colorAccent" />
+
+    <ntk.android.academy.adapter.AdPager
+        android:id="@+id/ViewPagerContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/LineBottomActMain"
+        android:layout_below="@id/RecyclerToolbarActMain" />
+
+</RelativeLayout>

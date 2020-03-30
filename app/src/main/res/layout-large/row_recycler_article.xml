@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootMenu"
+    android:layout_width="170dp"
+    android:layout_height="250dp"
+    android:layout_marginStart="3dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="3dp"
+    android:layoutDirection="ltr"
+    android:orientation="vertical"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="0dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/BottomRowRecyclerMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#f9f8f8">
+
+            <RatingBar
+                android:id="@+id/ratingBarRowRecyclerMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:isIndicator="true"
+                android:layoutDirection="rtl"
+                android:progressDrawable="@drawable/rating_bar_layer"
+                android:rating="3" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="30dp"
+                    android:alpha=".5"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_eye" />
+
+                <TextView
+                    android:id="@+id/lblLikeRowRecyclerMenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="125"
+                    android:textColor="@color/colorAccent"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/BottomRowRecyclerMenu">
+
+            <ImageView
+                android:id="@+id/imgRowRecyclerMenu"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/lblNameRowRecyclerMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imgRowRecyclerMenu"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="7dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="@color/colorMenu" />
+
+            <ProgressBar
+                android:id="@+id/ProgressRecyclerMenu"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
