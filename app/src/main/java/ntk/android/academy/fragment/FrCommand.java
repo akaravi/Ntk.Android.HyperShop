@@ -28,6 +28,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import ntk.android.academy.R;
 import ntk.android.academy.adapter.AdCategory;
+import ntk.android.academy.adapter.AdCategoryHyper;
 import ntk.android.academy.config.ConfigRestHeader;
 import ntk.android.academy.config.ConfigStaticValue;
 import ntk.android.academy.utill.AppUtill;
@@ -35,6 +36,10 @@ import ntk.android.academy.utill.FontManager;
 import ntk.base.api.article.interfase.IArticle;
 import ntk.base.api.article.model.ArticleCategoryRequest;
 import ntk.base.api.article.model.ArticleCategoryResponse;
+import ntk.base.api.hyperShop.entity.HyperShopCategory;
+import ntk.base.api.hyperShop.interfase.IHyperShop;
+import ntk.base.api.hyperShop.model.HyperShopCategoryListRequest;
+import ntk.base.api.hyperShop.model.HyperShopCategoryResponse;
 import ntk.base.api.utill.RetrofitManager;
 
 public class FrCommand extends Fragment {
@@ -90,23 +95,24 @@ public class FrCommand extends Fragment {
 
     private void HandelRest() {
         RetrofitManager manager = new RetrofitManager(getContext());
-        IArticle iArticle = manager.getCachedRetrofit(configStaticValue.GetApiBaseUrl()).create(IArticle.class);
+//        IArticle iArticle = manager.getCachedRetrofit(configStaticValue.GetApiBaseUrl()).create(IArticle.class);
+        IHyperShop iHyperShop = manager.getRetrofitUnCached(configStaticValue.GetApiBaseUrl()).create(IHyperShop.class);
         Map<String, String> headers = new ConfigRestHeader().GetHeaders(getContext());
 
-        ArticleCategoryRequest request = new ArticleCategoryRequest();
-        request.RowPerPage = 20;
-        Observable<ArticleCategoryResponse> call = iArticle.GetCategoryList(headers, request);
-        call.observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<ArticleCategoryResponse>() {
+        HyperShopCategoryListRequest listRequest = new HyperShopCategoryListRequest();
+        listRequest.RowPerPage = 20;
+        Observable<HyperShopCategoryResponse> callHyper = iHyperShop.GetCategoryList(headers, listRequest);
+        callHyper.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<HyperShopCategoryResponse>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(ArticleCategoryResponse articleCategoryResponse) {
-                        AdCategory adapter = new AdCategory(getContext(), articleCategoryResponse.ListItems);
+                    public void onNext(HyperShopCategoryResponse hyperShopCategoryResponse) {
+                        AdCategoryHyper adapter = new AdCategoryHyper(getContext(), hyperShopCategoryResponse.ListItems);
                         Rv.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
                         Loading.setVisibility(View.GONE);
@@ -124,6 +130,38 @@ public class FrCommand extends Fragment {
 
                     }
                 });
+//        ArticleCategoryRequest request = new ArticleCategoryRequest();
+//        request.RowPerPage = 20;
+//
+//        Observable<ArticleCategoryResponse> call = iArticle.GetCategoryList(headers, request);
+//        call.observeOn(AndroidSchedulers.mainThread())
+//                .subscribeOn(Schedulers.io())
+//                .subscribe(new Observer<ArticleCategoryResponse>() {
+//                    @Override
+//                    public void onSubscribe(Disposable d) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(ArticleCategoryResponse articleCategoryResponse) {
+//                        AdCategory adapter = new AdCategory(getContext(), articleCategoryResponse.ListItems);
+//                        Rv.setAdapter(adapter);
+//                        adapter.notifyDataSetChanged();
+//                        Loading.setVisibility(View.GONE);
+//                        Rv.setVisibility(View.VISIBLE);
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        Loading.setVisibility(View.GONE);
+//                        Toasty.error(getContext(), "خطای سامانه مجددا تلاش کنیدِ", Toasty.LENGTH_LONG, true).show();
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
     }
 
 }

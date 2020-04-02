@@ -17,13 +17,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="false"
-        tools:replace="android:supportsRtl"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:supportsRtl">
         <activity
             android:name=".activity.ActSplash"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar">
+            android:theme="@style/NoActionBar"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -32,83 +33,108 @@
         <activity
             android:name=".activity.ActIntro"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.ActMain"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
+            android:theme="@style/NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.ActDetail"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
+            android:theme="@style/NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.ActArticleContentList"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
+            android:theme="@style/NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.ActSearch"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
+            android:theme="@style/NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.ActPhotoGallery"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.ActRegister"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.ActLogin"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.ActAbout"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.ActSupport"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
+            android:theme="@style/NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.ActSendTicket"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
+            android:theme="@style/NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.ActNews"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
+            android:theme="@style/NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.ActBlog"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
+            android:theme="@style/NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.ActPooling"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
+            android:theme="@style/NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.ActDetailPooling"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
+            android:theme="@style/NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.ActInbox"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
+            android:theme="@style/NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.ActDetailNews"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
+            android:theme="@style/NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.ActDetailBlog"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
+            android:theme="@style/NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.ActFaq"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
+            android:theme="@style/NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.ActTicketAnswer"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
+            android:theme="@style/NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.ActHyperContentList"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
 
         <service android:name=".service.SeFirebase">
             <intent-filter>

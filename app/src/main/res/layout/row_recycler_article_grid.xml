@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rootMenu"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
+    android:layout_height="270dp"
     android:layout_marginStart="3dp"
     android:layout_marginTop="10dp"
     android:layout_marginEnd="3dp"
@@ -83,6 +83,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/imgRowRecyclerMenu"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="7dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="@color/colorMenu" />
+
+            <TextView
+                android:id="@+id/lblPriceRowRecyclerMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/lblNameRowRecyclerMenu"
                 android:layout_marginLeft="7dp"
                 android:layout_marginTop="1dp"
                 android:layout_marginRight="7dp"
