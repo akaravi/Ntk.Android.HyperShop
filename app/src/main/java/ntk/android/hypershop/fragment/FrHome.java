@@ -74,6 +74,7 @@ public class FrHome extends Fragment {
     }
 
     private void SetDataHome() {
+        Loading.setVisibility(View.GONE);
         Theme theme = new Gson().fromJson(EasyPreference.with(getContext()).getString("Theme", ""), Theme.class);
         if (theme == null) return;
         AdHome adapter = new AdHome(getContext(), theme.Childs);
@@ -81,7 +82,6 @@ public class FrHome extends Fragment {
         adapter.notifyDataSetChanged();
         RvHome.scheduleLayoutAnimation();
         RvHome.setItemViewCacheSize(theme.Childs.size());
-        Loading.setVisibility(View.GONE);
         RvHome.setVisibility(View.VISIBLE);
     }
 }

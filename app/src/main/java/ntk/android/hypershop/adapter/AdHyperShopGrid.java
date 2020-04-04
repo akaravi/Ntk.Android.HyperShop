@@ -27,6 +27,7 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import ntk.android.hypershop.R;
 import ntk.android.hypershop.activity.ActDetail;
+import ntk.android.hypershop.activity.ActDetailHyperShop;
 import ntk.android.hypershop.utill.FontManager;
 import ntk.base.api.article.entity.ArticleContent;
 import ntk.base.api.article.model.ArticleContentViewRequest;
@@ -79,7 +80,7 @@ public class AdHyperShopGrid extends RecyclerView.Adapter<AdHyperShopGrid.ViewHo
         });
         holder.Rate.setRating(1);
         holder.Root.setOnClickListener(view -> {
-            Intent intent = new Intent(context, ActDetail.class);
+            Intent intent = new Intent(context, ActDetailHyperShop.class);
             HyperShopContentViewRequest request = new HyperShopContentViewRequest();
             request.code = arrayList.get(position).code;
             intent.putExtra("Request", new Gson().toJson(request));

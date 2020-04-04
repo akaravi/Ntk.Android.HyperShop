@@ -74,6 +74,10 @@ import ntk.base.api.article.model.ArticleContentViewRequest;
 import ntk.base.api.baseModel.ErrorException;
 import ntk.base.api.baseModel.Filters;
 import ntk.base.api.core.entity.CoreMain;
+import ntk.base.api.hyperShop.entity.HyperShopContent;
+import ntk.base.api.hyperShop.interfase.IHyperShop;
+import ntk.base.api.hyperShop.model.HyperShopContentResponse;
+import ntk.base.api.hyperShop.model.HyperShopContentViewRequest;
 import ntk.base.api.utill.RetrofitManager;
 
 public class ActDetailHyperShop extends AppCompatActivity {
@@ -84,21 +88,11 @@ public class ActDetailHyperShop extends AppCompatActivity {
     @BindView(R.id.rowProgressActDetail)
     LinearLayout Loading;
 
-    @BindViews({R.id.lblTitleActDetail,
-            R.id.lblNameCommandActDetail,
-            R.id.lblKeySeenActDetail,
-            R.id.lblValueSeenActDetail,
-            R.id.lblPhotoExtraActDetail,
-            R.id.lblCalActDetail,
-            R.id.lblTimerOne,
-            R.id.lblTimerTwo,
-            R.id.lblTimerThree,
-            R.id.lblTimerFour,
-            R.id.lblTimerFive,
-            R.id.lblTimerSix,
-            R.id.lblMenuActDetail,
-            R.id.lblMenuTwoActDetail,
+    @BindViews({
+            R.id.lblTitleActDetail,
+            R.id.lblDescriptionActDetailHyperShop,
             R.id.lblCommentActDetail,
+            R.id.lblMenuTwoActDetail,
             R.id.lblProgressActDetail
     })
     List<TextView> Lbls;
@@ -106,41 +100,30 @@ public class ActDetailHyperShop extends AppCompatActivity {
     @BindView(R.id.imgHeaderActDetail)
     ImageView ImgHeader;
 
-    @BindView(R.id.recyclerMenuActDetail)
-    RecyclerView RvSimilarArticle;
-
     @BindView(R.id.recyclerMenuTwoActDetail)
     RecyclerView RvSimilarCategory;
-
-    @BindView(R.id.WebViewActDetail)
-    WebView webView;
-
-    @BindView(R.id.recyclerTabActDetail)
-    RecyclerView RvTab;
 
     @BindView(R.id.recyclerCommentActDetail)
     RecyclerView RvComment;
 
-    @BindView(R.id.ratingBarActDetail)
-    RatingBar Rate;
-
     @BindView(R.id.PageActDetail)
     LinearLayout Page;
-
 
     @BindView(R.id.mainLayoutActDetail)
     CoordinatorLayout layout;
 
+    @BindView(R.id.btnOrderActDetailHyperShop)
+    Button Btn;
+
     private String RequestStr;
-    private ArticleContentResponse model;
-    private ArticleContentOtherInfoResponse Info;
-    private ArticleContentViewRequest Request;
+    private HyperShopContentResponse model;
+    private HyperShopContentViewRequest Request;
     private ConfigStaticValue configStaticValue;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_detail);
+        setContentView(R.layout.act_detail_hypershop);
         ButterKnife.bind(this);
         configStaticValue = new ConfigStaticValue(this);
         init();
@@ -151,143 +134,43 @@ public class ActDetailHyperShop extends AppCompatActivity {
         for (TextView tv : Lbls) {
             tv.setTypeface(FontManager.GetTypeface(this, FontManager.IranSans));
         }
+        Btn.setTypeface(FontManager.GetTypeface(this, FontManager.IranSans));
         Progress.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setBuiltInZoomControls(true);
-        RvTab.setHasFixedSize(true);
-        RvTab.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
         RequestStr = getIntent().getExtras().getString("Request");
-        Request = new Gson().fromJson(RequestStr, ArticleContentViewRequest.class);
+        Request = new Gson().fromJson(RequestStr, HyperShopContentViewRequest.class);
         HandelDataContent(Request);
         Loading.setVisibility(View.VISIBLE);
 
         RvComment.setHasFixedSize(true);
         RvComment.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        RvSimilarArticle.setHasFixedSize(true);
-        RvSimilarArticle.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
-
         RvSimilarCategory.setHasFixedSize(true);
         RvSimilarCategory.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
-
-        Rate.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                if (!fromUser) return;
-
-                if (AppUtill.isNetworkAvailable(ActDetailHyperShop.this)) {
-                    ArticleContentViewRequest request = new ArticleContentViewRequest();
-                    request.Id = Request.Id;
-                    request.ActionClientOrder = 55;
-                    if (rating == 0.5) {
-                        request.ScorePercent = 10;
-                    }
-                    if (rating == 1) {
-                        request.ScorePercent = 20;
-                    }
-                    if (rating == 1.5) {
-                        request.ScorePercent = 30;
-                    }
-                    if (rating == 2) {
-                        request.ScorePercent = 40;
-                    }
-                    if (rating == 2.5) {
-                        request.ScorePercent = 50;
-                    }
-                    if (rating == 3) {
-                        request.ScorePercent = 60;
-                    }
-                    if (rating == 3.5) {
-                        request.ScorePercent = 70;
-                    }
-                    if (rating == 4) {
-                        request.ScorePercent = 80;
-                    }
-                    if (rating == 4.5) {
-                        request.ScorePercent = 90;
-                    }
-                    if (rating == 5) {
-                        request.ScorePercent = 100;
-                    }
-                    RetrofitManager manager = new RetrofitManager(ActDetailHyperShop.this);
-                    IArticle iArticle = manager.getRetrofitUnCached(new ConfigStaticValue(ActDetailHyperShop.this).GetApiBaseUrl()).create(IArticle.class);
-                    Map<String, String> headers = new ConfigRestHeader().GetHeaders(ActDetailHyperShop.this);
-
-                    Observable<ArticleContentResponse> Call = iArticle.GetContentView(headers, request);
-                    Call.observeOn(AndroidSchedulers.mainThread())
-                            .subscribeOn(Schedulers.io())
-                            .subscribe(new Observer<ArticleContentResponse>() {
-                                @Override
-                                public void onSubscribe(Disposable d) {
-
-                                }
-
-                                @Override
-                                public void onNext(ArticleContentResponse response) {
-                                    Loading.setVisibility(View.GONE);
-                                    if (response.IsSuccess) {
-                                        Toasty.success(ActDetailHyperShop.this, "نظر شمابا موفقیت ثبت گردید").show();
-                                    } else {
-                                        Toasty.warning(ActDetailHyperShop.this, response.ErrorMessage).show();
-                                    }
-                                }
-
-                                @Override
-                                public void onError(Throwable e) {
-                                    Loading.setVisibility(View.GONE);
-                                    Snackbar.make(layout, "خطای سامانه مجددا تلاش کنید", Snackbar.LENGTH_INDEFINITE).setAction("تلاش مجددا", new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            init();
-                                        }
-                                    }).show();
-                                }
-
-                                @Override
-                                public void onComplete() {
-
-                                }
-                            });
-                } else {
-                    Loading.setVisibility(View.GONE);
-                    Snackbar.make(layout, "عدم دسترسی به اینترنت", Snackbar.LENGTH_INDEFINITE).setAction("تلاش مجددا", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            init();
-                        }
-                    }).show();
-                }
-            }
-        });
     }
 
 
-    private void HandelDataContent(ArticleContentViewRequest request) {
+    private void HandelDataContent(HyperShopContentViewRequest request) {
         if (AppUtill.isNetworkAvailable(this)) {
             RetrofitManager retro = new RetrofitManager(this);
-            IArticle iArticle = retro.getRetrofitUnCached(configStaticValue.GetApiBaseUrl()).create(IArticle.class);
+            IHyperShop iHyperShop = retro.getCachedRetrofit(configStaticValue.GetApiBaseUrl()).create(IHyperShop.class);
             Map<String, String> headers = new ConfigRestHeader().GetHeaders(this);
 
-            Observable<ArticleContentResponse> call = iArticle.GetContentView(headers, request);
+            Observable<HyperShopContentResponse> call = iHyperShop.GetContentView(headers, request);
             call.observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
-                    .subscribe(new Observer<ArticleContentResponse>() {
+                    .subscribe(new Observer<HyperShopContentResponse>() {
                         @Override
                         public void onSubscribe(Disposable d) {
 
                         }
 
                         @Override
-                        public void onNext(ArticleContentResponse articleContentResponse) {
-                            model = articleContentResponse;
+                        public void onNext(HyperShopContentResponse response) {
+                            model = response;
                             if (model.Item != null) {
                                 SetData(model);
-                                HandelSimilary(Request.Id);
-                                HandelSimilaryCategory(Request.Id);
-                                if (Request.Id > 0) {
-                                    HandelDataContentOtherInfo(Request.Id);
-                                    HandelDataComment(Request.Id);
-                                }
+//                                HandelSimilary(Request.Id);
+//                                HandelSimilaryCategory(Request.Id);
                             }
                             Loading.setVisibility(View.GONE);
                             Page.setVisibility(View.VISIBLE);
@@ -297,56 +180,6 @@ public class ActDetailHyperShop extends AppCompatActivity {
                         public void onError(Throwable e) {
                             Loading.setVisibility(View.GONE);
                             Toasty.warning(ActDetailHyperShop.this, "خطای سامانه", Toasty.LENGTH_LONG, true).show();
-                        }
-
-                        @Override
-                        public void onComplete() {
-
-                        }
-                    });
-        } else {
-            Snackbar.make(layout, "عدم دسترسی به اینترنت", Snackbar.LENGTH_INDEFINITE).setAction("تلاش مجددا", new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    init();
-                }
-            }).show();
-        }
-    }
-
-    private void HandelSimilary(long id) {
-        if (AppUtill.isNetworkAvailable(this)) {
-            RetrofitManager manager = new RetrofitManager(this);
-            IArticle iArticle = manager.getCachedRetrofit(new ConfigStaticValue(this).GetApiBaseUrl()).create(IArticle.class);
-            Map<String, String> headers = new ConfigRestHeader().GetHeaders(this);
-
-            ArticleContentSimilarListRequest request = new ArticleContentSimilarListRequest();
-            request.LinkContetnId = id;
-
-            Observable<ArticleContentResponse> call = iArticle.GetContentSimilarList(headers, request);
-            call.observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .subscribe(new Observer<ArticleContentResponse>() {
-                        @Override
-                        public void onSubscribe(Disposable d) {
-
-                        }
-
-                        @Override
-                        public void onNext(ArticleContentResponse response) {
-                            if (response.ListItems.size() == 0) {
-                                findViewById(R.id.RowSimilaryActDetail).setVisibility(View.GONE);
-                            } else {
-                                AdArticle adapter = new AdArticle(ActDetailHyperShop.this, response.ListItems);
-                                RvSimilarArticle.setAdapter(adapter);
-                                adapter.notifyDataSetChanged();
-                                findViewById(R.id.RowSimilaryActDetail).setVisibility(View.VISIBLE);
-                            }
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-
                         }
 
                         @Override
@@ -469,130 +302,12 @@ public class ActDetailHyperShop extends AppCompatActivity {
         }
     }
 
-    private void HandelDataContentOtherInfo(long ContentId) {
-
-        List<Filters> filters = new ArrayList<>();
-        ArticleContentOtherInfoRequest Request = new ArticleContentOtherInfoRequest();
-        Filters f = new Filters();
-        f.PropertyName = "LinkContentId";
-        f.IntValue1 = ContentId;
-        filters.add(f);
-        Request.filters = filters;
-        RetrofitManager retro = new RetrofitManager(this);
-        IArticle iArticle = retro.getRetrofitUnCached(configStaticValue.GetApiBaseUrl()).create(IArticle.class);
-        Map<String, String> headers = new ConfigRestHeader().GetHeaders(this);
-
-
-        Observable<ArticleContentOtherInfoResponse> call = iArticle.GetContentOtherInfoList(headers, Request);
-        call.observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<ArticleContentOtherInfoResponse>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(ArticleContentOtherInfoResponse articleContentOtherInfoResponse) {
-                        SetDataOtherinfo(articleContentOtherInfoResponse);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Toasty.warning(ActDetailHyperShop.this, "خطای سامانه", Toasty.LENGTH_LONG, true).show();
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-
-
-    }
-
-    private void SetDataOtherinfo(ArticleContentOtherInfoResponse model) {
-        Info = model;
-        if (model.ListItems == null || model.ListItems.size() == 0) {
-            findViewById(R.id.RowTimeActDetail).setVisibility(View.GONE);
-            LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            p.weight = 3;
-            return;
-        }
-        findViewById(R.id.RowTimeActDetail).setVisibility(View.GONE);
-        List<ArticleContentOtherInfo> Info = new ArrayList<>();
-        ArticleContentOtherInfo i = new ArticleContentOtherInfo();
-        i.Title = "طرز تهیه";
-        i.TypeId = 0;
-        i.HtmlBody = this.model.Item.Body;
-        Info.add(i);
-
-        for (ArticleContentOtherInfo ai : model.ListItems) {
-            switch (ai.TypeId) {
-                case 21:
-                    Lbls.get(7).setText(ai.Title);
-                    ai.HtmlBody = ai.HtmlBody.replace("<p>", "");
-                    ai.HtmlBody = ai.HtmlBody.replace("</p>", "");
-                    Lbls.get(6).setText(Html.fromHtml(ai.HtmlBody));
-                    findViewById(R.id.RowTimeActDetail).setVisibility(View.VISIBLE);
-                    break;
-                case 22:
-                    Lbls.get(9).setText(ai.Title);
-                    ai.HtmlBody = ai.HtmlBody.replace("<p>", "");
-                    ai.HtmlBody = ai.HtmlBody.replace("</p>", "");
-                    Lbls.get(8).setText(Html.fromHtml(ai.HtmlBody));
-                    findViewById(R.id.RowTimeActDetail).setVisibility(View.VISIBLE);
-                    break;
-                case 23:
-                    Lbls.get(11).setText(ai.Title);
-                    ai.HtmlBody = ai.HtmlBody.replace("<p>", "");
-                    ai.HtmlBody = ai.HtmlBody.replace("</p>", "");
-                    Lbls.get(10).setText(Html.fromHtml(ai.HtmlBody));
-                    findViewById(R.id.RowTimeActDetail).setVisibility(View.VISIBLE);
-                    break;
-                default:
-                    Info.add(ai);
-                    break;
-            }
-        }
-        AdTab adapter = new AdTab(ActDetailHyperShop.this, Info);
-        RvTab.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-    }
-
-    private void SetData(ArticleContentResponse model) {
-        double rating = 0.0;
-        int sumClick = model.Item.ScoreSumClick;
-        if (model.Item.ScoreSumClick == 0) sumClick = 1;
-        if (model.Item.ScoreSumPercent / sumClick > 0 && model.Item.ScoreSumPercent / sumClick <= 10) {
-            rating = 0.5;
-        } else if (model.Item.ScoreSumPercent / sumClick > 10 && model.Item.ScoreSumPercent / sumClick <= 20) {
-            rating = 1.0;
-        } else if (model.Item.ScoreSumPercent / sumClick > 20 && model.Item.ScoreSumPercent / sumClick <= 30) {
-            rating = 1.5;
-        } else if (model.Item.ScoreSumPercent / sumClick > 30 && model.Item.ScoreSumPercent / sumClick <= 40) {
-            rating = 2.0;
-        } else if (model.Item.ScoreSumPercent / sumClick > 40 && model.Item.ScoreSumPercent / sumClick <= 50) {
-            rating = 2.5;
-        } else if (model.Item.ScoreSumPercent / sumClick > 50 && model.Item.ScoreSumPercent / sumClick <= 60) {
-            rating = 3.0;
-        } else if (model.Item.ScoreSumPercent / sumClick > 60 && model.Item.ScoreSumPercent / sumClick <= 70) {
-            rating = 3.5;
-        } else if (model.Item.ScoreSumPercent / sumClick > 70 && model.Item.ScoreSumPercent / sumClick <= 80) {
-            rating = 4.0;
-        } else if (model.Item.ScoreSumPercent / sumClick > 80 && model.Item.ScoreSumPercent / sumClick <= 90) {
-            rating = 4.5;
-        } else if (model.Item.ScoreSumPercent / sumClick > 90) {
-            rating = 5.0;
-        }
-        Rate.setRating((float) rating);
-        ImageLoader.getInstance().displayImage(model.Item.imageSrc, ImgHeader);
-        Lbls.get(0).setText(model.Item.Title);
-        Lbls.get(1).setText(model.Item.Title);
-        Lbls.get(3).setText(String.valueOf(model.Item.viewCount));
-        if (model.Item.Favorited) {
-            ((ImageView) findViewById(R.id.imgHeartActDetail)).setImageResource(R.drawable.ic_fav_full);
-        }
+    private void SetData(HyperShopContentResponse model) {
+        ImageLoader.getInstance().displayImage(model.Item.image, ImgHeader);
+        Lbls.get(0).setText(model.Item.name);
+        Lbls.get(1).setText(model.Item.memo);
+        ((ImageView) findViewById(R.id.imgHeartActDetail)).setImageResource(R.drawable.ic_fav);
+        Btn.setText("قیمت: " + model.Item.price + " اضافه کردن به سبد خرید");
     }
 
     @OnClick(R.id.imgBackActDetail)
@@ -600,38 +315,6 @@ public class ActDetailHyperShop extends AppCompatActivity {
         finish();
     }
 
-    @OnClick(R.id.RowGalleryActDetail)
-    public void ClickGalley() {
-        if (model.Item.LinkFileIdsSrc != null && model.Item.LinkFileIdsSrc.size() != 0) {
-            String request = "";
-            for (String s : model.Item.LinkFileIdsSrc) {
-                if (!request.equals("")) {
-                    request = request + "@";
-                }
-                request = request + s;
-            }
-            Intent intent = new Intent(this, ActPhotoGallery.class);
-            intent.putExtra("Request", request);
-            startActivity(intent);
-        }
-    }
-
-    @Subscribe
-    public void EventHtmlBody(EvHtmlBody event) {
-        webView.loadData("<html dir=\"rtl\" lang=\"\"><body>" + event.GetMessage() + "</body></html>", "text/html; charset=utf-8", "UTF-8");
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
-    }
 
     @OnClick(R.id.imgCommentActDetail)
     public void ClickCommentAdd() {
@@ -665,50 +348,50 @@ public class ActDetailHyperShop extends AppCompatActivity {
                     if (Txt[1].getText().toString().isEmpty()) {
                         Toast.makeText(ActDetailHyperShop.this, "لطفا مقادیر را وارد نمایید", Toast.LENGTH_SHORT).show();
                     } else {
-                        ArticleCommentAddRequest add = new ArticleCommentAddRequest();
-                        add.Writer = Txt[0].getText().toString();
-                        add.Comment = Txt[1].getText().toString();
-                        add.LinkContentId = Request.Id;
-                        RetrofitManager retro = new RetrofitManager(this);
-                        IArticle iArticle = retro.getRetrofitUnCached(configStaticValue.GetApiBaseUrl()).create(IArticle.class);
-                        Map<String, String> headers = new ConfigRestHeader().GetHeaders(this);
-
-
-                        Observable<ArticleCommentResponse> call = iArticle.SetComment(headers, add);
-                        call.subscribeOn(Schedulers.io())
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(new Observer<ErrorException>() {
-                                    @Override
-                                    public void onSubscribe(Disposable d) {
-
-                                    }
-
-                                    @Override
-                                    public void onNext(ErrorException e) {
-                                        if (e.IsSuccess) {
-                                            HandelDataComment(Request.Id);
-                                            dialog.dismiss();
-                                            Toasty.success(ActDetailHyperShop.this, "نظر شما با موفقیت ثبت شد").show();
-                                        } else {
-                                            Toasty.warning(ActDetailHyperShop.this, "لطفا مجددا تلاش کنید").show();
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onError(Throwable e) {
-                                        Snackbar.make(layout, "خطای سامانه مجددا تلاش کنید", Snackbar.LENGTH_INDEFINITE).setAction("تلاش مجددا", new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                init();
-                                            }
-                                        }).show();
-                                    }
-
-                                    @Override
-                                    public void onComplete() {
-
-                                    }
-                                });
+//                        ArticleCommentAddRequest add = new ArticleCommentAddRequest();
+//                        add.Writer = Txt[0].getText().toString();
+//                        add.Comment = Txt[1].getText().toString();
+//                        add.LinkContentId = Request.code;
+//                        RetrofitManager retro = new RetrofitManager(this);
+//                        IArticle iArticle = retro.getRetrofitUnCached(configStaticValue.GetApiBaseUrl()).create(IArticle.class);
+//                        Map<String, String> headers = new ConfigRestHeader().GetHeaders(this);
+//
+//
+//                        Observable<ArticleCommentResponse> call = iArticle.SetComment(headers, add);
+//                        call.subscribeOn(Schedulers.io())
+//                                .observeOn(AndroidSchedulers.mainThread())
+//                                .subscribe(new Observer<ErrorException>() {
+//                                    @Override
+//                                    public void onSubscribe(Disposable d) {
+//
+//                                    }
+//
+//                                    @Override
+//                                    public void onNext(ErrorException e) {
+//                                        if (e.IsSuccess) {
+//                                            HandelDataComment(Request.Id);
+//                                            dialog.dismiss();
+//                                            Toasty.success(ActDetailHyperShop.this, "نظر شما با موفقیت ثبت شد").show();
+//                                        } else {
+//                                            Toasty.warning(ActDetailHyperShop.this, "لطفا مجددا تلاش کنید").show();
+//                                        }
+//                                    }
+//
+//                                    @Override
+//                                    public void onError(Throwable e) {
+//                                        Snackbar.make(layout, "خطای سامانه مجددا تلاش کنید", Snackbar.LENGTH_INDEFINITE).setAction("تلاش مجددا", new View.OnClickListener() {
+//                                            @Override
+//                                            public void onClick(View v) {
+//                                                init();
+//                                            }
+//                                        }).show();
+//                                    }
+//
+//                                    @Override
+//                                    public void onComplete() {
+//
+//                                    }
+//                                });
                     }
                 }
             });
@@ -725,130 +408,132 @@ public class ActDetailHyperShop extends AppCompatActivity {
 
     @OnClick(R.id.imgFavActDetail)
     public void ClickFav() {
-        if (!model.Item.Favorited) {
-            Fav();
+        if (!model.Item.status) {
+//            Fav();
+            ((ImageView) findViewById(R.id.imgHeartActDetail)).setImageResource(R.drawable.ic_fav_full);
         } else {
-            UnFav();
+//            UnFav();
+            ((ImageView) findViewById(R.id.imgHeartActDetail)).setImageResource(R.drawable.ic_fav);
         }
     }
 
-    private void UnFav() {
-        if (AppUtill.isNetworkAvailable(this)) {
-            RetrofitManager retro = new RetrofitManager(this);
-            IArticle iArticle = retro.getRetrofitUnCached(configStaticValue.GetApiBaseUrl()).create(IArticle.class);
-            Map<String, String> headers = new ConfigRestHeader().GetHeaders(this);
-
-            ArticleContentFavoriteRemoveRequest add = new ArticleContentFavoriteRemoveRequest();
-            add.Id = model.Item.Id;
-
-            Observable<ArticleContentFavoriteRemoveResponse> Call = iArticle.SetContentFavoriteRemove(headers, add);
-            Call.subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<ArticleContentFavoriteRemoveResponse>() {
-                        @Override
-                        public void onSubscribe(Disposable d) {
-
-                        }
-
-                        @Override
-                        public void onNext(ArticleContentFavoriteRemoveResponse e) {
-                            if (e.IsSuccess) {
-                                Toasty.success(ActDetailHyperShop.this, "با موفقیت ثبت شد").show();
-                                model.Item.Favorited = !model.Item.Favorited;
-                                if (model.Item.Favorited) {
-                                    ((ImageView) findViewById(R.id.imgHeartActDetail)).setImageResource(R.drawable.ic_fav_full);
-                                } else {
-                                    ((ImageView) findViewById(R.id.imgHeartActDetail)).setImageResource(R.drawable.ic_fav);
-                                }
-                            } else {
-                                Toasty.error(ActDetailHyperShop.this, e.ErrorMessage, Toast.LENGTH_LONG, true).show();
-                            }
-
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            Snackbar.make(layout, "خطای سامانه مجددا تلاش کنید", Snackbar.LENGTH_INDEFINITE).setAction("تلاش مجددا", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    init();
-                                }
-                            }).show();
-                        }
-
-                        @Override
-                        public void onComplete() {
-
-                        }
-                    });
-        } else {
-            Snackbar.make(layout, "عدم دسترسی به اینترنت", Snackbar.LENGTH_INDEFINITE).setAction("تلاش مجددا", new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    init();
-                }
-            }).show();
-        }
-    }
-
-    private void Fav() {
-        if (AppUtill.isNetworkAvailable(this)) {
-            RetrofitManager retro = new RetrofitManager(this);
-            IArticle iArticle = retro.getRetrofitUnCached(configStaticValue.GetApiBaseUrl()).create(IArticle.class);
-            Map<String, String> headers = new ConfigRestHeader().GetHeaders(this);
-
-            ArticleContentFavoriteAddRequest add = new ArticleContentFavoriteAddRequest();
-            add.Id = model.Item.Id;
-
-            Observable<ArticleContentFavoriteAddResponse> Call = iArticle.SetContentFavoriteAdd(headers, add);
-            Call.subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<ArticleContentFavoriteAddResponse>() {
-                        @Override
-                        public void onSubscribe(Disposable d) {
-
-                        }
-
-                        @Override
-                        public void onNext(ArticleContentFavoriteAddResponse e) {
-                            if (e.IsSuccess) {
-                                Toasty.success(ActDetailHyperShop.this, "با موفقیت ثبت شد").show();
-                                model.Item.Favorited = !model.Item.Favorited;
-                                if (model.Item.Favorited) {
-                                    ((ImageView) findViewById(R.id.imgHeartActDetail)).setImageResource(R.drawable.ic_fav_full);
-                                } else {
-                                    ((ImageView) findViewById(R.id.imgHeartActDetail)).setImageResource(R.drawable.ic_fav);
-                                }
-                            } else {
-                                Toasty.error(ActDetailHyperShop.this, e.ErrorMessage, Toast.LENGTH_LONG, true).show();
-                            }
-
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            Snackbar.make(layout, "خطای سامانه مجددا تلاش کنید", Snackbar.LENGTH_INDEFINITE).setAction("تلاش مجددا", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    init();
-                                }
-                            }).show();
-                        }
-
-                        @Override
-                        public void onComplete() {
-
-                        }
-                    });
-        } else {
-            Snackbar.make(layout, "عدم دسترسی به اینترنت", Snackbar.LENGTH_INDEFINITE).setAction("تلاش مجددا", new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    init();
-                }
-            }).show();
-        }
-    }
+//    private void UnFav() {
+//        if (AppUtill.isNetworkAvailable(this)) {
+//            RetrofitManager retro = new RetrofitManager(this);
+//            IArticle iArticle = retro.getRetrofitUnCached(configStaticValue.GetApiBaseUrl()).create(IArticle.class);
+//            Map<String, String> headers = new ConfigRestHeader().GetHeaders(this);
+//
+//            ArticleContentFavoriteRemoveRequest add = new ArticleContentFavoriteRemoveRequest();
+//            add.Id = model.Item.Id;
+//
+//            Observable<ArticleContentFavoriteRemoveResponse> Call = iArticle.SetContentFavoriteRemove(headers, add);
+//            Call.subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(new Observer<ArticleContentFavoriteRemoveResponse>() {
+//                        @Override
+//                        public void onSubscribe(Disposable d) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onNext(ArticleContentFavoriteRemoveResponse e) {
+//                            if (e.IsSuccess) {
+//                                Toasty.success(ActDetailHyperShop.this, "با موفقیت ثبت شد").show();
+//                                model.Item.Favorited = !model.Item.Favorited;
+//                                if (model.Item.Favorited) {
+//                                    ((ImageView) findViewById(R.id.imgHeartActDetail)).setImageResource(R.drawable.ic_fav_full);
+//                                } else {
+//                                    ((ImageView) findViewById(R.id.imgHeartActDetail)).setImageResource(R.drawable.ic_fav);
+//                                }
+//                            } else {
+//                                Toasty.error(ActDetailHyperShop.this, e.ErrorMessage, Toast.LENGTH_LONG, true).show();
+//                            }
+//
+//                        }
+//
+//                        @Override
+//                        public void onError(Throwable e) {
+//                            Snackbar.make(layout, "خطای سامانه مجددا تلاش کنید", Snackbar.LENGTH_INDEFINITE).setAction("تلاش مجددا", new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//                                    init();
+//                                }
+//                            }).show();
+//                        }
+//
+//                        @Override
+//                        public void onComplete() {
+//
+//                        }
+//                    });
+//        } else {
+//            Snackbar.make(layout, "عدم دسترسی به اینترنت", Snackbar.LENGTH_INDEFINITE).setAction("تلاش مجددا", new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    init();
+//                }
+//            }).show();
+//        }
+//    }
+//
+//    private void Fav() {
+//        if (AppUtill.isNetworkAvailable(this)) {
+//            RetrofitManager retro = new RetrofitManager(this);
+//            IArticle iArticle = retro.getRetrofitUnCached(configStaticValue.GetApiBaseUrl()).create(IArticle.class);
+//            Map<String, String> headers = new ConfigRestHeader().GetHeaders(this);
+//
+//            ArticleContentFavoriteAddRequest add = new ArticleContentFavoriteAddRequest();
+//            add.Id = model.Item.Id;
+//
+//            Observable<ArticleContentFavoriteAddResponse> Call = iArticle.SetContentFavoriteAdd(headers, add);
+//            Call.subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(new Observer<ArticleContentFavoriteAddResponse>() {
+//                        @Override
+//                        public void onSubscribe(Disposable d) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onNext(ArticleContentFavoriteAddResponse e) {
+//                            if (e.IsSuccess) {
+//                                Toasty.success(ActDetailHyperShop.this, "با موفقیت ثبت شد").show();
+//                                model.Item.Favorited = !model.Item.Favorited;
+//                                if (model.Item.Favorited) {
+//                                    ((ImageView) findViewById(R.id.imgHeartActDetail)).setImageResource(R.drawable.ic_fav_full);
+//                                } else {
+//                                    ((ImageView) findViewById(R.id.imgHeartActDetail)).setImageResource(R.drawable.ic_fav);
+//                                }
+//                            } else {
+//                                Toasty.error(ActDetailHyperShop.this, e.ErrorMessage, Toast.LENGTH_LONG, true).show();
+//                            }
+//
+//                        }
+//
+//                        @Override
+//                        public void onError(Throwable e) {
+//                            Snackbar.make(layout, "خطای سامانه مجددا تلاش کنید", Snackbar.LENGTH_INDEFINITE).setAction("تلاش مجددا", new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//                                    init();
+//                                }
+//                            }).show();
+//                        }
+//
+//                        @Override
+//                        public void onComplete() {
+//
+//                        }
+//                    });
+//        } else {
+//            Snackbar.make(layout, "عدم دسترسی به اینترنت", Snackbar.LENGTH_INDEFINITE).setAction("تلاش مجددا", new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    init();
+//                }
+//            }).show();
+//        }
+//    }
 
     @OnClick(R.id.imgShareActDetail)
     public void ClickShare() {
@@ -856,9 +541,9 @@ public class ActDetailHyperShop extends AppCompatActivity {
         CoreMain mcr = new Gson().fromJson(st, CoreMain.class);
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
-        String message = model.Item.Title + "\n" + model.Item.description + "\n";
-        if (model.Item.Body != null) {
-            message = message + Html.fromHtml(model.Item.Body
+        String message = model.Item.name + "\n" + model.Item.memo + "\n";
+        if (model.Item.memo != null) {
+            message = message + Html.fromHtml(model.Item.memo
                     .replace("<p>", "")
                     .replace("</p>", ""));
         }
@@ -866,15 +551,5 @@ public class ActDetailHyperShop extends AppCompatActivity {
         shareIntent.setType("text/txt");
         shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         this.startActivity(Intent.createChooser(shareIntent, "به اشتراک گزاری با...."));
-    }
-
-    @OnClick(R.id.playActDetail)
-    public void onPlayClick() {
-        Toasty.warning(ActDetailHyperShop.this, "موردی یافت نشد").show();
-    }
-
-    @OnClick(R.id.calActDetail)
-    public void onCalClick() {
-        Toasty.warning(ActDetailHyperShop.this, "موردی یافت نشد").show();
     }
 }

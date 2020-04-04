@@ -90,6 +90,7 @@ public class AdCategoryHyper extends RecyclerView.Adapter<AdCategoryHyper.ViewHo
             request.filters = filters;
             Intent intent = new Intent(context, ActHyperContentList.class);
             intent.putExtra("Request", new Gson().toJson(request));
+            intent.putExtra("Title", arrayList.get(position).name);
             context.startActivity(intent);
         });
 //        holder.ImgDrop.setOnClickListener(view -> {

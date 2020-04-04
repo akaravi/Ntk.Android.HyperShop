@@ -78,7 +78,7 @@ public class FrCommand extends Fragment {
         Rv.setHasFixedSize(true);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         Rv.setLayoutManager(manager);
-        Loading.setVisibility(View.VISIBLE);
+//        Loading.setVisibility(View.VISIBLE);
 
         HandelRest();
 
@@ -130,38 +130,6 @@ public class FrCommand extends Fragment {
 
                     }
                 });
-//        ArticleCategoryRequest request = new ArticleCategoryRequest();
-//        request.RowPerPage = 20;
-//
-//        Observable<ArticleCategoryResponse> call = iArticle.GetCategoryList(headers, request);
-//        call.observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.io())
-//                .subscribe(new Observer<ArticleCategoryResponse>() {
-//                    @Override
-//                    public void onSubscribe(Disposable d) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onNext(ArticleCategoryResponse articleCategoryResponse) {
-//                        AdCategory adapter = new AdCategory(getContext(), articleCategoryResponse.ListItems);
-//                        Rv.setAdapter(adapter);
-//                        adapter.notifyDataSetChanged();
-//                        Loading.setVisibility(View.GONE);
-//                        Rv.setVisibility(View.VISIBLE);
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        Loading.setVisibility(View.GONE);
-//                        Toasty.error(getContext(), "خطای سامانه مجددا تلاش کنیدِ", Toasty.LENGTH_LONG, true).show();
-//                    }
-//
-//                    @Override
-//                    public void onComplete() {
-//
-//                    }
-//                });
     }
 
 }

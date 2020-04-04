@@ -64,6 +64,7 @@ public class ActHyperContentList extends AppCompatActivity {
 
     private void init() {
         Lbl.setTypeface(FontManager.GetTypeface(this, FontManager.IranSans));
+        Lbl.setText(getIntent().getExtras().getString("Title"));
         Rv.setHasFixedSize(true);
         GridLayoutManager manager = new GridLayoutManager(this, 2);
         Rv.setLayoutManager(manager);
