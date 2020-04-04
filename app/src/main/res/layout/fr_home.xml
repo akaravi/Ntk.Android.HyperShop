@@ -15,7 +15,7 @@
         android:backgroundTint="@color/colorAccent"
         tools:targetApi="lollipop">
 
-        <ntk.android.academy.library.AnimatedRecyclerView
+        <ntk.android.hypershop.library.AnimatedRecyclerView
             android:id="@+id/RecyclerHome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

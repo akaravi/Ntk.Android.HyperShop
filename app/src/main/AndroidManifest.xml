@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="ntk.android.academy">
+    package="ntk.android.hypershop">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -154,7 +154,7 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="ntk.android.academy.APPNTK"
+            android:authorities="ntk.android.hypershop.APPNTK"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

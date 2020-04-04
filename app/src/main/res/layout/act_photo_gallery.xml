@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:layoutDirection="ltr">
 
-    <ntk.android.academy.library.scrollgallery.ScrollGalleryView
+    <ntk.android.hypershop.library.scrollgallery.ScrollGalleryView
         android:id="@+id/scroll_gallery_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

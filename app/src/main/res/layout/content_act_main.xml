@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:scrollbars="none" />
 
-    <ntk.android.academy.library.ahbottomnavigation.AHBottomNavigation
+    <ntk.android.hypershop.library.ahbottomnavigation.AHBottomNavigation
         android:id="@+id/bottomNavMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
         android:layout_above="@id/bottomNavMenu"
         android:background="@color/colorAccent" />
 
-    <ntk.android.academy.adapter.AdPager
+    <ntk.android.hypershop.adapter.AdPager
         android:id="@+id/ViewPagerContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

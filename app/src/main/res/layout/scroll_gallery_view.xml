@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ntk.android.academy.library.scrollgallery.HackyViewPager
+    <ntk.android.hypershop.library.scrollgallery.HackyViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
