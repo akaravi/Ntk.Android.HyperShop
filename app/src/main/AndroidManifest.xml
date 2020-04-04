@@ -135,6 +135,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar"
             tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.ActDetailHyperShop"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
 
         <service android:name=".service.SeFirebase">
             <intent-filter>
