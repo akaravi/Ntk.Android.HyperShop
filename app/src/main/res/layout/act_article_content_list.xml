@@ -45,7 +45,6 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="15dp"
             android:layout_toStartOf="@id/imgBackArticleContentList"
-            android:text="دستور آشپزی"
             android:textColor="@color/colorMenu"
             tools:ignore="HardcodedText" />
     </RelativeLayout>

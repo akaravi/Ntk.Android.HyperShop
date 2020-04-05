@@ -168,7 +168,6 @@ public class AdHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         };
         hoTag.RvTag.addOnScrollListener(scrollListener);
         hoTag.RvTag.setAdapter(adTag);
-
         RestCategory(1, hoTag, position);
 
     }
@@ -260,7 +259,6 @@ public class AdHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         String RequestStr = EasyPreference.with(context).getString("ArticleContentList", "");
         if (!RequestStr.equals("")) {
-            Log.i("likfvj", "ConfigArticle: " + RequestStr + "");
             ArticleContentResponse response = new Gson().fromJson(RequestStr, ArticleContentResponse.class);
             map_articles.get(position).addAll(response.ListItems);
             map_adapterArticle.get(position).notifyDataSetChanged();
