@@ -28,6 +28,8 @@ import io.reactivex.schedulers.Schedulers;
 import ntk.android.hypershop.R;
 import ntk.android.hypershop.activity.ActArticleContentList;
 import ntk.android.hypershop.adapter.AdArticle;
+import ntk.android.hypershop.adapter.AdHyperShopGrid;
+import ntk.android.hypershop.adapter.AdNews;
 import ntk.android.hypershop.adapter.AdTag;
 import ntk.android.hypershop.adapter.theme.holder.HoArticle;
 import ntk.android.hypershop.adapter.theme.holder.HoButton;
@@ -49,6 +51,8 @@ import ntk.base.api.article.model.ArticleTagRequest;
 import ntk.base.api.article.model.ArticleTagResponse;
 import ntk.base.api.baseModel.theme.ThemeChild;
 import ntk.base.api.baseModel.theme.ThemeChildConfig;
+import ntk.base.api.hyperShop.entity.HyperShopContent;
+import ntk.base.api.news.entity.NewsContent;
 import ntk.base.api.utill.RetrofitManager;
 import ss.com.bannerslider.banners.Banner;
 import ss.com.bannerslider.banners.RemoteBanner;
@@ -61,7 +65,11 @@ public class AdHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<ArticleTag> tags = new ArrayList<>();
     private AdTag adTag;
     private Map<Integer, List<ArticleContent>> map_articles = new HashMap<>();
-    private Map<Integer, AdArticle> map_adapter = new HashMap<>();
+    private Map<Integer, List<NewsContent>> map_news = new HashMap<>();
+    private Map<Integer, List<HyperShopContent>> map_hypershop = new HashMap<>();
+    private Map<Integer, AdArticle> map_adapterArticle = new HashMap<>();
+    private Map<Integer, AdNews> map_adapterNews = new HashMap<>();
+    private Map<Integer, AdHyperShopGrid> map_adapterHyperShop = new HashMap<>();
 
     private int TotalTag = 0, TotalArticle = 0;
 
@@ -73,8 +81,20 @@ public class AdHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             if (themes.get(i).LayoutName.equals("ArticleContentList")) {
                 List<ArticleContent> contents = new ArrayList<>();
                 map_articles.put(i, contents);
-                AdArticle adArticle = new AdArticle(context, contents);
-                map_adapter.put(i, adArticle);
+                AdArticle adnew = new AdArticle(context, contents);
+                map_adapterArticle.put(i, adnew);
+            }
+            else if (themes.get(i).LayoutName.equals("NewsContentList")) {
+                List<NewsContent> contents = new ArrayList<>();
+                map_news.put(i, contents);
+                AdNews adnew = new AdNews(context, contents);
+                map_adapterNews.put(i, adnew);
+            }
+            else if (themes.get(i).LayoutName.equals("HyperShopContentList")) {
+                List<HyperShopContent> contents = new ArrayList<>();
+                map_hypershop.put(i, contents);
+                AdHyperShopGrid adnew = new AdHyperShopGrid(context, contents);
+                map_adapterHyperShop.put(i, adnew);
             }
         }
     }
@@ -243,7 +263,7 @@ public class AdHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             Log.i("likfvj", "ConfigArticle: " + RequestStr + "");
             ArticleContentResponse response = new Gson().fromJson(RequestStr, ArticleContentResponse.class);
             map_articles.get(position).addAll(response.ListItems);
-            map_adapter.get(position).notifyDataSetChanged();
+            map_adapterArticle.get(position).notifyDataSetChanged();
             TotalArticle = response.TotalRowCount;
             hoArticle.RvMenu.setItemViewCacheSize(map_articles.get(position).size());
             hoArticle.Progress.setVisibility(View.GONE);
@@ -267,7 +287,7 @@ public class AdHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
         };
         hoArticle.RvMenu.addOnScrollListener(listener);
-        hoArticle.RvMenu.setAdapter(map_adapter.get(position));
+        hoArticle.RvMenu.setAdapter(map_adapterArticle.get(position));
         RestArticle(1, hoArticle, position);
     }
 
@@ -295,7 +315,7 @@ public class AdHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                             EasyPreference.with(context).addString("ArticleContentList", new Gson().toJson(articleContentResponse));
                         }
                         map_articles.get(position).addAll(articleContentResponse.ListItems);
-                        map_adapter.get(position).notifyDataSetChanged();
+                        map_adapterArticle.get(position).notifyDataSetChanged();
                         TotalArticle = articleContentResponse.TotalRowCount;
                         hoArticle.RvMenu.setItemViewCacheSize(map_articles.get(position).size());
                         hoArticle.Progress.setVisibility(View.GONE);
@@ -351,3 +371,4 @@ public class AdHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
 }
+

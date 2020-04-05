@@ -216,11 +216,7 @@ public class AHHelper {
 		Window w = unwrap(context).getWindow();
 		WindowManager.LayoutParams lp = w.getAttributes();
 		int flags = lp.flags;
-		if ((flags & WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION) == WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION) {
-			return true;
-		}
-
-		return false;
+		return (flags & WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION) == WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION;
 	}
 
 	/**

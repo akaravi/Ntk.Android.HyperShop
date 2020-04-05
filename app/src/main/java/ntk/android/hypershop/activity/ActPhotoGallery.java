@@ -34,7 +34,7 @@ public class ActPhotoGallery extends AppCompatActivity {
 
     private void init() {
         String Request = getIntent().getExtras().getString("Request");
-        String Links[] = Request.split("@");
+        String[] Links = Request.split("@");
         List<String> links = Arrays.asList(Links);
         List<MediaInfo> infos = new ArrayList<>(links.size());
         for (String url : links) infos.add(MediaInfo.mediaLoader(new DefaultImageLoader(url)));

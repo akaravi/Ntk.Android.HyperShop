@@ -120,11 +120,11 @@ public class ActMain extends AppCompatActivity implements AHBottomNavigation.OnT
         AHBottomNavigationItem BMI = new AHBottomNavigationItem("BMI", R.drawable.ic_one, R.color.colorMenu);
         AHBottomNavigationItem Favorite = new AHBottomNavigationItem("علاقه مندی", R.drawable.ic_two, R.color.colorMenu);
         AHBottomNavigationItem Home = new AHBottomNavigationItem("خانه", R.drawable.ic_three, R.color.colorMenu);
-        AHBottomNavigationItem Command = new AHBottomNavigationItem("دستور پخت", R.drawable.ic_five, R.color.colorMenu);
+        AHBottomNavigationItem Command = new AHBottomNavigationItem("فروشگاه", R.drawable.ic_buy, R.color.colorMenu);
         navigation.addItem(Command);
         navigation.addItem(Home);
-        navigation.addItem(Favorite);
-        navigation.addItem(BMI);
+        //navigation.addItem(Favorite);
+        //navigation.addItem(BMI);
 
         navigation.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
         navigation.setCurrentItem(1);
@@ -274,7 +274,7 @@ public class ActMain extends AppCompatActivity implements AHBottomNavigation.OnT
         ((TextView) dialog.findViewById(R.id.lbl1PernissionDialog)).setText("توجه");
         ((TextView) dialog.findViewById(R.id.lbl2PernissionDialog)).setTypeface(FontManager.GetTypeface(this, FontManager.IranSans));
         ((TextView) dialog.findViewById(R.id.lbl2PernissionDialog)).setText("نسخه جدید اپلیکیشن اومده دوست داری آبدیت بشه؟؟");
-        Button Ok = (Button) dialog.findViewById(R.id.btnOkPermissionDialog);
+        Button Ok = dialog.findViewById(R.id.btnOkPermissionDialog);
         Ok.setTypeface(FontManager.GetTypeface(this, FontManager.IranSans));
         Ok.setOnClickListener(view1 -> {
             Intent i = new Intent(Intent.ACTION_VIEW);
@@ -282,7 +282,7 @@ public class ActMain extends AppCompatActivity implements AHBottomNavigation.OnT
             startActivity(i);
             dialog.dismiss();
         });
-        Button Cancel = (Button) dialog.findViewById(R.id.btnCancelPermissionDialog);
+        Button Cancel = dialog.findViewById(R.id.btnCancelPermissionDialog);
         Cancel.setTypeface(FontManager.GetTypeface(this, FontManager.IranSans));
         Cancel.setOnClickListener(view12 -> dialog.dismiss());
         dialog.show();
@@ -302,7 +302,7 @@ public class ActMain extends AppCompatActivity implements AHBottomNavigation.OnT
         ((TextView) dialog.findViewById(R.id.lbl1PernissionDialogUpdate)).setText("توجه");
         ((TextView) dialog.findViewById(R.id.lbl2PernissionDialogUpdate)).setTypeface(FontManager.GetTypeface(this, FontManager.IranSans));
         ((TextView) dialog.findViewById(R.id.lbl2PernissionDialogUpdate)).setText("نسخه جدید اپلیکیشن اومده حتما باید آبدیت بشه");
-        Button Ok = (Button) dialog.findViewById(R.id.btnOkPermissionDialogUpdate);
+        Button Ok = dialog.findViewById(R.id.btnOkPermissionDialogUpdate);
         Ok.setTypeface(FontManager.GetTypeface(this, FontManager.IranSans));
         Ok.setOnClickListener(view1 -> {
             Intent i = new Intent(Intent.ACTION_VIEW);

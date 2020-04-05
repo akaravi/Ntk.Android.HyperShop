@@ -405,10 +405,10 @@ public class AHBottomNavigation extends FrameLayout {
 			AHBottomNavigationItem item = items.get(itemIndex);
 
 			View view = inflater.inflate(R.layout.bottom_navigation_item, this, false);
-			FrameLayout container = (FrameLayout) view.findViewById(R.id.bottom_navigation_container);
-			ImageView icon = (ImageView) view.findViewById(R.id.bottom_navigation_item_icon);
-			TextView title = (TextView) view.findViewById(R.id.bottom_navigation_item_title);
-			TextView notification = (TextView) view.findViewById(R.id.bottom_navigation_notification);
+			FrameLayout container = view.findViewById(R.id.bottom_navigation_container);
+			ImageView icon = view.findViewById(R.id.bottom_navigation_item_icon);
+			TextView title = view.findViewById(R.id.bottom_navigation_item_title);
+			TextView notification = view.findViewById(R.id.bottom_navigation_notification);
 
 			icon.setImageDrawable(item.getDrawable(context));
 			title.setText(item.getTitle(context));
@@ -531,9 +531,9 @@ public class AHBottomNavigation extends FrameLayout {
 			AHBottomNavigationItem item = items.get(itemIndex);
 
 			View view = inflater.inflate(R.layout.bottom_navigation_small_item, this, false);
-			ImageView icon = (ImageView) view.findViewById(R.id.bottom_navigation_small_item_icon);
-			TextView title = (TextView) view.findViewById(R.id.bottom_navigation_small_item_title);
-			TextView notification = (TextView) view.findViewById(R.id.bottom_navigation_notification);
+			ImageView icon = view.findViewById(R.id.bottom_navigation_small_item_icon);
+			TextView title = view.findViewById(R.id.bottom_navigation_small_item_title);
+			TextView notification = view.findViewById(R.id.bottom_navigation_notification);
 			icon.setImageDrawable(item.getDrawable(context));
 
 			if (titleState != TitleState.ALWAYS_HIDE) {
@@ -671,9 +671,9 @@ public class AHBottomNavigation extends FrameLayout {
 
 			if (i == itemIndex) {
 
-				final TextView title = (TextView) view.findViewById(R.id.bottom_navigation_item_title);
-				final ImageView icon = (ImageView) view.findViewById(R.id.bottom_navigation_item_icon);
-				final TextView notification = (TextView) view.findViewById(R.id.bottom_navigation_notification);
+				final TextView title = view.findViewById(R.id.bottom_navigation_item_title);
+				final ImageView icon = view.findViewById(R.id.bottom_navigation_item_icon);
+				final TextView notification = view.findViewById(R.id.bottom_navigation_notification);
 
 				icon.setSelected(true);
 				AHHelper.updateTopMargin(icon, inactiveMarginTop, activeMarginTop);
@@ -734,9 +734,9 @@ public class AHBottomNavigation extends FrameLayout {
 
 			} else if (i == currentItem) {
 
-				final TextView title = (TextView) view.findViewById(R.id.bottom_navigation_item_title);
-				final ImageView icon = (ImageView) view.findViewById(R.id.bottom_navigation_item_icon);
-				final TextView notification = (TextView) view.findViewById(R.id.bottom_navigation_notification);
+				final TextView title = view.findViewById(R.id.bottom_navigation_item_title);
+				final ImageView icon = view.findViewById(R.id.bottom_navigation_item_icon);
+				final TextView notification = view.findViewById(R.id.bottom_navigation_notification);
 
 				icon.setSelected(false);
 				AHHelper.updateTopMargin(icon, activeMarginTop, inactiveMarginTop);
@@ -795,10 +795,10 @@ public class AHBottomNavigation extends FrameLayout {
 
 			if (i == itemIndex) {
 
-				final FrameLayout container = (FrameLayout) view.findViewById(R.id.bottom_navigation_small_container);
-				final TextView title = (TextView) view.findViewById(R.id.bottom_navigation_small_item_title);
-				final ImageView icon = (ImageView) view.findViewById(R.id.bottom_navigation_small_item_icon);
-				final TextView notification = (TextView) view.findViewById(R.id.bottom_navigation_notification);
+				final FrameLayout container = view.findViewById(R.id.bottom_navigation_small_container);
+				final TextView title = view.findViewById(R.id.bottom_navigation_small_item_title);
+				final ImageView icon = view.findViewById(R.id.bottom_navigation_small_item_icon);
+				final TextView notification = view.findViewById(R.id.bottom_navigation_notification);
 
 				icon.setSelected(true);
 
@@ -865,9 +865,9 @@ public class AHBottomNavigation extends FrameLayout {
 			} else if (i == currentItem) {
 
 				final View container = view.findViewById(R.id.bottom_navigation_small_container);
-				final TextView title = (TextView) view.findViewById(R.id.bottom_navigation_small_item_title);
-				final ImageView icon = (ImageView) view.findViewById(R.id.bottom_navigation_small_item_icon);
-				final TextView notification = (TextView) view.findViewById(R.id.bottom_navigation_notification);
+				final TextView title = view.findViewById(R.id.bottom_navigation_small_item_title);
+				final ImageView icon = view.findViewById(R.id.bottom_navigation_small_item_icon);
+				final TextView notification = view.findViewById(R.id.bottom_navigation_notification);
 
 				icon.setSelected(false);
 
@@ -919,7 +919,7 @@ public class AHBottomNavigation extends FrameLayout {
 			final int currentTextColor = AHNotificationHelper.getTextColor(notificationItem, notificationTextColor);
 			final int currentBackgroundColor = AHNotificationHelper.getBackgroundColor(notificationItem, notificationBackgroundColor);
 
-			final TextView notification = (TextView) views.get(i).findViewById(R.id.bottom_navigation_notification);
+			final TextView notification = views.get(i).findViewById(R.id.bottom_navigation_notification);
 
 			String currentValue = notification.getText().toString();
 			boolean animate = !currentValue.equals(String.valueOf(notificationItem.getText()));
