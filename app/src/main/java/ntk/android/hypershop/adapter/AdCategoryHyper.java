@@ -85,7 +85,7 @@ public class AdCategoryHyper extends RecyclerView.Adapter<AdCategoryHyper.ViewHo
             List<Filters> filters = new ArrayList<>();
             Filters f = new Filters();
             f.PropertyName = "LinkCategoryId";
-            f.StringValue1 = arrayList.get(position).code;
+            f.StringValue = arrayList.get(position).code;
             filters.add(f);
             request.filters = filters;
             Intent intent = new Intent(context, ActHyperContentList.class);
