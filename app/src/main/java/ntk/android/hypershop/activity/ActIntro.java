@@ -44,6 +44,7 @@ public class ActIntro extends AppCompatActivity {
 
     private ApplicationIntroResponse Intro = new ApplicationIntroResponse();
     private int CountIntro = 0;
+    private Handler handler = new Handler();
 
     public int Help = 0;
 
@@ -133,6 +134,7 @@ public class ActIntro extends AppCompatActivity {
                 Lbls.get(2).setText("شروع");
             }
         } else {
+            handler.removeCallbacksAndMessages(null);
             if (Help == 0) {
                 EasyPreference.with(this).addBoolean("Intro", true);
                 startActivity(new Intent(ActIntro.this, ActRegister.class));
