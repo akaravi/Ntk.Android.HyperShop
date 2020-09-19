@@ -79,7 +79,7 @@ public class ActIntro extends AppCompatActivity {
 
                     @Override
                     public void onNext(ApplicationIntroResponse response) {
-                        if (response.ListItems.size() != 0) {
+                        if (Intro.ListItems != null && response.ListItems.size() != 0) {
                             Intro.ListItems = response.ListItems;
                             HandelIntro();
                         } else {
@@ -123,6 +123,8 @@ public class ActIntro extends AppCompatActivity {
 
     @OnClick(R.id.btnAfterActIntro)
     public void ClickAfter() {
+        if (Intro.ListItems == null)
+            return;
         if (CountIntro < (Intro.ListItems.size() - 1)) {
             CountIntro = CountIntro + 1;
             findViewById(R.id.btnBeforeActIntro).setVisibility(View.VISIBLE);
