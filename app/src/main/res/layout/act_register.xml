@@ -115,8 +115,8 @@
                 android:layout_height="20dp"
                 android:layout_centerInParent="true"
                 android:contentDescription="@null"
-                android:tint="#afafaf"
-                app:srcCompat="@drawable/ic_arrow_right" />
+                app:srcCompat="@drawable/ic_arrow_right"
+                app:tint="#afafaf" />
         </RelativeLayout>
     </LinearLayout>
 
