@@ -6,7 +6,8 @@ android {
     defaultConfig {
         applicationId "ntk.android.hypershop.APPNTK"//change for packagename for api
         minSdkVersion 17
-        targetSdkVersion 27
+        targetSdkVersion 28
+        multiDexEnabled true
         versionCode 1  //Build Version NTK
         versionName "1.0"//Splash Version Lable
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
