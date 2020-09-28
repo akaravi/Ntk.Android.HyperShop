@@ -90,6 +90,12 @@ public class ActSplash extends AppCompatActivity {
 
                         @Override
                         public void onNext(MainCoreResponse mainCoreResponse) {
+                            if(!mainCoreResponse.IsSuccess)
+                            {
+                                //BtnRefresh.setVisibility(View.VISIBLE);
+                                Toasty.warning(ActSplash.this, "خطای سامانه مجددا تلاش کنید"+mainCoreResponse.ErrorMessage, Toasty.LENGTH_LONG, true).show();
+                                return;
+                            }
                             EasyPreference.with(ActSplash.this).addString("configapp", new Gson().toJson(mainCoreResponse.Item));
                             if (EasyPreference.with(ActSplash.this).getBoolean("Intro", false)) {
                                 new Handler().postDelayed(() -> {
