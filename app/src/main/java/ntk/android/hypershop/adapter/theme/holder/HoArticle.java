@@ -2,8 +2,8 @@ package ntk.android.hypershop.adapter.theme.holder;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;

@@ -2,10 +2,10 @@ package ntk.android.hypershop.adapter;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.support.v7.widget.LinearLayoutCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,20 +16,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ntk.android.hypershop.R;
-import ntk.android.hypershop.activity.ActDetailPooling;
 import ntk.android.hypershop.utill.FontManager;
-import ntk.base.api.baseModel.Filters;
-import ntk.base.api.pooling.entity.PoolingCategory;
 import ntk.base.api.pooling.entity.PoolingContent;
-import ntk.base.api.pooling.model.PoolingContentListRequest;
 
 public class AdDetailPoolCategory extends RecyclerView.Adapter<AdDetailPoolCategory.ViewHolder> {
 

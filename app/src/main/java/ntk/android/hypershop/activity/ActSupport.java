@@ -2,17 +2,16 @@ package ntk.android.hypershop.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -31,10 +30,8 @@ import ntk.android.hypershop.R;
 import ntk.android.hypershop.adapter.AdTicket;
 import ntk.android.hypershop.config.ConfigRestHeader;
 import ntk.android.hypershop.config.ConfigStaticValue;
-import ntk.android.hypershop.utill.AppUtill;
 import ntk.android.hypershop.utill.EndlessRecyclerViewScrollListener;
 import ntk.android.hypershop.utill.FontManager;
-import ntk.base.api.article.interfase.IArticle;
 import ntk.base.api.ticket.interfase.ITicket;
 import ntk.base.api.ticket.model.TicketingListRequest;
 import ntk.base.api.ticket.model.TicketingListResponse;

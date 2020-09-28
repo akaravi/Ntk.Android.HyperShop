@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,14 +23,10 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.BindViews;
 import butterknife.ButterKnife;
 import ntk.android.hypershop.R;
-import ntk.android.hypershop.activity.ActDetail;
 import ntk.android.hypershop.activity.ActDetailHyperShop;
 import ntk.android.hypershop.utill.FontManager;
-import ntk.base.api.article.entity.ArticleContent;
-import ntk.base.api.article.model.ArticleContentViewRequest;
 import ntk.base.api.hyperShop.entity.HyperShopContent;
 import ntk.base.api.hyperShop.model.HyperShopContentViewRequest;
 

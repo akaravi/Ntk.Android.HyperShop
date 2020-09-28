@@ -8,7 +8,7 @@
     android:descendantFocusability="blocksDescendants"
     android:layoutDirection="ltr">
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipRefreshFrHome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
             app:layoutManagerOrientation="vertical"
             app:layoutManagerReverse="false"
             app:layoutManagerType="linear"/>
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <LinearLayout
         android:id="@+id/rowProgressFrHome"

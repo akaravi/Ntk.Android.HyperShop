@@ -6,11 +6,11 @@ import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.ThumbnailUtils;
 import android.os.Build;
-import android.support.transition.Transition;
-import android.support.transition.TransitionManager;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
+import androidx.transition.Transition;
+import androidx.transition.TransitionManager;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -25,7 +25,6 @@ import java.util.Collections;
 import java.util.List;
 
 import ntk.android.hypershop.R;
-import ntk.android.hypershop.library.scrollgallery.MediaInfo;
 import ntk.android.hypershop.library.scrollgallery.loader.MediaLoader;
 
 public class ScrollGalleryView extends LinearLayout {

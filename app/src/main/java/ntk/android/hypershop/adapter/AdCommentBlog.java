@@ -1,7 +1,7 @@
 package ntk.android.hypershop.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,10 +29,6 @@ import ntk.base.api.blog.interfase.IBlog;
 import ntk.base.api.blog.entity.BlogComment;
 import ntk.base.api.blog.model.BlogCommentResponse;
 import ntk.base.api.blog.model.BlogCommentViewRequest;
-import ntk.base.api.news.interfase.INews;
-import ntk.base.api.news.entity.NewsComment;
-import ntk.base.api.news.model.NewsCommentResponse;
-import ntk.base.api.news.model.NewsCommentViewRequest;
 import ntk.base.api.utill.NTKClientAction;
 import ntk.base.api.utill.RetrofitManager;
 

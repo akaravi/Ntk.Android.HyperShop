@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,12 +26,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ntk.android.hypershop.R;
 import ntk.android.hypershop.activity.ActDetailBlog;
-import ntk.android.hypershop.activity.ActDetailNews;
 import ntk.android.hypershop.utill.FontManager;
 import ntk.base.api.blog.entity.BlogContent;
 import ntk.base.api.blog.model.BlogContentViewRequest;
-import ntk.base.api.news.entity.NewsContent;
-import ntk.base.api.news.model.NewsContentViewRequest;
 
 public class AdBlog extends RecyclerView.Adapter<AdBlog.ViewHolder> {
 

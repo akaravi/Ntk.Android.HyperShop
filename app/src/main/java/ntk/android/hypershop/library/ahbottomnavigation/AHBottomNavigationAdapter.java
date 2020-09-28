@@ -1,8 +1,8 @@
 package ntk.android.hypershop.library.ahbottomnavigation;
 
 import android.app.Activity;
-import android.support.annotation.ColorInt;
-import android.support.annotation.MenuRes;
+import androidx.annotation.ColorInt;
+import androidx.annotation.MenuRes;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.PopupMenu;

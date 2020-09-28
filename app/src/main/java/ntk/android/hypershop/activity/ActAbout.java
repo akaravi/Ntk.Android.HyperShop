@@ -1,8 +1,8 @@
 package ntk.android.hypershop.activity;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import es.dmoral.toasty.Toasty;
@@ -17,7 +17,6 @@ import ntk.android.hypershop.config.ConfigRestHeader;
 import ntk.android.hypershop.config.ConfigStaticValue;
 import ntk.android.hypershop.library.about.AboutPage;
 import ntk.android.hypershop.library.about.Element;
-import ntk.base.api.article.interfase.IArticle;
 import ntk.base.api.core.interfase.ICore;
 import ntk.base.api.core.model.CoreAboutUsResponse;
 import ntk.base.api.utill.RetrofitManager;

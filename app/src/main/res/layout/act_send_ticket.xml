@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainLayoutActSendTicket"
@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/inputNameFamilytActSendTicket"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -115,9 +115,9 @@
                         android:paddingStart="15dp"
                         android:textSize="14sp"
                         tools:ignore="MissingPrefix,RtlSymmetry,TextFields" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/inputEmailtActSendTicket"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -137,9 +137,9 @@
                         android:paddingStart="15dp"
                         android:textSize="14sp"
                         tools:ignore="MissingPrefix,RtlSymmetry,TextFields" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/inputPhoneNumberActSendTicket"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -160,9 +160,9 @@
                         android:paddingStart="15dp"
                         android:textSize="14sp"
                         tools:ignore="MissingPrefix,RtlSymmetry,TextFields" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/inputSubjectActSendTicket"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -181,7 +181,7 @@
                         android:paddingStart="15dp"
                         android:textSize="14sp"
                         tools:ignore="MissingPrefix,RtlSymmetry,TextFields" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -252,7 +252,7 @@
 
                 </LinearLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/inputMessageActSendTicket"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -273,9 +273,9 @@
                         android:paddingStart="15dp"
                         android:textSize="14sp"
                         tools:ignore="MissingPrefix,RtlSymmetry,TextFields" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/RecyclerAttach"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -290,4 +290,4 @@
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

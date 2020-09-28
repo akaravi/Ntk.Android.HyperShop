@@ -1,10 +1,10 @@
 package ntk.android.hypershop.activity;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -23,16 +23,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import ntk.android.hypershop.R;
-import ntk.android.hypershop.adapter.AdArticleGrid;
 import ntk.android.hypershop.adapter.AdHyperShopGrid;
 import ntk.android.hypershop.config.ConfigRestHeader;
 import ntk.android.hypershop.config.ConfigStaticValue;
 import ntk.android.hypershop.utill.EndlessRecyclerViewScrollListener;
 import ntk.android.hypershop.utill.FontManager;
-import ntk.base.api.article.entity.ArticleContent;
-import ntk.base.api.article.interfase.IArticle;
-import ntk.base.api.article.model.ArticleContentListRequest;
-import ntk.base.api.article.model.ArticleContentResponse;
 import ntk.base.api.hyperShop.entity.HyperShopContent;
 import ntk.base.api.hyperShop.interfase.IHyperShop;
 import ntk.base.api.hyperShop.model.HyperShopContentListRequest;
