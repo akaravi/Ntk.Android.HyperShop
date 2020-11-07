@@ -27,7 +27,5 @@
         android:id="@+id/WebViewActDetailNews"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layoutDirection="rtl"
-        android:textDirection="rtl"
         tools:ignore="WebViewLayout" />
 </LinearLayout>

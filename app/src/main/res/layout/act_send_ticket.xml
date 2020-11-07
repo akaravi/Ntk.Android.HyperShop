@@ -26,8 +26,8 @@
                 android:layout_marginEnd="15dp"
                 android:contentDescription="@null"
                 android:rotation="180"
-                android:tint="@color/colorGrayText"
-                app:srcCompat="@drawable/ic_left" />
+                app:srcCompat="@drawable/ic_left"
+                app:tint="@color/colorGrayText" />
 
             <TextView
                 android:id="@+id/lblTitleActSendTicket"
@@ -70,6 +70,12 @@
             android:layout_height="3dp"
             android:layout_below="@id/toolbarFrService"
             android:background="@color/colorAccent" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true" />
 
         <Button
             android:id="@+id/btnSubmitActSendTicket"
@@ -268,7 +274,7 @@
                         android:layout_height="150dp"
                         android:background="@drawable/background_edittext"
                         android:gravity="right|top"
-                        android:hint="@string/Subject"
+                        android:hint="متن درخواست"
                         android:inputType="textMultiLine"
                         android:paddingStart="15dp"
                         android:textSize="14sp"
@@ -280,13 +286,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:scrollbars="none" />
-
-                <ProgressBar
-                    android:id="@+id/progressAttachActSendTicket"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:visibility="gone" />
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>

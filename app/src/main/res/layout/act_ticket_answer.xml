@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainLayoutActTicketAnswer"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layoutDirection="ltr">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -127,24 +128,27 @@
                     android:layout_height="wrap_content"
                     android:scrollbars="none" />
 
-                <ProgressBar
-                    android:id="@+id/progressAttachActTicketAnswer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:visibility="gone" />
-
-                <Button
-                    android:id="@+id/btnSubmitActTicketAnswer"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:layout_margin="15dp"
-                    android:background="#014efe"
-                    android:text="ارسال پاسخ"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    tools:ignore="MissingPrefix" />
+                    android:layout_height="wrap_content">
+
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true" />
+
+                    <Button
+                        android:id="@+id/btnSubmitActTicketAnswer"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:layout_margin="15dp"
+                        android:background="#014efe"
+                        android:text="ارسال پاسخ"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        tools:ignore="MissingPrefix" />
+                </RelativeLayout>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
