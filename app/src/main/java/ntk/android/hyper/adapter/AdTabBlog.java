@@ -1,4 +1,4 @@
-package ntk.android.ticketing.adapter;
+package ntk.android.hyper.adapter;
 
 import android.content.Context;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,7 +14,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ntk.android.ticketing.R;
+import ntk.android.hyper.R;
 import ntk.android.base.utill.FontManager;
 import ntk.android.base.api.blog.entity.BlogContentOtherInfo;
 

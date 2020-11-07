@@ -1,4 +1,4 @@
-package ntk.android.ticketing.activity;
+package ntk.android.hyper.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -61,10 +61,10 @@ import ntk.android.base.config.ConfigStaticValue;
 import ntk.android.base.utill.AppUtill;
 import ntk.android.base.utill.EasyPreference;
 import ntk.android.base.utill.FontManager;
-import ntk.android.ticketing.BuildConfig;
-import ntk.android.ticketing.R;
-import ntk.android.ticketing.adapter.AdCoreImage;
-import ntk.android.ticketing.event.toolbar.EVSearchClick;
+import ntk.android.hyper.BuildConfig;
+import ntk.android.hyper.R;
+import ntk.android.hyper.adapter.AdCoreImage;
+import ntk.android.hyper.event.toolbar.EVSearchClick;
 import ntk.android.base.api.application.interfase.IApplication;
 import ntk.android.base.api.application.model.ApplicationScoreRequest;
 import ntk.android.base.api.application.model.ApplicationScoreResponse;

@@ -1,4 +1,4 @@
-package ntk.android.ticketing.adapter;
+package ntk.android.hyper.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,8 +21,8 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ntk.android.ticketing.R;
-import ntk.android.ticketing.activity.NewsDetailActivity;
+import ntk.android.hyper.R;
+import ntk.android.hyper.activity.NewsDetailActivity;
 import ntk.android.base.utill.FontManager;
 import ntk.android.base.api.news.entity.NewsContent;
 import ntk.android.base.api.news.model.NewsContentViewRequest;

@@ -1,4 +1,4 @@
-package ntk.android.ticketing.activity;
+package ntk.android.hyper.activity;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;
@@ -11,12 +11,12 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import ntk.android.ticketing.BuildConfig;
-import ntk.android.ticketing.R;
+import ntk.android.hyper.BuildConfig;
+import ntk.android.hyper.R;
 import ntk.android.base.config.ConfigRestHeader;
 import ntk.android.base.config.ConfigStaticValue;
-import ntk.android.ticketing.library.about.AboutPage;
-import ntk.android.ticketing.library.about.Element;
+import ntk.android.hyper.library.about.AboutPage;
+import ntk.android.hyper.library.about.Element;
 import ntk.android.base.api.core.interfase.ICore;
 import ntk.android.base.api.core.model.CoreAboutUsResponse;
 import ntk.android.base.config.RetrofitManager;

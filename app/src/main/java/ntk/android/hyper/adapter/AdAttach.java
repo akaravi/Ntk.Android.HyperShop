@@ -1,4 +1,4 @@
-package ntk.android.ticketing.adapter;
+package ntk.android.hyper.adapter;
 
 import android.content.Context;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,8 +15,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ntk.android.ticketing.R;
-import ntk.android.ticketing.event.RemoveAttachEvent;
+import ntk.android.hyper.R;
+import ntk.android.hyper.event.RemoveAttachEvent;
 import ntk.android.base.utill.FontManager;
 
 public class AdAttach extends RecyclerView.Adapter<AdAttach.ViewHolder> {

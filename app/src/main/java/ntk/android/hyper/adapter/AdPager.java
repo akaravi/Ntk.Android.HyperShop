@@ -1,4 +1,4 @@
-package ntk.android.ticketing.adapter;
+package ntk.android.hyper.adapter;
 
 import android.content.Context;
 import androidx.viewpager.widget.ViewPager;

@@ -1,4 +1,4 @@
-package ntk.android.ticketing.activity;
+package ntk.android.hyper.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,8 +31,8 @@ import ntk.android.base.config.RetrofitManager;
 import ntk.android.base.utill.AppUtill;
 import ntk.android.base.utill.EndlessRecyclerViewScrollListener;
 import ntk.android.base.utill.FontManager;
-import ntk.android.ticketing.R;
-import ntk.android.ticketing.adapter.BlogAdapter;
+import ntk.android.hyper.R;
+import ntk.android.hyper.adapter.BlogAdapter;
 
 public class BlogActivity extends BaseActivity {
 

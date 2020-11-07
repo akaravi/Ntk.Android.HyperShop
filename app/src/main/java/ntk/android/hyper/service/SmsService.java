@@ -1,4 +1,4 @@
-package ntk.android.ticketing.service;
+package ntk.android.hyper.service;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -9,7 +9,7 @@ import android.telephony.SmsMessage;
 import org.greenrobot.eventbus.EventBus;
 
 import ntk.android.base.event.MessageEvent;
-import ntk.android.ticketing.R;
+import ntk.android.hyper.R;
 
 
 public class SmsService extends BroadcastReceiver {

@@ -1,4 +1,4 @@
-package ntk.android.ticketing.library.about;
+package ntk.android.hyper.library.about;
 
 import android.content.Context;
 import android.content.Intent;
@@ -24,7 +24,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import ntk.android.base.utill.FontManager;
-import ntk.android.ticketing.R;
+import ntk.android.hyper.R;
 
 
 public class AboutPage {

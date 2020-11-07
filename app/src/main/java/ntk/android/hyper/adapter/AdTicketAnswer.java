@@ -1,4 +1,4 @@
-package ntk.android.ticketing.adapter;
+package ntk.android.hyper.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -14,7 +14,7 @@ import java.util.List;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import ntk.android.base.utill.AppUtill;
-import ntk.android.ticketing.R;
+import ntk.android.hyper.R;
 import ntk.android.base.utill.FontManager;
 import ntk.android.base.api.ticket.entity.TicketingAnswer;
 

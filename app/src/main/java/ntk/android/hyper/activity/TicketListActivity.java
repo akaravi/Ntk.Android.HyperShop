@@ -1,4 +1,4 @@
-package ntk.android.ticketing.activity;
+package ntk.android.hyper.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,8 +25,8 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.base.utill.AppUtill;
-import ntk.android.ticketing.R;
-import ntk.android.ticketing.adapter.AdTicket;
+import ntk.android.hyper.R;
+import ntk.android.hyper.adapter.AdTicket;
 import ntk.android.base.config.ConfigRestHeader;
 import ntk.android.base.utill.EndlessRecyclerViewScrollListener;
 import ntk.android.base.api.ticket.entity.TicketingTask;

@@ -1,4 +1,4 @@
-package ntk.android.ticketing.adapter;
+package ntk.android.hyper.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -24,7 +24,7 @@ import io.reactivex.schedulers.Schedulers;
 import ntk.android.base.config.ConfigRestHeader;
 import ntk.android.base.utill.AppUtill;
 import ntk.android.base.utill.FontManager;
-import ntk.android.ticketing.R;
+import ntk.android.hyper.R;
 import ntk.android.base.api.news.entity.NewsComment;
 import ntk.android.base.api.news.interfase.INews;
 import ntk.android.base.api.news.model.NewsCommentResponse;

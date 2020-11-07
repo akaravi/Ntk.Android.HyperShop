@@ -1,4 +1,4 @@
-package ntk.android.ticketing.adapter;
+package ntk.android.hyper.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ntk.android.ticketing.R;
-import ntk.android.ticketing.activity.PoolingDetailActivity;
+import ntk.android.hyper.R;
+import ntk.android.hyper.activity.PoolingDetailActivity;
 import ntk.android.base.utill.FontManager;
 import ntk.android.base.api.baseModel.Filters;
 import ntk.android.base.api.pooling.entity.PoolingCategory;

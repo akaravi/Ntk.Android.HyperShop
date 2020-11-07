@@ -213,7 +213,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:893852902485:android:3b3183e41c78cdc3d2e0dc",
         "android_client_info": {
-          "package_name": "ntk.android.ticketing.APPNTK"
+          "package_name": "ntk.android.hyper.APPNTK"
         }
       },
       "oauth_client": [

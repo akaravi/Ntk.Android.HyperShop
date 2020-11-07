@@ -1,4 +1,4 @@
-package ntk.android.ticketing.adapter;
+package ntk.android.hyper.adapter;
 
 import android.content.Context;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,7 +22,7 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import ntk.android.ticketing.R;
+import ntk.android.hyper.R;
 import ntk.android.base.config.ConfigRestHeader;
 import ntk.android.base.utill.FontManager;
 import ntk.android.base.api.pooling.interfase.IPooling;

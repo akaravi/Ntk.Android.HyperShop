@@ -1,4 +1,4 @@
-package ntk.android.ticketing.activity;
+package ntk.android.hyper.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,8 +26,8 @@ import ntk.android.base.config.ConfigStaticValue;
 import ntk.android.base.utill.AppUtill;
 import ntk.android.base.utill.EndlessRecyclerViewScrollListener;
 import ntk.android.base.utill.FontManager;
-import ntk.android.ticketing.R;
-import ntk.android.ticketing.adapter.NewsAdapter;
+import ntk.android.hyper.R;
+import ntk.android.hyper.adapter.NewsAdapter;
 import ntk.android.base.api.news.entity.NewsContent;
 import ntk.android.base.api.news.interfase.INews;
 import ntk.android.base.api.news.model.NewsContentListRequest;

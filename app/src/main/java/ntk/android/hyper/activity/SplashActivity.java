@@ -1,4 +1,4 @@
-package ntk.android.ticketing.activity;
+package ntk.android.hyper.activity;
 
 import ntk.android.base.activity.BaseSplashActivity;
 

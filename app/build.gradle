@@ -5,7 +5,7 @@ apply plugin: 'io.fabric'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "ntk.android.ticketing.APPNTK"//change for packagename for api
+        applicationId "ntk.android.hyper.APPNTK"//change for packagename for api
         minSdkVersion 17
         targetSdkVersion 27
         multiDexEnabled true

@@ -1,4 +1,4 @@
-package ntk.android.ticketing.library.about;
+package ntk.android.hyper.library.about;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;

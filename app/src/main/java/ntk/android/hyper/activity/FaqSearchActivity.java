@@ -1,4 +1,4 @@
-package ntk.android.ticketing.activity;
+package ntk.android.hyper.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -27,8 +27,8 @@ import ntk.android.base.config.ConfigRestHeader;
 import ntk.android.base.config.ConfigStaticValue;
 import ntk.android.base.utill.AppUtill;
 import ntk.android.base.utill.FontManager;
-import ntk.android.ticketing.R;
-import ntk.android.ticketing.adapter.FaqAdapter;
+import ntk.android.hyper.R;
+import ntk.android.hyper.adapter.FaqAdapter;
 import ntk.android.base.api.baseModel.Filters;
 import ntk.android.base.api.ticket.entity.TicketingFaq;
 import ntk.android.base.api.ticket.interfase.ITicket;

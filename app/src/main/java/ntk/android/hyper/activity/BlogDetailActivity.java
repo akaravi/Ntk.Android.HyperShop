@@ -1,4 +1,4 @@
-package ntk.android.ticketing.activity;
+package ntk.android.hyper.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -48,13 +48,13 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import ntk.android.base.utill.AppUtill;
 import ntk.android.base.utill.EasyPreference;
-import ntk.android.ticketing.R;
-import ntk.android.ticketing.adapter.BlogAdapter;
-import ntk.android.ticketing.adapter.AdCommentBlog;
-import ntk.android.ticketing.adapter.AdTabBlog;
+import ntk.android.hyper.R;
+import ntk.android.hyper.adapter.BlogAdapter;
+import ntk.android.hyper.adapter.AdCommentBlog;
+import ntk.android.hyper.adapter.AdTabBlog;
 import ntk.android.base.config.ConfigRestHeader;
 import ntk.android.base.config.ConfigStaticValue;
-import ntk.android.ticketing.event.BlogHtmlBodyEvent;
+import ntk.android.hyper.event.BlogHtmlBodyEvent;
 import ntk.android.base.utill.FontManager;
 import ntk.android.base.api.blog.interfase.IBlog;
 import ntk.android.base.api.blog.model.BlogCommentAddRequest;

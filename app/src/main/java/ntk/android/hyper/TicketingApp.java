@@ -1,4 +1,4 @@
-package ntk.android.ticketing;
+package ntk.android.hyper;
 
 import android.content.Context;
 
@@ -15,7 +15,7 @@ import ntk.android.base.ApplicationParameter;
 import ntk.android.base.ApplicationStyle;
 import ntk.android.base.NTKApplication;
 import ntk.android.base.utill.FontManager;
-import ntk.android.ticketing.activity.MainActivity;
+import ntk.android.hyper.activity.MainActivity;
 
 public class TicketingApp extends NTKApplication {
 

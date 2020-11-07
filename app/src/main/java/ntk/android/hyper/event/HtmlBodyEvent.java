@@ -1,4 +1,4 @@
-package ntk.android.ticketing.event;
+package ntk.android.hyper.event;
 
 public class HtmlBodyEvent {
 

@@ -1,4 +1,4 @@
-package ntk.android.ticketing.activity;
+package ntk.android.hyper.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -62,10 +62,10 @@ import ntk.android.base.utill.AppUtill;
 import ntk.android.base.utill.EasyPreference;
 import ntk.android.base.utill.FontManager;
 import ntk.android.base.utill.Regex;
-import ntk.android.ticketing.R;
-import ntk.android.ticketing.adapter.AdAttach;
-import ntk.android.ticketing.adapter.AdSpinner;
-import ntk.android.ticketing.event.RemoveAttachEvent;
+import ntk.android.hyper.R;
+import ntk.android.hyper.adapter.AdAttach;
+import ntk.android.hyper.adapter.AdSpinner;
+import ntk.android.hyper.event.RemoveAttachEvent;
 import ntk.android.base.api.baseModel.FilterModel;
 import ntk.android.base.api.file.entity.FileUploadModel;
 import ntk.android.base.api.file.interfase.IFile;

@@ -1,4 +1,4 @@
-package ntk.android.ticketing.library;
+package ntk.android.hyper.library;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,7 +12,7 @@ import android.util.AttributeSet;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 
-import ntk.android.ticketing.R;
+import ntk.android.hyper.R;
 
 public class AnimatedRecyclerView extends RecyclerView {
     private int orientation = LinearLayoutManager.VERTICAL;

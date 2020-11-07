@@ -1,4 +1,4 @@
-package ntk.android.ticketing.activity;
+package ntk.android.hyper.activity;
 
 import android.os.Bundle;
 import android.widget.TextView;
@@ -20,8 +20,8 @@ import ntk.android.base.config.ConfigRestHeader;
 import ntk.android.base.config.ConfigStaticValue;
 import ntk.android.base.utill.AppUtill;
 import ntk.android.base.utill.FontManager;
-import ntk.android.ticketing.R;
-import ntk.android.ticketing.adapter.AdPoolCategory;
+import ntk.android.hyper.R;
+import ntk.android.hyper.adapter.AdPoolCategory;
 import ntk.android.base.api.pooling.interfase.IPooling;
 import ntk.android.base.api.pooling.model.PoolingCategoryResponse;
 import ntk.android.base.config.RetrofitManager;
