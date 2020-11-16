@@ -17,25 +17,23 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.Observable;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 import ntk.android.base.activity.BaseActivity;
-import ntk.android.base.config.ConfigRestHeader;
-import ntk.android.base.config.ConfigStaticValue;
+import ntk.android.base.api.utill.NTKUtill;
+import ntk.android.base.config.NtkObserver;
+import ntk.android.base.entitymodel.base.ErrorException;
+import ntk.android.base.entitymodel.base.FilterDataModel;
+import ntk.android.base.entitymodel.base.Filters;
+import ntk.android.base.entitymodel.news.NewsContentModel;
+import ntk.android.base.services.news.NewsContentService;
 import ntk.android.base.utill.AppUtill;
 import ntk.android.base.utill.FontManager;
 import ntk.android.hyper.R;
 import ntk.android.hyper.adapter.NewsAdapter;
-import ntk.android.base.api.baseModel.Filters;
-import ntk.android.base.api.news.entity.NewsContent;
-import ntk.android.base.api.news.interfase.INews;
-import ntk.android.base.api.news.model.NewsContentListRequest;
-import ntk.android.base.api.news.model.NewsContentResponse;
-import ntk.android.base.api.utill.NTKUtill;
-import ntk.android.base.config.RetrofitManager;
+
+;
 
 public class NewsSearchActivity extends BaseActivity {
 
@@ -51,7 +49,7 @@ public class NewsSearchActivity extends BaseActivity {
     @BindView(R.id.mainLayoutActNewsSearch)
     CoordinatorLayout layout;
 
-    private ArrayList<NewsContent> news = new ArrayList<>();
+    private ArrayList<NewsContentModel> news = new ArrayList<>();
     private NewsAdapter adapter;
     boolean searchLock;
 
@@ -84,46 +82,35 @@ public class NewsSearchActivity extends BaseActivity {
         if (!searchLock) {
             searchLock = true;
             if (AppUtill.isNetworkAvailable(this)) {
-                INews iNews = new RetrofitManager(this).getRetrofitUnCached(new ConfigStaticValue(this).GetApiBaseUrl()).create(INews.class);
-
-
-                NewsContentListRequest request = new NewsContentListRequest();
-                List<Filters> filters = new ArrayList<>();
+                FilterDataModel request = new FilterDataModel();
                 Filters ft = new Filters();
                 ft.PropertyName = "Title";
                 ft.StringValue = Txt.getText().toString();
                 ft.ClauseType = NTKUtill.ClauseType_Or;
                 ft.SearchType = NTKUtill.Search_Type_Contains;
-                filters.add(ft);
+                request.addFilter(ft);
 
                 Filters fd = new Filters();
                 fd.PropertyName = "Description";
                 fd.StringValue = Txt.getText().toString();
                 fd.ClauseType = NTKUtill.ClauseType_Or;
                 fd.SearchType = NTKUtill.Search_Type_Contains;
-                filters.add(fd);
+                request.addFilter(fd);
 
                 Filters fb = new Filters();
                 fb.PropertyName = "Body";
                 fb.StringValue = Txt.getText().toString();
                 fb.ClauseType = NTKUtill.ClauseType_Or;
                 fb.SearchType = NTKUtill.Search_Type_Contains;
+                request.addFilter(fb);
 
-                filters.add(fb);
-
-                request.filters = filters;
                 switcher.showProgressView();
-                Observable<NewsContentResponse> Call = iNews.GetContentList(new ConfigRestHeader().GetHeaders(this), request);
-                Call.observeOn(AndroidSchedulers.mainThread())
+                new NewsContentService(this).getAll(request).
+                        observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
-                        .subscribe(new Observer<NewsContentResponse>() {
+                        .subscribe(new NtkObserver<ErrorException<NewsContentModel>>() {
                             @Override
-                            public void onSubscribe(Disposable d) {
-
-                            }
-
-                            @Override
-                            public void onNext(NewsContentResponse response) {
+                            public void onNext(@NonNull ErrorException<NewsContentModel> response) {
                                 searchLock = false;
                                 if (response.IsSuccess) {
                                     if (response.ListItems.size() != 0) {
@@ -139,16 +126,10 @@ public class NewsSearchActivity extends BaseActivity {
                             }
 
                             @Override
-                            public void onError(Throwable e) {
+                            public void onError(@NonNull Throwable e) {
                                 searchLock = false;
                                 btnRefresh.setVisibility(View.VISIBLE);
                                 switcher.showErrorView("خطا در دسترسی به سامانه", () -> init());
-
-                            }
-
-                            @Override
-                            public void onComplete() {
-
                             }
                         });
             } else {

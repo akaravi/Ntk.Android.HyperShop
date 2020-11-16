@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,26 +11,30 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import com.google.gson.Gson;
+
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+
 import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ntk.android.base.entitymodel.news.NewsContentModel;
+import ntk.android.base.utill.FontManager;
 import ntk.android.hyper.R;
 import ntk.android.hyper.activity.NewsDetailActivity;
-import ntk.android.base.utill.FontManager;
-import ntk.android.base.api.news.entity.NewsContent;
-import ntk.android.base.api.news.model.NewsContentViewRequest;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
-    private List<NewsContent> arrayList;
+    private List<NewsContentModel> arrayList;
     private Context context;
 
-    public NewsAdapter(Context context, List<NewsContent> arrayList) {
+    public NewsAdapter(Context context, List<NewsContentModel> arrayList) {
         this.arrayList = arrayList;
         this.context = context;
     }
@@ -46,11 +48,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.LblTitle.setText(arrayList.get(position).Title);
-        holder.LblDescrption.setText(arrayList.get(position).description);
-        holder.LblLike.setText(String.valueOf(arrayList.get(position).viewCount));
+        holder.LblDescrption.setText(arrayList.get(position).Description);
+        holder.LblLike.setText(String.valueOf(arrayList.get(position).ViewCount));
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .cacheOnDisk(true).build();
-        ImageLoader.getInstance().displayImage(arrayList.get(position).imageSrc, holder.Img, options, new ImageLoadingListener() {
+        ImageLoader.getInstance().displayImage(arrayList.get(position).MainImageSrc, holder.Img, options, new ImageLoadingListener() {
             @Override
             public void onLoadingStarted(String imageUri, View view) {
 
@@ -72,8 +74,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             }
         });
         double rating = 0.0;
-        int sumClick = arrayList.get(position).ScoreSumClick;
-        if (arrayList.get(position).ScoreSumClick == 0) sumClick = 1;
+        int sumClick = arrayList.get(position).ViewCount;
+        if (arrayList.get(position).ViewCount == 0) sumClick = 1;
         if (arrayList.get(position).ScoreSumPercent / sumClick > 0 && arrayList.get(position).ScoreSumPercent / sumClick <= 10) {
             rating = 0.5;
         } else if (arrayList.get(position).ScoreSumPercent / sumClick > 10 && arrayList.get(position).ScoreSumPercent / sumClick <= 20) {
@@ -98,9 +100,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         holder.Rate.setRating((float) rating);
         holder.Root.setOnClickListener(view -> {
             Intent intent = new Intent(context, NewsDetailActivity.class);
-            NewsContentViewRequest request = new NewsContentViewRequest();
-            request.Id = arrayList.get(position).Id;
-            intent.putExtra("Request", new Gson().toJson(request));
+
+            intent.putExtra("Request",arrayList.get(position).Id);
             context.startActivity(intent);
         });
     }

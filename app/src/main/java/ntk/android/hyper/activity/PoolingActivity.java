@@ -10,21 +10,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.Observable;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 import ntk.android.base.activity.BaseActivity;
-import ntk.android.base.config.ConfigRestHeader;
-import ntk.android.base.config.ConfigStaticValue;
+import ntk.android.base.config.NtkObserver;
+import ntk.android.base.entitymodel.base.ErrorException;
+import ntk.android.base.entitymodel.base.FilterDataModel;
+import ntk.android.base.entitymodel.polling.PollingCategoryModel;
+import ntk.android.base.services.pooling.PollingCategoryService;
 import ntk.android.base.utill.AppUtill;
 import ntk.android.base.utill.FontManager;
 import ntk.android.hyper.R;
-import ntk.android.hyper.adapter.AdPoolCategory;
-import ntk.android.base.api.pooling.interfase.IPooling;
-import ntk.android.base.api.pooling.model.PoolingCategoryResponse;
-import ntk.android.base.config.RetrofitManager;
+import ntk.android.hyper.adapter.PoolCategoryAdapter;
 
 public class PoolingActivity extends BaseActivity {
 
@@ -49,20 +47,14 @@ public class PoolingActivity extends BaseActivity {
         if (AppUtill.isNetworkAvailable(this)) {
             // show loading
             switcher.showProgressView();
-            IPooling iPooling = new RetrofitManager(this).getRetrofitUnCached(new ConfigStaticValue(this).GetApiBaseUrl()).create(IPooling.class);
-            Observable<PoolingCategoryResponse> call = iPooling.GetCategoryList(new ConfigRestHeader().GetHeaders(this));
-            call.observeOn(AndroidSchedulers.mainThread())
+            new PollingCategoryService(this).getAll(new FilterDataModel())
+                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
-                    .subscribe(new Observer<PoolingCategoryResponse>() {
+                    .subscribe(new NtkObserver<ErrorException<PollingCategoryModel>>() {
                         @Override
-                        public void onSubscribe(Disposable d) {
-
-                        }
-
-                        @Override
-                        public void onNext(PoolingCategoryResponse poolingCategoryResponse) {
+                        public void onNext(@NonNull ErrorException<PollingCategoryModel> poolingCategoryResponse) {
                             if (poolingCategoryResponse.IsSuccess) {
-                                AdPoolCategory adapter = new AdPoolCategory(PoolingActivity.this, poolingCategoryResponse.ListItems);
+                                PoolCategoryAdapter adapter = new PoolCategoryAdapter(PoolingActivity.this, poolingCategoryResponse.ListItems);
                                 Rv.setAdapter(adapter);
                                 adapter.notifyDataSetChanged();
                                 if (adapter.getItemCount() > 0)
@@ -74,14 +66,8 @@ public class PoolingActivity extends BaseActivity {
                         }
 
                         @Override
-                        public void onError(Throwable e) {
+                        public void onError(@NonNull Throwable e) {
                             switcher.showErrorView("خطای سامانه مجددا تلاش کنید", () -> init());
-
-                        }
-
-                        @Override
-                        public void onComplete() {
-
                         }
                     });
         } else {

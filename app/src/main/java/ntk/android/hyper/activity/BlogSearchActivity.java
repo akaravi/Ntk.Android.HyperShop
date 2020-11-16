@@ -21,24 +21,20 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import es.dmoral.toasty.Toasty;
-import io.reactivex.Observable;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
-import ntk.android.base.config.ConfigRestHeader;
-import ntk.android.base.config.ConfigStaticValue;
+import ntk.android.base.api.utill.NTKUtill;
+import ntk.android.base.config.NtkObserver;
+import ntk.android.base.entitymodel.base.ErrorException;
+import ntk.android.base.entitymodel.base.FilterDataModel;
+import ntk.android.base.entitymodel.base.Filters;
+import ntk.android.base.entitymodel.blog.BlogContentModel;
+import ntk.android.base.services.blog.BlogContentService;
 import ntk.android.base.utill.AppUtill;
 import ntk.android.base.utill.FontManager;
 import ntk.android.hyper.R;
 import ntk.android.hyper.adapter.BlogAdapter;
-import ntk.android.base.api.baseModel.Filters;
-import ntk.android.base.api.blog.entity.BlogContent;
-import ntk.android.base.api.blog.interfase.IBlog;
-import ntk.android.base.api.blog.model.BlogContentListRequest;
-import ntk.android.base.api.blog.model.BlogContentListResponse;
-import ntk.android.base.api.utill.NTKUtill;
-import ntk.android.base.config.RetrofitManager;
 
 public class BlogSearchActivity extends AppCompatActivity {
 
@@ -54,7 +50,7 @@ public class BlogSearchActivity extends AppCompatActivity {
     @BindView(R.id.mainLayoutActBlogSearch)
     CoordinatorLayout layout;
 
-    private ArrayList<BlogContent> blogs = new ArrayList<>();
+    private ArrayList<BlogContentModel> blogs = new ArrayList<>();
     private BlogAdapter adapter;
 
 
@@ -85,24 +81,21 @@ public class BlogSearchActivity extends AppCompatActivity {
 
     private void Search() {
         if (AppUtill.isNetworkAvailable(this)) {
+            FilterDataModel request = new FilterDataModel();
 
-            IBlog iBlog = new RetrofitManager(this).getRetrofitUnCached(new ConfigStaticValue(this).GetApiBaseUrl()).create(IBlog.class);
-
-            BlogContentListRequest request = new BlogContentListRequest();
-            List<Filters> filters = new ArrayList<>();
             Filters ft = new Filters();
             ft.PropertyName = "Title";
             ft.StringValue = Txt.getText().toString();
             ft.ClauseType = NTKUtill.ClauseType_Or;
             ft.SearchType = NTKUtill.Search_Type_Contains;
-            filters.add(ft);
+            request.addFilter(ft);
 
             Filters fd = new Filters();
             fd.PropertyName = "Description";
             fd.StringValue = Txt.getText().toString();
             fd.ClauseType = NTKUtill.ClauseType_Or;
             fd.SearchType = NTKUtill.Search_Type_Contains;
-            filters.add(fd);
+            request.addFilter(fd);
 
             Filters fb = new Filters();
             fb.PropertyName = "Body";
@@ -110,20 +103,14 @@ public class BlogSearchActivity extends AppCompatActivity {
             fb.ClauseType = NTKUtill.ClauseType_Or;
             fb.SearchType = NTKUtill.Search_Type_Contains;
 
-            filters.add(fb);
-            request.filters = filters;
+            request.addFilter(fb);
 
-            Observable<BlogContentListResponse> Call = iBlog.GetContentList(new ConfigRestHeader().GetHeaders(this), request);
-            Call.observeOn(AndroidSchedulers.mainThread())
+            new BlogContentService(this).getAll(request).
+                    observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
-                    .subscribe(new Observer<BlogContentListResponse>() {
+                    .subscribe(new NtkObserver<ErrorException<BlogContentModel>>() {
                         @Override
-                        public void onSubscribe(Disposable d) {
-
-                        }
-
-                        @Override
-                        public void onNext(BlogContentListResponse response) {
+                        public void onNext(@NonNull ErrorException<BlogContentModel> response) {
                             if (response.IsSuccess) {
                                 if (response.ListItems.size() != 0) {
                                     blogs.addAll(response.ListItems);
@@ -135,7 +122,7 @@ public class BlogSearchActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onError(Throwable e) {
+                        public void onError(@NonNull Throwable e) {
                             btnRefresh.setVisibility(View.VISIBLE);
                             Snackbar.make(layout, "عدم دسترسی به اینترنت", Snackbar.LENGTH_INDEFINITE).setAction("تلاش مجددا", new View.OnClickListener() {
                                 @Override
@@ -145,10 +132,6 @@ public class BlogSearchActivity extends AppCompatActivity {
                             }).show();
                         }
 
-                        @Override
-                        public void onComplete() {
-
-                        }
                     });
         } else {
             btnRefresh.setVisibility(View.VISIBLE);
