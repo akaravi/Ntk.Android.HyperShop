@@ -91,6 +91,7 @@
             android:name=".activity.FaqSearchActivity"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
+        <activity android:name=".activity.hyper.ShopContentListActivity" />
 
 
         <provider

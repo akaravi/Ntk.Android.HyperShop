@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/tools"
+    android:id="@+id/newsContent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/sliderSection"
+        android:background="@color/colorTextBlack" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/headerTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sliderSection"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="4dp">
+
+                <TextView
+                    android:id="@+id/newsTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:ellipsize="marquee"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:gravity="right"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:paddingBottom="7dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="2dp"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:id="@+id/iconTextView"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center"
+                    android:text="@string/icon_category"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="25dp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="این محصول را به سبد خرید خود اضافه کنید"
+                android:textColor="#000000" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+
+
+                <TextView
+                    android:id="@+id/remove_item"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="10dp"
+                    android:layout_toLeftOf="@+id/iteam_amount"
+                    android:background="@drawable/round_text_remove_item"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="-"
+                    android:textColor="#FF0000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/iteam_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@+id/add_item"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:freezesText="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="1"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/add_item"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_alignBaseline="@+id/iteam_amount"
+                    android:layout_alignBottom="@+id/iteam_amount"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:background="@drawable/round_text_add_item"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="+"
+                    android:textColor="#ff669900"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/AddToCardBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+
+                    android:text="اضافه کردن به سبد خرید" />
+            </RelativeLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!--<ScrollView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@+id/headerTitle"-->
+    <!--android:layout_marginBottom="5dp"-->
+    <!--android:layout_marginLeft="5dp"-->
+    <!--android:layout_marginRight="5dp"-->
+    <!--android:background="@drawable/single_text_back"-->
+    <!--android:fadingEdge="vertical"-->
+    <!--android:fadingEdgeLength="4dp"-->
+    <!--android:requiresFadingEdge="vertical">-->
+
+    <!--<com.ntk.library.JustifiedTextView xmlns:noghteh="http://noghteh.ir"-->
+    <!--android:id="@+id/text"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:lineSpacingExtra="5dp"-->
+    <!--android:paddingLeft="10dp"-->
+    <!--android:paddingRight="10dp"-->
+    <!--noghteh:textColor="@color/black"-->
+    <!--noghteh:textSize="14dp"></com.ntk.library.JustifiedTextView>-->
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/headerTitle"></WebView>
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar_back" />
+
+    <RelativeLayout
+        android:id="@+id/sliderSection"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/slider_height"
+        android:layout_below="@+id/include"
+        android:background="@color/grayBg">
+
+        <TextView
+            android:id="@+id/newsVisit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="8dp"
+            android:padding="4dp"
+            android:text="2300 vdhg"
+            android:textColor="@android:color/white"
+            android:textSize="15dp"
+            android:visibility="gone" />
+
+        <ntkcms.base.view.slider.SliderLayout
+            android:id="@+id/slider"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            custom:auto_cycle="true"
+            custom:indicator_visibility="invisible"
+            custom:pager_animation="DepthPage"
+            custom:pager_animation_span="2500" />
+
+    </RelativeLayout>
+
+
+    <!--</ScrollView>-->
+
+
+</RelativeLayout>

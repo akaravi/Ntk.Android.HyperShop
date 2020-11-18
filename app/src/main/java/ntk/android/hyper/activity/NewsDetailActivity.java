@@ -218,7 +218,8 @@ public class NewsDetailActivity extends AppCompatActivity {
 
     private void HandelDataContent() {
         if (AppUtill.isNetworkAvailable(this)) {
-            new NewsContentService(this).getOne(Id).observeOn(AndroidSchedulers.mainThread())
+            new NewsContentService(this).getOne(Id)
+                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
                     .subscribe(new NtkObserver<ErrorException<NewsContentModel>>() {
                         @Override
