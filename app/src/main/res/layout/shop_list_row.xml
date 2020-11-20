@@ -23,7 +23,7 @@
             android:background="@drawable/image_replace_background" />
 
 
-        <com.rey.material.widget.ProgressView xmlns:app="http://schemas.android.com/apk/res-auto"
+        <ProgressBar xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/loadingProgress"
             style="style/CircularProgressDrawableStylePrimary"
             android:layout_width="30dp"
@@ -32,7 +32,7 @@
             android:layout_centerVertical="true"
             android:layout_gravity="center"
             android:layout_marginRight="30dp"
-            app:pv_autostart="false" />
+          />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -43,7 +43,7 @@
             android:paddingBottom="10dp"
             android:paddingTop="7dp">
 
-            <ntkcms.base.view.textviews.PersianTextView
+            <TextView
                 android:id="@+id/titleText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,11 +54,11 @@
                 android:gravity="right"
                 android:maxLines="2"
                 android:text="..."
-                android:textColor="@color/black_transparent_65"
+                android:textColor="@color/colorTextBlack"
                 android:textSize="12dp"
                 android:textStyle="bold" />
 
-            <ntkcms.base.view.textviews.PersianTextView
+            <TextView
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
                 android:textColor="#1f5119"
                 android:textStyle="bold" />
 
-            <ntkcms.base.view.textviews.PersianTextView
+            <TextView
                 android:id="@+id/priceText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

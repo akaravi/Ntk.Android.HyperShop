@@ -13,7 +13,7 @@
 
     <application
         android:name=".TicketingApp"
-        android:allowBackup="false"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
@@ -36,19 +36,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".activity.NewTicketActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
-        <activity
             android:name=".activity.NewsListActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
-        <activity
-            android:name=".activity.PoolingActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
-        <activity
-            android:name=".activity.PoolingDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
@@ -56,27 +44,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
-            android:name=".activity.FaqActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
-        <activity
-            android:name=".activity.TicketAnswerActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
-        <activity
-            android:name=".activity.TicketSearchActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
-        <activity
-            android:name=".activity.BlogActivity"
+            android:name=".activity.BlogListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".activity.BlogDetailActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
-        <activity
-            android:name=".activity.TicketListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
@@ -85,10 +57,6 @@
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".activity.BlogSearchActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
-        <activity
-            android:name=".activity.FaqSearchActivity"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity android:name=".activity.hyper.ShopContentListActivity" />

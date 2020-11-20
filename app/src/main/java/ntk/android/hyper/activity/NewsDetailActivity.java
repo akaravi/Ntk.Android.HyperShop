@@ -55,8 +55,8 @@ import ntk.android.base.services.news.NewsCommentService;
 import ntk.android.base.services.news.NewsContentOtherInfoService;
 import ntk.android.base.services.news.NewsContentService;
 import ntk.android.base.utill.AppUtill;
-import ntk.android.base.utill.EasyPreference;
 import ntk.android.base.utill.FontManager;
+import ntk.android.base.utill.prefrense.Preferences;
 import ntk.android.hyper.R;
 import ntk.android.hyper.adapter.CommentNewsAdapter;
 import ntk.android.hyper.adapter.NewsAdapter;
@@ -140,7 +140,7 @@ public class NewsDetailActivity extends AppCompatActivity {
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 if (!fromUser) return;
 
-                if (AppUtill.isNetworkAvailable(NewsDetailActivity.this)) {
+                if (AppUtill.isNetworkAvailable( NewsDetailActivity.this)) {
 
                     ScoreClickDtoModel request = new ScoreClickDtoModel();
                     request.Id = Id;
@@ -176,7 +176,7 @@ public class NewsDetailActivity extends AppCompatActivity {
                         request.ScorePercent = 100;
                     }
 
-                    new NewsContentService(NewsDetailActivity.this).scoreClick(request).observeOn(AndroidSchedulers.mainThread())
+                    new NewsContentService( NewsDetailActivity.this).scoreClick(request).observeOn(AndroidSchedulers.mainThread())
                             .subscribeOn(Schedulers.io())
                             .subscribe(new NtkObserver<ErrorExceptionBase>() {
 
@@ -184,9 +184,9 @@ public class NewsDetailActivity extends AppCompatActivity {
                                 public void onNext(ErrorExceptionBase biographyContentResponse) {
                                     Loading.setVisibility(View.GONE);
                                     if (biographyContentResponse.IsSuccess) {
-                                        Toasty.success(NewsDetailActivity.this, "نظر شمابا موفقیت ثبت گردید").show();
+                                        Toasty.success( NewsDetailActivity.this, "نظر شمابا موفقیت ثبت گردید").show();
                                     } else {
-                                        Toasty.warning(NewsDetailActivity.this, biographyContentResponse.ErrorMessage).show();
+                                        Toasty.warning( NewsDetailActivity.this, biographyContentResponse.ErrorMessage).show();
                                     }
                                 }
 
@@ -218,8 +218,7 @@ public class NewsDetailActivity extends AppCompatActivity {
 
     private void HandelDataContent() {
         if (AppUtill.isNetworkAvailable(this)) {
-            new NewsContentService(this).getOne(Id)
-                    .observeOn(AndroidSchedulers.mainThread())
+            new NewsContentService(this).getOne(Id).observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
                     .subscribe(new NtkObserver<ErrorException<NewsContentModel>>() {
                         @Override
@@ -274,7 +273,7 @@ public class NewsDetailActivity extends AppCompatActivity {
                         public void onNext(@NonNull ErrorException<NewsCommentModel> model) {
                             if (model.IsSuccess && !model.ListItems.isEmpty()) {
                                 findViewById(R.id.lblCommentActDetailNews).setVisibility(View.VISIBLE);
-                                CommentNewsAdapter adapter = new CommentNewsAdapter(NewsDetailActivity.this, model.ListItems);
+                                CommentNewsAdapter adapter = new CommentNewsAdapter( NewsDetailActivity.this, model.ListItems);
                                 RvComment.setAdapter(adapter);
                                 adapter.notifyDataSetChanged();
                             } else {
@@ -305,7 +304,6 @@ public class NewsDetailActivity extends AppCompatActivity {
 
     private void HandelDataContentOtherInfo(long ContentId) {
         if (AppUtill.isNetworkAvailable(this)) {
-           
             FilterDataModel Request = new FilterDataModel();
             Filters f = new Filters();
             f.PropertyName = "LinkContentId";
@@ -345,7 +343,7 @@ public class NewsDetailActivity extends AppCompatActivity {
         List<NewsContentOtherInfoModel> Info = new ArrayList<>();
 
         for (NewsContentOtherInfoModel ai : model.ListItems) {
-            switch (ai.typeId) {
+            switch (ai.TypeId) {
                 case 21:
                     Lbls.get(7).setText(ai.Title);
                     ai.HtmlBody = ai.HtmlBody.replace("<p>", "");
@@ -369,7 +367,7 @@ public class NewsDetailActivity extends AppCompatActivity {
                     break;
             }
         }
-        TabNewsAdapter adapter = new TabNewsAdapter(NewsDetailActivity.this, Info);
+        TabNewsAdapter adapter = new TabNewsAdapter( NewsDetailActivity.this, Info);
         RvTab.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
@@ -404,8 +402,8 @@ public class NewsDetailActivity extends AppCompatActivity {
             rating = 5.0;
         }
         Rate.setRating((float) rating);
-        if (model.Item.body != null)
-            webViewBody.loadData("<html dir=\"rtl\" lang=\"\"><body>" + model.Item.body + "</body></html>", "text/html; charset=utf-8", "UTF-8");
+        if (model.Item.Body != null)
+            webViewBody.loadData("<html dir=\"rtl\" lang=\"\"><body>" + model.Item.Body + "</body></html>", "text/html; charset=utf-8", "UTF-8");
         if (model.Item.Favorited) {
             ((ImageView) findViewById(R.id.imgHeartActDetailNews)).setImageResource(R.drawable.ic_fav_full);
         }
@@ -452,10 +450,10 @@ public class NewsDetailActivity extends AppCompatActivity {
 
         Btn.setOnClickListener(v -> {
             if (Txt[0].getText().toString().isEmpty()) {
-                Toast.makeText(NewsDetailActivity.this, "لطفا مقادیر را وارد نمایید", Toast.LENGTH_SHORT).show();
+                Toast.makeText( NewsDetailActivity.this, "لطفا مقادیر را وارد نمایید", Toast.LENGTH_SHORT).show();
             } else {
                 if (Txt[1].getText().toString().isEmpty()) {
-                    Toast.makeText(NewsDetailActivity.this, "لطفا مقادیر را وارد نمایید", Toast.LENGTH_SHORT).show();
+                    Toast.makeText( NewsDetailActivity.this, "لطفا مقادیر را وارد نمایید", Toast.LENGTH_SHORT).show();
                 } else {
                     if (AppUtill.isNetworkAvailable(this)) {
                         NewsCommentModel add = new NewsCommentModel();
@@ -471,10 +469,10 @@ public class NewsDetailActivity extends AppCompatActivity {
                                         if (e.IsSuccess) {
                                             HandelDataComment(Id);
                                             dialog.dismiss();
-                                            Toasty.success(NewsDetailActivity.this, "نظر شما با موفقیت ثبت شد").show();
+                                            Toasty.success( NewsDetailActivity.this, "نظر شما با موفقیت ثبت شد").show();
                                         } else {
                                             dialog.dismiss();
-                                            Toasty.warning(NewsDetailActivity.this, e.ErrorMessage).show();
+                                            Toasty.warning( NewsDetailActivity.this, e.ErrorMessage).show();
                                         }
                                     }
 
@@ -524,7 +522,7 @@ public class NewsDetailActivity extends AppCompatActivity {
                         @Override
                         public void onNext(ErrorExceptionBase e) {
                             if (e.IsSuccess) {
-                                Toasty.success(NewsDetailActivity.this, "با موفقیت ثبت شد").show();
+                                Toasty.success( NewsDetailActivity.this, "با موفقیت ثبت شد").show();
                                 model.Item.Favorited = !model.Item.Favorited;
                                 if (model.Item.Favorited) {
                                     ((ImageView) findViewById(R.id.imgHeartActDetailNews)).setImageResource(R.drawable.ic_fav_full);
@@ -532,7 +530,7 @@ public class NewsDetailActivity extends AppCompatActivity {
                                     ((ImageView) findViewById(R.id.imgHeartActDetailNews)).setImageResource(R.drawable.ic_fav);
                                 }
                             } else {
-                                Toasty.error(NewsDetailActivity.this, e.ErrorMessage, Toast.LENGTH_LONG, true).show();
+                                Toasty.error( NewsDetailActivity.this, e.ErrorMessage, Toast.LENGTH_LONG, true).show();
                             }
                         }
 
@@ -566,7 +564,7 @@ public class NewsDetailActivity extends AppCompatActivity {
                         @Override
                         public void onNext(ErrorExceptionBase e) {
                             if (e.IsSuccess) {
-                                Toasty.success(NewsDetailActivity.this, "با موفقیت ثبت شد").show();
+                                Toasty.success( NewsDetailActivity.this, "با موفقیت ثبت شد").show();
                                 model.Item.Favorited = !model.Item.Favorited;
                                 if (model.Item.Favorited) {
                                     ((ImageView) findViewById(R.id.imgHeartActDetailNews)).setImageResource(R.drawable.ic_fav_full);
@@ -574,7 +572,7 @@ public class NewsDetailActivity extends AppCompatActivity {
                                     ((ImageView) findViewById(R.id.imgHeartActDetailNews)).setImageResource(R.drawable.ic_fav);
                                 }
                             } else {
-                                Toasty.error(NewsDetailActivity.this, e.ErrorMessage, Toast.LENGTH_LONG, true).show();
+                                Toasty.error( NewsDetailActivity.this, e.ErrorMessage, Toast.LENGTH_LONG, true).show();
                             }
                         }
 
@@ -587,11 +585,6 @@ public class NewsDetailActivity extends AppCompatActivity {
                                 }
                             }).show();
                         }
-
-                        @Override
-                        public void onComplete() {
-
-                        }
                     });
         } else {
             Snackbar.make(layout, "عدم دسترسی به اینترنت", Snackbar.LENGTH_INDEFINITE).setAction("تلاش مجددا", v -> init()).show();
@@ -600,14 +593,13 @@ public class NewsDetailActivity extends AppCompatActivity {
 
     @OnClick(R.id.imgShareActDetailNews)
     public void ClickShare() {
-        String st =
-                EasyPreference.with(this).getString("configapp", "");
+                String st = Preferences.with(this).appVariableInfo().configapp();
         CoreMain mcr = new Gson().fromJson(st, CoreMain.class);
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
         String message = model.Item.Title + "\n" + model.Item.Description + "\n";
-        if (model.Item.body != null) {
-            message = message + Html.fromHtml(model.Item.body
+        if (model.Item.Body != null) {
+            message = message + Html.fromHtml(model.Item.Body
                     .replace("<p>", "")
                     .replace("</p>", ""));
         }

@@ -56,8 +56,8 @@ import ntk.android.base.services.blog.BlogCommentService;
 import ntk.android.base.services.blog.BlogContentOtherInfoService;
 import ntk.android.base.services.blog.BlogContentService;
 import ntk.android.base.utill.AppUtill;
-import ntk.android.base.utill.EasyPreference;
 import ntk.android.base.utill.FontManager;
+import ntk.android.base.utill.prefrense.Preferences;
 import ntk.android.hyper.R;
 import ntk.android.hyper.adapter.BlogAdapter;
 import ntk.android.hyper.adapter.CommentBlogAdapter;
@@ -183,9 +183,9 @@ public class BlogDetailActivity extends AppCompatActivity {
                                 public void onNext(ErrorExceptionBase biographyContentResponse) {
                                     Loading.setVisibility(View.GONE);
                                     if (biographyContentResponse.IsSuccess) {
-                                        Toasty.success(BlogDetailActivity.this, "نظر شمابا موفقیت ثبت گردید").show();
+                                        Toasty.success( BlogDetailActivity.this, "نظر شمابا موفقیت ثبت گردید").show();
                                     } else {
-                                        Toasty.warning(BlogDetailActivity.this, biographyContentResponse.ErrorMessage).show();
+                                        Toasty.warning( BlogDetailActivity.this, biographyContentResponse.ErrorMessage).show();
                                     }
                                 }
 
@@ -271,7 +271,7 @@ public class BlogDetailActivity extends AppCompatActivity {
                         public void onNext(ErrorException<BlogCommentModel> model) {
                             if (model.IsSuccess && !model.ListItems.isEmpty()) {
                                 findViewById(R.id.lblCommentActDetailBlog).setVisibility(View.VISIBLE);
-                                CommentBlogAdapter adapter = new CommentBlogAdapter(BlogDetailActivity.this, model.ListItems);
+                                CommentBlogAdapter adapter = new CommentBlogAdapter( BlogDetailActivity.this, model.ListItems);
                                 RvComment.setAdapter(adapter);
                                 adapter.notifyDataSetChanged();
                             } else {
@@ -341,7 +341,7 @@ public class BlogDetailActivity extends AppCompatActivity {
         List<BlogContentOtherInfoModel> Info = new ArrayList<>();
 
         for (BlogContentOtherInfoModel ai : model.ListItems) {
-            switch (ai.typeId) {
+            switch (ai.TypeId) {
                 case 21:
                     Lbls.get(7).setText(ai.Title);
                     ai.HtmlBody = ai.HtmlBody.replace("<p>", "");
@@ -365,7 +365,7 @@ public class BlogDetailActivity extends AppCompatActivity {
                     break;
             }
         }
-        TabBlogAdapter adapter = new TabBlogAdapter(BlogDetailActivity.this, Info);
+        TabBlogAdapter adapter = new TabBlogAdapter( BlogDetailActivity.this, Info);
         RvTab.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
@@ -421,7 +421,7 @@ public class BlogDetailActivity extends AppCompatActivity {
 
     @OnClick(R.id.lblAllMenuActDetailBlog)
     public void onMoreBlogClick() {
-        this.startActivity(new Intent(this, BlogActivity.class));
+        this.startActivity(new Intent(this, BlogListActivity.class));
     }
 
 
@@ -470,10 +470,10 @@ public class BlogDetailActivity extends AppCompatActivity {
 
             Btn.setOnClickListener(v -> {
                 if (Txt[0].getText().toString().isEmpty()) {
-                    Toast.makeText(BlogDetailActivity.this, "لطفا مقادیر را وارد نمایید", Toast.LENGTH_SHORT).show();
+                    Toast.makeText( BlogDetailActivity.this, "لطفا مقادیر را وارد نمایید", Toast.LENGTH_SHORT).show();
                 } else {
                     if (Txt[1].getText().toString().isEmpty()) {
-                        Toast.makeText(BlogDetailActivity.this, "لطفا مقادیر را وارد نمایید", Toast.LENGTH_SHORT).show();
+                        Toast.makeText( BlogDetailActivity.this, "لطفا مقادیر را وارد نمایید", Toast.LENGTH_SHORT).show();
                     } else {
                         BlogCommentModel add = new BlogCommentModel();
                         add.Writer = Txt[0].getText().toString();
@@ -489,9 +489,9 @@ public class BlogDetailActivity extends AppCompatActivity {
                                         if (e.IsSuccess) {
                                             HandelDataComment(Id);
                                             dialog.dismiss();
-                                            Toasty.success(BlogDetailActivity.this, "نظر شما با موفقیت ثبت شد").show();
+                                            Toasty.success( BlogDetailActivity.this, "نظر شما با موفقیت ثبت شد").show();
                                         } else {
-                                            Toasty.warning(BlogDetailActivity.this, "لطفا مجددا تلاش کنید").show();
+                                            Toasty.warning( BlogDetailActivity.this, "لطفا مجددا تلاش کنید").show();
                                         }
                                     }
 
@@ -541,7 +541,7 @@ public class BlogDetailActivity extends AppCompatActivity {
                         @Override
                         public void onNext(ErrorExceptionBase e) {
                             if (e.IsSuccess) {
-                                Toasty.success(BlogDetailActivity.this, "با موفقیت ثبت شد").show();
+                                Toasty.success( BlogDetailActivity.this, "با موفقیت ثبت شد").show();
                                 model.Item.Favorited = !model.Item.Favorited;
                                 if (model.Item.Favorited) {
                                     ((ImageView) findViewById(R.id.imgHeartActDetailBlog)).setImageResource(R.drawable.ic_fav_full);
@@ -549,7 +549,7 @@ public class BlogDetailActivity extends AppCompatActivity {
                                     ((ImageView) findViewById(R.id.imgHeartActDetailBlog)).setImageResource(R.drawable.ic_fav);
                                 }
                             } else {
-                                Toasty.error(BlogDetailActivity.this, e.ErrorMessage, Toast.LENGTH_LONG, true).show();
+                                Toasty.error( BlogDetailActivity.this, e.ErrorMessage, Toast.LENGTH_LONG, true).show();
                             }
 
                         }
@@ -589,13 +589,13 @@ public class BlogDetailActivity extends AppCompatActivity {
                             if (e.IsSuccess) {
                                 model.Item.Favorited = !model.Item.Favorited;
                                 if (model.Item.Favorited) {
-                                    Toasty.success(BlogDetailActivity.this, "با موفقیت ثبت شد").show();
+                                    Toasty.success( BlogDetailActivity.this, "با موفقیت ثبت شد").show();
                                     ((ImageView) findViewById(R.id.imgHeartActDetailBlog)).setImageResource(R.drawable.ic_fav_full);
                                 } else {
                                     ((ImageView) findViewById(R.id.imgHeartActDetailBlog)).setImageResource(R.drawable.ic_fav);
                                 }
                             } else {
-                                Toasty.error(BlogDetailActivity.this, e.ErrorMessage, Toast.LENGTH_LONG, true).show();
+                                Toasty.error( BlogDetailActivity.this, e.ErrorMessage, Toast.LENGTH_LONG, true).show();
                             }
 
                         }
@@ -623,7 +623,7 @@ public class BlogDetailActivity extends AppCompatActivity {
 
     @OnClick(R.id.imgShareActDetailBlog)
     public void ClickShare() {
-        String st = EasyPreference.with(this).getString("configapp", "");
+        String st = Preferences.with(this).appVariableInfo().configapp();
         CoreMain mcr = new Gson().fromJson(st, CoreMain.class);
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
