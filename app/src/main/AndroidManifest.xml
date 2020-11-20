@@ -60,6 +60,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity android:name=".activity.hyper.ShopContentListActivity" />
+        <activity android:name=".activity.hyper.HyperListActivity" />
 
 
         <provider

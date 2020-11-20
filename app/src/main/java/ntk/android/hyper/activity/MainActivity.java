@@ -71,6 +71,7 @@ import ntk.android.base.utill.FontManager;
 import ntk.android.base.utill.prefrense.Preferences;
 import ntk.android.hyper.BuildConfig;
 import ntk.android.hyper.R;
+import ntk.android.hyper.activity.hyper.HyperListActivity;
 import ntk.android.hyper.adapter.CoreImageAdapter;
 import ntk.android.hyper.event.toolbar.EVSearchClick;
 
@@ -448,7 +449,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.questionBtn)
     public void onQuestionClick() {
-        this.startActivity(new Intent(this, FaqActivity.class));
+        this.startActivity(new Intent(this, HyperListActivity.class));
     }
 
     @OnClick(R.id.blogBtn)
