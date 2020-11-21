@@ -56,7 +56,9 @@ public class TicketingApp extends NTKApplication {
     @Override
     protected ApplicationStaticParameter getConfig() {
         ApplicationStaticParameter applicationStaticParameter = new ApplicationStaticParameter();
-//        applicationStaticParameter.URL = "http://dd9ecb640aee.ngrok.io/";
+        // ApplicationStaticParameter.PACKAGE_NAME = "ntk.android.hypershop";
+        // ApplicationStaticParameter.URL = "http://d808c7eb0c6a.ngrok.io";
+
         return applicationStaticParameter;
     }
     @Override
