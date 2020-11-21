@@ -1,32 +1,7 @@
 package ntk.android.hyper.activity.hyper;
 
-import android.os.Bundle;
-import android.view.View;
-import android.webkit.WebView;
-import android.widget.TextView;
-
-import androidx.annotation.Nullable;
-
-import com.nostra13.universalimageloader.core.ImageLoader;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.schedulers.Schedulers;
 import ntk.android.base.activity.BaseActivity;
-import ntk.android.base.config.NtkObserver;
-import ntk.android.base.dtomodel.hypershop.HyperShopContentModel;
-import ntk.android.base.entitymodel.base.ErrorException;
-import ntk.android.base.services.hypershop.HyperShopMicroService;
-import ntk.android.base.utill.AppUtill;
-import ntk.android.base.utill.ExtrasString;
-import ntk.android.hyper.R;
+import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 
 
 /**

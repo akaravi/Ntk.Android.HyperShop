@@ -19,7 +19,7 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import java.util.List;
 
 import ntk.android.base.adapter.BaseRcAdapter;
-import ntk.android.base.dtomodel.hypershop.HyperShopContentModel;
+import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.hyper.R;
 
 public class HypershopContentAdapter extends BaseRcAdapter<HyperShopContentModel> {

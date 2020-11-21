@@ -65,7 +65,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="ntk.android.hyper.APPNTK"
+            android:authorities="ntk.android.hypershop.APPNTK"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
