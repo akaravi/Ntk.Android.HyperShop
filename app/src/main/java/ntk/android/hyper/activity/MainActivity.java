@@ -464,10 +464,8 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.introBtn)
     public void onIntroClick() {
-        Bundle bundle = new Bundle();
-        bundle.putInt("Help", 1);
         Intent intent = new Intent(this, IntroActivity.class);
-        intent.putExtra("Help", bundle);
+        intent.putExtra(IntroActivity.ExtraComeFromMain, true);
         this.startActivity(intent);
     }
 }

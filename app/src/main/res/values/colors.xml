@@ -42,4 +42,7 @@
     <color name="about_description_text_color">#595959</color>
     <color name="about_item_text_color">#7c7c7c</color>
     <color name="about_text_color">#595959</color>
+    <color name="colorItem">#2E4B59</color>
+    <color name="colorItemDetailBackground">#90A6B4</color>
+    <color name="colorItemName">#2E4B59</color>
 </resources>

@@ -9,6 +9,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -21,6 +22,7 @@ import java.util.List;
 import ntk.android.base.adapter.BaseRcAdapter;
 import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.hyper.R;
+import ntk.android.hyper.activity.hyper.ShopContentDetailDialog;
 
 public class HypershopContentAdapter extends BaseRcAdapter<HyperShopContentModel> {
 
@@ -41,6 +43,7 @@ public class HypershopContentAdapter extends BaseRcAdapter<HyperShopContentModel
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder b, int position) {
         HyperVH holder = (HyperVH) b;
         holder.title.setText(getItem(position).Name);
+        holder.itemView.setOnClickListener(view -> ShopContentDetailDialog.show((AppCompatActivity) holder.itemView.getContext(), getItem(position).Name));
         holder.description.setText(getItem(position).Memo);
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .cacheOnDisk(true).build();
