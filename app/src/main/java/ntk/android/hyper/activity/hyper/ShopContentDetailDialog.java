@@ -13,7 +13,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.steelkiwi.library.IncrementProductView;
@@ -24,6 +23,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import ntk.android.base.Extras;
 import ntk.android.base.config.NtkObserver;
+import ntk.android.base.dialog.baseFragmentDialog;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.base.services.hypershop.HyperShopContentService;
@@ -31,7 +31,7 @@ import ntk.android.hyper.R;
 import ntk.android.hyper.prefrense.OrderPref;
 import ntk.android.hyper.view.CircleAnimationUtil;
 
-public class ShopContentDetailDialog extends DialogFragment {
+public class ShopContentDetailDialog extends baseFragmentDialog {
 
     private String code;
     private int productCount = 1;
@@ -45,21 +45,21 @@ public class ShopContentDetailDialog extends DialogFragment {
     }
 
     @Override
+    public void onCreateFragment() {
+        setContentView(R.layout.dialog_item_detail);
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         code = getArguments().getString(Extras.EXTRA_FIRST_ARG, "");
     }
 
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.dialog_item_detail, container, false);
-    }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        switcher.showProgressView();
         new HyperShopContentService(getActivity()).getOne(code)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -80,6 +80,7 @@ public class ShopContentDetailDialog extends DialogFragment {
     }
 
     private void showModel(HyperShopContentModel item) {
+        switcher.showContentView();
         View view = getView();
         IncrementProductView incrementProductView = (IncrementProductView) view.findViewById(R.id.productView);
         TextView txtItemName = view.findViewById(R.id.txtItemName);
