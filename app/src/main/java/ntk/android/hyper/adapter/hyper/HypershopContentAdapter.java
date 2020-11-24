@@ -43,7 +43,7 @@ public class HypershopContentAdapter extends BaseRcAdapter<HyperShopContentModel
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder b, int position) {
         HyperVH holder = (HyperVH) b;
         holder.title.setText(getItem(position).Name);
-        holder.itemView.setOnClickListener(view -> ShopContentDetailDialog.show((AppCompatActivity) holder.itemView.getContext(), getItem(position).Name));
+        holder.itemView.setOnClickListener(view -> ShopContentDetailDialog.show((AppCompatActivity) holder.itemView.getContext(), getItem(position).Code));
         holder.description.setText(getItem(position).Memo);
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .cacheOnDisk(true).build();

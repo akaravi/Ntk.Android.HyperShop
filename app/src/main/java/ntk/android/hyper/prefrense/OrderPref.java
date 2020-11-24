@@ -25,6 +25,7 @@ public class OrderPref {
         p.Name = model.Name;
         p.Price = model.Price;
         p.Memo = model.Memo;
+        p.Image = model.Image;
         p.Count = count;
         order.Products.add(p);
         saveOrder(order);

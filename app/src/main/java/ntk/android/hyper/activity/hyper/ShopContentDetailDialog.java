@@ -33,13 +33,13 @@ import ntk.android.hyper.view.CircleAnimationUtil;
 
 public class ShopContentDetailDialog extends DialogFragment {
 
-    private long id;
+    private String code;
     private int productCount = 1;
 
-    public static void show(AppCompatActivity context, long Id) {
+    public static void show(AppCompatActivity context, String Id) {
         ShopContentDetailDialog d = new ShopContentDetailDialog();
         Bundle bundle = new Bundle();
-        bundle.putLong(Extras.EXTRA_FIRST_ARG, Id);
+        bundle.putString(Extras.EXTRA_FIRST_ARG, Id);
         d.setArguments(bundle);
         d.show(context.getSupportFragmentManager(), "dialog");
     }
@@ -47,7 +47,7 @@ public class ShopContentDetailDialog extends DialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        id = getArguments().getLong(Extras.EXTRA_FIRST_ARG, 0);
+        code = getArguments().getString(Extras.EXTRA_FIRST_ARG, "");
     }
 
 
@@ -60,7 +60,7 @@ public class ShopContentDetailDialog extends DialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        new HyperShopContentService(getActivity()).getOne(id)
+        new HyperShopContentService(getActivity()).getOne(code)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new NtkObserver<ErrorException<HyperShopContentModel>>() {
@@ -77,8 +77,6 @@ public class ShopContentDetailDialog extends DialogFragment {
                         Toasty.warning(getContext(), "خطای سامانه", Toasty.LENGTH_LONG, true).show();
                     }
                 });
-
-
     }
 
     private void showModel(HyperShopContentModel item) {

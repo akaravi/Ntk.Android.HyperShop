@@ -16,15 +16,13 @@ import ntk.android.base.ApplicationStaticParameter;
 import ntk.android.base.ApplicationStyle;
 import ntk.android.base.NTKApplication;
 import ntk.android.base.utill.FontManager;
-import ntk.android.hyper.activity.MainActivity;
+import ntk.android.hyper.activity.PanelActivity;
 
-public class TicketingApp extends NTKApplication {
-
-    public static boolean Inbox = false;
-
+public class MyApplication extends NTKApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        DEBUG = true;
         if (!new File(getCacheDir(), "image").exists()) {
             new File(getCacheDir(), "image").mkdirs();
         }
@@ -43,7 +41,7 @@ public class TicketingApp extends NTKApplication {
         applicationStyle = new ApplicationStyle() {
             @Override
             public Class<?> getMainActivity() {
-                return MainActivity.class;
+                return PanelActivity.class;
             }
         };
     }
@@ -53,6 +51,7 @@ public class TicketingApp extends NTKApplication {
         super.attachBaseContext(base);
         MultiDex.install(base);
     }
+
     @Override
     protected ApplicationStaticParameter getConfig() {
         ApplicationStaticParameter applicationStaticParameter = new ApplicationStaticParameter();
@@ -61,6 +60,7 @@ public class TicketingApp extends NTKApplication {
 
         return applicationStaticParameter;
     }
+
     @Override
     public ApplicationParameter getApplicationParameter() {
         return new ApplicationParameter(BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE);

@@ -1,24 +1,37 @@
 package ntk.android.hyper.fragment;
 
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
+import io.reactivex.Observable;
+import java9.util.function.Function;
+import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterDataModel;
-import ntk.android.hyper.adapter.hyper.ShopContentListAdapter;
+import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
+import ntk.android.base.fragment.abstraction.AbstractionListFragment;
+import ntk.android.base.services.hypershop.HyperShopContentService;
+import ntk.android.hyper.adapter.hyper.HypershopContentAdapter;
 
 
-public class ShopContentListFragment extends Fragment {
+public class ShopContentListFragment extends AbstractionListFragment<HyperShopContentModel> {
+    @Override
+    public Function<FilterDataModel, Observable<ErrorException<HyperShopContentModel>>> getService() {
+        return new HyperShopContentService(getContext())::getAll;
+    }
+
+    @Override
+    public boolean withToolbar() {
+        return false;
+    }
+
+    @Override
+    public RecyclerView.Adapter createAdapter() {
+        return new HypershopContentAdapter(models);
+    }
+
+    @Override
+    public void ClickSearch() {
+
+    }
 //     ShopContentListAdapter adapter;
 //    /**
 //     * if activity recently has been get data from server set true
