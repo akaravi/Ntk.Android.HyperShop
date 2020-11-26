@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imgCart"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/cart" />
+
+    <TextView
+        android:id="@+id/txtCount"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="-15dp"
+        android:layout_toLeftOf="@+id/imgCart"
+        android:background="@drawable/cart_count"
+        android:gravity="center"
+      android:visibility="gone"
+        android:textColor="@android:color/white"
+        android:textSize="11sp"
+       />
+</RelativeLayout>

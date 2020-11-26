@@ -1,5 +1,6 @@
 package ntk.android.hyper.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import com.yalantis.guillotine.animation.GuillotineAnimation;
 
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.hyper.R;
+import ntk.android.hyper.activity.hyper.OrderActivity;
 import ntk.android.hyper.fragment.ShopContentListFragment;
 
 public class PanelActivity extends BaseActivity {
@@ -24,7 +26,7 @@ public class PanelActivity extends BaseActivity {
 
         View guillotineMenu = LayoutInflater.from(this).inflate(R.layout.panel_drawer, null);
         ((FrameLayout) findViewById(R.id.root)).addView(guillotineMenu);
-
+        findViewById(R.id.cartView).setOnClickListener(view -> startActivity(new Intent(PanelActivity.this, OrderActivity.class)));
         new GuillotineAnimation.GuillotineBuilder(guillotineMenu,
                 guillotineMenu.findViewById(R.id.guillotine_hamburger),
                 findViewById(R.id.content_hamburger))
@@ -35,4 +37,6 @@ public class PanelActivity extends BaseActivity {
         ShopContentListFragment fragment = new ShopContentListFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
     }
+
+
 }

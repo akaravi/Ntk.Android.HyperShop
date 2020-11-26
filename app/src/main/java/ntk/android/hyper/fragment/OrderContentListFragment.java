@@ -1,35 +1,46 @@
 package ntk.android.hyper.fragment;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import androidx.recyclerview.widget.RecyclerView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
-import ntk.android.hyper.R;
+import io.reactivex.Observable;
+import java9.util.function.Function;
+import ntk.android.base.dtomodel.hypershop.HyperShopOrderContentDtoModel;
+import ntk.android.base.entitymodel.base.ErrorException;
+import ntk.android.base.entitymodel.base.FilterDataModel;
+import ntk.android.base.fragment.abstraction.AbstractionListFragment;
 import ntk.android.hyper.adapter.hyper.HyperOrderContentAdapter;
 import ntk.android.hyper.prefrense.OrderPref;
 
-public class OrderContentListFragment extends Fragment {
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+public class OrderContentListFragment extends AbstractionListFragment<HyperShopOrderContentDtoModel> {
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View inflate = inflater.inflate(R.layout.sub_base_recyclerview, container, false);
-        return inflate;
-    }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        HyperOrderContentAdapter adapter = new HyperOrderContentAdapter(getContext(), new OrderPref(getContext()).getOrder().Products);
+    public Function<FilterDataModel, Observable<ErrorException<HyperShopOrderContentDtoModel>>> getService() {
+        return dataModel -> getData();
+    }
+
+    private Observable<ErrorException<HyperShopOrderContentDtoModel>> getData() {
+        return Observable.create(emitter -> {
+            ErrorException<HyperShopOrderContentDtoModel> model = new ErrorException<>();
+            model.IsSuccess = true;
+            model.ListItems = new OrderPref(getContext()).getOrder().Products;
+            emitter.onNext(model);
+            emitter.onComplete();
+        });
+    }
+
+    @Override
+    public boolean withToolbar() {
+        return false;
+    }
+
+    @Override
+    public RecyclerView.Adapter createAdapter() {
+        return new HyperOrderContentAdapter(getContext(),models);
+    }
+
+    @Override
+    public void ClickSearch() {
 
     }
 }

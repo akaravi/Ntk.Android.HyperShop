@@ -17,7 +17,7 @@ import ntk.android.hyper.R;
 import ntk.android.hyper.fragment.OrderContentListFragment;
 import ntk.android.hyper.prefrense.OrderPref;
 
-class OrderActivity extends BaseActivity {
+public class OrderActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

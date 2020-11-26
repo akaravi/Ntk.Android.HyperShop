@@ -2,12 +2,10 @@ package ntk.android.hyper.activity.hyper;
 
 import android.animation.Animator;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.os.Handler;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,6 +27,7 @@ import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.base.services.hypershop.HyperShopContentService;
 import ntk.android.hyper.R;
 import ntk.android.hyper.prefrense.OrderPref;
+import ntk.android.hyper.view.CartView;
 import ntk.android.hyper.view.CircleAnimationUtil;
 
 public class ShopContentDetailDialog extends baseFragmentDialog {
@@ -41,6 +40,7 @@ public class ShopContentDetailDialog extends baseFragmentDialog {
         Bundle bundle = new Bundle();
         bundle.putString(Extras.EXTRA_FIRST_ARG, Id);
         d.setArguments(bundle);
+        d.setCancelable(false);
         d.show(context.getSupportFragmentManager(), "dialog");
     }
 
@@ -67,7 +67,7 @@ public class ShopContentDetailDialog extends baseFragmentDialog {
                     @Override
                     public void onNext(@io.reactivex.annotations.NonNull ErrorException<HyperShopContentModel> response) {
                         if (response.IsSuccess)
-                            showModel(response.Item);
+                            new Handler().postDelayed(() -> showModel(response.Item), 1);
                         else
                             Toasty.warning(ShopContentDetailDialog.this.getContext(), response.ErrorMessage).show();
                     }
@@ -97,7 +97,7 @@ public class ShopContentDetailDialog extends baseFragmentDialog {
         txtExtendedPrice.setText(String.format("%.2f", item.Price * 1));
 
 
-        this.getDialog().getWindow().getAttributes().windowAnimations = R.style.DetailDialogAnimation;
+//        this.getDialog().getWindow().getAttributes().windowAnimations = R.style.DetailDialogAnimation;
 
         ImageLoader.getInstance().displayImage(item.Image, imgThumbnail);
 //
@@ -127,31 +127,31 @@ public class ShopContentDetailDialog extends baseFragmentDialog {
 
         btnOk.setOnClickListener(view1 -> {
             new OrderPref(getContext()).addShopContent(item, productCount);
-            //todo add anim
-//                addItemToCartAnimation(imgThumbnail, item, Integer.parseInt(txtQuantity.getText().toString()));
+            addItemToCartAnimation(imgThumbnail);
             dismiss();
         });
     }
 
-    private void addItemToCartAnimation(ImageView targetView, final HyperShopContentModel item, final int quantity) {
-        RelativeLayout destView = getActivity().findViewById(R.id.aboutUs);
+    private void addItemToCartAnimation(ImageView targetView) {
+        CartView destView = getActivity().findViewById(R.id.cartView);
+        if (destView != null)
+            new CircleAnimationUtil().attachActivity(getActivity()).setTargetView(targetView).setMoveDuration(300).setDestView(destView).setAnimationListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+                }
 
-        new CircleAnimationUtil().attachActivity(getActivity()).setTargetView(targetView).setMoveDuration(300).setDestView(destView).setAnimationListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-            }
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    destView.updateCount();
+                }
 
-            @Override
-            public void onAnimationEnd(Animator animation) {
-            }
+                @Override
+                public void onAnimationCancel(Animator animation) {
+                }
 
-            @Override
-            public void onAnimationCancel(Animator animation) {
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-            }
-        }).startAnimation();
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+                }
+            }).startAnimation();
     }
 }
