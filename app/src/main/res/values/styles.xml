@@ -20,7 +20,10 @@
         <item name="Theme_NTK_Ticket_List">@style/NoActionBar</item>
         <item name="Theme_NTK_Faq_Search">@style/NoActionBar </item>
     </style>
+    <style name="NoAnimDialog">
+        <item name="android:windowAnimationStyle">@null</item>
 
+    </style>
     <style name="NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     </style>

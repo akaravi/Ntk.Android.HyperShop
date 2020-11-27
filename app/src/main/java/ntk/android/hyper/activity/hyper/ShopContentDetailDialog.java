@@ -41,6 +41,7 @@ public class ShopContentDetailDialog extends baseFragmentDialog {
         bundle.putString(Extras.EXTRA_FIRST_ARG, Id);
         d.setArguments(bundle);
         d.setCancelable(false);
+
         d.show(context.getSupportFragmentManager(), "dialog");
     }
 
@@ -50,8 +51,16 @@ public class ShopContentDetailDialog extends baseFragmentDialog {
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getDialog().getWindow()
+                .getAttributes().windowAnimations = R.style.NoAnimDialog;
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         code = getArguments().getString(Extras.EXTRA_FIRST_ARG, "");
     }
 
@@ -67,7 +76,7 @@ public class ShopContentDetailDialog extends baseFragmentDialog {
                     @Override
                     public void onNext(@io.reactivex.annotations.NonNull ErrorException<HyperShopContentModel> response) {
                         if (response.IsSuccess)
-                            new Handler().postDelayed(() -> showModel(response.Item), 1);
+                            new Handler().postDelayed(() -> showModel(response.Item), 10000);
                         else
                             Toasty.warning(ShopContentDetailDialog.this.getContext(), response.ErrorMessage).show();
                     }
