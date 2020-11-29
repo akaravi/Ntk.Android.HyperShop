@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
 import ntk.android.base.dtomodel.hypershop.HyperShopOrderContentDtoModel;
 import ntk.android.hyper.R;
 
@@ -44,6 +45,7 @@ public class HyperOrderContentAdapter extends RecyclerView.Adapter {
         ItemViewHolder holder = (ItemViewHolder) base;
         HyperShopOrderContentDtoModel item = products.get(position);
         holder.txtItemName.setText(item.Name);
+        holder.etCount.setText(products.get(position).Count);
         holder.txtProductPrice.setText(String.format("%.2f", item.Price));
 
         holder.imgAdd.setOnClickListener(view -> {
@@ -51,7 +53,10 @@ public class HyperOrderContentAdapter extends RecyclerView.Adapter {
             if (s.equalsIgnoreCase(""))
                 s = "0";
             int count = Integer.parseInt(s) + 1;
-            holder.etCount.setText(String.valueOf(count));
+            if (count <= products.get(position).TotalCount)
+                holder.etCount.setText(String.valueOf(count));
+            else
+                Toasty.error(view.getContext(), "این تعداد از کالا موجود نمی باشد").show();
 
         });
         holder.imgRemove.setOnClickListener(view -> {
@@ -73,8 +78,13 @@ public class HyperOrderContentAdapter extends RecyclerView.Adapter {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (!charSequence.toString().equals("")) {
-                    products.get(position).Count = Integer.parseInt(charSequence.toString());
-                    changePriceMethod.run();
+                    int count = Integer.parseInt(charSequence.toString());
+                    if (count <= products.get(position).TotalCount) {
+                        products.get(position).Count = count;
+                        changePriceMethod.run();
+                    } else {
+                        Toasty.error(context, "این تعداد از کالا موجود نمی باشد").show();
+                    }
                 }
             }
 
