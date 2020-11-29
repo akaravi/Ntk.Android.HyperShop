@@ -19,7 +19,7 @@ import es.dmoral.toasty.Toasty;
 import ntk.android.base.dtomodel.hypershop.HyperShopOrderContentDtoModel;
 import ntk.android.hyper.R;
 
-public class HyperOrderContentAdapter extends RecyclerView.Adapter {
+public class HyperOrderContentAdapter extends  RecyclerView.Adapter {
 
 
     private final Context context;
