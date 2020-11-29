@@ -30,11 +30,11 @@ public class CartView extends FrameLayout {
     }
 
     public void updateCount() {
-        TextView tv =findViewById(R.id.txtCount);
+        TextView tv = findViewById(R.id.txtCount);
         int products = new OrderPref(getContext()).getOrder().Products.size();
         if (products > 0) {
             tv.setVisibility(VISIBLE);
-            tv.setText(products);
+            tv.setText((String.valueOf(products)));
         }
     }
 

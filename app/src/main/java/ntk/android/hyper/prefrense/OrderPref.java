@@ -5,6 +5,7 @@ import android.content.Context;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ntk.android.base.dtomodel.hypershop.HyperShopOrderContentDtoModel;
 import ntk.android.base.dtomodel.hypershop.HyperShopOrderDtoModel;
@@ -31,19 +32,36 @@ public class OrderPref {
         saveOrder(order);
     }
 
+    public void updateOrderWith(List<HyperShopOrderContentDtoModel> models, float amountOrder) {
+        HyperShopOrderDtoModel order = getOrder();
+        order.Products = models;
+        order.Amount = amountOrder;
+        saveOrder(order);
+
+    }
+
     private void saveOrder(HyperShopOrderDtoModel model) {
         EasyPreference.with(c).addString("HypershopOrder", new Gson().toJson(model));
     }
 
     public HyperShopOrderDtoModel getOrder() {
         String hypershopOrder = EasyPreference.with(c).getString("HypershopOrder", "");
+
         if (!hypershopOrder.equalsIgnoreCase("")) {
             HyperShopOrderDtoModel hyperShopOrderDtoModel = new Gson().fromJson(hypershopOrder, HyperShopOrderDtoModel.class);
-            hyperShopOrderDtoModel.Products = new ArrayList<>();
             return hyperShopOrderDtoModel;
         }
         HyperShopOrderDtoModel hyperShopOrderDtoModel = new HyperShopOrderDtoModel();
         hyperShopOrderDtoModel.Products = new ArrayList<>();
         return hyperShopOrderDtoModel;
+    }
+
+    public void addDetails(String name, String family, String mobile, String address) {
+        HyperShopOrderDtoModel order = getOrder();
+        order.Name = name;
+        order.Family = family;
+        order.Mobile = mobile;
+        order.Address = address;
+        saveOrder(order);
     }
 }

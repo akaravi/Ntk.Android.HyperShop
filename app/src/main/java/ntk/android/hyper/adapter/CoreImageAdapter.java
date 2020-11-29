@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -18,7 +17,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ntk.android.base.api.news.model.NewsContentViewRequest;
 import ntk.android.base.entitymodel.news.NewsContentModel;
 import ntk.android.base.utill.FontManager;
 import ntk.android.hyper.R;
@@ -43,14 +41,13 @@ public class CoreImageAdapter extends RecyclerView.Adapter<CoreImageAdapter.View
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .cacheOnDisk(true).build();
-        ImageLoader.getInstance().displayImage(list.get(position).MainImageSrc, holder.Img, options);
+        ImageLoader.getInstance().displayImage(list.get(position).LinkMainImageIdSrc, holder.Img, options);
         holder.Lbl.setText(list.get(position).Title);
         holder.Img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewsContentViewRequest request = new NewsContentViewRequest();
-                request.Id = list.get(position).Id;
-                context.startActivity(new Intent(context, NewsDetailActivity.class).putExtra("Request", new Gson().toJson(request)));
+
+                context.startActivity(new Intent(context, NewsDetailActivity.class).putExtra("Request", list.get(position).Id));
             }
         });
 

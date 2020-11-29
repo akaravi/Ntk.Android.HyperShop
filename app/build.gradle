@@ -117,7 +117,8 @@ dependencies {
     //for functional codding
     implementation 'net.sourceforge.streamsupport:android-retrostreams:1.7.2'
     implementation 'com.google.zxing:core:3.3.0'
-
+    //for Shop editText
+    implementation 'ss.anoop:awesome-textinput-layout:1.0.3'
    implementation 'com.github.codekidX:storage-chooser:2.0.4.2'
     //for add view
     implementation 'com.steelkiwi:increment-product-view:1.2.0'

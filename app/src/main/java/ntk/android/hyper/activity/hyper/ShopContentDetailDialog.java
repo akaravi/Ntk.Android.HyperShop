@@ -40,8 +40,6 @@ public class ShopContentDetailDialog extends baseFragmentDialog {
         Bundle bundle = new Bundle();
         bundle.putString(Extras.EXTRA_FIRST_ARG, Id);
         d.setArguments(bundle);
-        d.setCancelable(false);
-
         d.show(context.getSupportFragmentManager(), "dialog");
     }
 

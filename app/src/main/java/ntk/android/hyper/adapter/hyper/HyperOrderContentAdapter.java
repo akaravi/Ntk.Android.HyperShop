@@ -1,36 +1,36 @@
 package ntk.android.hyper.adapter.hyper;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
 import ntk.android.base.dtomodel.hypershop.HyperShopOrderContentDtoModel;
 import ntk.android.hyper.R;
-import ntk.android.hyper.library.about.Element;
 
 public class HyperOrderContentAdapter extends RecyclerView.Adapter {
 
 
     private final Context context;
     private List<HyperShopOrderContentDtoModel> products;
+    Runnable changePriceMethod;
 
-    public HyperOrderContentAdapter(Context context, List<HyperShopOrderContentDtoModel> products) {
+    public HyperOrderContentAdapter(Context context, List<HyperShopOrderContentDtoModel> products, Runnable o) {
         this.context = context;
         this.products = products;
+        this.changePriceMethod = o;
     }
+
 
     @NonNull
     @Override
@@ -42,52 +42,76 @@ public class HyperOrderContentAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder base, int position) {
         ItemViewHolder holder = (ItemViewHolder) base;
-        HyperShopOrderContentDtoModel  item = products.get(position);
+        HyperShopOrderContentDtoModel item = products.get(position);
         holder.txtItemName.setText(item.Name);
+        holder.txtProductPrice.setText(String.format("%.2f", item.Price));
 
-        ImageLoader.getInstance().displayImage(item.Image, holder.imgThumbnail);
+        holder.imgAdd.setOnClickListener(view -> {
+            String s = holder.etCount.getText().toString();
+            if (s.equalsIgnoreCase(""))
+                s = "0";
+            int count = Integer.parseInt(s) + 1;
+            holder.etCount.setText(String.valueOf(count));
 
-
-        holder.txtPrice.setText(String.format("%.2f", item.Price));
-
-        holder.imgAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-              //todo
-            }
         });
-        holder.imgRemove.setOnClickListener(new View.OnClickListener() {
+        holder.imgRemove.setOnClickListener(view -> {
+            String s = holder.etCount.getText().toString();
+            if (s.equalsIgnoreCase(""))
+                s = "0";
+            int count = Integer.parseInt(s) - 1;
+            if (count < 0)
+                count = 0;
+            holder.etCount.setText(String.valueOf(count));
+
+        });
+        holder.etCount.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View view) {
-                //todo
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (!charSequence.toString().equals("")) {
+                    products.get(position).Count = Integer.parseInt(charSequence.toString());
+                    changePriceMethod.run();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return products.size();
+    }
+
+    public List<HyperShopOrderContentDtoModel> models() {
+        return products;
     }
 
     private class ItemViewHolder extends RecyclerView.ViewHolder {
         final TextView txtItemName;
-        final ImageView imgThumbnail;
+        final TextView txtProductPrice;
+
         final ImageView imgAdd;
-        final TextView txtPrice;
-        final TextView title;
-        final CardView cardItem;
+        final EditText etCount;
+
         public View imgRemove;
 
         ItemViewHolder(View itemView) {
             super(itemView);
             this.txtItemName = itemView.findViewById(R.id.txtItemName);
-            this.imgThumbnail = itemView.findViewById(R.id.imgThumbnail);
-            this.imgAdd = itemView.findViewById(R.id.imgAdd);
-            //todo add imgRemove
-            this.imgRemove = itemView.findViewById(R.id.imgAdd);
-            this.txtPrice = itemView.findViewById(R.id.txtPrice);
-            this.title = itemView.findViewById(R.id.title);
-            this.cardItem = itemView.findViewById(R.id.cardItem);
+            this.txtProductPrice = itemView.findViewById(R.id.txtProductPrice);
+            this.imgAdd = itemView.findViewById(R.id.imgAddProduct);
+            this.imgRemove = itemView.findViewById(R.id.imgRemoveProduct);
+
+            this.etCount = itemView.findViewById(R.id.etProductCount);
+
 
         }
 

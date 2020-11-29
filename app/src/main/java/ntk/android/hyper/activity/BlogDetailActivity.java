@@ -1,54 +1,23 @@
 package ntk.android.hyper.activity;
 
-import android.annotation.SuppressLint;
-import android.app.Dialog;
-import android.content.Intent;
-import android.graphics.PorterDuff;
-import android.os.Bundle;
 import android.text.Html;
 import android.util.Pair;
-import android.view.Gravity;
 import android.view.View;
-import android.view.Window;
-import android.webkit.WebView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.RatingBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.LinearLayoutCompat;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.snackbar.Snackbar;
-import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.BindViews;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import es.dmoral.toasty.Toasty;
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.schedulers.Schedulers;
 import java9.util.function.BiFunction;
 import java9.util.function.Function;
 import ntk.android.base.activity.abstraction.AbstractionDetailActivity;
-import ntk.android.base.api.core.entity.CoreMain;
-import ntk.android.base.config.NtkObserver;
 import ntk.android.base.dtomodel.core.ScoreClickDtoModel;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.ErrorExceptionBase;
@@ -60,10 +29,6 @@ import ntk.android.base.entitymodel.blog.BlogContentOtherInfoModel;
 import ntk.android.base.services.blog.BlogCommentService;
 import ntk.android.base.services.blog.BlogContentOtherInfoService;
 import ntk.android.base.services.blog.BlogContentService;
-import ntk.android.base.services.news.NewsContentService;
-import ntk.android.base.utill.AppUtill;
-import ntk.android.base.utill.FontManager;
-import ntk.android.base.utill.prefrense.Preferences;
 import ntk.android.hyper.R;
 import ntk.android.hyper.adapter.BlogAdapter;
 import ntk.android.hyper.adapter.BlogCommentAdapter;
@@ -179,7 +144,7 @@ public class BlogDetailActivity extends AbstractionDetailActivity<BlogContentMod
 
     @Override
     public void bindContentData(ErrorException<BlogContentModel> model) {
-        ImageLoader.getInstance().displayImage(model.Item.MainImageSrc, ImgHeader);
+        ImageLoader.getInstance().displayImage(model.Item.LinkMainImageIdSrc, ImgHeader);
         Lbls.get(0).setText(model.Item.Title);
         Lbls.get(1).setText(model.Item.Title);
         Lbls.get(3).setText(String.valueOf(model.Item.ViewCount));
