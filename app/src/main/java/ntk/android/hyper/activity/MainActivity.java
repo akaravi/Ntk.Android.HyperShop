@@ -176,58 +176,5 @@ public class MainActivity extends AbstractMainActivity {
                 });
     }
 
-    @OnClick(R.id.supportBtn)
-    public void onSupportClick() {
-        this.startActivity(new Intent(this, TicketListActivity.class));
-    }
 
-    @OnClick(R.id.searchBtn)
-    public void onSearchClick() {
-        this.startActivity(new Intent(this, TicketSearchActivity.class));
-    }
-
-    @OnClick(R.id.messageBtn)
-    public void onInboxClick() {
-        this.startActivity(new Intent(this, NotificationsActivity.class));
-    }
-
-    @OnClick(R.id.newsBtn)
-    public void onNewsClick() {
-        this.startActivity(new Intent(this, NewsListActivity.class));
-    }
-
-    @OnClick(R.id.feedbackBtn)
-    public void onFeedBackClick() {
-        onFeedbackClick();
-    }
-
-    @OnClick(R.id.poolingBtn)
-    public void onPoolingClick() {
-        this.startActivity(new Intent(this, PolingActivity.class));
-    }
-
-    @OnClick(R.id.inviteBtn)
-    public void onInviteClick() {
-        onInviteMethod();
-    }
-
-    @OnClick(R.id.questionBtn)
-    public void onQuestionClick() {
-        this.startActivity(new Intent(this, HyperListActivity.class));
-    }
-
-    @OnClick(R.id.blogBtn)
-    public void onBlogClick() {
-        this.startActivity(new Intent(this, BlogListActivity.class));
-    }
-
-    @OnClick(R.id.aboutUsBtn)
-    public void onAboutUsClick() {
-        this.startActivity(new Intent(this, AboutUsActivity.class));
-    }
-
-    @OnClick(R.id.introBtn)
-    public void onIntroClick() {
-        onMainIntro();
-    }
 }
