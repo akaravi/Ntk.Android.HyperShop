@@ -18,6 +18,7 @@ import io.reactivex.Observable;
 import java9.util.function.BiFunction;
 import java9.util.function.Function;
 import ntk.android.base.activity.abstraction.AbstractionDetailActivity;
+import ntk.android.base.activity.news.BaseNewsDetail_1_Activity;
 import ntk.android.base.dtomodel.core.ScoreClickDtoModel;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.ErrorExceptionBase;
@@ -36,7 +37,7 @@ import ntk.android.hyper.adapter.TabNewsAdapter;
 
 ;
 
-public class NewsDetailActivity extends BaseNewsDetailActivity {
+public class NewsDetailActivity extends BaseNewsDetail_1_Activity {
 
 
     @Override

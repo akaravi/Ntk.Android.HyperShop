@@ -93,7 +93,8 @@ public class MainActivity extends AbstractMainActivity {
 
     private void init() {
         setAnimation();
-        for (int i = 0; i < lbl.size(); i++) {
+        for (int 
+             i = 0; i < lbl.size(); i++) {
             lbl.get(i).setTypeface(FontManager.GetTypeface(this, FontManager.DastNevis));
         }
         Refresh.setColorSchemeResources(
@@ -103,29 +104,15 @@ public class MainActivity extends AbstractMainActivity {
 
         Refresh.setOnRefreshListener(() -> {
             CheckUpdate();
-            setAnimation();
+
             Refresh.setRefreshing(false);
         });
         HandelSlider();
     }
 
     private void setAnimation() {
-        AlphaAnimation alphaAnimation = new AlphaAnimation(0.5f, 1.0f);
-        alphaAnimation.setDuration(3000);
-        alphaAnimation.setFillAfter(true);
-        alphaAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
-        ScaleAnimation scaleAnimation = new ScaleAnimation(0.5f, 1.0f, 0.5f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        scaleAnimation.setDuration(2000);
-        scaleAnimation.setFillAfter(true);
-        scaleAnimation.setInterpolator(new BounceInterpolator());
-        AnimationSet animationSet = new AnimationSet(false);
-        animationSet.addAnimation(alphaAnimation);
-        animationSet.addAnimation(scaleAnimation);
-        for (int i = 0; i < btn.size(); i++) {
-            btn.get(i).startAnimation(scaleAnimation);
-        }
-        layout.startAnimation(alphaAnimation);
     }
+
 
     @Override
     protected void onStart() {
