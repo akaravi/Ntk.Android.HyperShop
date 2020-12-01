@@ -19,12 +19,12 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import java.util.List;
 
-import ntk.android.base.adapter.BaseRcAdapter;
+import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.hyper.R;
 import ntk.android.hyper.activity.hyper.ShopContentDetailDialog;
 
-public class HypershopContentAdapter extends BaseRcAdapter<HyperShopContentModel> {
+public class HypershopContentAdapter extends BaseRecyclerAdapter<HyperShopContentModel, HypershopContentAdapter.HyperVH> {
 
 
     public HypershopContentAdapter(List<HyperShopContentModel> list) {
@@ -33,14 +33,14 @@ public class HypershopContentAdapter extends BaseRcAdapter<HyperShopContentModel
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public HyperVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.shop_list_row, parent, false);
         HyperVH h = new HyperVH(v);
         return h;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder b, int position) {
+    public void onBindViewHolder(@NonNull HyperVH b, int position) {
         HyperVH holder = (HyperVH) b;
         holder.title.setText(getItem(position).Name);
         holder.itemView.setOnClickListener(view -> ShopContentDetailDialog.show((AppCompatActivity) holder.itemView.getContext(), getItem(position).Code));
@@ -70,7 +70,7 @@ public class HypershopContentAdapter extends BaseRcAdapter<HyperShopContentModel
         });
     }
 
-    private class HyperVH extends RecyclerView.ViewHolder {
+    protected class HyperVH extends RecyclerView.ViewHolder {
         public ImageView image;
         public TextView title;
         public ProgressBar loadingProgress;

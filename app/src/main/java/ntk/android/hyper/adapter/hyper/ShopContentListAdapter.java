@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import ntk.android.base.adapter.BaseRcAdapter;
+import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.hyper.R;
 
@@ -18,7 +18,7 @@ import ntk.android.hyper.R;
  * Created by m.parishani on 12/20/2017.
  */
 
-public class ShopContentListAdapter extends BaseRcAdapter<HyperShopContentModel> {
+public class ShopContentListAdapter extends BaseRecyclerAdapter<HyperShopContentModel,RecyclerView.ViewHolder> {
 //
 //    /**
 //     * defult constructor
