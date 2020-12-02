@@ -21,7 +21,7 @@ public class BlogListActivity extends AbstractionListActivity<BlogContentModel> 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((TextView) findViewById(R.id.lblTitle)).setText("مقالات");
+        LblTitle.setText("مقالات");
     }
 
     @Override

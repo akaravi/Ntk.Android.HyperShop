@@ -15,17 +15,17 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ntk.android.hyper.R;
+import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.news.NewsContentOtherInfoModel;
 import ntk.android.base.utill.FontManager;
-import ntk.android.hyper.R;
 
-public class TabNewsAdapter extends RecyclerView.Adapter<TabNewsAdapter.ViewHolder> {
+public class TabNewsAdapter extends BaseRecyclerAdapter<NewsContentOtherInfoModel, TabNewsAdapter.ViewHolder> {
 
-    private List<NewsContentOtherInfoModel> arrayList;
-    private Context context;
+    private final Context context;
 
     public TabNewsAdapter(Context context, List<NewsContentOtherInfoModel> arrayList) {
-        this.arrayList = arrayList;
+        super(arrayList);
         this.context = context;
     }
 
@@ -37,16 +37,12 @@ public class TabNewsAdapter extends RecyclerView.Adapter<TabNewsAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.Btn.setText(arrayList.get(position).Title);
-        if (arrayList.get(position).TypeId == 0) {
-            holder.webView.loadData("<html dir=\"rtl\" lang=\"\"><body>" + arrayList.get(position).HtmlBody + "</body></html>", "text/html; charset=utf-8", "UTF-8");
+        NewsContentOtherInfoModel item = list.get(position);
+        holder.Btn.setText(item.Title);
+        if (item.TypeId == 0) {
+            holder.webView.loadData("<html dir=\"rtl\" lang=\"\"><body>" + item.HtmlBody + "</body></html>", "text/html; charset=utf-8", "UTF-8");
         }
-        holder.Ripple.setOnClickListener(v -> holder.webView.loadData("<html dir=\"rtl\" lang=\"\"><body>" + arrayList.get(position).HtmlBody + "</body></html>", "text/html; charset=utf-8", "UTF-8"));
-    }
-
-    @Override
-    public int getItemCount() {
-        return arrayList.size();
+        holder.Ripple.setOnClickListener(v -> holder.webView.loadData("<html dir=\"rtl\" lang=\"\"><body>" + item.HtmlBody + "</body></html>", "text/html; charset=utf-8", "UTF-8"));
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

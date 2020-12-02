@@ -21,7 +21,7 @@ public class NewsListActivity extends AbstractionListActivity<NewsContentModel> 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((TextView) findViewById(R.id.lblTitle)).setText("اخبار");
+        LblTitle.setText("اخبار");
     }
 
     @Override

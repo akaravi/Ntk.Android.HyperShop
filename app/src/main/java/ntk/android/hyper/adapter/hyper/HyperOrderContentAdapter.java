@@ -16,36 +16,36 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
+import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.dtomodel.hypershop.HyperShopOrderContentDtoModel;
 import ntk.android.hyper.R;
 
-public class HyperOrderContentAdapter extends  RecyclerView.Adapter {
+public class HyperOrderContentAdapter extends BaseRecyclerAdapter<HyperShopOrderContentDtoModel, HyperOrderContentAdapter.ItemViewHolder> {
 
 
     private final Context context;
-    private List<HyperShopOrderContentDtoModel> products;
+
     Runnable changePriceMethod;
 
     public HyperOrderContentAdapter(Context context, List<HyperShopOrderContentDtoModel> products, Runnable o) {
+        super(products);
         this.context = context;
-        this.products = products;
         this.changePriceMethod = o;
     }
 
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_content_item_recycler, parent, false);
+    public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View inflate =inflate(parent,R.layout.order_content_item_recycler);
         return new ItemViewHolder(inflate);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder base, int position) {
-        ItemViewHolder holder = (ItemViewHolder) base;
-        HyperShopOrderContentDtoModel item = products.get(position);
+    public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
+        HyperShopOrderContentDtoModel item = list.get(position);
         holder.txtItemName.setText(item.Name);
-        holder.etCount.setText(products.get(position).Count);
+        holder.etCount.setText(list.get(position).Count);
         holder.txtProductPrice.setText(String.format("%.2f", item.Price));
 
         holder.imgAdd.setOnClickListener(view -> {
@@ -53,7 +53,7 @@ public class HyperOrderContentAdapter extends  RecyclerView.Adapter {
             if (s.equalsIgnoreCase(""))
                 s = "0";
             int count = Integer.parseInt(s) + 1;
-            if (count <= products.get(position).TotalCount)
+            if (count <= list.get(position).TotalCount)
                 holder.etCount.setText(String.valueOf(count));
             else
                 Toasty.error(view.getContext(), "این تعداد از کالا موجود نمی باشد").show();
@@ -79,8 +79,8 @@ public class HyperOrderContentAdapter extends  RecyclerView.Adapter {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (!charSequence.toString().equals("")) {
                     int count = Integer.parseInt(charSequence.toString());
-                    if (count <= products.get(position).TotalCount) {
-                        products.get(position).Count = count;
+                    if (count <= list.get(position).TotalCount) {
+                        list.get(position).Count = count;
                         changePriceMethod.run();
                     } else {
                         Toasty.error(context, "این تعداد از کالا موجود نمی باشد").show();
@@ -95,16 +95,8 @@ public class HyperOrderContentAdapter extends  RecyclerView.Adapter {
         });
     }
 
-    @Override
-    public int getItemCount() {
-        return products.size();
-    }
 
-    public List<HyperShopOrderContentDtoModel> models() {
-        return products;
-    }
-
-    private class ItemViewHolder extends RecyclerView.ViewHolder {
+    protected class ItemViewHolder extends RecyclerView.ViewHolder {
         final TextView txtItemName;
         final TextView txtProductPrice;
 

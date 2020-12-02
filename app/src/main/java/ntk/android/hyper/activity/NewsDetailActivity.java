@@ -41,12 +41,6 @@ public class NewsDetailActivity extends BaseNewsDetail_1_Activity {
 
 
     @Override
-    protected void initChild() {
-        favoriteDrawableId = R.drawable.ic_fav_full;
-        unFavoriteDrawableId = R.drawable.ic_fav;
-    }
-
-    @Override
     public RecyclerView.Adapter createCommentAdapter(List<NewsCommentModel> listItems) {
         return new NewsCommentAdapter(this, listItems);
     }

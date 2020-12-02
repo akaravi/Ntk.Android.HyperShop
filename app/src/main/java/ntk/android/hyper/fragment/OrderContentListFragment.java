@@ -75,6 +75,6 @@ public class OrderContentListFragment extends AbstractionListFragment<HyperShopO
 
 
     public void updateOrder() {
-        new OrderPref(getContext()).updateOrderWith(((HyperOrderContentAdapter) adapter).models(),amountOrder);
+        new OrderPref(getContext()).updateOrderWith(((HyperOrderContentAdapter) adapter).list(),amountOrder);
     }
 }

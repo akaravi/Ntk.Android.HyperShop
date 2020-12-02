@@ -16,7 +16,7 @@ import ntk.android.base.ApplicationStaticParameter;
 import ntk.android.base.ApplicationStyle;
 import ntk.android.base.NTKApplication;
 import ntk.android.base.utill.FontManager;
-import ntk.android.hyper.activity.PanelActivity;
+import ntk.android.hyper.activity.MainActivity;
 
 public class MyApplication extends NTKApplication {
     @Override
@@ -41,7 +41,7 @@ public class MyApplication extends NTKApplication {
         applicationStyle = new ApplicationStyle() {
             @Override
             public Class<?> getMainActivity() {
-                return PanelActivity.class;
+                return MainActivity.class;
             }
         };
     }

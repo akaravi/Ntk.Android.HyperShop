@@ -28,10 +28,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.MainActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
-        <activity
             android:name=".activity.AboutUsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
@@ -61,7 +57,7 @@
             android:theme="@style/NoActionBar" />
         <activity android:name=".activity.hyper.ShopContentListActivity" />
         <activity android:name=".activity.hyper.HyperListActivity" />
-        <activity android:name=".activity.PanelActivity" />
+        <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.hyper.OrderActivity" />
 
 

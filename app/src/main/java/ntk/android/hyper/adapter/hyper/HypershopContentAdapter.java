@@ -1,6 +1,5 @@
 package ntk.android.hyper.adapter.hyper;
 
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import java.util.List;
 
@@ -40,34 +34,13 @@ public class HypershopContentAdapter extends BaseRecyclerAdapter<HyperShopConten
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HyperVH b, int position) {
-        HyperVH holder = (HyperVH) b;
-        holder.title.setText(getItem(position).Name);
-        holder.itemView.setOnClickListener(view -> ShopContentDetailDialog.show((AppCompatActivity) holder.itemView.getContext(), getItem(position).Code));
-        holder.description.setText(getItem(position).Memo);
-        DisplayImageOptions options = new DisplayImageOptions.Builder()
-                .cacheOnDisk(true).build();
-        ImageLoader.getInstance().displayImage(getItem(position).Image, holder.image, options, new ImageLoadingListener() {
-            @Override
-            public void onLoadingStarted(String imageUri, View view) {
+    public void onBindViewHolder(@NonNull HyperVH holder, int position) {
 
-            }
-
-            @Override
-            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-//                holder.Progress.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-//                holder.Progress.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onLoadingCancelled(String imageUri, View view) {
-
-            }
-        });
+        HyperShopContentModel item = getItem(position);
+        holder.title.setText(item.Name);
+        holder.itemView.setOnClickListener(view -> ShopContentDetailDialog.show((AppCompatActivity) holder.itemView.getContext(), item.Code));
+        holder.description.setText(item.Memo);
+        loadImage(item.Image, holder.image, holder.loadingProgress);
     }
 
     protected class HyperVH extends RecyclerView.ViewHolder {
