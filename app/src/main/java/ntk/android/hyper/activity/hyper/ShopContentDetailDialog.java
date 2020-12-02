@@ -67,7 +67,7 @@ public class ShopContentDetailDialog extends baseFragmentDialog {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         switcher.showProgressView();
-        new HyperShopContentService(getActivity()).getOne(code)
+        new HyperShopContentService(getActivity()).getOneMicroService(code)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new NtkObserver<ErrorException<HyperShopContentModel>>() {

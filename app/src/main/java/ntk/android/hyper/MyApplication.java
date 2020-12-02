@@ -16,6 +16,7 @@ import ntk.android.base.ApplicationStaticParameter;
 import ntk.android.base.ApplicationStyle;
 import ntk.android.base.NTKApplication;
 import ntk.android.base.utill.FontManager;
+import ntk.android.base.view.ViewController;
 import ntk.android.hyper.activity.MainActivity;
 
 public class MyApplication extends NTKApplication {
@@ -39,6 +40,16 @@ public class MyApplication extends NTKApplication {
                 .setToastTypeface(FontManager.GetTypeface(getApplicationContext(), FontManager.IranSans))
                 .setTextSize(14).apply();
         applicationStyle = new ApplicationStyle() {
+            @Override
+            public ViewController getViewController() {
+                ViewController vc = new ViewController() {
+                };
+                vc.setLoading_view(R.layout.sub_base_loading);
+                vc.setEmpty_view(R.layout.sub_base_empty);
+                vc.setError_view(R.layout.sub_base_error);
+                return vc;
+            }
+
             @Override
             public Class<?> getMainActivity() {
                 return MainActivity.class;

@@ -18,7 +18,7 @@ import ntk.android.hyper.R;
 import ntk.android.hyper.adapter.hyper.HyperOrderContentAdapter;
 import ntk.android.hyper.prefrense.OrderPref;
 
-public class OrderContentListFragment extends AbstractionListFragment<HyperShopOrderContentDtoModel> {
+public class  OrderContentListFragment extends AbstractionListFragment<HyperShopOrderContentDtoModel> {
     float amountOrder;
 
     @Override

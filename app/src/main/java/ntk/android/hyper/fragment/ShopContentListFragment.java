@@ -15,7 +15,7 @@ import ntk.android.hyper.adapter.hyper.HypershopContentAdapter;
 public class ShopContentListFragment extends AbstractionListFragment<HyperShopContentModel> {
     @Override
     public Function<FilterDataModel, Observable<ErrorException<HyperShopContentModel>>> getService() {
-        return new HyperShopContentService(getContext())::getAll;
+        return new HyperShopContentService(getContext())::getAllMicroService;
     }
 
     @Override

@@ -16,7 +16,7 @@ public class HyperListActivity extends AbstractionListActivity<HyperShopContentM
 
     @Override
     public Function<FilterDataModel, Observable<ErrorException<HyperShopContentModel>>> getService() {
-        return new HyperShopContentService(this)::getAll;
+        return new HyperShopContentService(this)::getAllMicroService;
     }
 
     @Override
