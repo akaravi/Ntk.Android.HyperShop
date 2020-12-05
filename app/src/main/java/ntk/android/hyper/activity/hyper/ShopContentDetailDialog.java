@@ -74,7 +74,7 @@ public class ShopContentDetailDialog extends baseFragmentDialog {
                     @Override
                     public void onNext(@io.reactivex.annotations.NonNull ErrorException<HyperShopContentModel> response) {
                         if (response.IsSuccess)
-                            new Handler().postDelayed(() -> showModel(response.Item), 10000);
+                            new Handler().postDelayed(() -> showModel(response.Item), 1);
                         else
                             Toasty.warning(ShopContentDetailDialog.this.getContext(), response.ErrorMessage).show();
                     }

@@ -9,12 +9,15 @@ import es.dmoral.toasty.Toasty;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
+import ntk.android.base.Extras;
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.dtomodel.hypershop.HyperShopOrderDtoModel;
 import ntk.android.base.entitymodel.base.ErrorException;
+import ntk.android.base.entitymodel.hypershop.HyperShopOrderModel;
 import ntk.android.base.services.hypershop.HyperShopOrderService;
 import ntk.android.hyper.R;
+import ntk.android.hyper.fragment.BankPaymentListFragment;
 import ntk.android.hyper.fragment.OrderContentListFragment;
 import ntk.android.hyper.fragment.OrderOtherDetailFragment;
 import ntk.android.hyper.prefrense.OrderPref;
@@ -48,18 +51,29 @@ public class OrderActivity extends BaseActivity {
 
     }
 
+    public void showBankPayments(long orderId) {
+        BankPaymentListFragment fragment = new BankPaymentListFragment();
+        Bundle b = new Bundle();
+        b.putLong(Extras.EXTRA_FIRST_ARG, orderId);
+        fragment.setArguments(b);
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
+    }
+
     public void addOrder() {
         HyperShopOrderDtoModel order = new OrderPref(this).getOrder();
         switcher.showProgressView();
         new HyperShopOrderService(this).orderAdd(order).observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io()).subscribe(new NtkObserver<ErrorException<HyperShopOrderDtoModel>>() {
+                .subscribeOn(Schedulers.io()).subscribe(new NtkObserver<ErrorException<HyperShopOrderModel>>() {
             @Override
-            public void onNext(@NonNull ErrorException<HyperShopOrderDtoModel> response) {
+            public void onNext(@NonNull ErrorException<HyperShopOrderModel> response) {
                 switcher.showContentView();
                 if (response.IsSuccess) {
                     Toasty.success(OrderActivity.this, "سفارش شما ثبت شد").show();
-                    //todo show animate
-                    finish();
+                    if (response.Item.Id != null && response.Item.Id > 0)
+                        showBankPayments(response.Item.Id);
+                    else
+                        Toasty.error(OrderActivity.this, response.ErrorMessage).show();
+
                 } else
                     Toasty.error(OrderActivity.this, response.ErrorMessage).show();
             }

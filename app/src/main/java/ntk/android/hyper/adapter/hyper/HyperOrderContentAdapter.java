@@ -3,7 +3,6 @@ package ntk.android.hyper.adapter.hyper;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -37,7 +36,7 @@ public class HyperOrderContentAdapter extends BaseRecyclerAdapter<HyperShopOrder
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate =inflate(parent,R.layout.order_content_item_recycler);
+        View inflate = inflate(parent, R.layout.order_content_item_recycler);
         return new ItemViewHolder(inflate);
     }
 
@@ -45,7 +44,7 @@ public class HyperOrderContentAdapter extends BaseRecyclerAdapter<HyperShopOrder
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         HyperShopOrderContentDtoModel item = list.get(position);
         holder.txtItemName.setText(item.Name);
-        holder.etCount.setText(list.get(position).Count);
+        holder.etCount.setText(String.valueOf(list.get(position).Count));
         holder.txtProductPrice.setText(String.format("%.2f", item.Price));
 
         holder.imgAdd.setOnClickListener(view -> {
