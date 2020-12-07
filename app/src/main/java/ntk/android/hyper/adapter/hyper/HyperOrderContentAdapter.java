@@ -100,7 +100,7 @@ public class HyperOrderContentAdapter extends BaseRecyclerAdapter<HyperShopOrder
         final TextView txtProductPrice;
 
         final ImageView imgAdd;
-        final EditText etCount;
+         EditText etCount;
 
         public View imgRemove;
 
@@ -111,7 +111,7 @@ public class HyperOrderContentAdapter extends BaseRecyclerAdapter<HyperShopOrder
             this.imgAdd = itemView.findViewById(R.id.imgAddProduct);
             this.imgRemove = itemView.findViewById(R.id.imgRemoveProduct);
 
-            this.etCount = itemView.findViewById(R.id.etProductCount);
+//            this.etCount = itemView.findViewById(R.id.etProductCount);
 
 
         }

@@ -31,8 +31,8 @@ public class OrderActivity extends BaseActivity {
     }
 
     public void showProductFragment() {
-        OrderContentListFragment fragment = new OrderContentListFragment();
 
+        OrderContentListFragment fragment = new OrderContentListFragment();
         findViewById(R.id.bottomLayout).setVisibility(View.VISIBLE);
         findViewById(R.id.btnGoToDetail).setOnClickListener(view -> {
             fragment.updateOrder();

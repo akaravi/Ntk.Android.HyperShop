@@ -29,6 +29,7 @@ import ntk.android.base.activity.ticketing.TicketSearchActivity;
 import ntk.android.hyper.R;
 import ntk.android.hyper.activity.hyper.OrderActivity;
 import ntk.android.hyper.fragment.ShopContentListFragment;
+import ntk.android.hyper.fragment.ShopContentList_1_Fragment;
 
 public class MainActivity extends AbstractMainActivity {
 
@@ -62,7 +63,7 @@ public class MainActivity extends AbstractMainActivity {
                     }
                 })
                 .build();
-        ShopContentListFragment fragment = new ShopContentListFragment();
+        ShopContentList_1_Fragment fragment = new ShopContentList_1_Fragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
     }
 

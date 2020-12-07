@@ -1,18 +1,75 @@
 package ntk.android.hyper.activity.hyper;
 
-import ntk.android.base.activity.BaseActivity;
-import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
+import android.graphics.Bitmap;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+
+import java.text.DecimalFormat;
+
+import ntk.android.base.activity.hyper.BaseHyperShopContentDetail_1_Activity;
+import ntk.android.hyper.R;
+import ntk.android.hyper.view.BuyView;
 
 
 /**
  * Created by m.parishani on 12/20/2017.
  */
 
-public class ShopContentDetailActivity extends BaseActivity {
-    HyperShopContentModel entity;
-    Long Id;
+public class ShopContentDetailActivity extends BaseHyperShopContentDetail_1_Activity {
+    View loading;
 
-//    @Override
+    @Override
+    protected void onCreated() {
+        setContentView(R.layout.hypercontent_detail_actvitiy);
+        loading = findViewById(R.id.loadingProgress);
+    }
+
+    @Override
+    protected void bindData() {
+        ((TextView) findViewById(R.id.txtProductName)).setText(model.Name);
+        ((TextView) findViewById(R.id.txtProductCount)).setText(model.Count + "addad");
+        ((TextView) findViewById(R.id.txtProductPrice)).setText(new DecimalFormat("###,###,###,###").format(model.Price) + " " + model.CURRENCY_UNIT);
+        ((TextView) findViewById(R.id.txtDescriptionl)).setText(model.Memo);
+        if (model.Cat == null || model.Cat.equalsIgnoreCase(""))
+            ((TextView) findViewById(R.id.txtCategory)).setText("نامشخص");
+        else
+            ((TextView) findViewById(R.id.txtCategory)).setText(model.Cat);
+//      todo      ((TextView) findViewById(R.id.txtProductCount)).setText(model.Count + model.QueantityName);
+        ((BuyView) findViewById(R.id.buyView)).bind(model);
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .showImageOnFail(R.drawable.logo).cacheOnDisk(true).build();
+        ImageLoader.getInstance().displayImage(model.Image, (ImageView) findViewById(R.id.imgProduct), options, new ImageLoadingListener() {
+            @Override
+            public void onLoadingStarted(String imageUri, View view) {
+                loading.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+                loading.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                loading.setVisibility(View.GONE);
+                ((ImageView) view).setImageResource(R.drawable.logo);
+            }
+
+            @Override
+            public void onLoadingCancelled(String imageUri, View view) {
+
+            }
+        });
+    }
+
+    //    @Override
 //    protected void onCreate(@Nullable Bundle savedInstanceState) {
 //        setContentView(R.layout.activity_shop);
 //        super.onCreate(savedInstanceState);
@@ -133,4 +190,4 @@ public class ShopContentDetailActivity extends BaseActivity {
 //            webViewBody.loadData("<html dir=\"rtl\" lang=\"\"><body>" + model.Item.body + "</body></html>", "text/html; charset=utf-8", "UTF-8");
 //
 //    }
-    }
+}

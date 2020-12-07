@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#673AB7</color>
     <color name="colorPrimaryDark">#340088</color>
-    <color name="colorAccent">#FBE200</color>
+    <color name="colorAccent">#FD01A4</color>
     <color name="colorAccentDark">#303FDB</color>
     <color name="colorWhite">#fff</color>
 
@@ -45,4 +45,6 @@
     <color name="colorItem">#2E4B59</color>
     <color name="colorItemDetailBackground">#90A6B4</color>
     <color name="colorItemName">#2E4B59</color>
+    <color name="colorTextPrimary">#202020</color>
+    <color name="colorTextSecondary">#454545</color>
 </resources>

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.prefs.Preferences;
 
 import io.reactivex.Observable;
 import java9.util.function.Function;
@@ -23,21 +24,9 @@ public class  OrderContentListFragment extends AbstractionListFragment<HyperShop
 
     @Override
     public Function<FilterDataModel, Observable<ErrorException<HyperShopOrderContentDtoModel>>> getService() {
-        return dataModel -> getData();
+        return dataModel -> new OrderPref(getContext()).getLastShopping();
     }
-
-    private Observable<ErrorException<HyperShopOrderContentDtoModel>> getData() {
-        return Observable.create(emitter -> {
-            ErrorException<HyperShopOrderContentDtoModel> model = new ErrorException<>();
-            model.IsSuccess = true;
-            List<HyperShopOrderContentDtoModel> products = new OrderPref(getContext()).getOrder().Products;
-            model.ListItems = new ArrayList<>();
-            model.ListItems.addAll(products);
-            model.TotalRowCount = products.size();
-            emitter.onNext(model);
-            emitter.onComplete();
-        });
-    }
+    
 
     @Override
     protected IntegrationView viewSyncOnScrolling() {

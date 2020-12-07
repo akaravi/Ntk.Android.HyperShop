@@ -7,8 +7,10 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observable;
 import ntk.android.base.dtomodel.hypershop.HyperShopOrderContentDtoModel;
 import ntk.android.base.dtomodel.hypershop.HyperShopOrderDtoModel;
+import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.base.utill.prefrense.EasyPreference;
 
@@ -21,12 +23,21 @@ public class OrderPref {
 
     public void addShopContent(HyperShopContentModel model, int count) {
         HyperShopOrderDtoModel order = getOrder();
-        HyperShopOrderContentDtoModel p = new HyperShopOrderContentDtoModel();
+        HyperShopOrderContentDtoModel p = null;
+        for (int i = 0; i < order.Products.size(); i++) {
+            if (order.Products.get(i).Code == model.Code) {
+                p = order.Products.remove(i);
+                break;
+            }
+        }
+        if (p == null)
+            p = new HyperShopOrderContentDtoModel();
         p.Code = model.Code;
         p.Name = model.Name;
         p.Price = model.Price;
         p.Memo = model.Memo;
         p.Image = model.Image;
+        p.TotalCount = model.Count;
         p.Count = count;
         order.Products.add(p);
         saveOrder(order);
@@ -63,5 +74,18 @@ public class OrderPref {
         order.Mobile = mobile;
         order.Address = address;
         saveOrder(order);
+    }
+
+    public Observable< ErrorException<HyperShopOrderContentDtoModel>> getLastShopping(){
+        return Observable.create(emitter -> {
+            ErrorException<HyperShopOrderContentDtoModel> model = new ErrorException<>();
+            model.IsSuccess = true;
+            List<HyperShopOrderContentDtoModel> products = getOrder().Products;
+            model.ListItems = new ArrayList<>();
+            model.ListItems.addAll(products);
+            model.TotalRowCount = products.size();
+            emitter.onNext(model);
+            emitter.onComplete();
+        });
     }
 }

@@ -1,80 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cardItem"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:background="@android:color/white"
-    android:clickable="true"
-    android:focusable="true"
-    android:foreground="?attr/selectableItemBackground"
-    android:padding="5dp"
-    card_view:cardCornerRadius="3dp"
-    card_view:cardElevation="8dp"
-    card_view:cardUseCompatPadding="true">
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:clickable="false"
+    android:orientation="vertical">
 
-    <LinearLayout
+
+    <TextView
+        android:id="@+id/txtItemName"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="bottom"
+        android:background="@android:color/white"
+        android:gravity="right"
+        android:maxLines="1"
+        android:padding="8dp"
+        android:textColor="@color/colorItemName"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="false"
-        android:orientation="vertical">
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/txtProductPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/imgAddProduct" />
+
+        <ImageView
+            android:id="@+id/imgRemoveProduct"
+            card_view:tint="@color/colorAccent"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_margin="8dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_minus" />
 
 
         <TextView
-            android:id="@+id/txtItemName"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_gravity="bottom"
-            android:background="@android:color/white"
-            android:gravity="center"
-            android:padding="8dp"
-            android:textColor="@color/colorItemName"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
+            android:id="@+id/txtProductCount"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
-            android:gravity="center">
+            android:layout_toRightOf="@+id/imgRemoveProduct" />
 
-            <TextView
-                android:id="@+id/txtProductPrice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/imgAddProduct" />
+        <ImageView
+            android:id="@+id/imgAddProduct"
+            card_view:tint="@color/colorAccent"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_margin="8dp"
+            android:layout_toRightOf="@+id/txtProductCount"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_plus_pool" />
 
-            <ImageView
-                android:id="@+id/imgAddProduct"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_margin="8dp"
-                android:layout_toRightOf="@+id/etProductCount"
-                android:contentDescription="@null"
-                android:src="@drawable/ic_plus_pool"
-                card_view:tint="@color/colorAccent" />
+    </RelativeLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etProductCount"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:inputType="number"
-                android:layout_marginRight="8dp"
-                android:layout_toRightOf="@+id/imgRemoveProduct" />
+    <include layout="@layout/app_line" />
+</LinearLayout>
 
-            <ImageView
-                android:id="@+id/imgRemoveProduct"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_margin="8dp"
-                android:contentDescription="@null"
-                android:src="@drawable/ic_minus"
-                card_view:tint="@color/colorAccent" />
-        </RelativeLayout>
-
-    </LinearLayout>
-
-</androidx.cardview.widget.CardView>
 
