@@ -15,6 +15,7 @@ import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.fragment.abstraction.AbstractionListFragment;
 import ntk.android.base.view.NViewUtils;
 import ntk.android.hyper.R;
+import ntk.android.hyper.activity.hyper.OrderActivity;
 import ntk.android.hyper.adapter.hyper.HyperOrderContentAdapter;
 import ntk.android.hyper.prefrense.OrderPref;
 
@@ -28,7 +29,10 @@ public class OrderContentListFragment extends AbstractionListFragment<HyperShopO
 
     @Override
     protected void onListCreate() {
-        updateTotalPrice();
+        if(models.size()>0) {
+            updateTotalPrice();
+            ((OrderActivity) getActivity()).showBottom();
+        }
     }
 
     @Override

@@ -22,20 +22,21 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:visibility="gone">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGoToDetail"
             style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ادامه"
-           android:padding="16dp"
-            android:textStyle="bold"
             android:layout_weight="1"
+            android:padding="16dp"
+            android:text="ادامه"
             android:textAlignment="center"
             android:textColor="@color/colorWhite"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <View
             android:layout_width="0dp"

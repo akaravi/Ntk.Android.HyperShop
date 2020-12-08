@@ -35,14 +35,16 @@ public class OrderActivity extends BaseActivity {
         showProductFragment();
     }
 
+    public void showBottom() {
+        findViewById(R.id.bottomLayout).setVisibility(View.VISIBLE);
+        findViewById(R.id.imgDeleteOrder).setVisibility(View.VISIBLE);
+    }
+
     public void showProductFragment() {
         title.setText("سبد خرید");
 
-        View deleteIcon = findViewById(R.id.imgDeleteOrder);
-        deleteIcon.setVisibility(View.VISIBLE);
-        deleteIcon.setOnClickListener(view -> deleteOrderDialog());
+        findViewById(R.id.imgDeleteOrder).setOnClickListener(view -> deleteOrderDialog());
         OrderContentListFragment fragment = new OrderContentListFragment();
-        findViewById(R.id.bottomLayout).setVisibility(View.VISIBLE);
         findViewById(R.id.btnGoToDetail).setOnClickListener(view -> {
             fragment.updateOrder();
             showOrderDetail();
