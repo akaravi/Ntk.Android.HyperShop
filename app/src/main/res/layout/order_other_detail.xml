@@ -3,74 +3,78 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="16dp"
     android:orientation="vertical">
 
-    <ss.anoop.awesometextinputlayout.AwesomeTextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        app:borderColor="@color/colorAccent"
-        app:borderWidth="2dp"
-        app:cornerRadius="8dp">
 
-        <EditText
+        android:hint="نام شما">
+
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint=" نام " />
-    </ss.anoop.awesometextinputlayout.AwesomeTextInputLayout>
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="14sp" />
 
-    <ss.anoop.awesometextinputlayout.AwesomeTextInputLayout
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        app:borderColor="@color/colorAccent"
-        app:borderWidth="2dp"
-        app:cornerRadius="8dp">
+        android:hint="نام خانوادگی">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etFamily"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="نام خانوادگی" />
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="14sp" />
 
-    </ss.anoop.awesometextinputlayout.AwesomeTextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <ss.anoop.awesometextinputlayout.AwesomeTextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        app:borderColor="@color/colorAccent"
-        app:borderWidth="2dp"
-        app:cornerRadius="8dp">
+        android:hint="شماره تلفن همراه">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etMobile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="شماره تلفن همراه" />
+            android:inputType="number"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="14sp" />
 
-    </ss.anoop.awesometextinputlayout.AwesomeTextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <ss.anoop.awesometextinputlayout.AwesomeTextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        app:borderColor="@color/colorAccent"
-        app:borderWidth="2dp"
-        app:cornerRadius="8dp">
+        android:hint="شماره تلفن همراه">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etAddress"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:hint="آدرس" />
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="14sp" />
 
-    </ss.anoop.awesometextinputlayout.AwesomeTextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSubmit"
+        android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="تایید سفارش" />
+        android:text="تایید سفارش"
+     />
 </LinearLayout>

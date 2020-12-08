@@ -7,6 +7,7 @@ import org.jetbrains.annotations.Nullable;
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.hyper.R;
 import ntk.android.hyper.fragment.ShopContentListFragment;
+import ntk.android.hyper.fragment.ShopContentList_1_Fragment;
 
 /**
  * Created by m.parishani on 12/20/2017.
@@ -22,7 +23,7 @@ public class ShopContentListActivity extends BaseActivity {
     }
 
     public void showFragment() {
-        ShopContentListFragment fragment = new ShopContentListFragment();
+        ShopContentList_1_Fragment fragment = new ShopContentList_1_Fragment();
         fragment.setArguments(getIntent().getExtras());
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
 

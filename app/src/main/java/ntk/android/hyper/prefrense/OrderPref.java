@@ -60,7 +60,7 @@ public class OrderPref {
         p.Price = model.Price;
         p.Memo = model.Memo;
         p.Image = model.Image;
-        p.TotalCount = model.Count;
+        p.TotalCount = model.TotalCount;
         p.CURRENCY_UNIT = model.CURRENCY_UNIT;
         p.Count = count;
         if (p.Count > 0)

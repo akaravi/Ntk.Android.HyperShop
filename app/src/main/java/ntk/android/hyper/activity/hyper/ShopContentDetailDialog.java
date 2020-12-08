@@ -37,6 +37,7 @@ public class ShopContentDetailDialog extends baseFragmentDialog {
 
     public static void show(AppCompatActivity context, String Id) {
         ShopContentDetailDialog d = new ShopContentDetailDialog();
+
         Bundle bundle = new Bundle();
         bundle.putString(Extras.EXTRA_FIRST_ARG, Id);
         d.setArguments(bundle);

@@ -2,6 +2,7 @@ package ntk.android.hyper.activity.hyper;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -23,15 +24,23 @@ import ntk.android.hyper.fragment.OrderOtherDetailFragment;
 import ntk.android.hyper.prefrense.OrderPref;
 
 public class OrderActivity extends BaseActivity {
+    TextView title;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_activity);
+        title = findViewById(R.id.txtToolbar);
+
         showProductFragment();
     }
 
     public void showProductFragment() {
+        title.setText("سبد خرید");
 
+        View deleteIcon = findViewById(R.id.imgDeleteOrder);
+        deleteIcon.setVisibility(View.VISIBLE);
+        deleteIcon.setOnClickListener(view -> deleteOrderDialog());
         OrderContentListFragment fragment = new OrderContentListFragment();
         findViewById(R.id.bottomLayout).setVisibility(View.VISIBLE);
         findViewById(R.id.btnGoToDetail).setOnClickListener(view -> {
@@ -43,7 +52,13 @@ public class OrderActivity extends BaseActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
     }
 
+    private void deleteOrderDialog() {
+        //todo show dialog
+        Toasty.success(this, "سبد شما کامل حذف گردید").show();
+    }
+
     public void showOrderDetail() {
+        title.setText("تایید نهایی");
         findViewById(R.id.bottomLayout).setVisibility(View.GONE);
         OrderOtherDetailFragment fragment = new OrderOtherDetailFragment();
         fragment.setArguments(getIntent().getExtras());

@@ -1,15 +1,11 @@
 package ntk.android.hyper.fragment;
 
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.prefs.Preferences;
+import java.text.DecimalFormat;
 
 import io.reactivex.Observable;
 import java9.util.function.Function;
@@ -17,18 +13,23 @@ import ntk.android.base.dtomodel.hypershop.HyperShopOrderContentDtoModel;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.fragment.abstraction.AbstractionListFragment;
+import ntk.android.base.view.NViewUtils;
 import ntk.android.hyper.R;
 import ntk.android.hyper.adapter.hyper.HyperOrderContentAdapter;
 import ntk.android.hyper.prefrense.OrderPref;
 
-public class  OrderContentListFragment extends AbstractionListFragment<HyperShopOrderContentDtoModel> {
+public class OrderContentListFragment extends AbstractionListFragment<HyperShopOrderContentDtoModel> {
     float amountOrder;
 
     @Override
     public Function<FilterDataModel, Observable<ErrorException<HyperShopOrderContentDtoModel>>> getService() {
         return dataModel -> new OrderPref(getContext()).getLastShopping();
     }
-    
+
+    @Override
+    protected void onListCreate() {
+        updateTotalPrice();
+    }
 
     @Override
     protected IntegrationView viewSyncOnScrolling() {
@@ -61,12 +62,11 @@ public class  OrderContentListFragment extends AbstractionListFragment<HyperShop
         for (HyperShopOrderContentDtoModel d : models) {
             amountOrder += d.Price * d.Count;
         }
-        ((TextView) getActivity().findViewById(R.id.txtTotalPrice)).setText(String.valueOf(amountOrder));
+        ((TextView) getActivity().findViewById(R.id.txtTotalPrice)).setText(new DecimalFormat("###,###,###,###").format(amountOrder) + " " + HyperShopOrderContentDtoModel.CURRENCY_UNIT);
     }
 
 
-
     public void updateOrder() {
-        new OrderPref(getContext()).updateOrderWith(((HyperOrderContentAdapter) adapter).list(),amountOrder);
+        new OrderPref(getContext()).updateOrderWith(((HyperOrderContentAdapter) adapter).list(), amountOrder);
     }
 }

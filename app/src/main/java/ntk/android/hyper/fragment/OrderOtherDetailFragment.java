@@ -22,35 +22,35 @@ public class OrderOtherDetailFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        findViewById(R.id.btnSubmit).setOnClickListener(view1 -> submit());
+switcher.showContentView();
+//        findViewById(R.id.btnSubmit).setOnClickListener(view1 -> submit());
     }
 
-    private void submit() {
-        EditText name = findViewById(R.id.etName);
-        EditText family = findViewById(R.id.etFamily);
-        EditText mobile = findViewById(R.id.etMobile);
-        EditText address = findViewById(R.id.etAddress);
-        if (name.getText().toString().equalsIgnoreCase("")) {
-            Toasty.warning(getContext(), "نام خود را وارد نمایید").show();
-            return;
-        } else if (family.getText().toString().equalsIgnoreCase("")) {
-            Toasty.warning(getContext(), "نام خانوادگی را وارد نمایید").show();
-            return;
-        } else if (mobile.getText().toString().equalsIgnoreCase("")) {
-            Toasty.warning(getContext(), "شماره تلفن همراه خود را وارد نمایید").show();
-            return;
-        } else if (address.getText().toString().equalsIgnoreCase("")) {
-            Toasty.warning(getContext(), "آدرس خود را وارد نمایید").show();
-            return;
-        } else {
-            new OrderPref(getContext()).addDetails(
-                    name.getText().toString(),
-                    family.getText().toString(),
-                    mobile.getText().toString(),
-                    address.getText().toString()
-            );
-            ((OrderActivity) getActivity()).addOrder();
-        }
-    }
+//    private void submit() {
+//        EditText name = findViewById(R.id.etName);
+//        EditText family = findViewById(R.id.etFamily);
+//        EditText mobile = findViewById(R.id.etMobile);
+//        EditText address = findViewById(R.id.etAddress);
+//        if (name.getText().toString().equalsIgnoreCase("")) {
+//            Toasty.warning(getContext(), "نام خود را وارد نمایید").show();
+//            return;
+//        } else if (family.getText().toString().equalsIgnoreCase("")) {
+//            Toasty.warning(getContext(), "نام خانوادگی را وارد نمایید").show();
+//            return;
+//        } else if (mobile.getText().toString().equalsIgnoreCase("")) {
+//            Toasty.warning(getContext(), "شماره تلفن همراه خود را وارد نمایید").show();
+//            return;
+//        } else if (address.getText().toString().equalsIgnoreCase("")) {
+//            Toasty.warning(getContext(), "آدرس خود را وارد نمایید").show();
+//            return;
+//        } else {
+//            new OrderPref(getContext()).addDetails(
+//                    name.getText().toString(),
+//                    family.getText().toString(),
+//                    mobile.getText().toString(),
+//                    address.getText().toString()
+//            );
+//            ((OrderActivity) getActivity()).addOrder();
+//        }
+//    }
 }
