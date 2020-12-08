@@ -38,6 +38,7 @@ public class BankSelectAdapter extends BaseRecyclerAdapter<BankPaymentPrivateSit
 
     public BankSelectAdapter(Context context, Long orderId, List<BankPaymentPrivateSiteConfigModel> arrayList) {
         super(arrayList);
+        drawable = R.drawable.pdf;
         this.orderId = orderId;
         this.context = context;
     }
@@ -57,17 +58,22 @@ public class BankSelectAdapter extends BaseRecyclerAdapter<BankPaymentPrivateSit
 
             HyperShopOrderPaymentDtoModel req = new HyperShopOrderPaymentDtoModel();
             req.LinkOrderId = orderId;
-            CheckPaymentActivity.Last_Order_Id=orderId;
+            CheckPaymentActivity.Last_Order_Id = orderId;
             req.BankPaymentPrivateId = list.get(position).Id;
-            req.LastUrlAddressInUse= "oco.ir/"+NTKApplication.get().getApplicationParameter().APPLICATION_ID();
+            req.LastUrlAddressInUse = "oco.ir/" + NTKApplication.get().getApplicationParameter().APPLICATION_ID();
             new HyperShopOrderService(view.getContext()).orderPayment(req)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io()).subscribe(new NtkObserver<ErrorException<BankPaymentOnlineTransactionModel>>() {
                 @Override
                 public void onNext(@io.reactivex.annotations.NonNull ErrorException<BankPaymentOnlineTransactionModel> response) {
                     if (response.IsSuccess) {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(response.Item.LastUrlAddressInUse));
-                        context.startActivity(browserIntent);
+                        if (response.Item.LastUrlAddressInUse != null) {
+                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(response.Item.LastUrlAddressInUse));
+                            context.startActivity(browserIntent);
+                        } else {
+                            Toasty.error(context, "وبگاه پرداخت فعلا در دسترس نیست لطفا بعدا تلاش فرمایید " +
+                                    "").show();
+                        }
                     } else {
                         Toasty.error(context, response.ErrorMessage).show();
 

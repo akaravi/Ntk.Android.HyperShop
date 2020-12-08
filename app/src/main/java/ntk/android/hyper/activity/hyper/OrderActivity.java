@@ -85,7 +85,7 @@ public class OrderActivity extends BaseActivity {
             public void onNext(@NonNull ErrorException<HyperShopOrderModel> response) {
                 switcher.showContentView();
                 if (response.IsSuccess) {
-                    new OrderPref(OrderActivity.this).clear();
+//                    new OrderPref(OrderActivity.this).clear(); todo
                     Toasty.success(OrderActivity.this, "سفارش شما ثبت شد").show();
                     if (response.Item.Id != null && response.Item.Id > 0)
                         showBankPayments(response.Item.Id);

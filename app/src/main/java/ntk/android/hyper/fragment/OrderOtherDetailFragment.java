@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import es.dmoral.toasty.Toasty;
+import ntk.android.base.entitymodel.enums.enumHyperShopPaymentType;
 import ntk.android.base.fragment.BaseFragment;
 import ntk.android.hyper.R;
 import ntk.android.hyper.activity.hyper.OrderActivity;
@@ -50,6 +51,7 @@ public class OrderOtherDetailFragment extends BaseFragment {
             Toasty.warning(getContext(), "آدرس خود را وارد نمایید").show();
             return;
         } else {
+            enumHyperShopPaymentType type = enumHyperShopPaymentType.Online;
             HyperPref hyperPref = new HyperPref(getContext());
             hyperPref.setName(name.getText().toString());
             hyperPref.setLastName(family.getText().toString());
@@ -59,8 +61,9 @@ public class OrderOtherDetailFragment extends BaseFragment {
                     name.getText().toString(),
                     family.getText().toString(),
                     mobile.getText().toString(),
-                    address.getText().toString()
-            );
+                    address.getText().toString(),
+                    type
+                    );
             ((OrderActivity) getActivity()).addOrder();
         }
     }

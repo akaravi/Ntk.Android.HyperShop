@@ -11,6 +11,7 @@ import io.reactivex.Observable;
 import ntk.android.base.dtomodel.hypershop.HyperShopOrderContentDtoModel;
 import ntk.android.base.dtomodel.hypershop.HyperShopOrderDtoModel;
 import ntk.android.base.entitymodel.base.ErrorException;
+import ntk.android.base.entitymodel.enums.enumHyperShopPaymentType;
 import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.base.utill.prefrense.EasyPreference;
 
@@ -44,6 +45,7 @@ public class OrderPref {
             order.Products.add(p);
         saveOrder(order);
     }
+
     public void updateShopContent(HyperShopOrderContentDtoModel model, int count) {
         HyperShopOrderDtoModel order = getOrder();
         HyperShopOrderContentDtoModel p = null;
@@ -92,12 +94,13 @@ public class OrderPref {
         return hyperShopOrderDtoModel;
     }
 
-    public void addDetails(String name, String family, String mobile, String address) {
+    public void addDetails(String name, String family, String mobile, String address, enumHyperShopPaymentType type) {
         HyperShopOrderDtoModel order = getOrder();
         order.Name = name;
         order.Family = family;
         order.Mobile = mobile;
         order.Address = address;
+        order.PaymentType = type.index();
         saveOrder(order);
     }
 
@@ -127,6 +130,6 @@ public class OrderPref {
     }
 
     public void clear() {
-         EasyPreference.with(c).addString("NTK_HyperShopOrder", "");
+        EasyPreference.with(c).addString("NTK_HyperShopOrder", "");
     }
 }
