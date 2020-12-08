@@ -8,6 +8,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import es.dmoral.toasty.Toasty;
+import ntk.android.base.dtomodel.hypershop.HyperShopOrderContentDtoModel;
 import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.hyper.R;
 import ntk.android.hyper.prefrense.OrderPref;
@@ -27,10 +28,9 @@ public class BuyView extends FrameLayout {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View inflate = inflater.inflate(R.layout.sub_buy_view, this);
         inflate.findViewById(R.id.mbtnAdd).setOnClickListener(view -> {
-            findViewById(R.id.mbtnAdd).setVisibility(GONE);
-            findViewById(R.id.buy_view_plus).setVisibility(VISIBLE);
-            findViewById(R.id.buy_view_txtCount).setVisibility(VISIBLE);
-            findViewById(R.id.buy_view_mines).setVisibility(VISIBLE);
+            findViewById(R.id.mbtnAdd).setVisibility(INVISIBLE);
+            findViewById(R.id.linear).setVisibility(VISIBLE);
+
             increaseCount();
         });
         findViewById(R.id.buy_view_plus).setOnClickListener(view -> increaseCount());
@@ -41,17 +41,15 @@ public class BuyView extends FrameLayout {
         count--;
         if (count == 0) {
             findViewById(R.id.mbtnAdd).setVisibility(VISIBLE);
-            findViewById(R.id.buy_view_plus).setVisibility(GONE);
-            findViewById(R.id.buy_view_txtCount).setVisibility(GONE);
-            findViewById(R.id.buy_view_mines).setVisibility(GONE);
-        } else {
-            ((TextView) findViewById(R.id.buy_view_txtCount)).setText(count + "");
-            updatePref();
+            findViewById(R.id.linear).setVisibility(GONE);
+
         }
+        ((TextView) findViewById(R.id.buy_view_txtCount)).setText(count + "");
+        updatePref();
     }
 
     private void increaseCount() {
-        if (model.Count < count) {
+        if (model.Count > count) {
             count++;
             ((TextView) findViewById(R.id.buy_view_txtCount)).setText(count + "");
             updatePref();
@@ -59,9 +57,7 @@ public class BuyView extends FrameLayout {
             Toasty.error(getContext(), "تعداد موجودی این کالا کمتر از مقدار درخواستی شما است").show();
             if (count == 0) {
                 findViewById(R.id.mbtnAdd).setVisibility(VISIBLE);
-                findViewById(R.id.buy_view_plus).setVisibility(GONE);
-                findViewById(R.id.buy_view_txtCount).setVisibility(GONE);
-                findViewById(R.id.buy_view_mines).setVisibility(GONE);
+                findViewById(R.id.linear).setVisibility(GONE);
             }
         }
     }
@@ -73,5 +69,12 @@ public class BuyView extends FrameLayout {
 
     public void bind(HyperShopContentModel item) {
         model = item;
+        HyperShopOrderContentDtoModel product = new OrderPref(getContext()).getProduct(item.Code);
+        if (product != null) {
+            count = product.Count;
+            ((TextView) findViewById(R.id.buy_view_txtCount)).setText(count + "");
+            findViewById(R.id.mbtnAdd).setVisibility(GONE);
+            findViewById(R.id.linear).setVisibility(VISIBLE);
+        }
     }
 }

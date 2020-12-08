@@ -25,7 +25,7 @@ public class OrderPref {
         HyperShopOrderDtoModel order = getOrder();
         HyperShopOrderContentDtoModel p = null;
         for (int i = 0; i < order.Products.size(); i++) {
-            if (order.Products.get(i).Code == model.Code) {
+            if (order.Products.get(i).Code.equalsIgnoreCase(model.Code)) {
                 p = order.Products.remove(i);
                 break;
             }
@@ -76,7 +76,7 @@ public class OrderPref {
         saveOrder(order);
     }
 
-    public Observable< ErrorException<HyperShopOrderContentDtoModel>> getLastShopping(){
+    public Observable<ErrorException<HyperShopOrderContentDtoModel>> getLastShopping() {
         return Observable.create(emitter -> {
             ErrorException<HyperShopOrderContentDtoModel> model = new ErrorException<>();
             model.IsSuccess = true;
@@ -87,5 +87,17 @@ public class OrderPref {
             emitter.onNext(model);
             emitter.onComplete();
         });
+    }
+
+    public HyperShopOrderContentDtoModel getProduct(String code) {
+        HyperShopOrderDtoModel order = getOrder();
+        HyperShopOrderContentDtoModel p = null;
+        for (int i = 0; i < order.Products.size(); i++) {
+            if (order.Products.get(i).Code.equalsIgnoreCase(code)) {
+                p = order.Products.get(i);
+                break;
+            }
+        }
+        return p;
     }
 }
