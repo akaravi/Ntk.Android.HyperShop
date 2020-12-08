@@ -16,6 +16,7 @@ import ntk.android.hyper.prefrense.OrderPref;
 public class BuyView extends FrameLayout {
     int count = 0;
     HyperShopContentModel model;
+    HyperShopOrderContentDtoModel dtoModel;
 
     public BuyView(Context context) {
         super(context, null);
@@ -49,7 +50,8 @@ public class BuyView extends FrameLayout {
     }
 
     private void increaseCount() {
-        if (model.Count > count) {
+        int modelCount = model != null ? model.Count : dtoModel.TotalCount;
+        if (modelCount > count) {
             count++;
             ((TextView) findViewById(R.id.buy_view_txtCount)).setText(count + "");
             updatePref();
@@ -63,7 +65,10 @@ public class BuyView extends FrameLayout {
     }
 
     private void updatePref() {
-        new OrderPref(getContext()).addShopContent(model, count);
+        if (model != null)
+            new OrderPref(getContext()).updateShopContent(model, count);
+        else
+            new OrderPref(getContext()).updateShopContent(dtoModel, count);
     }
 
 
@@ -73,8 +78,17 @@ public class BuyView extends FrameLayout {
         if (product != null) {
             count = product.Count;
             ((TextView) findViewById(R.id.buy_view_txtCount)).setText(count + "");
-            findViewById(R.id.mbtnAdd).setVisibility(GONE);
+            findViewById(R.id.mbtnAdd).setVisibility(INVISIBLE);
             findViewById(R.id.linear).setVisibility(VISIBLE);
         }
     }
+
+    public void bind(HyperShopOrderContentDtoModel item) {
+        dtoModel = item;
+        count = dtoModel.Count;
+        ((TextView) findViewById(R.id.buy_view_txtCount)).setText(count + "");
+        findViewById(R.id.mbtnAdd).setVisibility(INVISIBLE);
+        findViewById(R.id.linear).setVisibility(VISIBLE);
+    }
+
 }

@@ -12,12 +12,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.dtomodel.hypershop.HyperShopOrderContentDtoModel;
 import ntk.android.hyper.R;
+import ntk.android.hyper.view.BuyView;
 
 public class HyperOrderContentAdapter extends BaseRecyclerAdapter<HyperShopOrderContentDtoModel, HyperOrderContentAdapter.ItemViewHolder> {
 
@@ -44,75 +46,23 @@ public class HyperOrderContentAdapter extends BaseRecyclerAdapter<HyperShopOrder
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         HyperShopOrderContentDtoModel item = list.get(position);
         holder.txtItemName.setText(item.Name);
-        holder.etCount.setText(String.valueOf(list.get(position).Count));
-        holder.txtProductPrice.setText(String.format("%.2f", item.Price));
+        holder.txtProductPrice.setText(new DecimalFormat("###,###,###,###").format(item.Price) + " " + item.CURRENCY_UNIT);
+        holder.buyView.bind(item);
 
-        holder.imgAdd.setOnClickListener(view -> {
-            String s = holder.etCount.getText().toString();
-            if (s.equalsIgnoreCase(""))
-                s = "0";
-            int count = Integer.parseInt(s) + 1;
-            if (count <= list.get(position).TotalCount)
-                holder.etCount.setText(String.valueOf(count));
-            else
-                Toasty.error(view.getContext(), "این تعداد از کالا موجود نمی باشد").show();
 
-        });
-        holder.imgRemove.setOnClickListener(view -> {
-            String s = holder.etCount.getText().toString();
-            if (s.equalsIgnoreCase(""))
-                s = "0";
-            int count = Integer.parseInt(s) - 1;
-            if (count < 0)
-                count = 0;
-            holder.etCount.setText(String.valueOf(count));
-
-        });
-        holder.etCount.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (!charSequence.toString().equals("")) {
-                    int count = Integer.parseInt(charSequence.toString());
-                    if (count <= list.get(position).TotalCount) {
-                        list.get(position).Count = count;
-                        changePriceMethod.run();
-                    } else {
-                        Toasty.error(context, "این تعداد از کالا موجود نمی باشد").show();
-                    }
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
     }
 
 
     protected class ItemViewHolder extends RecyclerView.ViewHolder {
-        final TextView txtItemName;
-        final TextView txtProductPrice;
-
-        final ImageView imgAdd;
-         EditText etCount;
-
-        public View imgRemove;
+         TextView txtItemName;
+         TextView txtProductPrice;
+         BuyView buyView;
 
         ItemViewHolder(View itemView) {
             super(itemView);
-            this.txtItemName = itemView.findViewById(R.id.txtItemName);
-            this.txtProductPrice = itemView.findViewById(R.id.txtProductPrice);
-            this.imgAdd = itemView.findViewById(R.id.imgAddProduct);
-            this.imgRemove = itemView.findViewById(R.id.imgRemoveProduct);
-
-//            this.etCount = itemView.findViewById(R.id.etProductCount);
-
+            this.txtItemName = itemView.findViewById(R.id.txtShopName);
+            this.txtProductPrice = itemView.findViewById(R.id.txtShopPrice);
+            this.buyView=itemView.findViewById(R.id.buyView);
 
         }
 

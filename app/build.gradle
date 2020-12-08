@@ -127,7 +127,7 @@ dependencies {
 
 
      implementation project(path: ':baseActivity')
-//     implementation project(path: ':baseApi')
+     implementation project(path: ':baseApi')
 
 }
 repositories {

@@ -21,7 +21,7 @@ public class OrderPref {
         this.c = context;
     }
 
-    public void addShopContent(HyperShopContentModel model, int count) {
+    public void updateShopContent(HyperShopContentModel model, int count) {
         HyperShopOrderDtoModel order = getOrder();
         HyperShopOrderContentDtoModel p = null;
         for (int i = 0; i < order.Products.size(); i++) {
@@ -38,8 +38,33 @@ public class OrderPref {
         p.Memo = model.Memo;
         p.Image = model.Image;
         p.TotalCount = model.Count;
+        p.CURRENCY_UNIT = model.CURRENCY_UNIT;
         p.Count = count;
-        order.Products.add(p);
+        if (p.Count > 0)
+            order.Products.add(p);
+        saveOrder(order);
+    }
+    public void updateShopContent(HyperShopOrderContentDtoModel model, int count) {
+        HyperShopOrderDtoModel order = getOrder();
+        HyperShopOrderContentDtoModel p = null;
+        for (int i = 0; i < order.Products.size(); i++) {
+            if (order.Products.get(i).Code.equalsIgnoreCase(model.Code)) {
+                p = order.Products.remove(i);
+                break;
+            }
+        }
+        if (p == null)
+            p = new HyperShopOrderContentDtoModel();
+        p.Code = model.Code;
+        p.Name = model.Name;
+        p.Price = model.Price;
+        p.Memo = model.Memo;
+        p.Image = model.Image;
+        p.TotalCount = model.Count;
+        p.CURRENCY_UNIT = model.CURRENCY_UNIT;
+        p.Count = count;
+        if (p.Count > 0)
+            order.Products.add(p);
         saveOrder(order);
     }
 

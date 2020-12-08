@@ -133,7 +133,7 @@ public class ShopContentDetailDialog extends baseFragmentDialog {
         btnCancel.setOnClickListener(view12 -> dismiss());
 
         btnOk.setOnClickListener(view1 -> {
-            new OrderPref(getContext()).addShopContent(item, productCount);
+            new OrderPref(getContext()).updateShopContent(item, productCount);
             addItemToCartAnimation(imgThumbnail);
             dismiss();
         });
