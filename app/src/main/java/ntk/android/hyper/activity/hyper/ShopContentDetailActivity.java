@@ -42,8 +42,8 @@ public class ShopContentDetailActivity extends BaseHyperShopContentDetail_1_Acti
             ((TextView) findViewById(R.id.txtCategory)).setText(model.Cat);
 //      todo      ((TextView) findViewById(R.id.txtProductCount)).setText(model.Count + model.QueantityName);
         ((BuyView) findViewById(R.id.buyView)).bind(model);
-        DisplayImageOptions options = new DisplayImageOptions.Builder()
-                .showImageOnFail(R.drawable.logo).cacheOnDisk(true).build();
+        DisplayImageOptions options = new DisplayImageOptions.Builder().showImageForEmptyUri(R.drawable.empty_product)
+                .showImageOnFail(R.drawable.empty_product).cacheOnDisk(true).build();
         ImageLoader.getInstance().displayImage(model.Image, (ImageView) findViewById(R.id.imgProduct), options, new ImageLoadingListener() {
             @Override
             public void onLoadingStarted(String imageUri, View view) {
@@ -59,7 +59,7 @@ public class ShopContentDetailActivity extends BaseHyperShopContentDetail_1_Acti
             @Override
             public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
                 loading.setVisibility(View.GONE);
-                ((ImageView) view).setImageResource(R.drawable.logo);
+//                ((ImageView) view).setImageResource(R.drawable.logo);
             }
 
             @Override

@@ -92,6 +92,10 @@ public class BuyView extends FrameLayout {
             ((TextView) findViewById(R.id.buy_view_txtCount)).setText(count + "");
             findViewById(R.id.mbtnAdd).setVisibility(INVISIBLE);
             findViewById(R.id.linear).setVisibility(VISIBLE);
+        }else
+        {
+            findViewById(R.id.mbtnAdd).setVisibility(VISIBLE);
+            findViewById(R.id.linear).setVisibility(GONE);
         }
     }
 

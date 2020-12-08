@@ -25,7 +25,7 @@ public class HyperShopContent_1_Adapter extends BaseRecyclerAdapter<HyperShopCon
 
     public HyperShopContent_1_Adapter(List<HyperShopContentModel> list) {
         super(list);
-        drawable = R.drawable.logo;
+        drawable = R.drawable.empty_product;
     }
 
     @NonNull

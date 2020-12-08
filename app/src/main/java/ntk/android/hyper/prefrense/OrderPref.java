@@ -77,11 +77,11 @@ public class OrderPref {
     }
 
     private void saveOrder(HyperShopOrderDtoModel model) {
-        EasyPreference.with(c).addString("HypershopOrder", new Gson().toJson(model));
+        EasyPreference.with(c).addString("NTK_HyperShopOrder", new Gson().toJson(model));
     }
 
     public HyperShopOrderDtoModel getOrder() {
-        String hypershopOrder = EasyPreference.with(c).getString("HypershopOrder", "");
+        String hypershopOrder = EasyPreference.with(c).getString("NTK_HyperShopOrder", "");
 
         if (!hypershopOrder.equalsIgnoreCase("")) {
             HyperShopOrderDtoModel hyperShopOrderDtoModel = new Gson().fromJson(hypershopOrder, HyperShopOrderDtoModel.class);
@@ -124,5 +124,9 @@ public class OrderPref {
             }
         }
         return p;
+    }
+
+    public void clear() {
+         EasyPreference.with(c).addString("NTK_HyperShopOrder", "");
     }
 }
