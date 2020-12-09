@@ -94,13 +94,13 @@ public class OrderPref {
         return hyperShopOrderDtoModel;
     }
 
-    public void addDetails(String name, String family, String mobile, String address, enumHyperShopPaymentType type) {
+    public void addDetails(String name, String family, String mobile, String address, int type) {
         HyperShopOrderDtoModel order = getOrder();
         order.Name = name;
         order.Family = family;
         order.Mobile = mobile;
         order.Address = address;
-        order.PaymentType = type.index();
+        order.PaymentType =type;
         saveOrder(order);
     }
 
