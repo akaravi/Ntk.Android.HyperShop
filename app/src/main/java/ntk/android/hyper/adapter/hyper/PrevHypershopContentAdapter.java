@@ -18,10 +18,10 @@ import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.hyper.R;
 import ntk.android.hyper.activity.hyper.ShopContentDetailDialog;
 
-public class HypershopContentAdapter extends BaseRecyclerAdapter<HyperShopContentModel, HypershopContentAdapter.HyperVH> {
+public class PrevHypershopContentAdapter extends BaseRecyclerAdapter<HyperShopContentModel, PrevHypershopContentAdapter.HyperVH> {
 
 
-    public HypershopContentAdapter(List<HyperShopContentModel> list) {
+    public PrevHypershopContentAdapter(List<HyperShopContentModel> list) {
         super(list);
     }
 

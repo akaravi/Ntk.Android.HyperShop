@@ -4,13 +4,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import io.reactivex.Observable;
 import java9.util.function.Function;
-import ntk.android.base.activity.abstraction.AbstractionListActivity;
 import ntk.android.base.activity.common.BaseFilterModelListActivity;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.base.services.hypershop.HyperShopContentService;
-import ntk.android.hyper.adapter.hyper.HypershopContentAdapter;
+import ntk.android.hyper.adapter.hyper.PrevHypershopContentAdapter;
 
 public class HyperListActivity extends BaseFilterModelListActivity<HyperShopContentModel> {
 
@@ -22,7 +21,7 @@ public class HyperListActivity extends BaseFilterModelListActivity<HyperShopCont
 
     @Override
     public RecyclerView.Adapter createAdapter() {
-        return new HypershopContentAdapter(models);
+        return new PrevHypershopContentAdapter(models);
     }
 
     @Override

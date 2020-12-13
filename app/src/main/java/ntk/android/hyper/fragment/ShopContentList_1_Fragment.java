@@ -11,7 +11,6 @@ import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.base.fragment.abstraction.AbstractionListFragment;
 import ntk.android.base.services.hypershop.HyperShopContentService;
 import ntk.android.hyper.adapter.hyper.HyperShopContent_1_Adapter;
-import ntk.android.hyper.adapter.hyper.HypershopContentAdapter;
 
 
 public class ShopContentList_1_Fragment extends AbstractionListFragment<HyperShopContentModel> {

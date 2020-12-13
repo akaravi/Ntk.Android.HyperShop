@@ -36,10 +36,10 @@ public class ShopContentDetailActivity extends BaseHyperShopContentDetail_1_Acti
         ((TextView) findViewById(R.id.txtProductCount)).setText(model.Count + "addad");
         ((TextView) findViewById(R.id.txtProductPrice)).setText(new DecimalFormat("###,###,###,###").format(model.Price) + " " + model.CURRENCY_UNIT);
         ((TextView) findViewById(R.id.txtDescriptionl)).setText(model.Memo);
-        if (model.Cat == null || model.Cat.equalsIgnoreCase(""))
+        if (model.Category == null || model.Category.equalsIgnoreCase(""))
             ((TextView) findViewById(R.id.txtCategory)).setText("نامشخص");
         else
-            ((TextView) findViewById(R.id.txtCategory)).setText(model.Cat);
+            ((TextView) findViewById(R.id.txtCategory)).setText(model.Category);
 //      todo      ((TextView) findViewById(R.id.txtProductCount)).setText(model.Count + model.QueantityName);
         ((BuyView) findViewById(R.id.buyView)).bind(model);
         DisplayImageOptions options = new DisplayImageOptions.Builder().showImageForEmptyUri(R.drawable.empty_product)

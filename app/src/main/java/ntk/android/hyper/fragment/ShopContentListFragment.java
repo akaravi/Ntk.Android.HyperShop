@@ -9,7 +9,7 @@ import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.base.fragment.abstraction.AbstractionListFragment;
 import ntk.android.base.services.hypershop.HyperShopContentService;
-import ntk.android.hyper.adapter.hyper.HypershopContentAdapter;
+import ntk.android.hyper.adapter.hyper.PrevHypershopContentAdapter;
 
 
 public class ShopContentListFragment extends AbstractionListFragment<HyperShopContentModel> {
@@ -25,7 +25,7 @@ public class ShopContentListFragment extends AbstractionListFragment<HyperShopCo
 
     @Override
     public RecyclerView.Adapter createAdapter() {
-        return new HypershopContentAdapter(models);
+        return new PrevHypershopContentAdapter(models);
     }
 
     @Override
