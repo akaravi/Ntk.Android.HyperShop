@@ -74,6 +74,7 @@
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.hyper.OrderActivity" />
         <activity android:name=".activity.hyper.ShopContentDetailActivity" />
+        <activity android:name=".activity.hyper.OrderListActivity" />
 
 
         <provider

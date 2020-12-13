@@ -47,4 +47,6 @@
     <color name="colorItemName">#2E4B59</color>
     <color name="colorTextPrimary">#202020</color>
     <color name="colorTextSecondary">#454545</color>
+    <color name="colorUnsuccess">#B14953</color>
+    <color name="colorSuccess">#3B9B69</color>
 </resources>

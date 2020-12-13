@@ -2,7 +2,11 @@ package ntk.android.hyper.fragment;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
 import android.widget.AutoCompleteTextView;
+
+import androidx.annotation.Nullable;
 
 import java.util.List;
 
@@ -39,6 +43,12 @@ public class BankPaymentListFragment extends BaseFragment {
         super.onCreated();
         assert getArguments() != null;
         OrderId = getArguments().getLong(Extras.EXTRA_FIRST_ARG, 0);
+
+    }
+
+    @Override
+    public void onViewCreated(@androidx.annotation.NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         FilterDataModel filterDataModel = new FilterDataModel();
         filterDataModel.RowPerPage = 20;
         switcher.showProgressView();
@@ -64,7 +74,6 @@ public class BankPaymentListFragment extends BaseFragment {
     }
 
     private void bindView(List<BankPaymentPrivateSiteConfigModel> listItems) {
-
 
         AutoCompleteTextView paymentType = (AutoCompleteTextView) findViewById(R.id.etPaymentBank);
         paymentType.setAdapter(new BankSelectAdapter(getContext(), listItems));
@@ -95,9 +104,10 @@ public class BankPaymentListFragment extends BaseFragment {
             @Override
             public void onNext(@io.reactivex.annotations.NonNull ErrorException<BankPaymentOnlineTransactionModel> response) {
                 if (response.IsSuccess) {
-                    if (response.Item.LastUrlAddressInUse != null) {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(response.Item.LastUrlAddressInUse));
+                    if (response.Item.UrlToPay != null) {
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(response.Item.UrlToPay));
                         getContext().startActivity(browserIntent);
+                        getActivity().finish();
                     } else {
                         Toasty.error(getContext(), "وبگاه پرداخت فعلا در دسترس نیست لطفا بعدا تلاش فرمایید " +
                                 "").show();
