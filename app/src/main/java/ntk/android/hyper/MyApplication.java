@@ -44,9 +44,11 @@ public class MyApplication extends NTKApplication {
             public ViewController getViewController() {
                 ViewController vc = new ViewController() {
                 };
-                vc.setLoading_view(R.layout.sub_base_loading);
-                vc.setEmpty_view(R.layout.sub_base_empty);
-                vc.setError_view(R.layout.sub_base_error);
+                vc.setLoading_view(R.layout.sub_base_loading)
+                        .setEmpty_view(R.layout.sub_base_empty)
+                        .setError_view(R.layout.sub_base_error)
+                        .setError_button(R.id.btn_error_tryAgain)
+                        .setError_label(R.id.tvError);
                 return vc;
             }
 
