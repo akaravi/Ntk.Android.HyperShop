@@ -11,6 +11,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 import ntk.android.base.config.NtkObserver;
+import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.dtomodel.application.AboutUsDtoModel;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.services.application.ApplicationAppService;
@@ -28,8 +29,7 @@ public class AboutUsActivity extends AppCompatActivity {
     }
 
     private void init() {
-        new ApplicationAppService(this).getAboutUs().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        ServiceExecute.execute(new ApplicationAppService(this).getAboutUs())
                 .subscribe(new NtkObserver<ErrorException<AboutUsDtoModel>>() {
                     @Override
                     public void onNext(@NonNull ErrorException<AboutUsDtoModel> about) {

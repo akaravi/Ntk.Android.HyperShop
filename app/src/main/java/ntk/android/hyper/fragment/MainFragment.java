@@ -20,6 +20,7 @@ import es.dmoral.toasty.Toasty;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import ntk.android.base.config.NtkObserver;
+import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.entitymodel.hypershop.HyperShopCategoryModel;
@@ -78,35 +79,33 @@ public class MainFragment extends BaseFragment {
     private void getContent() {
         FilterDataModel f = new FilterDataModel();
         f.RowPerPage = 20;
-        new HyperShopContentService(getContext()).getAllMicroService(f)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io()).subscribe(new NtkObserver<ErrorException<HyperShopContentModel>>() {
-            @Override
-            public void onNext(@io.reactivex.annotations.NonNull ErrorException<HyperShopContentModel> response) {
-                if (response.IsSuccess) {
-                    adapter.put(1, response.ListItems);
-                    if (adapter.getItemCount() == 2) {
+        ServiceExecute.execute(new HyperShopContentService(getContext()).getAllMicroService(f))
+                .subscribe(new NtkObserver<ErrorException<HyperShopContentModel>>() {
+                    @Override
+                    public void onNext(@io.reactivex.annotations.NonNull ErrorException<HyperShopContentModel> response) {
+                        if (response.IsSuccess) {
+                            adapter.put(1, response.ListItems);
+                            if (adapter.getItemCount() == 2) {
 
-                        ((RecyclerView) findViewById(R.id.rc)).setAdapter(adapter);
-                        switcher.showContentView();
+                                ((RecyclerView) findViewById(R.id.rc)).setAdapter(adapter);
+                                switcher.showContentView();
+                            }
+                        } else
+                            Toasty.error(getContext(), response.ErrorMessage).show();
                     }
-                } else
-                    Toasty.error(getContext(), response.ErrorMessage).show();
-            }
 
-            @Override
-            public void onError(@io.reactivex.annotations.NonNull Throwable e) {
+                    @Override
+                    public void onError(@io.reactivex.annotations.NonNull Throwable e) {
 
-            }
-        });
+                    }
+                });
     }
 
     private void getCategory() {
         FilterDataModel f = new FilterDataModel();
         f.RowPerPage = 8;
-        new HyperShopCategoryService(getContext()).getAllMicroService(f)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io()).subscribe(new NtkObserver<ErrorException<HyperShopCategoryModel>>() {
+        ServiceExecute.execute(new HyperShopCategoryService(getContext()).getAllMicroService(f))
+              .subscribe(new NtkObserver<ErrorException<HyperShopCategoryModel>>() {
             @Override
             public void onNext(@io.reactivex.annotations.NonNull ErrorException<HyperShopCategoryModel> response) {
                 if (response.IsSuccess) {

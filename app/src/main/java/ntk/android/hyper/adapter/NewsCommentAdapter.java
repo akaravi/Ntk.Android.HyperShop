@@ -15,17 +15,16 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.schedulers.Schedulers;
-import ntk.android.hyper.R;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.config.NtkObserver;
+import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorExceptionBase;
 import ntk.android.base.entitymodel.news.NewsCommentModel;
 import ntk.android.base.services.news.NewsCommentService;
 import ntk.android.base.utill.AppUtill;
 import ntk.android.base.utill.FontManager;
+import ntk.android.hyper.R;
 
 public class NewsCommentAdapter extends BaseRecyclerAdapter<NewsCommentModel, NewsCommentAdapter.ViewHolder> {
 
@@ -60,8 +59,7 @@ public class NewsCommentAdapter extends BaseRecyclerAdapter<NewsCommentModel, Ne
 
             long id = item.Id;
             holder.loading.setVisibility(View.VISIBLE);
-            new NewsCommentService(context).like(id).observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
+            ServiceExecute.execute(new NewsCommentService(context).like(id))
                     .subscribe(new NtkObserver<ErrorExceptionBase>() {
                         @Override
                         public void onNext(@NonNull ErrorExceptionBase model) {
@@ -86,8 +84,7 @@ public class NewsCommentAdapter extends BaseRecyclerAdapter<NewsCommentModel, Ne
         holder.ImgDisLike.setOnClickListener(v -> {
             long id = item.Id;
             holder.loading.setVisibility(View.VISIBLE);
-            new NewsCommentService(context).dislike(id).observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
+            ServiceExecute.execute(new NewsCommentService(context).dislike(id))
                     .subscribe(new NtkObserver<ErrorExceptionBase>() {
 
                         @Override

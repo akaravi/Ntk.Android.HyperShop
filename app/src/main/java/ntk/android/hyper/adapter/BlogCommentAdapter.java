@@ -18,6 +18,7 @@ import es.dmoral.toasty.Toasty;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
+import ntk.android.base.config.ServiceExecute;
 import ntk.android.hyper.R;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.config.NtkObserver;
@@ -57,8 +58,7 @@ public class BlogCommentAdapter extends BaseRecyclerAdapter<BlogCommentModel, Bl
         holder.ImgLike.setOnClickListener(v -> {
             long id = item.Id;
             holder.loading.setVisibility(View.VISIBLE);
-            new BlogCommentService(context).like(id).observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
+            ServiceExecute.execute(new BlogCommentService(context).like(id))
                     .subscribe(new NtkObserver<ErrorExceptionBase>() {
                         @Override
                         public void onNext(@NonNull ErrorExceptionBase model) {
@@ -83,8 +83,7 @@ public class BlogCommentAdapter extends BaseRecyclerAdapter<BlogCommentModel, Bl
         holder.ImgDisLike.setOnClickListener(v -> {
             long id = item.Id;
             holder.loading.setVisibility(View.VISIBLE);
-            new BlogCommentService(context).dislike(id).observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
+            ServiceExecute.execute(new BlogCommentService(context).dislike(id))
                     .subscribe(new NtkObserver<ErrorExceptionBase>() {
 
                         @Override

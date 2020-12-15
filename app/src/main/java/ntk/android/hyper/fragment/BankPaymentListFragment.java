@@ -11,12 +11,11 @@ import androidx.annotation.Nullable;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.schedulers.Schedulers;
 import ntk.android.base.Extras;
 import ntk.android.base.NTKApplication;
 import ntk.android.base.config.NtkObserver;
+import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.dtomodel.bankpayment.BankPaymentOnlineTransactionModel;
 import ntk.android.base.dtomodel.hypershop.HyperShopOrderPaymentDtoModel;
 import ntk.android.base.entitymodel.bankpayment.BankPaymentPrivateSiteConfigModel;
@@ -52,9 +51,7 @@ public class BankPaymentListFragment extends BaseFragment {
         FilterDataModel filterDataModel = new FilterDataModel();
         filterDataModel.RowPerPage = 20;
         switcher.showProgressView();
-        new BankPaymentPrivateSiteConfigService(getContext()).getAll(filterDataModel)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
+        ServiceExecute.execute(new BankPaymentPrivateSiteConfigService(getContext()).getAll(filterDataModel))
                 .subscribe(new NtkObserver<ErrorException<BankPaymentPrivateSiteConfigModel>>() {
                     @Override
                     public void onNext(@NonNull ErrorException<BankPaymentPrivateSiteConfigModel> banks) {
@@ -98,9 +95,8 @@ public class BankPaymentListFragment extends BaseFragment {
         CheckPaymentActivity.Last_Order_Id = OrderId;
         req.BankPaymentPrivateId = BankId;
         req.LastUrlAddressInUse = "oco.ir/" + NTKApplication.get().getApplicationParameter().APPLICATION_ID();
-        new HyperShopOrderService(getContext()).orderPayment(req)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io()).subscribe(new NtkObserver<ErrorException<BankPaymentOnlineTransactionModel>>() {
+        ServiceExecute.execute(new HyperShopOrderService(getContext()).orderPayment(req))
+                .subscribe(new NtkObserver<ErrorException<BankPaymentOnlineTransactionModel>>() {
             @Override
             public void onNext(@io.reactivex.annotations.NonNull ErrorException<BankPaymentOnlineTransactionModel> response) {
                 if (response.IsSuccess) {

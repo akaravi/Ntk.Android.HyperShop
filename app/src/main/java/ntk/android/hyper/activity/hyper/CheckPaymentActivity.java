@@ -10,6 +10,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.base.config.NtkObserver;
+import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.hypershop.HyperShopOrderModel;
 import ntk.android.base.services.hypershop.HyperShopOrderService;
@@ -24,9 +25,7 @@ public class CheckPaymentActivity extends BaseActivity {
     }
 
     private void checkPayment() {
-        new HyperShopOrderService(this).getOne(Last_Order_Id)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
+        ServiceExecute.execute( new HyperShopOrderService(this).getOne(Last_Order_Id))
                 .subscribe(new NtkObserver<ErrorException<HyperShopOrderModel>>() {
                     @Override
                     public void onNext(@NonNull ErrorException<HyperShopOrderModel> resposne) {

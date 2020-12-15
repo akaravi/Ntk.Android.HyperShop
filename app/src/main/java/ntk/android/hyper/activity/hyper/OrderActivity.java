@@ -7,12 +7,11 @@ import android.widget.TextView;
 import org.jetbrains.annotations.Nullable;
 
 import es.dmoral.toasty.Toasty;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.schedulers.Schedulers;
 import ntk.android.base.Extras;
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.base.config.NtkObserver;
+import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.dtomodel.hypershop.HyperShopOrderDtoModel;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.hypershop.HyperShopOrderModel;
@@ -79,27 +78,27 @@ public class OrderActivity extends BaseActivity {
     public void addOrder() {
         HyperShopOrderDtoModel order = new OrderPref(this).getOrder();
         switcher.showProgressView();
-        new HyperShopOrderService(this).orderAdd(order).observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io()).subscribe(new NtkObserver<ErrorException<HyperShopOrderModel>>() {
-            @Override
-            public void onNext(@NonNull ErrorException<HyperShopOrderModel> response) {
-                switcher.showContentView();
-                if (response.IsSuccess) {
+        ServiceExecute.execute(new HyperShopOrderService(this).orderAdd(order))
+                .subscribe(new NtkObserver<ErrorException<HyperShopOrderModel>>() {
+                    @Override
+                    public void onNext(@NonNull ErrorException<HyperShopOrderModel> response) {
+                        switcher.showContentView();
+                        if (response.IsSuccess) {
 //                    new OrderPref(OrderActivity.this).clear(); todo
-                    Toasty.success(OrderActivity.this, "سفارش شما ثبت شد").show();
-                    if (response.Item.Id != null && response.Item.Id > 0)
-                        showBankPayments(response.Item.Id);
-                    else
-                        Toasty.error(OrderActivity.this, response.ErrorMessage).show();
+                            Toasty.success(OrderActivity.this, "سفارش شما ثبت شد").show();
+                            if (response.Item.Id != null && response.Item.Id > 0)
+                                showBankPayments(response.Item.Id);
+                            else
+                                Toasty.error(OrderActivity.this, response.ErrorMessage).show();
 
-                } else
-                    Toasty.error(OrderActivity.this, response.ErrorMessage).show();
-            }
+                        } else
+                            Toasty.error(OrderActivity.this, response.ErrorMessage).show();
+                    }
 
-            @Override
-            public void onError(@NonNull Throwable e) {
-                Toasty.error(OrderActivity.this, "خطای سامانه").show();
-            }
-        });
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Toasty.error(OrderActivity.this, "خطای سامانه").show();
+                    }
+                });
     }
 }
