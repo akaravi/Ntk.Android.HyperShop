@@ -32,6 +32,7 @@ public class NewsAdapter extends BaseRecyclerAdapter<NewsContentModel, NewsAdapt
     public NewsAdapter(Context context, List<NewsContentModel> arrayList) {
         super(arrayList);
         this.context = context;
+        drawable=R.drawable.news_placeholder;
     }
 
     @Override

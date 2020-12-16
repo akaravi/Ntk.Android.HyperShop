@@ -33,7 +33,7 @@ public class MoreItemsVH extends RecyclerView.ViewHolder {
         RecyclerView rc = itemView.findViewById(R.id.moreRc);
         rc.setNestedScrollingEnabled(true);
         rc.setHasFixedSize(true);
-        rc.setLayoutManager(new LinearLayoutManager(itemView.getContext(), LinearLayoutManager.VERTICAL, false));
+        rc.setLayoutManager(new LinearLayoutManager(itemView.getContext(), LinearLayoutManager.HORIZONTAL, false));
         rc.setAdapter(new HyperShopContent_1_Adapter(list));
     }
 }

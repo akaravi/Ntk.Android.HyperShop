@@ -1,5 +1,7 @@
 package ntk.android.hyper.fragment;
 
+import android.content.Intent;
+
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,6 +12,7 @@ import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.base.fragment.abstraction.AbstractionListFragment;
 import ntk.android.base.services.hypershop.HyperShopContentService;
+import ntk.android.hyper.activity.hyper.HyperShopContentSearchActivity;
 import ntk.android.hyper.adapter.hyper.HyperShopContent_1_Adapter;
 
 
@@ -19,10 +22,6 @@ public class ShopContentList_1_Fragment extends AbstractionListFragment<HyperSho
         return new HyperShopContentService(getContext())::getAllMicroService;
     }
 
-    @Override
-    public boolean withToolbar() {
-        return false;
-    }
 
     @Override
     protected RecyclerView.LayoutManager getRvLayoutManager() {
@@ -36,7 +35,7 @@ public class ShopContentList_1_Fragment extends AbstractionListFragment<HyperSho
 
     @Override
     public void ClickSearch() {
-
+            startActivity(new Intent(getContext(), HyperShopContentSearchActivity.class));
     }
 //     ShopContentListAdapter adapter;
 //    /**

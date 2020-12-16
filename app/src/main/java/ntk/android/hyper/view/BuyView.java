@@ -18,6 +18,7 @@ public class BuyView extends FrameLayout {
     HyperShopContentModel model;
     HyperShopOrderContentDtoModel dtoModel;
     Runnable changePriceMethod;
+    Runnable deleteProduct;
 
     public BuyView(Context context) {
         super(context, null);
@@ -45,7 +46,8 @@ public class BuyView extends FrameLayout {
         if (count == 0) {
             findViewById(R.id.mbtnAdd).setVisibility(VISIBLE);
             findViewById(R.id.linear).setVisibility(GONE);
-
+            if (deleteProduct != null)
+                deleteProduct.run();
         }
         ((TextView) findViewById(R.id.buy_view_txtCount)).setText(count + "");
         updatePref();
@@ -92,15 +94,15 @@ public class BuyView extends FrameLayout {
             ((TextView) findViewById(R.id.buy_view_txtCount)).setText(count + "");
             findViewById(R.id.mbtnAdd).setVisibility(INVISIBLE);
             findViewById(R.id.linear).setVisibility(VISIBLE);
-        }else
-        {
+        } else {
             findViewById(R.id.mbtnAdd).setVisibility(VISIBLE);
             findViewById(R.id.linear).setVisibility(GONE);
         }
     }
 
-    public void bind(HyperShopOrderContentDtoModel item, Runnable o) {
+    public void bind(HyperShopOrderContentDtoModel item, Runnable o, Runnable d) {
         changePriceMethod = o;
+        deleteProduct = d;
         dtoModel = item;
         count = dtoModel.Count;
         ((TextView) findViewById(R.id.buy_view_txtCount)).setText(count + "");

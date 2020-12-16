@@ -13,7 +13,6 @@ import ntk.android.base.dtomodel.hypershop.HyperShopOrderContentDtoModel;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.fragment.abstraction.AbstractionListFragment;
-import ntk.android.base.view.NViewUtils;
 import ntk.android.hyper.R;
 import ntk.android.hyper.activity.hyper.OrderActivity;
 import ntk.android.hyper.adapter.hyper.HyperOrderContentAdapter;
@@ -29,7 +28,7 @@ public class OrderContentListFragment extends AbstractionListFragment<HyperShopO
 
     @Override
     protected void onListCreate() {
-        if(models.size()>0) {
+        if (models.size() > 0) {
             updateTotalPrice();
             ((OrderActivity) getActivity()).showBottom();
         }
@@ -58,7 +57,7 @@ public class OrderContentListFragment extends AbstractionListFragment<HyperShopO
 
     @Override
     public RecyclerView.Adapter createAdapter() {
-        return new HyperOrderContentAdapter(getContext(), models, this::updateTotalPrice);
+        return new HyperOrderContentAdapter(getContext(), models, this::updateTotalPrice, this::updateList);
     }
 
     private void updateTotalPrice() {
@@ -69,6 +68,14 @@ public class OrderContentListFragment extends AbstractionListFragment<HyperShopO
         ((TextView) getActivity().findViewById(R.id.txtTotalPrice)).setText(new DecimalFormat("###,###,###,###").format(amountOrder) + " " + HyperShopOrderContentDtoModel.CURRENCY_UNIT);
     }
 
+    public void updateList() {
+        if (adapter.getItemCount() == 0) {
+            switcher.showEmptyView();
+            getActivity().findViewById(R.id.bottomLayout).setVisibility(View.GONE);
+        }
+
+
+    }
 
     public void updateOrder() {
         new OrderPref(getContext()).updateOrderWith(((HyperOrderContentAdapter) adapter).list(), amountOrder);

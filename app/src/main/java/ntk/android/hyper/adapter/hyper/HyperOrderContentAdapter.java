@@ -23,11 +23,14 @@ public class HyperOrderContentAdapter extends BaseRecyclerAdapter<HyperShopOrder
     private final Context context;
 
     Runnable changePriceMethod;
+    Runnable showEmptyMethod;
 
-    public HyperOrderContentAdapter(Context context, List<HyperShopOrderContentDtoModel> products, Runnable o) {
+
+    public HyperOrderContentAdapter(Context context, List<HyperShopOrderContentDtoModel> products, Runnable o, Runnable updateList) {
         super(products);
         this.context = context;
         this.changePriceMethod = o;
+        showEmptyMethod = updateList;
     }
 
 
@@ -42,14 +45,16 @@ public class HyperOrderContentAdapter extends BaseRecyclerAdapter<HyperShopOrder
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         if (position == list.size() - 1) {
             holder.itemView.setPadding(0, 0, 0, NViewUtils.dpToPx(context, 100));
-        }else
-            holder.itemView.setPadding(0, 0, 0,0);
+        } else
+            holder.itemView.setPadding(0, 0, 0, 0);
         HyperShopOrderContentDtoModel item = list.get(position);
         holder.txtItemName.setText(item.Name);
         holder.txtProductPrice.setText(new DecimalFormat("###,###,###,###").format(item.Price) + " " + item.CURRENCY_UNIT);
-        holder.buyView.bind(item, changePriceMethod);
-
-
+        holder.buyView.bind(item, changePriceMethod, () -> {
+            list.remove(position);
+            notifyDataSetChanged();
+            showEmptyMethod.run();
+        });
     }
 
 

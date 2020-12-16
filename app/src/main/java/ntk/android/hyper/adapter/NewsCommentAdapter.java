@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
 import io.reactivex.annotations.NonNull;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
+import ntk.android.base.config.GenericErrors;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorExceptionBase;
@@ -75,8 +76,10 @@ public class NewsCommentAdapter extends BaseRecyclerAdapter<NewsCommentModel, Ne
                         @Override
                         public void onError(@NonNull Throwable e) {
                             holder.loading.setVisibility(View.GONE);
-                            Toasty.warning(context, "خطا در انجام عملیات", Toasty.LENGTH_LONG, true).show();
-
+                            new GenericErrors().throwableException((error, tryAgain) -> {
+                                Toasty.warning(context, error, Toasty.LENGTH_LONG, true).show();
+                            }, e, () -> {
+                            });
                         }
                     });
         });
@@ -101,7 +104,10 @@ public class NewsCommentAdapter extends BaseRecyclerAdapter<NewsCommentModel, Ne
                         @Override
                         public void onError(Throwable e) {
                             holder.loading.setVisibility(View.GONE);
-                            Toasty.warning(context, "خطا در انجام عملیات", Toasty.LENGTH_LONG, true).show();
+                            new GenericErrors().throwableException((error, tryAgain) -> {
+                                Toasty.warning(context, error, Toasty.LENGTH_LONG, true).show();
+                            }, e, () -> {
+                            });
                         }
 
                     });

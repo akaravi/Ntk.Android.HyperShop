@@ -18,6 +18,7 @@ import es.dmoral.toasty.Toasty;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
+import ntk.android.base.config.GenericErrors;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.hyper.R;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
@@ -74,7 +75,10 @@ public class BlogCommentAdapter extends BaseRecyclerAdapter<BlogCommentModel, Bl
                         @Override
                         public void onError(@NonNull Throwable e) {
                             holder.loading.setVisibility(View.GONE);
-                            Toasty.warning(context, "خطا در انجام عملیات", Toasty.LENGTH_LONG, true).show();
+                            new GenericErrors().throwableException((error, tryAgain) -> {
+                                Toasty.warning(context, error, Toasty.LENGTH_LONG, true).show();
+                            }, e, () -> {
+                            });
 
                         }
                     });
@@ -100,7 +104,10 @@ public class BlogCommentAdapter extends BaseRecyclerAdapter<BlogCommentModel, Bl
                         @Override
                         public void onError(Throwable e) {
                             holder.loading.setVisibility(View.GONE);
-                            Toasty.warning(context, "خطا در انجام عملیات", Toasty.LENGTH_LONG, true).show();
+                            new GenericErrors().throwableException((error, tryAgain) -> {
+                                Toasty.warning(context, error, Toasty.LENGTH_LONG, true).show();
+                            }, e, () -> {
+                            });
                         }
 
                     });

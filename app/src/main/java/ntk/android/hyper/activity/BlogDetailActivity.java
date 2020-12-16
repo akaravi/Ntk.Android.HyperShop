@@ -46,4 +46,6 @@ public class BlogDetailActivity extends BaseBlogDetail_1_Activity {
     protected RecyclerView.Adapter createOtherInfoAdapter(List<BlogContentOtherInfoModel> info) {
         return new TabBlogAdapter(this, info);
     }
+
+
 }
