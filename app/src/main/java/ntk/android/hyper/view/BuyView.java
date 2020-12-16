@@ -7,10 +7,13 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
+
 import es.dmoral.toasty.Toasty;
 import ntk.android.base.dtomodel.hypershop.HyperShopOrderContentDtoModel;
 import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.hyper.R;
+import ntk.android.hyper.event.UpdateCartViewEvent;
 import ntk.android.hyper.prefrense.OrderPref;
 
 public class BuyView extends FrameLayout {
@@ -54,6 +57,7 @@ public class BuyView extends FrameLayout {
     }
 
     private void increaseCount() {
+
         int modelCount = model != null ? model.Count : dtoModel.TotalCount;
         if (modelCount > count) {
             count++;
@@ -77,11 +81,13 @@ public class BuyView extends FrameLayout {
     }
 
     private void updatePref() {
-        if (model != null)
+        if (model != null) {
             new OrderPref(getContext()).updateShopContent(model, count);
-        else {
+            EventBus.getDefault().post(new UpdateCartViewEvent());
+        }       else {
             new OrderPref(getContext()).updateShopContent(dtoModel, count);
             changePriceMethod.run();
+            EventBus.getDefault().post(new UpdateCartViewEvent());
         }
     }
 

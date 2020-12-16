@@ -23,15 +23,28 @@ import ntk.android.hyper.view.BuyView;
 public class HyperShopContent_1_Adapter extends BaseRecyclerAdapter<HyperShopContentModel, HyperShopContent_1_Adapter.HyperVH> {
 
 
+    private boolean divideScreen = false;
+
     public HyperShopContent_1_Adapter(List<HyperShopContentModel> list) {
         super(list);
         drawable = R.drawable.empty_product;
+    }
+
+    public HyperShopContent_1_Adapter(List<HyperShopContentModel> list, boolean halfView) {
+        super(list);
+        drawable = R.drawable.empty_product;
+        divideScreen = halfView;
     }
 
     @NonNull
     @Override
     public HyperShopContent_1_Adapter.HyperVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = inflate(parent, R.layout.shop_content_row_item1);
+        if (divideScreen) {
+            ViewGroup.LayoutParams ret = v.getLayoutParams();
+            ret.width = getScreenWidth() / 2;
+            v.setLayoutParams(ret);
+        }
         HyperShopContent_1_Adapter.HyperVH h = new HyperShopContent_1_Adapter.HyperVH(v);
         return h;
     }

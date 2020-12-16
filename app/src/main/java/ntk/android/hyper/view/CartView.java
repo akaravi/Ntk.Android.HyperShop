@@ -25,8 +25,6 @@ public class CartView extends FrameLayout {
         View inflate = inflater.inflate(R.layout.sub_card_view, this);
 
         updateCount();
-
-
     }
 
     public void updateCount() {
