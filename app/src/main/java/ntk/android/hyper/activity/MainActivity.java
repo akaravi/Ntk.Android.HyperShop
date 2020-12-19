@@ -1,6 +1,7 @@
 package ntk.android.hyper.activity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.animation.BounceInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
@@ -29,8 +31,11 @@ import ntk.android.base.activity.common.NotificationsActivity;
 import ntk.android.base.activity.poling.PolingActivity;
 import ntk.android.base.activity.ticketing.TicketListActivity;
 import ntk.android.base.activity.ticketing.TicketSearchActivity;
+import ntk.android.base.utill.FontManager;
 import ntk.android.hyper.R;
+import ntk.android.hyper.activity.hyper.HyperTransactionListActivity;
 import ntk.android.hyper.activity.hyper.OrderActivity;
+import ntk.android.hyper.activity.hyper.OrderListActivity;
 import ntk.android.hyper.event.UpdateCartViewEvent;
 import ntk.android.hyper.fragment.MainFragment;
 import ntk.android.hyper.view.CartView;
@@ -69,6 +74,31 @@ public class MainActivity extends AbstractMainActivity {
                 .build();
         MainFragment fragment = new MainFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
+        setFont();
+    }
+
+    private void setFont() {
+        Typeface t1_req = FontManager.T1_Typeface(this);
+        Typeface t1_bold = FontManager.T1_Typeface(this);
+        Typeface t2_req = FontManager.T2_Typeface(this);
+        ((TextView) findViewById(R.id.txt_toolbar)).setTypeface(t1_req);
+
+       ((TextView) findViewById(R.id.txtPanel)).setTypeface(t2_req);
+       ((TextView) findViewById(R.id.txtOrder)).setTypeface(t2_req);
+       ((TextView) findViewById(R.id.category)).setTypeface(t2_req);
+       ((TextView) findViewById(R.id.transactionsTxt)).setTypeface(t2_req);
+       ((TextView) findViewById(R.id.message)).setTypeface(t2_req);
+       ((TextView) findViewById(R.id.search)).setTypeface(t2_req);
+       ((TextView) findViewById(R.id.support)).setTypeface(t2_req);
+       ((TextView) findViewById(R.id.question)).setTypeface(t2_req);
+       ((TextView) findViewById(R.id.feedback)).setTypeface(t2_req);
+       ((TextView) findViewById(R.id.news)).setTypeface(t2_req);
+       ((TextView) findViewById(R.id.intro)).setTypeface(t2_req);
+       ((TextView) findViewById(R.id.pooling)).setTypeface(t2_req);;
+       ((TextView) findViewById(R.id.aboutUs)).setTypeface(t2_req);;
+       ((TextView) findViewById(R.id.invite)).setTypeface(t2_req);
+       ((TextView) findViewById(R.id.blog)).setTypeface(t2_req);
+       ((TextView) findViewById(R.id.blog)).setTypeface(t2_req);
     }
 
     @Override
@@ -100,6 +130,9 @@ public class MainActivity extends AbstractMainActivity {
 
     private void setAnimation(View v, boolean b) {
         btn = new ArrayList() {{
+            add(findViewById(R.id.categoryBtn));
+            add(findViewById(R.id.transactionBtn));
+            add(findViewById(R.id.orderListBtn));
             add(findViewById(R.id.newsBtn));
             add(findViewById(R.id.poolingBtn));
             add(findViewById(R.id.searchBtn));
@@ -138,6 +171,21 @@ public class MainActivity extends AbstractMainActivity {
 //            }
         }
 //        v.startAnimation(alphaAnimation);
+    }
+
+    @OnClick(R.id.orderListBtn)
+    public void orderListClick() {
+        this.startActivity(new Intent(this, OrderListActivity.class));
+    }
+
+    @OnClick(R.id.categoryBtn)
+    public void categoryListClick() {
+        this.startActivity(new Intent(this, HyperCategoryListActivity.class));
+    }
+
+    @OnClick(R.id.transactionBtn)
+    public void transActiosListClick() {
+        this.startActivity(new Intent(this, HyperTransactionListActivity.class));
     }
 
     @OnClick(R.id.supportBtn)

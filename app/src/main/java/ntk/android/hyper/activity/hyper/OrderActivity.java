@@ -41,8 +41,7 @@ public class OrderActivity extends BaseActivity {
 
     public void showProductFragment() {
         title.setText("سبد خرید");
-
-        findViewById(R.id.imgDeleteOrder).setOnClickListener(view -> deleteOrderDialog());
+        findViewById(R.id.imgDeleteOrder).setVisibility(View.VISIBLE);
         OrderContentListFragment fragment = new OrderContentListFragment();
         findViewById(R.id.btnGoToDetail).setOnClickListener(view -> {
             fragment.updateOrder();
@@ -53,13 +52,10 @@ public class OrderActivity extends BaseActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
     }
 
-    private void deleteOrderDialog() {
-        //todo show dialog
-        Toasty.success(this, "سبد شما کامل حذف گردید").show();
-    }
 
     public void showOrderDetail() {
         title.setText("تایید نهایی");
+        findViewById(R.id.imgDeleteOrder).setVisibility(View.GONE);
         findViewById(R.id.bottomLayout).setVisibility(View.GONE);
         OrderOtherDetailFragment fragment = new OrderOtherDetailFragment();
         fragment.setArguments(getIntent().getExtras());

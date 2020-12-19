@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import ntk.android.base.utill.FontManager;
 import ntk.android.hyper.R;
 import ntk.android.hyper.prefrense.OrderPref;
 
@@ -23,7 +24,7 @@ public class CartView extends FrameLayout {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View inflate = inflater.inflate(R.layout.sub_card_view, this);
-
+        ((TextView) findViewById(R.id.txtCount)).setTypeface(FontManager.T1_Typeface(getContext()));
         updateCount();
     }
 
@@ -33,7 +34,10 @@ public class CartView extends FrameLayout {
         if (products > 0) {
             tv.setVisibility(VISIBLE);
             tv.setText((String.valueOf(products)));
+        } else {
+            tv.setVisibility(GONE);
         }
+
     }
 
 }

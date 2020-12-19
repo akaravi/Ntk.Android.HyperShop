@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import org.greenrobot.eventbus.EventBus;
 import es.dmoral.toasty.Toasty;
 import ntk.android.base.dtomodel.hypershop.HyperShopOrderContentDtoModel;
 import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
+import ntk.android.base.utill.FontManager;
 import ntk.android.hyper.R;
 import ntk.android.hyper.event.UpdateCartViewEvent;
 import ntk.android.hyper.prefrense.OrderPref;
@@ -39,6 +41,7 @@ public class BuyView extends FrameLayout {
 
             increaseCount();
         });
+        ((Button) findViewById(R.id.mbtnAdd)).setTypeface(FontManager.T1_Typeface(getContext()));
         findViewById(R.id.buy_view_plus).setOnClickListener(view -> increaseCount());
         findViewById(R.id.buy_view_mines).setOnClickListener(view -> decreaseCount());
     }

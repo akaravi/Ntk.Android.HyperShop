@@ -10,11 +10,17 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.text.DecimalFormat;
 
 import ntk.android.base.activity.hyper.BaseHyperShopContentDetail_1_Activity;
+import ntk.android.base.view.NViewUtils;
 import ntk.android.hyper.R;
+import ntk.android.hyper.event.UpdateCartViewEvent;
 import ntk.android.hyper.view.BuyView;
+import ntk.android.hyper.view.CartView;
 
 
 /**
@@ -32,9 +38,10 @@ public class ShopContentDetailActivity extends BaseHyperShopContentDetail_1_Acti
 
     @Override
     protected void bindData() {
+        findViewById(R.id.back_button).setOnClickListener(view -> finish());
         ((TextView) findViewById(R.id.txtProductName)).setText(model.Name);
         ((TextView) findViewById(R.id.txtProductCount)).setText(model.Count + "addad");
-        ((TextView) findViewById(R.id.txtProductPrice)).setText(new DecimalFormat("###,###,###,###").format(model.Price) + " " + model.CURRENCY_UNIT);
+        ((TextView) findViewById(R.id.txtProductPrice)).setText(NViewUtils.PriceFormat(model.Price) + " " + model.CURRENCY_UNIT);
         ((TextView) findViewById(R.id.txtDescriptionl)).setText(model.Memo);
         if (model.Category == null || model.Category.equalsIgnoreCase(""))
             ((TextView) findViewById(R.id.txtCategory)).setText("نامشخص");
@@ -68,7 +75,25 @@ public class ShopContentDetailActivity extends BaseHyperShopContentDetail_1_Acti
             }
         });
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+    @Subscribe
+    public void EventRemove(UpdateCartViewEvent event) {
+        UpdateCard();
+    }
+
+    public void UpdateCard() {
+        ((CartView) findViewById(R.id.cartView)).updateCount();
+    }
     //    @Override
 //    protected void onCreate(@Nullable Bundle savedInstanceState) {
 //        setContentView(R.layout.activity_shop);

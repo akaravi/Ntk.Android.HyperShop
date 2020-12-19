@@ -92,9 +92,9 @@ public class BankPaymentListFragment extends BaseFragment {
     private void callPayment() {
         HyperShopOrderPaymentDtoModel req = new HyperShopOrderPaymentDtoModel();
         req.LinkOrderId = OrderId;
-        CheckPaymentActivity.Last_Order_Id = OrderId;
+        CheckPaymentActivity.LAST_ORDER(getContext(),OrderId);
         req.BankPaymentPrivateId = BankId;
-        req.LastUrlAddressInUse = "oco.ir/" + NTKApplication.get().getApplicationParameter().APPLICATION_ID();
+        req.LastUrlAddressInUse = "" + NTKApplication.get().getApplicationParameter().APPLICATION_ID()+"://"+"hypershop";
         ServiceExecute.execute(new HyperShopOrderService(getContext()).orderPayment(req))
                 .subscribe(new NtkObserver<ErrorException<BankPaymentOnlineTransactionModel>>() {
             @Override

@@ -1,6 +1,7 @@
 package ntk.android.hyper.adapter.hyper;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import java.util.List;
 
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.dtomodel.hypershop.HyperShopOrderContentDtoModel;
+import ntk.android.base.utill.FontManager;
 import ntk.android.base.view.NViewUtils;
 import ntk.android.hyper.R;
 import ntk.android.hyper.view.BuyView;
@@ -49,7 +51,7 @@ public class HyperOrderContentAdapter extends BaseRecyclerAdapter<HyperShopOrder
             holder.itemView.setPadding(0, 0, 0, 0);
         HyperShopOrderContentDtoModel item = list.get(position);
         holder.txtItemName.setText(item.Name);
-        holder.txtProductPrice.setText(new DecimalFormat("###,###,###,###").format(item.Price) + " " + item.CURRENCY_UNIT);
+        holder.txtProductPrice.setText(NViewUtils.PriceFormat(item.Price) + " " + item.CURRENCY_UNIT);
         holder.buyView.bind(item, changePriceMethod, () -> {
             list.remove(position);
             notifyDataSetChanged();
@@ -65,8 +67,12 @@ public class HyperOrderContentAdapter extends BaseRecyclerAdapter<HyperShopOrder
 
         ItemViewHolder(View itemView) {
             super(itemView);
+            Typeface typeface = FontManager.T1_Typeface(context);
+            Typeface typefaceBold = FontManager.T1_BOLD_Typeface(context);
             this.txtItemName = itemView.findViewById(R.id.txtShopName);
+            txtItemName.setTypeface(typeface);
             this.txtProductPrice = itemView.findViewById(R.id.txtShopPrice);
+            txtProductPrice.setTypeface(typefaceBold);
             this.buyView = itemView.findViewById(R.id.buyView);
 
         }

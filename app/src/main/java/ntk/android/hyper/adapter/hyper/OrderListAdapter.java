@@ -8,11 +8,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.enums.enumHyperShopPaymentType;
 import ntk.android.base.entitymodel.hypershop.HyperShopOrderModel;
+import ntk.android.base.utill.AppUtill;
 import ntk.android.hyper.R;
 
 public class OrderListAdapter extends BaseRecyclerAdapter<HyperShopOrderModel, OrderListAdapter.VH> {
@@ -31,8 +33,8 @@ public class OrderListAdapter extends BaseRecyclerAdapter<HyperShopOrderModel, O
     public void onBindViewHolder(@NonNull VH holder, int position) {
         HyperShopOrderModel item = getItem(position);
         holder.title.setText("فاکتور # " + (position + 1));
-        holder.date.setText(item.CreatedDate.getDate() + "");
-        holder.time.setText(item.CreatedDate.getDate() + "");
+        holder.date.setText(AppUtill.GregorianToPersian(getItem(position).CreatedDate) + "");
+        holder.time.setText(new SimpleDateFormat("HH:mm:ss").format(item.CreatedDate) + "");
         holder.totalPrice.setText("مجموع : " + item.Amount);
         holder.showPaymentType(item);
         holder.showPayState(item);

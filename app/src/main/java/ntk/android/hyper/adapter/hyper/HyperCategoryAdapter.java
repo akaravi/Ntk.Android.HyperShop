@@ -18,6 +18,7 @@ import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.entitymodel.base.Filters;
 import ntk.android.base.entitymodel.hypershop.HyperShopCategoryModel;
+import ntk.android.base.utill.FontManager;
 import ntk.android.hyper.R;
 import ntk.android.hyper.activity.hyper.ShopContentListActivity;
 
@@ -57,6 +58,7 @@ public class HyperCategoryAdapter extends BaseRecyclerAdapter<HyperShopCategoryM
         public VH(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.catName);
+            name.setTypeface(FontManager.T1_BOLD_Typeface(itemView.getContext()));
             image = itemView.findViewById(R.id.catImage);
             loading = itemView.findViewById(R.id.loadingProgress);
         }

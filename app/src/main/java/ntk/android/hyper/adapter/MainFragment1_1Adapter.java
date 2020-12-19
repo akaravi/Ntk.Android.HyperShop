@@ -25,7 +25,7 @@ public class MainFragment1_1Adapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         switch (viewType) {
-            case 0:
+            case 1:
                 return CategoryVH.create(parent);
             default:
                 return MoreItemsVH.create(parent);
@@ -36,7 +36,7 @@ public class MainFragment1_1Adapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         int viewType = getItemViewType(position);
         switch (viewType) {
-            case 0:
+            case 1:
                 ((CategoryVH) holder).bind(models.get(viewType));
                 break;
             default:

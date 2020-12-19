@@ -4,14 +4,14 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#383547"
+
     android:orientation="vertical">
 
     <View
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_gravity="top"
-        android:background="#444153" />
+        android:background="@color/colorPrimary" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,9 +34,11 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="16dp"
                     android:src="@drawable/ic_menu_90" />
 
                 <TextView
+                    android:id="@+id/txt_toolbar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -47,10 +49,10 @@
 
                 <ntk.android.hyper.view.CartView
                     android:id="@+id/cartView"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="4dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="4dp" />
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
 

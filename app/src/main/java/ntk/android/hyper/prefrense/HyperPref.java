@@ -18,20 +18,23 @@ public class HyperPref {
     public void setMobile(String s) {
         EasyPreference.with(c).addString("ntk_hyper_mobile", s);
     }
- public String name() {
+
+    public String name() {
         return EasyPreference.with(c).getString("ntk_hyper_name", "");
     }
 
     public void setName(String s) {
         EasyPreference.with(c).addString("ntk_hyper_name", s);
     }
- public String lastName() {
+
+    public String lastName() {
         return EasyPreference.with(c).getString("ntk_hyper_lastname", "");
     }
 
     public void setLastName(String s) {
         EasyPreference.with(c).addString("ntk_hyper_lastname", s);
     }
+
     public String address() {
         return EasyPreference.with(c).getString("ntk_hyper_address", "");
     }
@@ -40,4 +43,11 @@ public class HyperPref {
         EasyPreference.with(c).addString("ntk_hyper_address", s);
     }
 
+    public void setLastOrder(Long orderId) {
+        EasyPreference.with(c).addLong("ntk_hyper_Last_order", orderId);
+    }
+
+    public Long lastOrder() {
+        return EasyPreference.with(c).getLong("ntk_hyper_Last_order", 0);
+    }
 }

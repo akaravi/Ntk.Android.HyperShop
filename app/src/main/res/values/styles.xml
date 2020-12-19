@@ -18,12 +18,15 @@
         <item name="Theme_NTK_Ticket_Answer">@style/NoActionBar</item>
         <item name="Theme_NTK_Ticket_Search">@style/NoActionBar</item>
         <item name="Theme_NTK_Ticket_List">@style/NoActionBar</item>
-        <item name="Theme_NTK_Faq_Search">@style/NoActionBar </item>
+        <item name="Theme_NTK_Faq_Search">@style/NoActionBar</item>
+
     </style>
+
     <style name="NoAnimDialog">
         <item name="android:windowAnimationStyle">@null</item>
 
     </style>
+
     <style name="NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     </style>
@@ -65,7 +68,7 @@
     <style name="about_description" parent="@android:style/TextAppearance">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:text">@string/about_page_description</item>
+
         <item name="android:lineSpacingExtra">8dp</item>
         <item name="android:layout_marginBottom">20dp</item>
         <item name="android:textColor">@color/about_description_text_color</item>
@@ -93,14 +96,6 @@
     </style>
 
 
-    <!--Style Float Text-->
-    <style name="TextLabel" parent="Widget.Design.TextInputLayout">
-        <item name="android:textColorHint">@color/colorGrayText</item>
-        <item name="android:textSize">16sp</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorControlNormal">@color/colorGrayText</item>
-        <item name="colorControlActivated">@color/colorAccent</item>
-    </style>
     <style name="DetailDialogAnimation">
         <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
         <item name="android:windowExitAnimation">@android:anim/fade_out</item>

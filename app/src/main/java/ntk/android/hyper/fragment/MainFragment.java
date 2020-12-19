@@ -1,8 +1,10 @@
 package ntk.android.hyper.fragment;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,8 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
@@ -28,6 +28,7 @@ import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.base.fragment.BaseFragment;
 import ntk.android.base.services.hypershop.HyperShopCategoryService;
 import ntk.android.base.services.hypershop.HyperShopContentService;
+import ntk.android.base.utill.FontManager;
 import ntk.android.hyper.R;
 import ntk.android.hyper.activity.hyper.HyperShopContentSearchActivity;
 import ntk.android.hyper.adapter.MainFragment1_1Adapter;
@@ -46,6 +47,7 @@ public class MainFragment extends BaseFragment {
         findViewById(R.id.imgSearchContent).setOnClickListener(view1 -> startActivity(new Intent(getContext(), HyperShopContentSearchActivity.class)));
         switcher.showProgressView();
         List<String> titles = new ArrayList() {{
+            add("فروش ویژه");
             add("دسته بندی ها");
             add("کالاهای جدید");
         }};
@@ -57,11 +59,14 @@ public class MainFragment extends BaseFragment {
         for (int i = 0; i < titles.size(); i++) {
             int index = titles.size() - 1 - i;
             String name = titles.get(index);
-            Chip inflate = (Chip) getLayoutInflater().inflate(R.layout.chip_row_item, null);
-            inflate.setId(ViewCompat.generateViewId());
-            inflate.setTag(index);
-            inflate.setText(name);
-            chipGroup.addView(inflate);
+            Chip chip = (Chip) getLayoutInflater().inflate(R.layout.chip_row_item, chipGroup, false);
+//          inflate.setId(index);
+//            Chip chip=inflate.findViewById(R.id.chip);
+            chip.setId(ViewCompat.generateViewId());
+            chip.setTag(index);
+            chip.setTypeface(FontManager.T1_BOLD_Typeface(getContext()));
+            chip.setText(name);
+            chipGroup.addView(chip);
         }
         chipGroup.setOnCheckedChangeListener((group, checkedId) -> {
             for (int i = 0; i < group.getChildCount(); i++) {
@@ -72,8 +77,41 @@ public class MainFragment extends BaseFragment {
         RecyclerView rcAllView = findViewById(R.id.rc);
         rcAllView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         adapter = (new MainFragment1_1Adapter(titles));
+        getPrize();
         getCategory();
         getContent();
+        setfont();
+    }
+
+    private void setfont() {
+        Typeface t1 = FontManager.T1_BOLD_Typeface(getContext());
+        ((TextView) findViewById(R.id.txtStoreTitle)).setTypeface(t1);
+        ((TextView) findViewById(R.id.informataionTxt)).setTypeface(t1);
+    }
+
+    private void getPrize() {
+        FilterDataModel f = new FilterDataModel();
+        f.RowPerPage = 1;
+        ServiceExecute.execute(new HyperShopContentService(getContext()).getAllMicroService(f))
+                .subscribe(new NtkObserver<ErrorException<HyperShopContentModel>>() {
+                    @Override
+                    public void onNext(@io.reactivex.annotations.NonNull ErrorException<HyperShopContentModel> response) {
+                        if (response.IsSuccess) {
+                            adapter.put(0, response.ListItems);
+                            if (adapter.getItemCount() == 3) {
+
+                                ((RecyclerView) findViewById(R.id.rc)).setAdapter(adapter);
+                                switcher.showContentView();
+                            }
+                        } else
+                            Toasty.error(getContext(), response.ErrorMessage).show();
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.annotations.NonNull Throwable e) {
+
+                    }
+                });
     }
 
     private void getContent() {
@@ -84,8 +122,8 @@ public class MainFragment extends BaseFragment {
                     @Override
                     public void onNext(@io.reactivex.annotations.NonNull ErrorException<HyperShopContentModel> response) {
                         if (response.IsSuccess) {
-                            adapter.put(1, response.ListItems);
-                            if (adapter.getItemCount() == 2) {
+                            adapter.put(2, response.ListItems);
+                            if (adapter.getItemCount() == 3) {
 
                                 ((RecyclerView) findViewById(R.id.rc)).setAdapter(adapter);
                                 switcher.showContentView();
@@ -105,24 +143,24 @@ public class MainFragment extends BaseFragment {
         FilterDataModel f = new FilterDataModel();
         f.RowPerPage = 8;
         ServiceExecute.execute(new HyperShopCategoryService(getContext()).getAllMicroService(f))
-              .subscribe(new NtkObserver<ErrorException<HyperShopCategoryModel>>() {
-            @Override
-            public void onNext(@io.reactivex.annotations.NonNull ErrorException<HyperShopCategoryModel> response) {
-                if (response.IsSuccess) {
-                    adapter.put(0, response.ListItems);
-                    if (adapter.getItemCount() == 2) {
-                        ((RecyclerView) findViewById(R.id.rc)).setAdapter(adapter);
-                        switcher.showContentView();
+                .subscribe(new NtkObserver<ErrorException<HyperShopCategoryModel>>() {
+                    @Override
+                    public void onNext(@io.reactivex.annotations.NonNull ErrorException<HyperShopCategoryModel> response) {
+                        if (response.IsSuccess) {
+                            adapter.put(1, response.ListItems);
+                            if (adapter.getItemCount() == 3) {
+                                ((RecyclerView) findViewById(R.id.rc)).setAdapter(adapter);
+                                switcher.showContentView();
+                            }
+                        } else
+                            Toasty.error(getContext(), response.ErrorMessage).show();
                     }
-                } else
-                    Toasty.error(getContext(), response.ErrorMessage).show();
-            }
 
-            @Override
-            public void onError(@io.reactivex.annotations.NonNull Throwable e) {
-                Toasty.error(getContext(), e.toString()).show();
-            }
-        });
+                    @Override
+                    public void onError(@io.reactivex.annotations.NonNull Throwable e) {
+                        Toasty.error(getContext(), e.toString()).show();
+                    }
+                });
 
     }
 }

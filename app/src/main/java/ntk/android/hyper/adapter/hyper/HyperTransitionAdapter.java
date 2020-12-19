@@ -1,4 +1,4 @@
-package ntk.android.hyper.adapter;
+package ntk.android.hyper.adapter.hyper;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -6,29 +6,26 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.chip.Chip;
-
 import java.util.List;
 
 import ntk.android.base.adapter.BaseRecyclerAdapter;
+import ntk.android.base.entitymodel.hypershop.HyperShopPaymentModel;
 import ntk.android.hyper.R;
 
-public class SelectableChipsAdapter extends BaseRecyclerAdapter<String, SelectableChipsAdapter.VH> {
-    public SelectableChipsAdapter(List<String> list) {
+public class HyperTransitionAdapter extends BaseRecyclerAdapter<HyperShopPaymentModel, HyperTransitionAdapter.VH> {
+    public HyperTransitionAdapter(List<HyperShopPaymentModel> list) {
         super(list);
     }
 
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new VH(inflate(parent, R.layout.chip_row_item));
+        return new VH(inflate(parent, R.layout.row_hyper_transactions));
     }
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
-        Chip chips = (Chip) holder.itemView.findViewById(R.id.chip);
-        chips.setText(list.get(position));
-        chips.setOnClickListener(view -> {});
+
     }
 
     public class VH extends RecyclerView.ViewHolder {

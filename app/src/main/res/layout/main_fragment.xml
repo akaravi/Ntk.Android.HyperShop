@@ -1,48 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="2dp"
-            android:layout_weight="1" />
-
-        <HorizontalScrollView
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/custommenr" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/shadow" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="90dp"
+                android:background="@drawable/main_rounded_bg">
+
+                <TextView
+                    android:id="@+id/txtStoreTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:padding="8dp"
+                    android:text="سوپر مارکت ایران"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/mainRate"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/txtStoreTitle"
+                    android:layout_alignParentRight="true"
+
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/main_rate" />
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/txtStoreTitle"
+
+                    android:layout_toLeftOf="@+id/mainRate"
+                    android:src="@drawable/main_comment" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtStoreTitle"
+                    android:layout_margin="16dp"
+                    app:cardCornerRadius="8sp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+
+                        android:orientation="vertical"
+                        android:padding="4dp">
+
+                        <ImageView
+                            android:layout_width="43dp"
+                            android:layout_height="23dp"
+                            android:src="@drawable/main_about" />
+
+                        <TextView
+                            android:id="@+id/informataionTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="اطلاعات و نظرات"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_weight="1" />
+
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chip_group_main"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:chipSpacingVertical="43dp"
+                app:ensureMinTouchTargetSize="false"
+                app:itemSpacing="36dp"
                 app:singleLine="true"
                 app:singleSelection="true">
 
                 <!-- Chips can be declared here, or added dynamically. -->
 
             </com.google.android.material.chip.ChipGroup>
-        </HorizontalScrollView>
+            <!--        </HorizontalScrollView>-->
 
 
-        <ImageView
-            android:id="@+id/imgSearchContent"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:src="@drawable/ic_search" />
+            <ImageView
+                android:id="@+id/imgSearchContent"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginLeft="16dp"
+                android:src="@drawable/ic_search" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:nestedScrollingEnabled="true"
+            android:padding="8dp" />
     </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>

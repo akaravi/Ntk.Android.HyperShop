@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DecimalFormat;
 
+import es.dmoral.toasty.Toasty;
 import io.reactivex.Observable;
 import java9.util.function.Function;
 import ntk.android.base.dtomodel.hypershop.HyperShopOrderContentDtoModel;
@@ -24,6 +25,19 @@ public class OrderContentListFragment extends AbstractionListFragment<HyperShopO
     @Override
     public Function<FilterDataModel, Observable<ErrorException<HyperShopOrderContentDtoModel>>> getService() {
         return dataModel -> new OrderPref(getContext()).getLastShopping();
+    }
+
+    @Override
+    public void onCreated() {
+        super.onCreated();
+        getActivity().findViewById(R.id.imgDeleteOrder).setOnClickListener(view -> clearOrders());
+    }
+
+    private void clearOrders() {
+        new OrderPref(getContext()).clear();
+        models.clear();
+        updateList();
+        Toasty.success(getContext(), "سبد شما کامل حذف گردید", Toasty.LENGTH_LONG, true).show();
     }
 
     @Override
@@ -72,6 +86,7 @@ public class OrderContentListFragment extends AbstractionListFragment<HyperShopO
         if (adapter.getItemCount() == 0) {
             switcher.showEmptyView();
             getActivity().findViewById(R.id.bottomLayout).setVisibility(View.GONE);
+            getActivity().findViewById(R.id.imgDeleteOrder).setVisibility(View.GONE);
         }
 
 
