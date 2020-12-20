@@ -14,6 +14,7 @@ import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.dtomodel.hypershop.HyperShopOrderDtoModel;
 import ntk.android.base.entitymodel.base.ErrorException;
+import ntk.android.base.entitymodel.enums.enumHyperShopPaymentType;
 import ntk.android.base.entitymodel.hypershop.HyperShopOrderModel;
 import ntk.android.base.services.hypershop.HyperShopOrderService;
 import ntk.android.hyper.R;
@@ -30,7 +31,7 @@ public class OrderActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_activity);
         title = findViewById(R.id.txtToolbar);
-
+        findViewById(R.id.back_button).setOnClickListener(view -> finish());
         showProductFragment();
     }
 
@@ -42,6 +43,7 @@ public class OrderActivity extends BaseActivity {
     public void showProductFragment() {
         title.setText("سبد خرید");
         findViewById(R.id.imgDeleteOrder).setVisibility(View.VISIBLE);
+
         OrderContentListFragment fragment = new OrderContentListFragment();
         findViewById(R.id.btnGoToDetail).setOnClickListener(view -> {
             fragment.updateOrder();
@@ -82,10 +84,10 @@ public class OrderActivity extends BaseActivity {
                         if (response.IsSuccess) {
 //                    new OrderPref(OrderActivity.this).clear(); todo
                             Toasty.success(OrderActivity.this, "سفارش شما ثبت شد").show();
-                            if (response.Item.Id != null && response.Item.Id > 0)
+                            if (response.Item.PaymentType == enumHyperShopPaymentType.Online.index() || response.Item.PaymentType == enumHyperShopPaymentType.OnlineAndOnPlace.index())
                                 showBankPayments(response.Item.Id);
                             else
-                                Toasty.error(OrderActivity.this, response.ErrorMessage).show();
+                                finish();
 
                         } else
                             Toasty.error(OrderActivity.this, response.ErrorMessage).show();

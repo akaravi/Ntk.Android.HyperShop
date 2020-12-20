@@ -16,22 +16,20 @@
             android:id="@+id/imgThumbnail"
             android:layout_width="150dp"
             android:layout_height="150dp"
-
-            android:layout_alignStart="@id/productView"
-            android:layout_alignEnd="@id/productView"
             android:layout_centerVertical="true"
             android:scaleType="centerInside" />
-
-        <com.steelkiwi.library.IncrementProductView
-            android:id="@+id/productView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            app:ipv_add_icon="@drawable/ic__product_plus"
-            app:ipv_default_background_color="@color/colorPrimary"
-            app:ipv_highlight_background_color="@color/colorAccent"
-            app:ipv_text_color="@color/colorPrimary"
-            app:ipv_text_size="@dimen/text_size" />
+<!--        android:layout_alignStart="@id/productView"-->
+<!--        android:layout_alignEnd="@id/productView"-->
+<!--        <com.steelkiwi.library.IncrementProductView-->
+<!--            android:id="@+id/productView"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            app:ipv_add_icon="@drawable/ic__product_plus"-->
+<!--            app:ipv_default_background_color="@color/colorPrimary"-->
+<!--            app:ipv_highlight_background_color="@color/colorAccent"-->
+<!--            app:ipv_text_color="@color/colorPrimary"-->
+<!--            app:ipv_text_size="@dimen/text_size" />-->
 
     </RelativeLayout>
 

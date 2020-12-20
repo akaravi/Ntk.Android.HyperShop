@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import ntk.android.base.Extras;
 import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.hyper.R;
 import ntk.android.hyper.activity.hyper.ShopContentListActivity;
@@ -30,12 +31,17 @@ public class MoreItemsVH extends RecyclerView.ViewHolder {
 
     public void bind(List<HyperShopContentModel> list) {
         ((TextView) itemView.findViewById(R.id.moreTextTitle)).setText("لیست محصولات");
-        itemView.findViewById(R.id.moreBtn).setOnClickListener(view -> itemView.getContext().startActivity(new Intent(itemView.getContext(), ShopContentListActivity.class)));
+        itemView.findViewById(R.id.moreBtn).setOnClickListener(view -> {
+            Intent intent = new Intent(itemView.getContext(), ShopContentListActivity.class);
+            intent.putExtra(Extras.EXTRA_SECOND_ARG, "لیست پیشفرض محصولات");
+            intent.putExtra(Extras.Extra_THIRD_ARG, true);
+            itemView.getContext().startActivity(intent);
+        });
         RecyclerView rc = itemView.findViewById(R.id.moreRc);
         rc.setNestedScrollingEnabled(true);
         rc.setHasFixedSize(true);
         rc.setLayoutManager(new LinearLayoutManager(itemView.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        rc.setAdapter(new HyperShopContent_1_Adapter(list,true));
+        rc.setAdapter(new HyperShopContent_1_Adapter(list, true));
         LinearSnapHelper snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(rc);
     }

@@ -19,7 +19,7 @@ public class ShopContentListActivity extends BaseActivity {
 
     boolean showToolbar = false;
     String tittle = "لیست محصولات";
-    String filterModel;
+    String filterModel="";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

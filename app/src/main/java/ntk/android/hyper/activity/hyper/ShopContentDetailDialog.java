@@ -13,12 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.steelkiwi.library.IncrementProductView;
-import com.steelkiwi.library.listener.OnStateListener;
 
 import es.dmoral.toasty.Toasty;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import ntk.android.base.Extras;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
@@ -30,6 +26,9 @@ import ntk.android.hyper.R;
 import ntk.android.hyper.prefrense.OrderPref;
 import ntk.android.hyper.view.CartView;
 import ntk.android.hyper.view.CircleAnimationUtil;
+
+//import com.steelkiwi.library.IncrementProductView;
+//import com.steelkiwi.library.listener.OnStateListener;
 
 public class ShopContentDetailDialog extends baseFragmentDialog {
 
@@ -89,7 +88,7 @@ public class ShopContentDetailDialog extends baseFragmentDialog {
     private void showModel(HyperShopContentModel item) {
         switcher.showContentView();
         View view = getView();
-        IncrementProductView incrementProductView = (IncrementProductView) view.findViewById(R.id.productView);
+//        IncrementProductView incrementProductView = (IncrementProductView) view.findViewById(R.id.productView);
         TextView txtItemName = view.findViewById(R.id.txtItemName);
         TextView txtUnitPrice = view.findViewById(R.id.txtUnitPrice);
         TextView txtExtendedPrice = view.findViewById(R.id.txtExtendedPrice);
@@ -108,27 +107,27 @@ public class ShopContentDetailDialog extends baseFragmentDialog {
 
         ImageLoader.getInstance().displayImage(item.Image, imgThumbnail);
 //
-        incrementProductView.getAddIcon();
+//        incrementProductView.getAddIcon();
 //
-        incrementProductView.setOnStateListener(new OnStateListener() {
-
-            @Override
-            public void onCountChange(int count) {
-                txtQuantity.setText(String.valueOf(count));
-                txtExtendedPrice.setText(String.format("%.2f", item.Price * count));
-                //todo check count be < entitiy.count
-            }
-
-            @Override
-            public void onConfirm(int count) {
-                productCount = count;
-            }
-
-            @Override
-            public void onClose() {
-
-            }
-        });
+//        incrementProductView.setOnStateListener(new OnStateListener() {
+//
+//            @Override
+//            public void onCountChange(int count) {
+//                txtQuantity.setText(String.valueOf(count));
+//                txtExtendedPrice.setText(String.format("%.2f", item.Price * count));
+//                //todo check count be < entitiy.count
+//            }
+//
+//            @Override
+//            public void onConfirm(int count) {
+//                productCount = count;
+//            }
+//
+//            @Override
+//            public void onClose() {
+//
+//            }
+//        });
 
         btnCancel.setOnClickListener(view12 -> dismiss());
 

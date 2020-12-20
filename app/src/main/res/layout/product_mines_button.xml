@@ -11,6 +11,6 @@
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_gravity="center"
-        android:src="@drawable/minus"
+        android:src="@drawable/ic_minus"
         app:tint="#A6A2A2" />
 </com.google.android.material.card.MaterialCardView>
