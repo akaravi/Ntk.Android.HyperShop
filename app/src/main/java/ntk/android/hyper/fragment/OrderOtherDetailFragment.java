@@ -40,7 +40,7 @@ public class OrderOtherDetailFragment extends BaseFragment {
             add("انتخاب کنید");
             add("پرداخت به صورت آنلاین");
             add("پرداخت در محل");
-            add("پرداخت به صورت پیش پرداخت");
+//            add("پرداخت به صورت پیش پرداخت");
         }};
 
         AutoCompleteTextView paymentType = (AutoCompleteTextView) findViewById(R.id.etPaymentType);
