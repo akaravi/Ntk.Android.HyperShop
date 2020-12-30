@@ -13,7 +13,8 @@
         android:textAlignment="center"
         android:textColor="@color/colorAccent"
         android:textSize="15sp"
-        app:strokeColor="@color/colorAccent" />
+        app:strokeColor="@color/colorAccent"
+        android:gravity="center_horizontal" />
 
     <LinearLayout
         android:layout_marginRight="8dp"

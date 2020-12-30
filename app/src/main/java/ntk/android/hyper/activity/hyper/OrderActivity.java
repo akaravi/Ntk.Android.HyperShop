@@ -65,10 +65,16 @@ public class OrderActivity extends BaseActivity {
 
     }
 
-    public void showBankPayments(long orderId) {
+    public void showBankPayments(HyperShopOrderModel item) {
+        long orderId=item.Id;
+        String TotalProductPrice=item.ProducsSumPrice;
+        String DeliveryPrice=item.DelivaryPrice;
         BankPaymentListFragment fragment = new BankPaymentListFragment();
         Bundle b = new Bundle();
         b.putLong(Extras.EXTRA_FIRST_ARG, orderId);
+        b.putString(Extras.EXTRA_SECOND_ARG, TotalProductPrice);
+        b.putString(Extras.Extra_THIRD_ARG, DeliveryPrice);
+//        b.putString(Extras.Extra_FORTH_ARG, DeliveryPrice);
         fragment.setArguments(b);
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
     }
@@ -85,7 +91,7 @@ public class OrderActivity extends BaseActivity {
 //                    new OrderPref(OrderActivity.this).clear(); todo
                             Toasty.success(OrderActivity.this, "سفارش شما ثبت شد").show();
                             if (response.Item.PaymentType == enumHyperShopPaymentType.Online.index() || response.Item.PaymentType == enumHyperShopPaymentType.OnlineAndOnPlace.index())
-                                showBankPayments(response.Item.Id);
+                                showBankPayments(response.Item);
                             else
                                 finish();
 

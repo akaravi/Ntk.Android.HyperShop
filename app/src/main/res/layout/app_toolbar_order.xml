@@ -7,12 +7,12 @@
     android:gravity="center"
     android:orientation="horizontal">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imgDeleteOrder"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:padding="8dp"
-        android:src="@drawable/ic_delete"
+        app:srcCompat="@drawable/ic_delete"
         app:tint="@color/colorWhite" />
 
     <TextView
@@ -24,12 +24,12 @@
         android:textColor="@color/colorWhite"
         android:textSize="16sp" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/back_button"
         android:layout_width="45dp"
         android:layout_height="45dp"
 
-        android:src="@drawable/ic_arrow_right"
+        app:srcCompat="@drawable/ic_arrow_right"
         app:tint="@color/colorWhite" />
 
 

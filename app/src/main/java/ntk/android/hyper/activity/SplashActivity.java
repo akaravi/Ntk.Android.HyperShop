@@ -1,10 +1,8 @@
 package ntk.android.hyper.activity;
 
-import com.google.firebase.crashlytics.FirebaseCrashlytics;
+import android.content.Intent;
 
 import ntk.android.base.activity.common.BaseSplashActivity;
-import ntk.android.base.activity.ticketing.TicketAnswerActivity;
-import ntk.android.base.activity.ticketing.TicketListActivity;
 
 public class SplashActivity extends BaseSplashActivity {
 
@@ -13,7 +11,6 @@ public class SplashActivity extends BaseSplashActivity {
 //    @Override
 //    protected void onCreated() {
 //        super.onCreated();
-//
 //        FirebaseCrashlytics crashlytics = FirebaseCrashlytics.getInstance();
 //        crashlytics.log("error can seeeeeeee");
 //    }
