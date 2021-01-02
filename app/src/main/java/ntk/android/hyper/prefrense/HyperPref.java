@@ -50,4 +50,12 @@ public class HyperPref {
     public Long lastOrder() {
         return EasyPreference.with(c).getLong("ntk_hyper_Last_order", 0);
     }
+
+    public void setLastBank(String bankUrl) {
+        EasyPreference.with(c).addString("ntk_hyper_Last_order", bankUrl);
+    }
+
+    public String lastBank() {
+        return EasyPreference.with(c).getString("ntk_hyper_last_bank_url", "");
+    }
 }

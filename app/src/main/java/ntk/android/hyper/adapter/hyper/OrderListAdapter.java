@@ -1,6 +1,7 @@
 package ntk.android.hyper.adapter.hyper;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.enums.enumHyperShopPaymentType;
 import ntk.android.base.entitymodel.hypershop.HyperShopOrderModel;
 import ntk.android.base.utill.AppUtill;
+import ntk.android.base.utill.FontManager;
 import ntk.android.hyper.R;
 
 public class OrderListAdapter extends BaseRecyclerAdapter<HyperShopOrderModel, OrderListAdapter.VH> {
@@ -33,7 +35,7 @@ public class OrderListAdapter extends BaseRecyclerAdapter<HyperShopOrderModel, O
     public void onBindViewHolder(@NonNull VH holder, int position) {
         HyperShopOrderModel item = getItem(position);
         holder.title.setText("فاکتور # " + (position + 1));
-        holder.date.setText(AppUtill.GregorianToPersian(getItem(position).CreatedDate) + "");
+        holder.date.setText(AppUtill.GregorianToPersian(item.CreatedDate) + "");
         holder.time.setText(new SimpleDateFormat("HH:mm:ss").format(item.CreatedDate) + "");
         holder.totalPrice.setText("مجموع : " + item.Amount);
         holder.showPaymentType(item);
@@ -50,10 +52,21 @@ public class OrderListAdapter extends BaseRecyclerAdapter<HyperShopOrderModel, O
 
         public VH(@NonNull View itemView) {
             super(itemView);
+            Typeface tBold = FontManager.T1_BOLD_Typeface(itemView.getContext());
+            Typeface t1 = FontManager.T1_Typeface(itemView.getContext());
             title = itemView.findViewById(R.id.txtOrderNum);
             date = itemView.findViewById(R.id.txtDate);
             time = itemView.findViewById(R.id.txtTime);
             totalPrice = itemView.findViewById(R.id.txtTotalPrice);
+            title.setTypeface(tBold);
+            time.setTypeface(t1);
+            date.setTypeface(t1);
+            totalPrice.setTypeface(t1);
+            ((TextView) itemView.findViewById(R.id.txt1)).setTypeface(t1);
+            ((TextView) itemView.findViewById(R.id.txt2)).setTypeface(t1);
+            ((TextView) itemView.findViewById(R.id.txt3)).setTypeface(t1);
+            ((TextView) itemView.findViewById(R.id.txt4)).setTypeface(t1);
+            ((TextView) itemView.findViewById(R.id.txt5)).setTypeface(t1);
         }
 
         public void showPaymentType(HyperShopOrderModel model) {
@@ -84,7 +97,13 @@ public class OrderListAdapter extends BaseRecyclerAdapter<HyperShopOrderModel, O
         public void showPayState(HyperShopOrderModel item) {
             View successType = itemView.findViewById(R.id.successPayment);
             View errorType = itemView.findViewById(R.id.errorPayment);
-
+            if (item.SystemMicroServiceIsSuccess) {
+                successType.setVisibility(View.VISIBLE);
+                errorType.setVisibility(View.GONE);
+            } else {
+                successType.setVisibility(View.GONE);
+                errorType.setVisibility(View.VISIBLE);
+            }
         }
     }
 }

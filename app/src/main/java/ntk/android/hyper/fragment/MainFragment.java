@@ -85,8 +85,11 @@ public class MainFragment extends BaseFragment {
 
     private void setfont() {
         Typeface t1 = FontManager.T1_BOLD_Typeface(getContext());
+        Typeface t2 = FontManager.T1_Typeface(getContext());
         ((TextView) findViewById(R.id.txtStoreTitle)).setTypeface(t1);
         ((TextView) findViewById(R.id.informataionTxt)).setTypeface(t1);
+        ((TextView) findViewById(R.id.txtTotal)).setTypeface(t2);
+        ((TextView) findViewById(R.id.txtScore)).setTypeface(t2);
     }
 
     private void getPrize() {

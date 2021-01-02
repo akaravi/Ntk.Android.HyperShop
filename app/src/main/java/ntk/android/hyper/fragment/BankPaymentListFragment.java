@@ -92,33 +92,34 @@ public class BankPaymentListFragment extends BaseFragment {
     private void callPayment() {
         HyperShopOrderPaymentDtoModel req = new HyperShopOrderPaymentDtoModel();
         req.LinkOrderId = OrderId;
-        CheckPaymentActivity.LAST_ORDER(getContext(),OrderId);
+        CheckPaymentActivity.LAST_ORDER(getContext(), OrderId);
         req.BankPaymentPrivateId = BankId;
-        req.LastUrlAddressInUse = "" + NTKApplication.get().getApplicationParameter().APPLICATION_ID()+"://"+"hypershop";
+        req.LastUrlAddressInUse = "" + NTKApplication.get().getApplicationParameter().APPLICATION_ID() + "://" + "hypershop";
         ServiceExecute.execute(new HyperShopOrderService(getContext()).orderPayment(req))
                 .subscribe(new NtkObserver<ErrorException<BankPaymentOnlineTransactionModel>>() {
-            @Override
-            public void onNext(@io.reactivex.annotations.NonNull ErrorException<BankPaymentOnlineTransactionModel> response) {
-                if (response.IsSuccess) {
-                    if (response.Item.UrlToPay != null) {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(response.Item.UrlToPay));
-                        getContext().startActivity(browserIntent);
-                        getActivity().finish();
-                    } else {
-                        Toasty.error(getContext(), "وبگاه پرداخت فعلا در دسترس نیست لطفا بعدا تلاش فرمایید " +
-                                "").show();
+                    @Override
+                    public void onNext(@io.reactivex.annotations.NonNull ErrorException<BankPaymentOnlineTransactionModel> response) {
+                        if (response.IsSuccess) {
+                            if (response.Item.UrlToPay != null && !response.Item.UrlToPay.equalsIgnoreCase("")) {
+                                CheckPaymentActivity.LAST_PAY_URL(getContext(),response.Item.UrlToPay);
+                                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(response.Item.UrlToPay));
+                                getContext().startActivity(browserIntent);
+                                getActivity().finish();
+                            } else {
+                                Toasty.error(getContext(), "وبگاه پرداخت فعلا در دسترس نیست لطفا بعدا تلاش فرمایید " +
+                                        "").show();
+                            }
+                        } else {
+                            Toasty.error(getContext(), response.ErrorMessage).show();
+
+                        }
                     }
-                } else {
-                    Toasty.error(getContext(), response.ErrorMessage).show();
 
-                }
-            }
-
-            @Override
-            public void onError(@io.reactivex.annotations.NonNull Throwable e) {
-                Toasty.error(getContext(), "خطای سامانه").show();
-            }
-        });
+                    @Override
+                    public void onError(@io.reactivex.annotations.NonNull Throwable e) {
+                        Toasty.error(getContext(), "خطای سامانه").show();
+                    }
+                });
     }
 
 

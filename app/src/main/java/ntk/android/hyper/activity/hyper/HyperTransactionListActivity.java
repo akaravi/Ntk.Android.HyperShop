@@ -1,6 +1,5 @@
 package ntk.android.hyper.activity.hyper;
 
-import android.graphics.Color;
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,14 +7,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.Observable;
 import java9.util.function.Function;
 import ntk.android.base.activity.common.BaseFilterModelListActivity;
+import ntk.android.base.entitymodel.bankpayment.BankPaymentTransactionModel;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterDataModel;
-import ntk.android.base.entitymodel.hypershop.HyperShopPaymentModel;
-import ntk.android.base.services.hypershop.HyperShopPaymentService;
+import ntk.android.base.services.bankpayment.BankPaymentTransactionService;
 import ntk.android.hyper.R;
 import ntk.android.hyper.adapter.hyper.HyperTransitionAdapter;
 
-public class HyperTransactionListActivity extends BaseFilterModelListActivity<HyperShopPaymentModel> {
+public class HyperTransactionListActivity extends BaseFilterModelListActivity<BankPaymentTransactionModel> {
     @Override
     public void afterInit() {
         super.afterInit();
@@ -24,8 +23,8 @@ public class HyperTransactionListActivity extends BaseFilterModelListActivity<Hy
     }
 
     @Override
-    public Function<FilterDataModel, Observable<ErrorException<HyperShopPaymentModel>>> getService() {
-        return new HyperShopPaymentService(this)::getAll;
+    public Function<FilterDataModel, Observable<ErrorException<BankPaymentTransactionModel>>> getService() {
+        return new BankPaymentTransactionService(this)::getAll;
     }
 
     @Override

@@ -41,24 +41,85 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
-                <ImageView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/mainRate"
-                    android:layout_width="60dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_below="@+id/txtStoreTitle"
                     android:layout_alignParentRight="true"
-
+                    android:layout_marginTop="8dp"
                     android:layout_marginRight="16dp"
-                    android:src="@drawable/main_rate" />
 
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="30dp"
+                    app:cardBackgroundColor="#427E04"
+                    app:cardCornerRadius="4dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="3dp">
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:padding="2dp"
+                            android:src="@drawable/main_star"
+                            app:tint="@color/colorWhite" />
+
+                        <TextView
+                            android:id="@+id/txtScore"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="4dp"
+                            android:paddingRight="4dp"
+                            android:text="2.3"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mainComment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_below="@+id/txtStoreTitle"
 
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
                     android:layout_toLeftOf="@+id/mainRate"
-                    android:src="@drawable/main_comment" />
 
+                    app:cardBackgroundColor="#7B7B7B"
+                    app:cardCornerRadius="4dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="3dp">
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:padding="2dp"
+                            android:src="@drawable/main_comment"
+                            app:tint="@color/colorWhite" />
+
+                        <TextView
+                            android:id="@+id/txtTotal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="4dp"
+                            android:paddingRight="4dp"
+                            android:text="2.3"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+                
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -132,8 +193,8 @@
             android:id="@+id/rc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
             android:nestedScrollingEnabled="true"
             android:padding="8dp" />
     </LinearLayout>
