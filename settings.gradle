@@ -1,4 +1,4 @@
-//include ':app'
+include ':app'
 //include 'baseActivity'
 //project(':baseActivity').projectDir = new File('..\\Ntk.Android.BaseActivity\\app')
 //include 'baseApi'
