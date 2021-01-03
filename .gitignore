@@ -16,5 +16,5 @@
 /Log.txt
 /.idea/gradle.xml
 /app/app.iml
-/settings.gradle
-/app/build.gradle
+#/settings.gradle
+#/app/build.gradle
