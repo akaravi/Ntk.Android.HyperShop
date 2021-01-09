@@ -50,6 +50,7 @@ public class MainActivity extends AbstractMainActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.panel_activity);
+        startActivity(new Intent(this, Test.class));
         View guillotineMenu = LayoutInflater.from(this).inflate(R.layout.panel_drawer, null);
         ((FrameLayout) findViewById(R.id.root)).addView(guillotineMenu);
         ButterKnife.bind(this);
@@ -83,22 +84,24 @@ public class MainActivity extends AbstractMainActivity {
         Typeface t2_req = FontManager.T2_Typeface(this);
         ((TextView) findViewById(R.id.txt_toolbar)).setTypeface(t1_req);
 
-       ((TextView) findViewById(R.id.txtPanel)).setTypeface(t2_req);
-       ((TextView) findViewById(R.id.txtOrder)).setTypeface(t2_req);
-       ((TextView) findViewById(R.id.category)).setTypeface(t2_req);
-       ((TextView) findViewById(R.id.transactionsTxt)).setTypeface(t2_req);
-       ((TextView) findViewById(R.id.message)).setTypeface(t2_req);
-       ((TextView) findViewById(R.id.search)).setTypeface(t2_req);
-       ((TextView) findViewById(R.id.support)).setTypeface(t2_req);
-       ((TextView) findViewById(R.id.question)).setTypeface(t2_req);
-       ((TextView) findViewById(R.id.feedback)).setTypeface(t2_req);
-       ((TextView) findViewById(R.id.news)).setTypeface(t2_req);
-       ((TextView) findViewById(R.id.intro)).setTypeface(t2_req);
-       ((TextView) findViewById(R.id.pooling)).setTypeface(t2_req);;
-       ((TextView) findViewById(R.id.aboutUs)).setTypeface(t2_req);;
-       ((TextView) findViewById(R.id.invite)).setTypeface(t2_req);
-       ((TextView) findViewById(R.id.blog)).setTypeface(t2_req);
-       ((TextView) findViewById(R.id.blog)).setTypeface(t2_req);
+        ((TextView) findViewById(R.id.txtPanel)).setTypeface(t2_req);
+        ((TextView) findViewById(R.id.txtOrder)).setTypeface(t2_req);
+        ((TextView) findViewById(R.id.category)).setTypeface(t2_req);
+        ((TextView) findViewById(R.id.transactionsTxt)).setTypeface(t2_req);
+        ((TextView) findViewById(R.id.message)).setTypeface(t2_req);
+        ((TextView) findViewById(R.id.search)).setTypeface(t2_req);
+        ((TextView) findViewById(R.id.support)).setTypeface(t2_req);
+        ((TextView) findViewById(R.id.question)).setTypeface(t2_req);
+        ((TextView) findViewById(R.id.feedback)).setTypeface(t2_req);
+        ((TextView) findViewById(R.id.news)).setTypeface(t2_req);
+        ((TextView) findViewById(R.id.intro)).setTypeface(t2_req);
+        ((TextView) findViewById(R.id.pooling)).setTypeface(t2_req);
+        ;
+        ((TextView) findViewById(R.id.aboutUs)).setTypeface(t2_req);
+        ;
+        ((TextView) findViewById(R.id.invite)).setTypeface(t2_req);
+        ((TextView) findViewById(R.id.blog)).setTypeface(t2_req);
+        ((TextView) findViewById(R.id.blog)).setTypeface(t2_req);
     }
 
     @Override
