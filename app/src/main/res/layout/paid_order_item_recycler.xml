@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#F1F0F0"
+    android:orientation="horizontal"
+    android:weightSum="3.85">
+
+    <TextView
+        android:id="@+id/txtTotalPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".75"
+        android:padding="8dp"
+        android:text="قیمت کل"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#eee" />
+
+    <TextView
+        android:id="@+id/txtCount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".5"
+        android:padding="8dp"
+        android:text="تعداد"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#eee" />
+
+    <TextView
+        android:id="@+id/txtPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".75"
+        android:padding="8dp"
+        android:text="قیمت واحد"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#eee" />
+
+    <TextView
+        android:id="@+id/txtProductName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5"
+        android:padding="8dp"
+        android:text="نام محصول"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#eee" />
+
+    <TextView
+        android:id="@+id/txtRow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".35"
+        android:padding="8dp"
+        android:text="#"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="14sp" />
+</LinearLayout>

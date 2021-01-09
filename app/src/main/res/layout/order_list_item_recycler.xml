@@ -176,8 +176,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:layout_below="@+id/txtTotalPrice"
+            android:layout_alignParentLeft="true"
             android:layout_toLeftOf="@+id/lin1"
             android:orientation="horizontal">
 
@@ -248,5 +248,12 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/paidFactorBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lin1"
+            android:text="مشاهده فاکتور" />
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -74,7 +74,7 @@
         <activity android:name=".activity.hyper.HyperShopContentSearchActivity" />
         <activity android:name=".activity.HyperCategoryListActivity" />
         <activity android:name=".activity.hyper.HyperTransactionListActivity" />
-
+        <activity android:name=".activity.hyper.PaidOrderDetailActivity" />
 
 
         <provider
