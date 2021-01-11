@@ -52,7 +52,7 @@ public class HyperPref {
     }
 
     public void setLastBank(String bankUrl) {
-        EasyPreference.with(c).addString("ntk_hyper_Last_order", bankUrl);
+        EasyPreference.with(c).addString("ntk_hyper_last_bank_url", bankUrl);
     }
 
     public String lastBank() {

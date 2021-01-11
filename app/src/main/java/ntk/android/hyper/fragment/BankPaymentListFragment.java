@@ -92,7 +92,7 @@ public class BankPaymentListFragment extends BaseFragment {
     private void callPayment() {
         HyperShopOrderPaymentDtoModel req = new HyperShopOrderPaymentDtoModel();
         req.LinkOrderId = OrderId;
-        CheckPaymentActivity.LAST_ORDER(getContext(), OrderId);
+        CheckPaymentActivity.SET_LAST_ORDER(getContext(), OrderId);
         req.BankPaymentPrivateId = BankId;
         req.LastUrlAddressInUse = "" + NTKApplication.get().getApplicationParameter().APPLICATION_ID() + "://" + "hypershop";
         ServiceExecute.execute(new HyperShopOrderService(getContext()).orderPayment(req))
@@ -101,7 +101,7 @@ public class BankPaymentListFragment extends BaseFragment {
                     public void onNext(@io.reactivex.annotations.NonNull ErrorException<BankPaymentOnlineTransactionModel> response) {
                         if (response.IsSuccess) {
                             if (response.Item.UrlToPay != null && !response.Item.UrlToPay.equalsIgnoreCase("")) {
-                                CheckPaymentActivity.LAST_PAY_URL(getContext(),response.Item.UrlToPay);
+                                CheckPaymentActivity.SET_LAST_PAY_URL(getContext(),response.Item.UrlToPay);
                                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(response.Item.UrlToPay));
                                 getContext().startActivity(browserIntent);
                                 getActivity().finish();

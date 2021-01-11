@@ -20,17 +20,18 @@ import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.hypershop.HyperShopOrderModel;
 import ntk.android.base.services.hypershop.HyperShopOrderService;
+import ntk.android.base.utill.FontManager;
 import ntk.android.hyper.R;
 import ntk.android.hyper.prefrense.HyperPref;
 
 public class CheckPaymentActivity extends BaseActivity {
 
 
-    public static void LAST_ORDER(Context context, Long orderId) {
+    public static void SET_LAST_ORDER(Context context, Long orderId) {
         new HyperPref(context).setLastOrder(orderId);
     }
 
-    public static void LAST_PAY_URL(Context context, String bankUrl) {
+    public static void SET_LAST_PAY_URL(Context context, String bankUrl) {
         new HyperPref(context).setLastBank(bankUrl);
     }
 
@@ -39,6 +40,9 @@ public class CheckPaymentActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.payment_check_activity);
         checkPayment();
+        ((TextView) findViewById(R.id.paymentStatus)).setTypeface(FontManager.T1_Typeface(this));
+        ((TextView) findViewById(R.id.btn)).setTypeface(FontManager.T1_Typeface(this));
+
     }
 
     private void checkPayment() {
@@ -66,6 +70,7 @@ public class CheckPaymentActivity extends BaseActivity {
         TextView tv = findViewById(R.id.paymentStatus);
         Button btn = findViewById(R.id.btn);
         animation.setAnimation(R.raw.payment_failed);
+        animation.playAnimation();
         tv.setText("عملیات پرداخت با خطا مواجه شد چنانچه وجه از حساب شما کسر گردیده است طی 24 ساعت به حساب شما باز خواهد گشت");
         btn.setText("پرداخت مجدد");
         btn.setOnClickListener(view -> {
@@ -81,6 +86,8 @@ public class CheckPaymentActivity extends BaseActivity {
         tv.setText("فاکتور شما به صورت آنلاین پرداخت شد");
         Button btn = findViewById(R.id.btn);
         animation.setAnimation(R.raw.payment_success);
+        animation.playAnimation();
+        btn.setText("بستن");
         btn.setOnClickListener(view -> finish());
     }
 }

@@ -33,6 +33,7 @@ import ntk.android.base.activity.ticketing.TicketListActivity;
 import ntk.android.base.activity.ticketing.TicketSearchActivity;
 import ntk.android.base.utill.FontManager;
 import ntk.android.hyper.R;
+import ntk.android.hyper.activity.hyper.CheckPaymentActivity;
 import ntk.android.hyper.activity.hyper.HyperTransactionListActivity;
 import ntk.android.hyper.activity.hyper.OrderActivity;
 import ntk.android.hyper.activity.hyper.OrderListActivity;
@@ -50,7 +51,6 @@ public class MainActivity extends AbstractMainActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.panel_activity);
-        startActivity(new Intent(this, Test.class));
         View guillotineMenu = LayoutInflater.from(this).inflate(R.layout.panel_drawer, null);
         ((FrameLayout) findViewById(R.id.root)).addView(guillotineMenu);
         ButterKnife.bind(this);
@@ -155,16 +155,16 @@ public class MainActivity extends AbstractMainActivity {
 //            alphaAnimation.setFillBefore(true);
 //            alphaAnimation.setFillAfter(true);
 //            alphaAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
-            ScaleAnimation scaleAnimation = new ScaleAnimation(0.5f, 1.0f, 0.5f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-            scaleAnimation.setDuration(1500);
-            scaleAnimation.setFillAfter(true);
-            scaleAnimation.setInterpolator(new BounceInterpolator());
-            AnimationSet animationSet = new AnimationSet(false);
-//            animationSet.addAnimation(alphaAnimation);
-            animationSet.addAnimation(scaleAnimation);
-            for (int i = 0; i < btn.size(); i++) {
-                btn.get(i).startAnimation(scaleAnimation);
-            }
+//            ScaleAnimation scaleAnimation = new ScaleAnimation(0.5f, 1.0f, 0.5f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+//            scaleAnimation.setDuration(1500);
+//            scaleAnimation.setFillAfter(true);
+//            scaleAnimation.setInterpolator(new BounceInterpolator());
+//            AnimationSet animationSet = new AnimationSet(false);
+////            animationSet.addAnimation(alphaAnimation);
+//            animationSet.addAnimation(scaleAnimation);
+//            for (int i = 0; i < btn.size(); i++) {
+//                btn.get(i).startAnimation(scaleAnimation);
+//            }
         } else {
 //            AlphaAnimation alphaAnimation = new AlphaAnimation( 1.0f,0.0f);
 //            alphaAnimation.setDuration(1000);

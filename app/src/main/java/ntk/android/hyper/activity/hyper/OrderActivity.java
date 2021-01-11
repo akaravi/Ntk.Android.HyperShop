@@ -25,6 +25,7 @@ import ntk.android.hyper.prefrense.OrderPref;
 
 public class OrderActivity extends BaseActivity {
     TextView title;
+    private int stepNumber;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class OrderActivity extends BaseActivity {
     }
 
     public void showProductFragment() {
+        stepNumber = 1;
         title.setText("سبد خرید");
         findViewById(R.id.imgDeleteOrder).setVisibility(View.VISIBLE);
 
@@ -56,6 +58,7 @@ public class OrderActivity extends BaseActivity {
 
 
     public void showOrderDetail() {
+        stepNumber = 2;
         title.setText("تایید نهایی");
         findViewById(R.id.imgDeleteOrder).setVisibility(View.GONE);
         findViewById(R.id.bottomLayout).setVisibility(View.GONE);
@@ -66,9 +69,10 @@ public class OrderActivity extends BaseActivity {
     }
 
     public void showBankPayments(HyperShopOrderModel item) {
-        long orderId=item.Id;
-        String TotalProductPrice=item.ProducsSumPrice;
-        String DeliveryPrice=item.DelivaryPrice;
+        stepNumber = 3;
+        long orderId = item.Id;
+        String TotalProductPrice = item.ProducsSumPrice;
+        String DeliveryPrice = item.DelivaryPrice;
         BankPaymentListFragment fragment = new BankPaymentListFragment();
         Bundle b = new Bundle();
         b.putLong(Extras.EXTRA_FIRST_ARG, orderId);
@@ -88,7 +92,7 @@ public class OrderActivity extends BaseActivity {
                     public void onNext(@NonNull ErrorException<HyperShopOrderModel> response) {
                         switcher.showContentView();
                         if (response.IsSuccess) {
-//                    new OrderPref(OrderActivity.this).clear(); todo
+                    new OrderPref(OrderActivity.this).clear();
                             Toasty.success(OrderActivity.this, "سفارش شما ثبت شد").show();
                             if (response.Item.PaymentType == enumHyperShopPaymentType.Online.index() || response.Item.PaymentType == enumHyperShopPaymentType.OnlineAndOnPlace.index())
                                 showBankPayments(response.Item);
@@ -104,5 +108,15 @@ public class OrderActivity extends BaseActivity {
                         Toasty.error(OrderActivity.this, "خطای سامانه").show();
                     }
                 });
+    }
+
+    @Override
+    public void onBackPressed() {
+        stepNumber--;
+        if (stepNumber == 2)
+            showOrderDetail();
+        else if (stepNumber == 1)
+            showProductFragment();
+        else super.onBackPressed();
     }
 }
