@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="1">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.25"
         android:gravity="center"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/orderListBtn"
@@ -29,7 +30,8 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:layout_weight="0.3"
-                android:src="@drawable/transactions" />
+                android:src="@drawable/orders"
+                app:tint="@color/colorTextSecondary" />
 
             <TextView
                 android:id="@+id/txtOrder"
@@ -57,7 +59,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.6"
-                android:src="@drawable/category" />
+                android:src="@drawable/category"
+                app:tint="@color/colorTextSecondary" />
 
             <TextView
                 android:id="@+id/category"
@@ -97,9 +100,11 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:layout_weight="0.3"
-                android:src="@drawable/transactions" />
+                android:src="@drawable/transactions"
+                app:tint="@color/colorTextSecondary" />
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -125,7 +130,8 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:layout_weight="0.3"
-                android:src="@drawable/bell" />
+                android:src="@drawable/bell"
+                app:tint="@color/colorTextSecondary" />
 
             <TextView
                 android:id="@+id/message"
@@ -144,16 +150,17 @@
             android:layout_height="match_parent"
             android:layout_margin="4dp"
             android:layout_weight="0.2"
-            android:weightSum="1"
-            android:orientation="vertical"
             android:background="@drawable/main_btn_background"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical"
+            android:weightSum="1">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.6"
-                android:src="@drawable/search" />
+                android:src="@drawable/search"
+                app:tint="@color/colorTextSecondary" />
 
             <TextView
                 android:id="@+id/search"
@@ -193,7 +200,8 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:layout_weight="0.3"
-                android:src="@drawable/support" />
+                android:src="@drawable/support"
+                app:tint="@color/colorTextSecondary" />
         </LinearLayout>
     </LinearLayout>
 
@@ -226,7 +234,8 @@
                     android:layout_height="0dp"
                     android:layout_marginTop="8dp"
                     android:layout_weight="0.6"
-                    android:src="@drawable/question" />
+                    android:src="@drawable/question"
+                    app:tint="@color/colorTextSecondary" />
 
                 <TextView
                     android:id="@+id/question"
@@ -270,7 +279,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="0.3"
-                        android:src="@drawable/intro" />
+                        android:src="@drawable/intro"
+                        app:tint="@color/colorTextSecondary" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -295,7 +305,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="0.6"
-                            android:src="@drawable/files" />
+                            android:src="@drawable/files"
+                            app:tint="@color/colorTextSecondary" />
 
                         <TextView
                             android:id="@+id/blog"
@@ -334,7 +345,8 @@
                             android:layout_height="0dp"
                             android:layout_marginBottom="8dp"
                             android:layout_weight="0.6"
-                            android:src="@drawable/about_us" />
+                            android:src="@drawable/about_us"
+                            app:tint="@color/colorTextSecondary" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -378,7 +390,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="0.4"
-                        android:src="@drawable/feed_back" />
+                        android:src="@drawable/feed_back"
+                        app:tint="@color/colorTextSecondary" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -420,7 +433,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_weight="0.5"
-                                android:src="@drawable/news" />
+                                android:src="@drawable/news"
+                                app:tint="@color/colorTextSecondary" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -448,7 +462,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="0.7"
-                            android:src="@drawable/pooling" />
+                            android:src="@drawable/pooling"
+                            app:tint="@color/colorTextSecondary" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -469,7 +484,8 @@
                     android:layout_height="0dp"
                     android:layout_marginTop="8dp"
                     android:layout_weight="0.6"
-                    android:src="@drawable/invate" />
+                    android:src="@drawable/invate"
+                    app:tint="@color/colorTextSecondary" />
 
                 <TextView
                     android:id="@+id/invite"
