@@ -32,14 +32,9 @@ import ntk.android.hyper.activity.hyper.CheckPaymentActivity;
 
 public class BankSelectAdapter extends ArrayAdapter<BankPaymentPrivateSiteConfigModel> {
 
-
-    private final Context context;
     List<BankPaymentPrivateSiteConfigModel> list;
-
     public BankSelectAdapter(Context context,  List<BankPaymentPrivateSiteConfigModel> arrayList) {
         super(context, R.layout.row_bank_payment, arrayList);
-
-        this.context = context;
         list = arrayList;
     }
 
