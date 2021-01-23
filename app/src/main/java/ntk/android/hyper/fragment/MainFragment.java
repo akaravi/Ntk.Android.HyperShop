@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
+import ntk.android.base.appclass.AboutUsClass;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
@@ -29,7 +30,9 @@ import ntk.android.base.fragment.BaseFragment;
 import ntk.android.base.services.hypershop.HyperShopCategoryService;
 import ntk.android.base.services.hypershop.HyperShopContentService;
 import ntk.android.base.utill.FontManager;
+import ntk.android.base.utill.prefrense.Preferences;
 import ntk.android.hyper.R;
+import ntk.android.hyper.activity.AboutUsActivity;
 import ntk.android.hyper.activity.hyper.HyperShopContentSearchActivity;
 import ntk.android.hyper.adapter.MainFragment1_1Adapter;
 
@@ -77,10 +80,19 @@ public class MainFragment extends BaseFragment {
         RecyclerView rcAllView = findViewById(R.id.rc);
         rcAllView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         adapter = (new MainFragment1_1Adapter(titles));
+        showStoreInfo();
         getPrize();
         getCategory();
         getContent();
         setfont();
+    }
+
+    private void showStoreInfo() {
+        AboutUsClass aboutUsClass = Preferences.with(getContext()).appVariableInfo().aboutUs();
+        ((TextView) findViewById(R.id.txtStoreTitle)).setText(aboutUsClass.AboutUsTitle + "");
+        ((TextView) findViewById(R.id.txtScore)).setText(aboutUsClass.AboutUsScoreClick + "");
+        ((TextView) findViewById(R.id.txtTotal)).setText(aboutUsClass.AboutUsScoreSum + "");
+        findViewById(R.id.mainAboutUs).setOnClickListener(view -> startActivity(new Intent(getContext(), AboutUsActivity.class)));
     }
 
     private void setfont() {
