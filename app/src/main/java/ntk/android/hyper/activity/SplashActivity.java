@@ -2,9 +2,11 @@ package ntk.android.hyper.activity;
 
 import android.content.Intent;
 
+import ntk.android.base.activity.common.BaseAboutActivity;
 import ntk.android.base.activity.common.BaseSplashActivity;
+import ntk.android.base.activity.ticketing.TicketListActivity;
 
-public class SplashActivity extends BaseSplashActivity {
+public class SplashActivity extends AboutUsActivity {
 
     //todo for release
 //

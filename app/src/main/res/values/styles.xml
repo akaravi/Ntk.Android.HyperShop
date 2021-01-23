@@ -8,6 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="toolbarColorText">@color/colorWhite</item>
         <item name="toolbarColorBackground">@color/colorPrimary</item>
+        <item name="colorTextPrimary">@color/colorTextPrimary</item>
+        <item name="colorTextSecondary">@color/colorTextSecondary</item>
         <item name="ntk_base_logo">@drawable/logo</item>
         <item name="ntk_splash_background">@drawable/splash</item>
         <item name="ntk_splash_loading">@raw/loading</item>
@@ -41,61 +43,7 @@
         <item name="android:windowDisablePreview">true</item>
     </style>
 
-    <style name="about_About" />
 
-    <style name="about_About.wrapper">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:gravity">center</item>
-        <item name="android:background">@color/about_background_color</item>
-    </style>
-
-    <style name="about_sub_wrapper">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:gravity">center</item>
-        <item name="android:padding">20dp</item>
-    </style>
-
-    <style name="about_image">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center</item>
-        <item name="android:layout_marginBottom">30dp</item>
-        <item name="android:layout_marginTop">20dp</item>
-    </style>
-
-    <style name="about_description" parent="@android:style/TextAppearance">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-
-        <item name="android:lineSpacingExtra">8dp</item>
-        <item name="android:layout_marginBottom">20dp</item>
-        <item name="android:textColor">@color/about_description_text_color</item>
-        <item name="android:textSize">@dimen/about_description_text_size</item>
-    </style>
-
-    <style name="about_separator">
-        <item name="android:layout_height">@dimen/about_separator_height</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:background">@color/about_separator_color</item>
-        <item name="android:padding">0dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_marginTop">0dp</item>
-        <item name="android:layout_marginBottom">0dp</item>
-    </style>
-
-    <style name="about_elementTextAppearance" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/about_text_color</item>
-        <item name="android:textSize">@dimen/about_item_text_size</item>
-    </style>
-
-    <style name="about_groupTextAppearance" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/about_item_text_color</item>
-        <item name="android:textSize">@dimen/about_group_item_text_size</item>
-    </style>
 
 
     <style name="DetailDialogAnimation">
