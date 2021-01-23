@@ -111,6 +111,8 @@
         android:layout_weight="0.25"
         android:gravity="center"
         android:orientation="horizontal"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
         android:weightSum="1">
 
         <LinearLayout
