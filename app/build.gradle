@@ -121,7 +121,7 @@ dependencies {
     //for add view
 
 //    api project(path: ':baseActivity')
-
+//
     api 'com.github.akaravi:Ntk.Android.BaseActivity:1.4.103'
 
 }
