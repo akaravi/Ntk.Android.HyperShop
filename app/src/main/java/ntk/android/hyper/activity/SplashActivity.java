@@ -6,7 +6,7 @@ import ntk.android.base.activity.common.BaseAboutActivity;
 import ntk.android.base.activity.common.BaseSplashActivity;
 import ntk.android.base.activity.ticketing.TicketListActivity;
 
-public class SplashActivity extends AboutUsActivity {
+public class SplashActivity extends BaseSplashActivity {
 
     //todo for release
 //
