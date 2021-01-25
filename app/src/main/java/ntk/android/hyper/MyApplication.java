@@ -69,7 +69,7 @@ public class MyApplication extends NTKApplication {
     protected ApplicationStaticParameter getConfig() {
         ApplicationStaticParameter applicationStaticParameter = new ApplicationStaticParameter();
 //         ApplicationStaticParameter.PACKAGE_NAME = "ntk.android.hypershop";
-//         ApplicationStaticParameter.URL = "http://336b28b04cec.ngrok.io";
+//         ApplicationStaticParameter.URL = "http://fc8959d0a34d.ngrok.io";
 
         return applicationStaticParameter;
     }
