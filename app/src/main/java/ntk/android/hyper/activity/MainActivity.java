@@ -5,10 +5,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.BounceInterpolator;
-import android.view.animation.ScaleAnimation;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,12 +24,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ntk.android.base.activity.abstraction.AbstractMainActivity;
 import ntk.android.base.activity.common.NotificationsActivity;
-import ntk.android.base.activity.poling.PolingActivity;
+import ntk.android.base.activity.poling.PolingDetailActivity;
 import ntk.android.base.activity.ticketing.TicketListActivity;
 import ntk.android.base.activity.ticketing.TicketSearchActivity;
 import ntk.android.base.utill.FontManager;
 import ntk.android.hyper.R;
-import ntk.android.hyper.activity.hyper.CheckPaymentActivity;
 import ntk.android.hyper.activity.hyper.HyperTransactionListActivity;
 import ntk.android.hyper.activity.hyper.OrderActivity;
 import ntk.android.hyper.activity.hyper.OrderListActivity;
@@ -218,7 +213,7 @@ public class MainActivity extends AbstractMainActivity {
 
     @OnClick(R.id.poolingBtn)
     public void onPoolingClick() {
-        this.startActivity(new Intent(this, PolingActivity.class));
+        this.startActivity(new Intent(this, PolingDetailActivity.class));
     }
 
     @OnClick(R.id.inviteBtn)

@@ -32,7 +32,7 @@ public class OrderActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_activity);
         title = findViewById(R.id.txtToolbar);
-        findViewById(R.id.back_button).setOnClickListener(view -> finish());
+        findViewById(R.id.back_button).setOnClickListener(view -> onBackPressed());
         showProductFragment();
     }
 
@@ -92,7 +92,7 @@ public class OrderActivity extends BaseActivity {
                     public void onNext(@NonNull ErrorException<HyperShopOrderModel> response) {
                         switcher.showContentView();
                         if (response.IsSuccess) {
-                    new OrderPref(OrderActivity.this).clear();
+                            new OrderPref(OrderActivity.this).clear();
                             Toasty.success(OrderActivity.this, "سفارش شما ثبت شد").show();
                             if (response.Item.PaymentType == enumHyperShopPaymentType.Online.index() || response.Item.PaymentType == enumHyperShopPaymentType.OnlineAndOnPlace.index())
                                 showBankPayments(response.Item);
