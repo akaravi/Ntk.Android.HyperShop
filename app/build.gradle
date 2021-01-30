@@ -120,9 +120,9 @@ dependencies {
    implementation 'com.github.codekidX:storage-chooser:2.0.4.2'
     //for add view
 
-//    api project(path: ':baseActivity')
+    api project(path: ':baseActivity')
 //
-    api 'com.github.akaravi:Ntk.Android.BaseActivity:1.4.105'
+//    api 'com.github.akaravi:Ntk.Android.BaseActivity:1.4.105'
 
 }
 repositories {

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_gravity="top"
-        android:background="@color/colorPrimary" />
+        android:background="?attr/toolbarColorBackground" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,6 +35,7 @@
                     android:layout_height="32dp"
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="16dp"
+                    app:tint="?attr/toolbarColorText"
                     android:src="@drawable/ic_menu_90" />
 
                 <TextView
@@ -43,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:text="فروشگاه"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="?attr/toolbarColorText"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 

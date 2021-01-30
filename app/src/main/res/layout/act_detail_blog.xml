@@ -58,13 +58,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <ImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_centerInParent="true"
                             android:contentDescription="@null"
                             android:rotation="180"
-                            app:srcCompat="@drawable/ic_back" />
+                            app:srcCompat="@drawable/ic_back"
+                            app:tint="?attr/toolbarColorText" />
                     </RelativeLayout>
                 </com.balysv.materialripple.MaterialRippleLayout>
 
@@ -82,12 +83,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <ImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            android:layout_centerInParent="true"
+                            android:layout_centerVertical="true"
                             android:contentDescription="@null"
-                            app:srcCompat="@drawable/ic_share" />
+                            app:srcCompat="@drawable/ic_share"
+                            app:tint="?attr/toolbarColorText" />
                     </RelativeLayout>
                 </com.balysv.materialripple.MaterialRippleLayout>
 
@@ -104,13 +106,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <ImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/imgHeartActDetailBlog"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            android:layout_centerInParent="true"
+                            android:layout_centerVertical="true"
                             android:contentDescription="@null"
-                            app:srcCompat="@drawable/ic_fav" />
+                            app:srcCompat="@drawable/ic_fav"
+                            app:tint="?attr/toolbarColorText" />
                     </RelativeLayout>
                 </com.balysv.materialripple.MaterialRippleLayout>
 
@@ -127,12 +130,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <ImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_centerInParent="true"
                             android:contentDescription="@null"
-                            app:srcCompat="@drawable/ic_comment" />
+                            app:srcCompat="@drawable/ic_comment"
+                            app:tint="?attr/toolbarColorText" />
                     </RelativeLayout>
                 </com.balysv.materialripple.MaterialRippleLayout>
 
@@ -146,7 +150,7 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:text=" وبلاگ"
-                    android:textColor="@color/colorMenu"
+                    android:textColor="?attr/toolbarColorText"
                     tools:ignore="HardcodedText" />
 
                 <View

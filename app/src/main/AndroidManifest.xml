@@ -15,26 +15,33 @@
         android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name" android:largeHeap="true"
+        android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="false"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:supportsRtl">
-        <activity android:name=".activity.SplashActivity"  >
+        <activity
+            android:name=".activity.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.hyper.CheckPaymentActivity">
+        <activity
+            android:name=".activity.hyper.CheckPaymentActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- Accepts URIs that begin with "example://gizmos” -->
-                <data android:scheme="ntk.android.hypershop.appntk"
-                    android:host="hypershop" />
+                <data
+                    android:host="hypershop"
+                    android:scheme="ntk.android.hypershop.appntk" />
             </intent-filter>
         </activity>
         <activity
@@ -43,39 +50,53 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".activity.NewsListActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.NewsDetailActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.BlogListActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.BlogDetailActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.NewsSearchActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.BlogSearchActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
-        <activity android:name=".activity.hyper.ShopContentListActivity" />
-        <activity android:name=".activity.hyper.HyperListActivity" />
-        <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.hyper.OrderActivity" />
-        <activity android:name=".activity.hyper.ShopContentDetailActivity" />
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.hyper.ShopContentListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.hyper.HyperListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.hyper.OrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.hyper.ShopContentDetailActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".activity.hyper.OrderListActivity" />
-        <activity android:name=".activity.hyper.HyperShopContentSearchActivity" />
-        <activity android:name=".activity.HyperCategoryListActivity" />
-        <activity android:name=".activity.hyper.HyperTransactionListActivity" />
-        <activity android:name=".activity.hyper.PaidOrderDetailActivity" />
-        <activity android:name=".activity.Test" />
+        <activity
+            android:name=".activity.hyper.HyperShopContentSearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.HyperCategoryListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.hyper.HyperTransactionListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.hyper.PaidOrderDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.Test"
+            android:screenOrientation="portrait" />
 
 
         <provider

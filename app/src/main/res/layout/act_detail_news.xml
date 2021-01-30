@@ -14,7 +14,7 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:contentScrim="@color/colorPrimary"
+            app:contentScrim="?attr/toolbarColorBackground"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:titleEnabled="false">
 
@@ -41,7 +41,6 @@
                 android:id="@+id/ToolbarActDetailNews"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorWhite"
                 app:layout_collapseMode="pin">
 
                 <com.balysv.materialripple.MaterialRippleLayout
@@ -52,18 +51,20 @@
                     android:layout_marginEnd="10dp"
                     app:mrl_rippleAlpha="0.05"
                     app:mrl_rippleColor="#10000000"
-                    app:mrl_rippleRoundedCorners="100dp">
+                    app:mrl_rippleRoundedCorners="100dp"
+                    android:layout_alignParentRight="true">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <ImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_centerInParent="true"
                             android:contentDescription="@null"
                             android:rotation="180"
+                            app:tint="?attr/toolbarColorText"
                             app:srcCompat="@drawable/ic_back" />
                     </RelativeLayout>
                 </com.balysv.materialripple.MaterialRippleLayout>
@@ -82,12 +83,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <ImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            android:layout_centerInParent="true"
+                            android:layout_centerVertical="true"
                             android:contentDescription="@null"
-                            app:srcCompat="@drawable/ic_share" />
+                            app:srcCompat="@drawable/ic_share"
+                            app:tint="?attr/toolbarColorText" />
                     </RelativeLayout>
                 </com.balysv.materialripple.MaterialRippleLayout>
 
@@ -104,13 +106,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <ImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/imgHeartActDetailNews"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            android:layout_centerInParent="true"
+                            android:layout_centerVertical="true"
                             android:contentDescription="@null"
-                            app:srcCompat="@drawable/ic_fav" />
+                            app:srcCompat="@drawable/ic_fav"
+                            app:tint="?attr/toolbarColorText" />
                     </RelativeLayout>
                 </com.balysv.materialripple.MaterialRippleLayout>
 
@@ -127,9 +130,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <ImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="30dp"
-                            android:layout_height="30dp"
+                            android:layout_height="30dp"     app:tint="?attr/toolbarColorText"
                             android:layout_centerInParent="true"
                             android:contentDescription="@null"
                             app:srcCompat="@drawable/ic_comment" />
@@ -146,7 +149,7 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:text=" وبلاگ"
-                    android:textColor="@color/colorMenu"
+                    android:textColor="?attr/toolbarColorText"
                     tools:ignore="HardcodedText" />
 
                 <View
