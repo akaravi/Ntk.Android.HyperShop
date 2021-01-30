@@ -1,5 +1,6 @@
 package ntk.android.hyper.activity.hyper;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,8 +13,6 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-
-import java.text.DecimalFormat;
 
 import ntk.android.base.activity.hyper.BaseHyperShopContentDetail_1_Activity;
 import ntk.android.base.view.NViewUtils;
@@ -34,7 +33,14 @@ public class ShopContentDetailActivity extends BaseHyperShopContentDetail_1_Acti
     protected void onCreated() {
         setContentView(R.layout.hypercontent_detail_actvitiy);
         loading = findViewById(R.id.loadingProgress);
+        findViewById(R.id.cartView).setOnClickListener(view -> startActivity(new Intent(ShopContentDetailActivity.this, OrderActivity.class)));
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        UpdateCard();
+    }
+
 
     @Override
     protected void bindData() {
