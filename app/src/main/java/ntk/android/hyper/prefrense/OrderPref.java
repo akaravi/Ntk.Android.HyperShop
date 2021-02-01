@@ -11,8 +11,9 @@ import io.reactivex.Observable;
 import ntk.android.base.dtomodel.hypershop.HyperShopOrderContentDtoModel;
 import ntk.android.base.dtomodel.hypershop.HyperShopOrderDtoModel;
 import ntk.android.base.entitymodel.base.ErrorException;
-import ntk.android.base.entitymodel.enums.enumHyperShopPaymentType;
 import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
+import ntk.android.base.entitymodel.hypershop.HyperShopOrderContentModel;
+import ntk.android.base.entitymodel.hypershop.HyperShopOrderModel;
 import ntk.android.base.utill.prefrense.EasyPreference;
 
 public class OrderPref {
@@ -100,7 +101,7 @@ public class OrderPref {
         order.Family = family;
         order.Mobile = mobile;
         order.Address = address;
-        order.PaymentType =type;
+        order.PaymentType = type;
         saveOrder(order);
     }
 
@@ -131,5 +132,23 @@ public class OrderPref {
 
     public void clear() {
         EasyPreference.with(c).addString("NTK_HyperShopOrder", "");
+    }
+
+    public void lastOrder(HyperShopOrderModel item) {
+        clear();
+        HyperShopOrderDtoModel order = new HyperShopOrderDtoModel();
+        for (int i = 0; i < item.Products.size(); i++) {
+            HyperShopOrderContentModel model = item.Products.get(i);
+            HyperShopOrderContentDtoModel p = new HyperShopOrderContentDtoModel();
+            p.Code = model.Code;
+            p.Name = model.Name;
+            p.Price = model.Price;
+            p.Memo = model.Memo;
+            p.Count = model.Count;
+            p.CURRENCY_UNIT = "نداریم تو فاکتور";
+            p.TotalCount = 100;
+            order.Products.add(p);
+        }
+        saveOrder(order);
     }
 }

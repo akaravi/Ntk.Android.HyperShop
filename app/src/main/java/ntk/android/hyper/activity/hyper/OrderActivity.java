@@ -71,14 +71,15 @@ public class OrderActivity extends BaseActivity {
     public void showBankPayments(HyperShopOrderModel item) {
         stepNumber = 3;
         long orderId = item.Id;
-        String TotalProductPrice = item.ProducsSumPrice;
-        String DeliveryPrice = item.DelivaryPrice;
         BankPaymentListFragment fragment = new BankPaymentListFragment();
         Bundle b = new Bundle();
         b.putLong(Extras.EXTRA_FIRST_ARG, orderId);
-        b.putString(Extras.EXTRA_SECOND_ARG, TotalProductPrice);
-        b.putString(Extras.Extra_THIRD_ARG, DeliveryPrice);
-//        b.putString(Extras.Extra_FORTH_ARG, DeliveryPrice);
+        b.putDouble(Extras.EXTRA_SECOND_ARG, item.Amount);
+        b.putDouble(Extras.Extra_THIRD_ARG, item.DelivaryPrice);
+        b.putDouble(Extras.Extra_4_ARG, item.FeeTax);
+        b.putDouble(Extras.Extra_5_ARG, item.FeeTransport);
+        b.putDouble(Extras.Extra_5_ARG, item.AmountPure);
+
         fragment.setArguments(b);
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
     }

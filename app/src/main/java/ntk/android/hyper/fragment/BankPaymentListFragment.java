@@ -31,6 +31,10 @@ import ntk.android.hyper.adapter.BankSelectAdapter;
 public class BankPaymentListFragment extends BaseFragment {
     Long OrderId;
     long BankId;
+    double productsPrice;
+    double taxPrice;
+    double transportPrice;
+    double totalPrice;
 
     @Override
     public void onCreateFragment() {
@@ -42,6 +46,9 @@ public class BankPaymentListFragment extends BaseFragment {
         super.onCreated();
         assert getArguments() != null;
         OrderId = getArguments().getLong(Extras.EXTRA_FIRST_ARG, 0);
+        taxPrice = getArguments().getDouble(Extras.EXTRA_SECOND_ARG, 0);
+        transportPrice = getArguments().getDouble(Extras.Extra_THIRD_ARG, 0);
+        productsPrice = getArguments().getDouble(Extras.Extra_4_ARG, 0);
 
     }
 
@@ -72,7 +79,7 @@ public class BankPaymentListFragment extends BaseFragment {
 
     private void bindView(List<BankPaymentPrivateSiteConfigModel> listItems) {
 
-        AutoCompleteTextView paymentType = (AutoCompleteTextView) findViewById(R.id.etPaymentBank);
+        AutoCompleteTextView paymentType = findViewById(R.id.etPaymentBank);
         paymentType.setAdapter(new BankSelectAdapter(getContext(), listItems));
         paymentType.setOnItemClickListener((adapterView, view12, i, l) -> {
             BankId = ((BankPaymentPrivateSiteConfigModel) adapterView.getItemAtPosition(i)).Id;
@@ -101,7 +108,7 @@ public class BankPaymentListFragment extends BaseFragment {
                     public void onNext(@io.reactivex.annotations.NonNull ErrorException<BankPaymentOnlineTransactionModel> response) {
                         if (response.IsSuccess) {
                             if (response.Item.UrlToPay != null && !response.Item.UrlToPay.equalsIgnoreCase("")) {
-                                CheckPaymentActivity.SET_LAST_PAY_URL(getContext(),response.Item.UrlToPay);
+                                CheckPaymentActivity.SET_LAST_PAY_URL(getContext(), response.Item.UrlToPay);
                                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(response.Item.UrlToPay));
                                 getContext().startActivity(browserIntent);
                                 getActivity().finish();

@@ -5,6 +5,7 @@ import android.content.Intent;
 import ntk.android.base.activity.common.BaseAboutActivity;
 import ntk.android.base.activity.common.BaseSplashActivity;
 import ntk.android.base.activity.ticketing.TicketListActivity;
+import ntk.android.hyper.fragment.CurrentLocationActivity;
 
 public class SplashActivity extends BaseSplashActivity {
 

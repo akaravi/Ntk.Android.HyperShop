@@ -2,18 +2,4 @@
     <string name="app_name">APPNTK</string>
     <string name="PhoneNumber">+9810005612020</string>
 
-    <string name="Subject">موضوع درخواست</string>
-    <string name="Departman">دپارتمان</string>
-    <string name="Inportant">اهمیت</string>
-    <string name="UserService">سرویس مرتبط</string>
-    <string name="SendTicket">ارسال درخواست پشتیبانی</string>
-
-    <string-array name="SpiinerDepartman">
-        <item>فروش</item>
-        <item>مالی</item>
-        <item>فنی</item>
-        <item>طراحی</item>
-        <item>پشتیبانی</item>
-    </string-array>
-
 </resources>

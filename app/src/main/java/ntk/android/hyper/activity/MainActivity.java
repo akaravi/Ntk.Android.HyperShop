@@ -27,13 +27,21 @@ import ntk.android.base.activity.common.NotificationsActivity;
 import ntk.android.base.activity.poling.PolingDetailActivity;
 import ntk.android.base.activity.ticketing.TicketListActivity;
 import ntk.android.base.activity.ticketing.TicketSearchActivity;
+import ntk.android.base.config.ErrorExceptionObserver;
+import ntk.android.base.config.ServiceExecute;
+import ntk.android.base.entitymodel.base.ErrorException;
+import ntk.android.base.entitymodel.hypershop.HyperShopOrderModel;
+import ntk.android.base.services.hypershop.HyperShopOrderService;
 import ntk.android.base.utill.FontManager;
+import ntk.android.base.utill.prefrense.Preferences;
 import ntk.android.hyper.R;
 import ntk.android.hyper.activity.hyper.HyperTransactionListActivity;
 import ntk.android.hyper.activity.hyper.OrderActivity;
 import ntk.android.hyper.activity.hyper.OrderListActivity;
 import ntk.android.hyper.event.UpdateCartViewEvent;
+import ntk.android.hyper.fragment.CurrentLocationActivity;
 import ntk.android.hyper.fragment.MainFragment;
+import ntk.android.hyper.prefrense.OrderPref;
 import ntk.android.hyper.view.CartView;
 
 public class MainActivity extends AbstractMainActivity {
@@ -45,6 +53,7 @@ public class MainActivity extends AbstractMainActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        startActivity(new Intent(this, CurrentLocationActivity.class));
         setContentView(R.layout.panel_activity);
         View guillotineMenu = LayoutInflater.from(this).inflate(R.layout.panel_drawer, null);
         ((FrameLayout) findViewById(R.id.root)).addView(guillotineMenu);
@@ -68,9 +77,31 @@ public class MainActivity extends AbstractMainActivity {
                     }
                 })
                 .build();
-        MainFragment fragment = new MainFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
+        getLastOrder();
         setFont();
+    }
+
+    private void getLastOrder() {
+        Long userId = Preferences.with(this).UserInfo().userId();
+        if (userId != null && userId > 0L) {
+            ServiceExecute.execute(new HyperShopOrderService(this).ServiceOrderAdd())
+                    .subscribe(new ErrorExceptionObserver<HyperShopOrderModel>(switcher::showErrorView) {
+                        @Override
+                        protected void SuccessResponse(ErrorException<HyperShopOrderModel> response) {
+                            new OrderPref(MainActivity.this).lastOrder(response.Item);
+                        }
+
+                        @Override
+                        protected Runnable tryAgainMethod() {
+                            return () -> {};
+                        }
+                    });
+        } else {
+
+            MainFragment fragment = new MainFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
+        }
+
     }
 
     private void setFont() {
