@@ -120,11 +120,11 @@ dependencies {
     implementation 'net.sourceforge.streamsupport:android-retrostreams:1.7.2'
     implementation 'com.google.zxing:core:3.3.0'
    implementation 'com.github.codekidX:storage-chooser:2.0.4.2'
-    //for add view
+//    for add view
 
 //    api project(path: ':baseActivity')
 //
-    api 'com.github.akaravi:Ntk.Android.BaseActivity:1.4.106'
+    api 'com.github.akaravi:Ntk.Android.BaseActivity:1.4.107'
 
 }
 repositories {
