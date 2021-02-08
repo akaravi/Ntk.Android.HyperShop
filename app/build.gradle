@@ -108,7 +108,8 @@ dependencies {
 //    implementation 'com.flaviofaria:kenburnsview:1.0.7'
     //flow drawer
     implementation 'com.mxn.soul:flowingdrawer-core:2.1.0'
-
+    //for flex
+    implementation 'com.google.android:flexbox:2.0.1'
     //noinspection GradleDependency
 
     //noinspection GradleDependency
@@ -124,7 +125,7 @@ dependencies {
 
     api project(path: ':baseActivity')
 
-//    api 'com.github.akaravi:Ntk.Android.BaseActivity:1.4.107'
+//    api 'com.github.akaravi:Ntk.Android.BaseActivity:1.4.110'
 
 }
 repositories {
