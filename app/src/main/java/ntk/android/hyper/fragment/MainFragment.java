@@ -24,6 +24,7 @@ import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterDataModel;
+import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.hypershop.HyperShopCategoryModel;
 import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.base.fragment.BaseFragment;
@@ -105,7 +106,7 @@ public class MainFragment extends BaseFragment {
     }
 
     private void getPrize() {
-        FilterDataModel f = new FilterDataModel();
+        FilterModel f = new FilterModel();
         f.RowPerPage = 1;
         ServiceExecute.execute(new HyperShopContentService(getContext()).getAllMicroService(f))
                 .subscribe(new NtkObserver<ErrorException<HyperShopContentModel>>() {
@@ -130,7 +131,7 @@ public class MainFragment extends BaseFragment {
     }
 
     private void getContent() {
-        FilterDataModel f = new FilterDataModel();
+        FilterModel f = new FilterModel();
         f.RowPerPage = 20;
         ServiceExecute.execute(new HyperShopContentService(getContext()).getAllMicroService(f))
                 .subscribe(new NtkObserver<ErrorException<HyperShopContentModel>>() {
@@ -155,7 +156,7 @@ public class MainFragment extends BaseFragment {
     }
 
     private void getCategory() {
-        FilterDataModel f = new FilterDataModel();
+        FilterModel f = new FilterModel();
         f.RowPerPage = 8;
         ServiceExecute.execute(new HyperShopCategoryService(getContext()).getAllMicroService(f))
                 .subscribe(new NtkObserver<ErrorException<HyperShopCategoryModel>>() {

@@ -13,6 +13,7 @@ import java9.util.function.Function;
 import ntk.android.base.dtomodel.hypershop.HyperShopOrderContentDtoModel;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterDataModel;
+import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.fragment.abstraction.AbstractionListFragment;
 import ntk.android.hyper.R;
 import ntk.android.hyper.activity.hyper.OrderActivity;
@@ -23,7 +24,7 @@ public class OrderContentListFragment extends AbstractionListFragment<HyperShopO
     float amountOrder;
 
     @Override
-    public Function<FilterDataModel, Observable<ErrorException<HyperShopOrderContentDtoModel>>> getService() {
+    public Function<FilterModel, Observable<ErrorException<HyperShopOrderContentDtoModel>>> getService() {
         return dataModel -> new OrderPref(getContext()).getLastShopping();
     }
 

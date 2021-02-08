@@ -9,6 +9,7 @@ import java9.util.function.Function;
 import ntk.android.base.activity.common.BaseFilterModelListActivity;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterDataModel;
+import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.hypershop.HyperShopOrderModel;
 import ntk.android.base.services.hypershop.HyperShopOrderService;
 import ntk.android.hyper.R;
@@ -22,7 +23,7 @@ public class OrderListActivity extends BaseFilterModelListActivity<HyperShopOrde
     }
 
     @Override
-    public Function<FilterDataModel, Observable<ErrorException<HyperShopOrderModel>>> getService() {
+    public Function<FilterModel, Observable<ErrorException<HyperShopOrderModel>>> getService() {
         return new HyperShopOrderService(this)::getAll;
     }
 

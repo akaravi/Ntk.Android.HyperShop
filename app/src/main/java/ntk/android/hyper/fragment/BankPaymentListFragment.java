@@ -20,7 +20,7 @@ import ntk.android.base.dtomodel.bankpayment.BankPaymentOnlineTransactionModel;
 import ntk.android.base.dtomodel.hypershop.HyperShopOrderPaymentDtoModel;
 import ntk.android.base.entitymodel.bankpayment.BankPaymentPrivateSiteConfigModel;
 import ntk.android.base.entitymodel.base.ErrorException;
-import ntk.android.base.entitymodel.base.FilterDataModel;
+import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.fragment.BaseFragment;
 import ntk.android.base.services.bankpayment.BankPaymentPrivateSiteConfigService;
 import ntk.android.base.services.hypershop.HyperShopOrderService;
@@ -55,7 +55,7 @@ public class BankPaymentListFragment extends BaseFragment {
     @Override
     public void onViewCreated(@androidx.annotation.NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        FilterDataModel filterDataModel = new FilterDataModel();
+        FilterModel filterDataModel = new FilterModel();
         filterDataModel.RowPerPage = 20;
         switcher.showProgressView();
         ServiceExecute.execute(new BankPaymentPrivateSiteConfigService(getContext()).getAll(filterDataModel))

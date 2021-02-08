@@ -10,6 +10,7 @@ import ntk.android.base.activity.common.BaseFilterModelListActivity;
 import ntk.android.base.entitymodel.bankpayment.BankPaymentTransactionModel;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterDataModel;
+import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.services.bankpayment.BankPaymentTransactionService;
 import ntk.android.hyper.R;
 import ntk.android.hyper.adapter.hyper.HyperTransitionAdapter;
@@ -23,7 +24,7 @@ public class HyperTransactionListActivity extends BaseFilterModelListActivity<Ba
     }
 
     @Override
-    public Function<FilterDataModel, Observable<ErrorException<BankPaymentTransactionModel>>> getService() {
+    public Function<FilterModel, Observable<ErrorException<BankPaymentTransactionModel>>> getService() {
         return new BankPaymentTransactionService(this)::getAll;
     }
 

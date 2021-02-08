@@ -10,7 +10,7 @@ import ntk.android.base.activity.abstraction.AbstractionSearchActivity;
 import ntk.android.base.api.utill.NTKUtill;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterDataModel;
-import ntk.android.base.entitymodel.base.Filters;
+import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.base.services.hypershop.HyperShopContentService;
 import ntk.android.hyper.adapter.hyper.HyperShopContent_1_Adapter;
@@ -23,23 +23,23 @@ public class HyperShopContentSearchActivity extends AbstractionSearchActivity<Hy
 
     @NotNull
     @Override
-    protected FilterDataModel getDefaultFilterDataModel(String stringValue) {
-        FilterDataModel request = new FilterDataModel();
-        Filters ft = new Filters();
+    protected FilterModel getDefaultFilterDataModel(String stringValue) {
+        FilterModel request = new FilterModel();
+        FilterDataModel ft = new FilterDataModel();
         ft.PropertyName = "Name";
         ft.StringValue = stringValue;
         ft.ClauseType = NTKUtill.ClauseType_Or;
         ft.SearchType = NTKUtill.Search_Type_Contains;
         request.addFilter(ft);
 
-        Filters fd = new Filters();
+        FilterDataModel fd = new FilterDataModel();
         fd.PropertyName = "Cat";
         fd.StringValue = stringValue;
         fd.ClauseType = NTKUtill.ClauseType_Or;
         fd.SearchType = NTKUtill.Search_Type_Contains;
         request.addFilter(fd);
 
-        Filters fb = new Filters();
+        FilterDataModel fb = new FilterDataModel();
         fb.PropertyName = "Memo";
         fb.StringValue = stringValue;
         fb.ClauseType = NTKUtill.ClauseType_Or;
@@ -49,7 +49,7 @@ public class HyperShopContentSearchActivity extends AbstractionSearchActivity<Hy
     }
 
     @Override
-    public Function<FilterDataModel, Observable<ErrorException<HyperShopContentModel>>> getService() {
+    public Function<FilterModel, Observable<ErrorException<HyperShopContentModel>>> getService() {
         return new HyperShopContentService(this)::getAllMicroService;
     }
 }

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.Observable;
 import java9.util.function.Function;
 import ntk.android.base.entitymodel.base.ErrorException;
-import ntk.android.base.entitymodel.base.FilterDataModel;
+import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.base.fragment.abstraction.AbstractionListFragment;
 import ntk.android.base.services.hypershop.HyperShopContentService;
@@ -18,7 +18,7 @@ import ntk.android.hyper.adapter.hyper.HyperShopContent_1_Adapter;
 
 public class ShopContentList_1_Fragment extends AbstractionListFragment<HyperShopContentModel> {
     @Override
-    public Function<FilterDataModel, Observable<ErrorException<HyperShopContentModel>>> getService() {
+    public Function<FilterModel, Observable<ErrorException<HyperShopContentModel>>> getService() {
         return new HyperShopContentService(getContext())::getAllMicroService;
     }
 

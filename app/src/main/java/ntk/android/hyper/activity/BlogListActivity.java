@@ -9,6 +9,7 @@ import java9.util.function.Function;
 import ntk.android.base.activity.common.BaseFilterModelListActivity;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterDataModel;
+import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.blog.BlogContentModel;
 import ntk.android.base.services.blog.BlogContentService;
 import ntk.android.hyper.adapter.BlogAdapter;
@@ -21,7 +22,7 @@ public class BlogListActivity extends BaseFilterModelListActivity<BlogContentMod
     }
 
     @Override
-    public Function<FilterDataModel, Observable<ErrorException<BlogContentModel>>> getService() {
+    public Function<FilterModel, Observable<ErrorException<BlogContentModel>>> getService() {
         return new BlogContentService(this)::getAll;
     }
 

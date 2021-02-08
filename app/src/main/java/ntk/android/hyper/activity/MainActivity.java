@@ -39,7 +39,6 @@ import ntk.android.hyper.activity.hyper.HyperTransactionListActivity;
 import ntk.android.hyper.activity.hyper.OrderActivity;
 import ntk.android.hyper.activity.hyper.OrderListActivity;
 import ntk.android.hyper.event.UpdateCartViewEvent;
-import ntk.android.hyper.fragment.CurrentLocationActivity;
 import ntk.android.hyper.fragment.MainFragment;
 import ntk.android.hyper.prefrense.OrderPref;
 import ntk.android.hyper.view.CartView;

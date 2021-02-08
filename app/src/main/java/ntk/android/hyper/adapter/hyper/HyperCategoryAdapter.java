@@ -16,7 +16,7 @@ import java.util.List;
 import ntk.android.base.Extras;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.base.FilterDataModel;
-import ntk.android.base.entitymodel.base.Filters;
+import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.hypershop.HyperShopCategoryModel;
 import ntk.android.base.utill.FontManager;
 import ntk.android.hyper.R;
@@ -41,9 +41,9 @@ public class HyperCategoryAdapter extends BaseRecyclerAdapter<HyperShopCategoryM
         holder.name.setText(getItem(position).name);
         holder.itemView.setOnClickListener(view -> {
             Intent i = new Intent(view.getContext(), ShopContentListActivity.class);
-            FilterDataModel filterDataModel = new FilterDataModel();
-            filterDataModel.addFilter(new Filters().setPropertyName("CategoryCode").setStringValue(getItem(position).Code));
-            i.putExtra(Extras.EXTRA_FIRST_ARG, new Gson().toJson(filterDataModel));
+            FilterModel filterModel = new FilterModel();
+            filterModel.addFilter(new FilterDataModel().setPropertyName("CategoryCode").setStringValue(getItem(position).Code));
+            i.putExtra(Extras.EXTRA_FIRST_ARG, new Gson().toJson(filterModel));
             i.putExtra(Extras.EXTRA_SECOND_ARG, "لیست محصولات " + list.get(position).name);
             i.putExtra(Extras.Extra_THIRD_ARG, true);
             view.getContext().startActivity(i);

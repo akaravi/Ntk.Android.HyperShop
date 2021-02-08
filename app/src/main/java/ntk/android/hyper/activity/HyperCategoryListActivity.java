@@ -11,6 +11,7 @@ import java9.util.function.Function;
 import ntk.android.base.activity.common.BaseFilterModelListActivity;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterDataModel;
+import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.hypershop.HyperShopCategoryModel;
 import ntk.android.base.services.hypershop.HyperShopCategoryService;
 import ntk.android.base.view.NViewUtils;
@@ -30,7 +31,7 @@ public class HyperCategoryListActivity extends BaseFilterModelListActivity<Hyper
     }
 
     @Override
-    public Function<FilterDataModel, Observable<ErrorException<HyperShopCategoryModel>>> getService() {
+    public Function<FilterModel, Observable<ErrorException<HyperShopCategoryModel>>> getService() {
         return new HyperShopCategoryService(this)::getAllMicroService;
     }
 
