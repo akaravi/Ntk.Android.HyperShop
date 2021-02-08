@@ -52,7 +52,6 @@ public class MainActivity extends AbstractMainActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(new Intent(this, Test.class));
         setContentView(R.layout.panel_activity);
         View guillotineMenu = LayoutInflater.from(this).inflate(R.layout.panel_drawer, null);
         ((FrameLayout) findViewById(R.id.root)).addView(guillotineMenu);
