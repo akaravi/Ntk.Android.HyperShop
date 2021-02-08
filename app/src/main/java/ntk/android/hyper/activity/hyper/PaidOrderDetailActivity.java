@@ -1,6 +1,7 @@
 package ntk.android.hyper.activity.hyper;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,6 +27,7 @@ public class PaidOrderDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.paid_order_activity);
         OrderId = getIntent().getExtras().getLong(Extras.EXTRA_FIRST_ARG, 0);
+        findViewById(R.id.cartView).setVisibility(View.GONE);
         getApi();
     }
 

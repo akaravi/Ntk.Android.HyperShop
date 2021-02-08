@@ -31,8 +31,9 @@ public class CategoryVH extends RecyclerView.ViewHolder {
         return new CategoryVH(inflate);
     }
 
-    public void bind(List list) {
+    public void bind(List list, String title) {
         RecyclerView rc = itemView.findViewById(R.id.rc);
+        ((TextView) itemView.findViewById(R.id.categoryTitle)).setText(title);
         int i = NViewUtils.dpToPx(itemView.getContext(), 8);
         rc.setPadding(i, i, i, i);
 

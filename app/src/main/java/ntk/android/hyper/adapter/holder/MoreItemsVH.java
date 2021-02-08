@@ -29,8 +29,8 @@ public class MoreItemsVH extends RecyclerView.ViewHolder {
         return new MoreItemsVH(inflate);
     }
 
-    public void bind(List<HyperShopContentModel> list) {
-        ((TextView) itemView.findViewById(R.id.moreTextTitle)).setText("لیست محصولات");
+    public void bind(List<HyperShopContentModel> list, String title) {
+        ((TextView) itemView.findViewById(R.id.moreTextTitle)).setText(title);
         itemView.findViewById(R.id.moreBtn).setOnClickListener(view -> {
             Intent intent = new Intent(itemView.getContext(), ShopContentListActivity.class);
             intent.putExtra(Extras.EXTRA_SECOND_ARG, "لیست پیشفرض محصولات");

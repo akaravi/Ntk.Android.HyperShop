@@ -37,10 +37,10 @@ public class MainFragment1_1Adapter extends RecyclerView.Adapter {
         int viewType = getItemViewType(position);
         switch (viewType) {
             case 1:
-                ((CategoryVH) holder).bind(models.get(viewType));
+                ((CategoryVH) holder).bind(models.get(viewType),strings.get(position));
                 break;
             default:
-                ((MoreItemsVH) holder).bind(models.get(viewType));
+                ((MoreItemsVH) holder).bind(models.get(viewType),strings.get(position));
                 break;
         }
     }
