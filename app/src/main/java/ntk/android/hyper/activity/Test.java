@@ -13,6 +13,6 @@ public class Test extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BuyView s = new BuyView(this);
-        setContentView(R.layout.shop_content_row_item1);
+        setContentView(R.layout.common_splash_activity);
     }
 }

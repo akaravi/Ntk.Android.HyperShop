@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 import io.reactivex.Observable;
 import java9.util.function.Function;
-import ntk.android.base.activity.abstraction.AbstractionSearchActivity;
+import ntk.android.base.activity.abstraction.AbstractSearchActivity;
 import ntk.android.base.api.utill.NTKUtill;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterDataModel;
@@ -15,7 +15,7 @@ import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.base.services.hypershop.HyperShopContentService;
 import ntk.android.hyper.adapter.hyper.HyperShopContent_1_Adapter;
 
-public class HyperShopContentSearchActivity extends AbstractionSearchActivity<HyperShopContentModel> {
+public class HyperShopContentSearchActivity extends AbstractSearchActivity<HyperShopContentModel> {
     @Override
     protected RecyclerView.Adapter getAdapter() {
         return new HyperShopContent_1_Adapter(models);
