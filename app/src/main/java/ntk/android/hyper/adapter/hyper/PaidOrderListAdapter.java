@@ -1,5 +1,6 @@
 package ntk.android.hyper.adapter.hyper;
 
+import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import java.util.List;
 
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.hypershop.HyperShopOrderContentModel;
+import ntk.android.base.utill.FontManager;
 import ntk.android.hyper.R;
 
 public class PaidOrderListAdapter extends BaseRecyclerAdapter<HyperShopOrderContentModel, PaidOrderListAdapter.VH> {
@@ -50,6 +52,12 @@ public class PaidOrderListAdapter extends BaseRecyclerAdapter<HyperShopOrderCont
             price = itemView.findViewById(R.id.txtPrice);
             name = itemView.findViewById(R.id.txtProductName);
             count = itemView.findViewById(R.id.txtCount);
+            Typeface typeface = FontManager.T1_Typeface(itemView.getContext());
+            row.setTypeface(typeface);
+            totalPrice.setTypeface(typeface);
+            price.setTypeface(typeface);
+            name.setTypeface(typeface);
+            count.setTypeface(typeface);
         }
     }
 }
