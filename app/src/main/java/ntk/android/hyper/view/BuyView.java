@@ -11,8 +11,9 @@ import android.widget.TextView;
 import org.greenrobot.eventbus.EventBus;
 
 import es.dmoral.toasty.Toasty;
-import ntk.android.base.dtomodel.hypershop.HyperShopOrderContentDtoModel;
+
 import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
+import ntk.android.base.entitymodel.hypershop.HyperShopOrderContentModel;
 import ntk.android.base.utill.FontManager;
 import ntk.android.hyper.R;
 import ntk.android.hyper.event.UpdateCartViewEvent;
@@ -21,7 +22,7 @@ import ntk.android.hyper.prefrense.OrderPref;
 public class BuyView extends FrameLayout {
     int count = 0;
     HyperShopContentModel model;
-    HyperShopOrderContentDtoModel dtoModel;
+    HyperShopOrderContentModel dtoModel;
     Runnable changePriceMethod;
     Runnable deleteProduct;
 
@@ -97,7 +98,7 @@ public class BuyView extends FrameLayout {
 
     public void bind(HyperShopContentModel item) {
         model = item;
-        HyperShopOrderContentDtoModel product = new OrderPref(getContext()).getProduct(item.Code);
+        HyperShopOrderContentModel product = new OrderPref(getContext()).getProduct(item.Code);
         if (product != null) {
             count = product.Count;
             ((TextView) findViewById(R.id.buy_view_txtCount)).setText(count + "");
@@ -109,7 +110,7 @@ public class BuyView extends FrameLayout {
         }
     }
 
-    public void bind(HyperShopOrderContentDtoModel item, Runnable o, Runnable d) {
+    public void bind(HyperShopOrderContentModel item, Runnable o, Runnable d) {
         changePriceMethod = o;
         deleteProduct = d;
         dtoModel = item;

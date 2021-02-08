@@ -10,7 +10,7 @@ import java.text.DecimalFormat;
 import es.dmoral.toasty.Toasty;
 import io.reactivex.Observable;
 import java9.util.function.Function;
-import ntk.android.base.dtomodel.hypershop.HyperShopOrderContentDtoModel;
+import ntk.android.base.entitymodel.hypershop.HyperShopOrderContentModel;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.entitymodel.base.FilterModel;
@@ -20,11 +20,11 @@ import ntk.android.hyper.activity.hyper.OrderActivity;
 import ntk.android.hyper.adapter.hyper.HyperOrderContentAdapter;
 import ntk.android.hyper.prefrense.OrderPref;
 
-public class OrderContentListFragment extends AbstractionListFragment<HyperShopOrderContentDtoModel> {
+public class OrderContentListFragment extends AbstractionListFragment<HyperShopOrderContentModel> {
     float amountOrder;
 
     @Override
-    public Function<FilterModel, Observable<ErrorException<HyperShopOrderContentDtoModel>>> getService() {
+    public Function<FilterModel, Observable<ErrorException<HyperShopOrderContentModel>>> getService() {
         return dataModel -> new OrderPref(getContext()).getLastShopping();
     }
 
@@ -77,10 +77,10 @@ public class OrderContentListFragment extends AbstractionListFragment<HyperShopO
 
     private void updateTotalPrice() {
         amountOrder = 0;
-        for (HyperShopOrderContentDtoModel d : models) {
+        for (HyperShopOrderContentModel d : models) {
             amountOrder += d.Price * d.Count;
         }
-        ((TextView) getActivity().findViewById(R.id.txtTotalPrice)).setText(new DecimalFormat("###,###,###,###").format(amountOrder) + " " + HyperShopOrderContentDtoModel.CURRENCY_UNIT);
+        ((TextView) getActivity().findViewById(R.id.txtTotalPrice)).setText(new DecimalFormat("###,###,###,###").format(amountOrder) + " " + HyperShopOrderContentModel.CURRENCY_UNIT);
     }
 
     public void updateList() {

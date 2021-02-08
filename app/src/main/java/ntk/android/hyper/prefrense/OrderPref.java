@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
-import ntk.android.base.dtomodel.hypershop.HyperShopOrderContentDtoModel;
-import ntk.android.base.dtomodel.hypershop.HyperShopOrderDtoModel;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.base.entitymodel.hypershop.HyperShopOrderContentModel;
@@ -24,8 +22,8 @@ public class OrderPref {
     }
 
     public void updateShopContent(HyperShopContentModel model, int count) {
-        HyperShopOrderDtoModel order = getOrder();
-        HyperShopOrderContentDtoModel p = null;
+        HyperShopOrderModel order = getOrder();
+        HyperShopOrderContentModel p = null;
         for (int i = 0; i < order.Products.size(); i++) {
             if (order.Products.get(i).Code.equalsIgnoreCase(model.Code)) {
                 p = order.Products.remove(i);
@@ -33,7 +31,7 @@ public class OrderPref {
             }
         }
         if (p == null)
-            p = new HyperShopOrderContentDtoModel();
+            p = new HyperShopOrderContentModel();
         p.Code = model.Code;
         p.Name = model.Name;
         p.Price = model.Price;
@@ -47,9 +45,9 @@ public class OrderPref {
         saveOrder(order);
     }
 
-    public void updateShopContent(HyperShopOrderContentDtoModel model, int count) {
-        HyperShopOrderDtoModel order = getOrder();
-        HyperShopOrderContentDtoModel p = null;
+    public void updateShopContent(HyperShopOrderContentModel model, int count) {
+        HyperShopOrderModel order = getOrder();
+        HyperShopOrderContentModel p = null;
         for (int i = 0; i < order.Products.size(); i++) {
             if (order.Products.get(i).Code.equalsIgnoreCase(model.Code)) {
                 p = order.Products.remove(i);
@@ -57,7 +55,7 @@ public class OrderPref {
             }
         }
         if (p == null)
-            p = new HyperShopOrderContentDtoModel();
+            p = new HyperShopOrderContentModel();
         p.Code = model.Code;
         p.Name = model.Name;
         p.Price = model.Price;
@@ -71,32 +69,32 @@ public class OrderPref {
         saveOrder(order);
     }
 
-    public void updateOrderWith(List<HyperShopOrderContentDtoModel> models, float amountOrder) {
-        HyperShopOrderDtoModel order = getOrder();
+    public void updateOrderWith(List<HyperShopOrderContentModel> models, float amountOrder) {
+        HyperShopOrderModel order = getOrder();
         order.Products = models;
         order.Amount = amountOrder;
         saveOrder(order);
 
     }
 
-    private void saveOrder(HyperShopOrderDtoModel model) {
+    private void saveOrder(HyperShopOrderModel model) {
         EasyPreference.with(c).addString("NTK_HyperShopOrder", new Gson().toJson(model));
     }
 
-    public HyperShopOrderDtoModel getOrder() {
+    public HyperShopOrderModel getOrder() {
         String hypershopOrder = EasyPreference.with(c).getString("NTK_HyperShopOrder", "");
 
         if (!hypershopOrder.equalsIgnoreCase("")) {
-            HyperShopOrderDtoModel hyperShopOrderDtoModel = new Gson().fromJson(hypershopOrder, HyperShopOrderDtoModel.class);
-            return hyperShopOrderDtoModel;
+            HyperShopOrderModel HyperShopOrderModel = new Gson().fromJson(hypershopOrder, HyperShopOrderModel.class);
+            return HyperShopOrderModel;
         }
-        HyperShopOrderDtoModel hyperShopOrderDtoModel = new HyperShopOrderDtoModel();
-        hyperShopOrderDtoModel.Products = new ArrayList<>();
-        return hyperShopOrderDtoModel;
+        HyperShopOrderModel HyperShopOrderModel = new HyperShopOrderModel();
+        HyperShopOrderModel.Products = new ArrayList<>();
+        return HyperShopOrderModel;
     }
 
     public void addDetails(String name, String family, String mobile, String address, int type) {
-        HyperShopOrderDtoModel order = getOrder();
+        HyperShopOrderModel order = getOrder();
         order.Name = name;
         order.Family = family;
         order.Mobile = mobile;
@@ -105,11 +103,11 @@ public class OrderPref {
         saveOrder(order);
     }
 
-    public Observable<ErrorException<HyperShopOrderContentDtoModel>> getLastShopping() {
+    public Observable<ErrorException<HyperShopOrderContentModel>> getLastShopping() {
         return Observable.create(emitter -> {
-            ErrorException<HyperShopOrderContentDtoModel> model = new ErrorException<>();
+            ErrorException<HyperShopOrderContentModel> model = new ErrorException<>();
             model.IsSuccess = true;
-            List<HyperShopOrderContentDtoModel> products = getOrder().Products;
+            List<HyperShopOrderContentModel> products = getOrder().Products;
             model.ListItems = new ArrayList<>();
             model.ListItems.addAll(products);
             model.TotalRowCount = products.size();
@@ -118,9 +116,9 @@ public class OrderPref {
         });
     }
 
-    public HyperShopOrderContentDtoModel getProduct(String code) {
-        HyperShopOrderDtoModel order = getOrder();
-        HyperShopOrderContentDtoModel p = null;
+    public HyperShopOrderContentModel getProduct(String code) {
+        HyperShopOrderModel order = getOrder();
+        HyperShopOrderContentModel p = null;
         for (int i = 0; i < order.Products.size(); i++) {
             if (order.Products.get(i).Code.equalsIgnoreCase(code)) {
                 p = order.Products.get(i);
@@ -136,10 +134,10 @@ public class OrderPref {
 
     public void lastOrder(HyperShopOrderModel item) {
         clear();
-        HyperShopOrderDtoModel order = new HyperShopOrderDtoModel();
+        HyperShopOrderModel order = new HyperShopOrderModel();
         for (int i = 0; i < item.Products.size(); i++) {
             HyperShopOrderContentModel model = item.Products.get(i);
-            HyperShopOrderContentDtoModel p = new HyperShopOrderContentDtoModel();
+            HyperShopOrderContentModel p = new HyperShopOrderContentModel();
             p.Code = model.Code;
             p.Name = model.Name;
             p.Price = model.Price;

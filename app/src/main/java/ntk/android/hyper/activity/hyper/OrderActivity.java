@@ -12,7 +12,6 @@ import ntk.android.base.Extras;
 import ntk.android.base.activity.BaseActivity;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
-import ntk.android.base.dtomodel.hypershop.HyperShopOrderDtoModel;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.enums.enumHyperShopPaymentType;
 import ntk.android.base.entitymodel.hypershop.HyperShopOrderModel;
@@ -85,9 +84,9 @@ public class OrderActivity extends BaseActivity {
     }
 
     public void addOrder() {
-        HyperShopOrderDtoModel order = new OrderPref(this).getOrder();
+        HyperShopOrderModel order = new OrderPref(this).getOrder();
         switcher.showProgressView();
-        ServiceExecute.execute(new HyperShopOrderService(this).orderAdd(order))
+        ServiceExecute.execute(new HyperShopOrderService(this).add(order))
                 .subscribe(new NtkObserver<ErrorException<HyperShopOrderModel>>() {
                     @Override
                     public void onNext(@NonNull ErrorException<HyperShopOrderModel> response) {

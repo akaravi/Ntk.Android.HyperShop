@@ -13,13 +13,13 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import ntk.android.base.adapter.BaseRecyclerAdapter;
-import ntk.android.base.dtomodel.hypershop.HyperShopOrderContentDtoModel;
+import ntk.android.base.entitymodel.hypershop.HyperShopOrderContentModel;
 import ntk.android.base.utill.FontManager;
 import ntk.android.base.view.NViewUtils;
 import ntk.android.hyper.R;
 import ntk.android.hyper.view.BuyView;
 
-public class HyperOrderContentAdapter extends BaseRecyclerAdapter<HyperShopOrderContentDtoModel, HyperOrderContentAdapter.ItemViewHolder> {
+public class HyperOrderContentAdapter extends BaseRecyclerAdapter<HyperShopOrderContentModel, HyperOrderContentAdapter.ItemViewHolder> {
 
 
     private final Context context;
@@ -28,7 +28,7 @@ public class HyperOrderContentAdapter extends BaseRecyclerAdapter<HyperShopOrder
     Runnable showEmptyMethod;
 
 
-    public HyperOrderContentAdapter(Context context, List<HyperShopOrderContentDtoModel> products, Runnable o, Runnable updateList) {
+    public HyperOrderContentAdapter(Context context, List<HyperShopOrderContentModel> products, Runnable o, Runnable updateList) {
         super(products);
         this.context = context;
         this.changePriceMethod = o;
@@ -49,7 +49,7 @@ public class HyperOrderContentAdapter extends BaseRecyclerAdapter<HyperShopOrder
             holder.itemView.setPadding(0, 0, 0, NViewUtils.dpToPx(context, 100));
         } else
             holder.itemView.setPadding(0, 0, 0, 0);
-        HyperShopOrderContentDtoModel item = list.get(position);
+        HyperShopOrderContentModel item = list.get(position);
         holder.txtItemName.setText(item.Name);
         holder.txtProductPrice.setText(NViewUtils.PriceFormat(item.Price) + " " + item.CURRENCY_UNIT);
         holder.buyView.bind(item, changePriceMethod, () -> {
