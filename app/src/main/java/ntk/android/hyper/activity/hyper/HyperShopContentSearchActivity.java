@@ -27,21 +27,21 @@ public class HyperShopContentSearchActivity extends AbstractSearchActivity<Hyper
         FilterModel request = new FilterModel();
         FilterDataModel ft = new FilterDataModel();
         ft.PropertyName = "Name";
-        ft.StringValue = stringValue;
+        ft.setStringValue(stringValue);
         ft.ClauseType = NTKUtill.ClauseType_Or;
         ft.SearchType = NTKUtill.Search_Type_Contains;
         request.addFilter(ft);
 
         FilterDataModel fd = new FilterDataModel();
         fd.PropertyName = "Cat";
-        fd.StringValue = stringValue;
+        fd.setStringValue(stringValue);
         fd.ClauseType = NTKUtill.ClauseType_Or;
         fd.SearchType = NTKUtill.Search_Type_Contains;
         request.addFilter(fd);
 
         FilterDataModel fb = new FilterDataModel();
         fb.PropertyName = "Memo";
-        fb.StringValue = stringValue;
+        fb.setStringValue(stringValue);
         fb.ClauseType = NTKUtill.ClauseType_Or;
         fb.SearchType = NTKUtill.Search_Type_Contains;
         request.addFilter(fb);
