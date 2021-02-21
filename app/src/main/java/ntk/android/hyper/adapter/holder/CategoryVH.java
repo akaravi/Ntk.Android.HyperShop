@@ -1,6 +1,7 @@
 
 package ntk.android.hyper.adapter.holder;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import java.util.List;
 import ntk.android.base.utill.FontManager;
 import ntk.android.base.view.NViewUtils;
 import ntk.android.hyper.R;
+import ntk.android.hyper.activity.HyperCategoryListActivity;
 import ntk.android.hyper.adapter.hyper.HyperCategoryAdapter;
 
 public class CategoryVH extends RecyclerView.ViewHolder {
@@ -36,10 +38,13 @@ public class CategoryVH extends RecyclerView.ViewHolder {
         ((TextView) itemView.findViewById(R.id.categoryTitle)).setText(title);
         int i = NViewUtils.dpToPx(itemView.getContext(), 8);
         rc.setPadding(i, i, i, i);
-
         rc.setNestedScrollingEnabled(true);
         rc.setHasFixedSize(true);
         rc.setLayoutManager(new GridLayoutManager(itemView.getContext(), 3));
         rc.setAdapter(new HyperCategoryAdapter(list));
+        itemView.findViewById(R.id.moreBtn).setOnClickListener(view -> {
+            Intent intent = new Intent(itemView.getContext(), HyperCategoryListActivity.class);
+            itemView.getContext().startActivity(intent);
+        });
     }
 }

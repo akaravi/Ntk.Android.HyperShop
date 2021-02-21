@@ -23,7 +23,6 @@ import ntk.android.base.appclass.AboutUsClass;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
-import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.hypershop.HyperShopCategoryModel;
 import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
