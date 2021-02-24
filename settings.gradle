@@ -1,5 +1,8 @@
 include ':app'//hyper 32  //sample 1 //control panel 2 //state 3 //biography 11 //academy 10
-include 'baseActivity'
-project(':baseActivity').projectDir = new File('..\\Ntk.Android.BaseActivity\\app')
-include 'baseApi'
-project(':baseApi').projectDir = new File('..\\Ntk.Android.Base\\api')
+//include 'baseActivity'
+//project(':baseActivity').projectDir = new File('..\\Ntk.Android.BaseActivity\\app')
+//include 'sweetDialog'
+//project(':sweetDialog').projectDir = new File('..\\Ntk.Android.BaseActivity\\sweetDialog')
+//project(':baseActivity').projectDir = new File('..\\Ntk.Android.BaseActivity\\app')
+//include 'baseApi'
+//project(':baseApi').projectDir = new File('..\\Ntk.Android.Base\\api')

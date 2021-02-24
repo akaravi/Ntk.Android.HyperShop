@@ -1,6 +1,5 @@
 package ntk.android.hyper.activity.hyper;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.ImageView;
@@ -33,8 +32,9 @@ public class ShopContentDetailActivity extends BaseHyperShopContentDetail_1_Acti
     protected void onCreated() {
         setContentView(R.layout.hypercontent_detail_actvitiy);
         loading = findViewById(R.id.loadingProgress);
-        findViewById(R.id.cartView).setOnClickListener(view -> startActivity(new Intent(ShopContentDetailActivity.this, OrderActivity.class)));
+        findViewById(R.id.cartView).setOnClickListener(view -> OrderActivity.START_ORDER_ACTIVITY(ShopContentDetailActivity.this));
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -81,6 +81,7 @@ public class ShopContentDetailActivity extends BaseHyperShopContentDetail_1_Acti
             }
         });
     }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -92,6 +93,7 @@ public class ShopContentDetailActivity extends BaseHyperShopContentDetail_1_Acti
         super.onStop();
         EventBus.getDefault().unregister(this);
     }
+
     @Subscribe
     public void EventRemove(UpdateCartViewEvent event) {
         UpdateCard();

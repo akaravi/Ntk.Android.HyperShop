@@ -1,21 +1,26 @@
 package ntk.android.hyper.activity.hyper;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import org.jetbrains.annotations.Nullable;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import es.dmoral.toasty.Toasty;
 import io.reactivex.annotations.NonNull;
 import ntk.android.base.Extras;
 import ntk.android.base.activity.BaseActivity;
+import ntk.android.base.activity.common.AuthWithSmsActivity;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.enums.enumHyperShopPaymentType;
 import ntk.android.base.entitymodel.hypershop.HyperShopOrderModel;
 import ntk.android.base.services.hypershop.HyperShopOrderService;
+import ntk.android.base.utill.prefrense.Preferences;
 import ntk.android.hyper.R;
 import ntk.android.hyper.fragment.BankPaymentListFragment;
 import ntk.android.hyper.fragment.OrderContentListFragment;
@@ -23,6 +28,25 @@ import ntk.android.hyper.fragment.OrderOtherDetailFragment;
 import ntk.android.hyper.prefrense.OrderPref;
 
 public class OrderActivity extends BaseActivity {
+
+    public static void START_ORDER_ACTIVITY(Context c) {
+//        if (Preferences.with(c).UserInfo().userId() > 0)
+            c.startActivity(new Intent(c, OrderActivity.class));
+//        else {
+//            SweetAlertDialog dialog = new SweetAlertDialog(c, SweetAlertDialog.ERROR_TYPE);
+//            dialog.setTitle("خطا در انجام عملیات");
+//            dialog.setContentText("برای ادامه فرایند خرید نیاز است که به حساب خود وارد شوید. آیا مایلید به صفحه ی ورود هدایت شوید؟");
+//            dialog.setConfirmButton("بلی", d -> {
+//                Intent i = new Intent(d.getContext(), AuthWithSmsActivity.class);
+//                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                d.getContext().startActivity(i);
+//                d.dismiss();
+//            });
+//            dialog.setCancelButton("تمایل ندارم", SweetAlertDialog::dismiss);
+//            dialog.show();
+//        }
+    }
+
     TextView title;
     private int stepNumber;
 

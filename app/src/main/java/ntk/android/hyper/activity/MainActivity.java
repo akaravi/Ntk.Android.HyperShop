@@ -56,7 +56,7 @@ public class MainActivity extends AbstractMainActivity {
         View guillotineMenu = LayoutInflater.from(this).inflate(R.layout.panel_drawer, null);
         ((FrameLayout) findViewById(R.id.root)).addView(guillotineMenu);
         ButterKnife.bind(this);
-        findViewById(R.id.cartView).setOnClickListener(view -> startActivity(new Intent(MainActivity.this, OrderActivity.class)));
+        findViewById(R.id.cartView).setOnClickListener(view -> OrderActivity.START_ORDER_ACTIVITY(MainActivity.this));
         menuAnim = new GuillotineAnimation.GuillotineBuilder(guillotineMenu,
                 guillotineMenu.findViewById(R.id.guillotine_hamburger),
                 findViewById(R.id.content_hamburger))
@@ -86,7 +86,12 @@ public class MainActivity extends AbstractMainActivity {
                     .subscribe(new ErrorExceptionObserver<HyperShopOrderModel>(switcher::showErrorView) {
                         @Override
                         protected void SuccessResponse(ErrorException<HyperShopOrderModel> response) {
-                            new OrderPref(MainActivity.this).lastOrder(response.Item);
+                                if (response.Item != null && response.Item.Products != null && response.Item.Products.size() > 0) {
+                                    new OrderPref(MainActivity.this).lastOrder(response.Item);
+                                    UpdateCard();
+                                }
+                                MainFragment fragment = new MainFragment();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
                         }
 
                         @Override

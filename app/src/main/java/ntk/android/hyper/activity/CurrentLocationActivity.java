@@ -1,6 +1,7 @@
 package ntk.android.hyper.activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -221,18 +222,18 @@ public class CurrentLocationActivity extends FragmentActivity implements OnMapRe
             marker.remove();
         marker = mMap.addMarker(new MarkerOptions().position(latLng).draggable(false));
         findViewById(R.id.selectLocation).setVisibility(View.VISIBLE);
-        findViewById(R.id.selectLocation).setOnClickListener(view -> sendLocationResul());
+        findViewById(R.id.selectLocation).setOnClickListener(view -> sendLocationResult());
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
         mMap.getUiSettings().setZoomControlsEnabled(true);
     }
 
-    private void sendLocationResul() {
+    private void sendLocationResult() {
         if (clickedLat != null) {
             Intent s = new Intent();
             s.putExtra(Extras.EXTRA_FIRST_ARG, clickedLat);
-            setResult(REQ_CODE, s);
+            setResult(Activity.RESULT_OK, s);
             finish();
         } else
             Toasty.error(this, "متاسفانه موقعیت مکان در دسترس نیست ، مجددا تلاش فرمایید", Toasty.LENGTH_SHORT).show();
