@@ -1,6 +1,7 @@
-package ntk.android.hyper.fragment;
+package ntk.android.hyper.activity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -25,28 +26,35 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import es.dmoral.toasty.Toasty;
+import ntk.android.base.Extras;
 import ntk.android.hyper.R;
 
 public class CurrentLocationActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleMap.OnMarkerDragListener,
-        GoogleMap.OnMapLongClickListener,
+        GoogleMap.OnMapClickListener,
         GoogleMap.OnMarkerClickListener,
         View.OnClickListener {
 
+    public static final int REQ_CODE = 3464;
     private static final String TAG = "MapsActivity";
     private static final int REQ_TO_GET_PERMISSION = 200;
     private GoogleMap mMap;
     private Double longitude;
     private Double latitude;
+    private LatLng clickedLat;
+    Marker marker;
 
     LocationCallback locationCallback;
     FusedLocationProviderClient fusedLocationClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +66,10 @@ public class CurrentLocationActivity extends FragmentActivity implements OnMapRe
         mapFragment.getMapAsync(this);
 
         //Initializing googleApiClient
-         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         createLocationRequest();
         settingsCheck();
+        findViewById(R.id.getCurrentGps).setOnClickListener(view -> Toasty.warning(CurrentLocationActivity.this, "در حال یافتن مکان تقریبی...").show());
     }
 
     // Check for location settings
@@ -75,7 +84,7 @@ public class CurrentLocationActivity extends FragmentActivity implements OnMapRe
             public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
                 // All location settings are satisfied. The client can initialize
                 // location requests here.
-                Log.d("TAG", "onSuccess: settingsCheck");
+                findViewById(R.id.getCurrentGps).setOnClickListener(view -> getCurrentLocation());
                 getCurrentLocation();
             }
         });
@@ -87,10 +96,10 @@ public class CurrentLocationActivity extends FragmentActivity implements OnMapRe
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         // googleMapOptions.mapType(googleMap.MAP_TYPE_HYBRID)
         //    .compassEnabled(true);
-
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(35.74875867596496, 51.374039804940466), 15));
         // Add a marker in Sydney and move the camera
         mMap.setOnMarkerDragListener(this);
-        mMap.setOnMapLongClickListener(this);
+        mMap.setOnMapClickListener(this);
     }
 
     //Getting current location
@@ -151,10 +160,8 @@ public class CurrentLocationActivity extends FragmentActivity implements OnMapRe
          * move the camera with animation
          */
         LatLng latLng = new LatLng(latitude, longitude);
-        mMap.addMarker(new MarkerOptions()
-                .position(latLng)
-                .draggable(true)
-                .title("Marker in India"));
+        mMap.addCircle(new CircleOptions()
+                .center(latLng));
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
@@ -168,12 +175,6 @@ public class CurrentLocationActivity extends FragmentActivity implements OnMapRe
         Log.v(TAG, "view click event");
     }
 
-
-    @Override
-    public void onMapLongClick(LatLng latLng) {
-        // mMap.clear();
-        mMap.addMarker(new MarkerOptions().position(latLng).draggable(true));
-    }
 
     @Override
     public void onMarkerDragStart(Marker marker) {
@@ -210,6 +211,29 @@ public class CurrentLocationActivity extends FragmentActivity implements OnMapRe
                 Toast.makeText(this, "دسترسی لازم برای نمایش موقعیت مکانی فعلی یافت نشد، مجددا تلاش کنید", Toast.LENGTH_SHORT).show();
                 return;
             }
+        }
+    }
+
+    @Override
+    public void onMapClick(LatLng latLng) {
+        clickedLat = latLng;
+        if(marker!=null)
+            marker.remove();
+        marker = mMap.addMarker(new MarkerOptions().position(latLng).draggable(false));
+        findViewById(R.id.selectLocation).setVisibility(View.VISIBLE);
+        findViewById(R.id.selectLocation).setOnClickListener(view -> goBack());
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+    }
+
+    private void goBack() {
+        if (clickedLat != null) {
+            Intent s = new Intent();
+            s.putExtra(Extras.EXTRA_FIRST_ARG, clickedLat);
+            setResult(REQ_CODE, s);
+            finish();
         }
     }
 }

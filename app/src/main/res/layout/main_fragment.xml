@@ -153,43 +153,30 @@
         </RelativeLayout>
 
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="16dp">
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                android:layout_weight="1" />
 
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chip_group_main"
-                android:layout_width="wrap_content"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/tagRc"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:chipSpacing="16dp"
-                app:chipSpacingVertical="43dp"
-                app:ensureMinTouchTargetSize="false"
-                app:itemSpacing="36dp"
-                app:singleLine="true"
-                app:singleSelection="true">
-
-                <!-- Chips can be declared here, or added dynamically. -->
-
-            </com.google.android.material.chip.ChipGroup>
-            <!--        </HorizontalScrollView>-->
+                android:layout_toLeftOf="@+id/imgSearchContent"
+                android:layout_weight="1" />
 
 
             <ImageView
                 android:id="@+id/imgSearchContent"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
+                android:layout_alignParentRight="true"
                 android:layout_marginLeft="16dp"
                 app:srcCompat="@drawable/ic_search" />
-        </LinearLayout>
+        </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rc"

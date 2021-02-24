@@ -1,5 +1,6 @@
 package ntk.android.hyper.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -15,6 +16,7 @@ import java.util.List;
 import es.dmoral.toasty.Toasty;
 import ntk.android.base.fragment.BaseFragment;
 import ntk.android.hyper.R;
+import ntk.android.hyper.activity.CurrentLocationActivity;
 import ntk.android.hyper.activity.hyper.OrderActivity;
 import ntk.android.hyper.prefrense.HyperPref;
 import ntk.android.hyper.prefrense.OrderPref;
@@ -48,6 +50,11 @@ public class OrderOtherDetailFragment extends BaseFragment {
         paymentType.setOnItemClickListener((adapterView, view12, i, l) -> {
             type=i;
         });
+        findViewById(R.id.selectPin).setOnClickListener(view1 -> SelectLocation());
+    }
+
+    private void SelectLocation() {
+        startActivityForResult(new Intent(getContext(), CurrentLocationActivity.class),CurrentLocationActivity.REQ_CODE);
     }
 
     private void submit() {

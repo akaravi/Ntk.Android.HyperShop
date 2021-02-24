@@ -25,7 +25,7 @@ public class OrderPref {
         HyperShopOrderModel order = getOrder();
         HyperShopOrderContentModel p = null;
         for (int i = 0; i < order.Products.size(); i++) {
-            if (order.Products.get(i).Code.equalsIgnoreCase(model.Code)) {
+            if (order.Products.get(i).Code.equals(model.Code)) {
                 p = order.Products.remove(i);
                 break;
             }

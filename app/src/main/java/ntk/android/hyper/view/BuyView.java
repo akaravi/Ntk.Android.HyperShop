@@ -70,7 +70,7 @@ public class BuyView extends FrameLayout {
             updatePref();
         } else {
             Toasty.error(getContext(), "تعداد موجودی این کالا کمتر از مقدار درخواستی شما است").show();
-            if (count == 0) {
+            if (count <= 0) {
                 findViewById(R.id.mbtnAdd).setVisibility(VISIBLE);
                 findViewById(R.id.linear).setVisibility(GONE);
             }

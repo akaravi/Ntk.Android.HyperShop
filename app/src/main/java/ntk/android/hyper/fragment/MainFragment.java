@@ -8,12 +8,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipGroup;
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +35,7 @@ import ntk.android.hyper.R;
 import ntk.android.hyper.activity.AboutUsActivity;
 import ntk.android.hyper.activity.hyper.HyperShopContentSearchActivity;
 import ntk.android.hyper.adapter.MainFragment1_1Adapter;
+import ntk.android.hyper.adapter.hyper.MainTagAdapter;
 
 public class MainFragment extends BaseFragment {
     MainFragment1_1Adapter adapter;
@@ -58,25 +59,19 @@ public class MainFragment extends BaseFragment {
             add(0);
             add(1);
         }};
-        ChipGroup chipGroup = findViewById(R.id.chip_group_main);
-        for (int i = 0; i < titles.size(); i++) {
-            int index = titles.size() - 1 - i;
-            String name = titles.get(index);
-            Chip chip = (Chip) getLayoutInflater().inflate(R.layout.chip_row_item, chipGroup, false);
-//          inflate.setId(index);
-//            Chip chip=inflate.findViewById(R.id.chip);
-            chip.setId(ViewCompat.generateViewId());
-            chip.setTag(index);
-            chip.setTypeface(FontManager.T1_BOLD_Typeface(getContext()));
-            chip.setText(name);
-            chipGroup.addView(chip);
-        }
-        chipGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            for (int i = 0; i < group.getChildCount(); i++) {
-                if (group.getChildAt(i).getId() == checkedId)
-                    ((RecyclerView) findViewById(R.id.rc)).scrollToPosition(((Integer) group.getChildAt(i).getTag()));
-            }
-        });
+        RecyclerView chipGroup = findViewById(R.id.tagRc);
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(getContext());
+        layoutManager.setFlexDirection(FlexDirection.ROW);
+        layoutManager.setJustifyContent(JustifyContent.FLEX_END);
+        chipGroup.setLayoutManager(layoutManager);
+        chipGroup.setAdapter(new MainTagAdapter(titles,
+                (t) -> ((RecyclerView) findViewById(R.id.rc)).scrollToPosition((Integer) t.getTag())));
+//        chipGroup.setOnCheckedChangeListener((group, checkedId) -> {
+//            for (int i = 0; i < group.getChildCount(); i++) {
+//                if (group.getChildAt(i).getId() == checkedId)
+//                    ((RecyclerView) findViewById(R.id.rc)).scrollToPosition(((Integer) group.getChildAt(i).getTag()));
+//            }
+//        });
         RecyclerView rcAllView = findViewById(R.id.rc);
         rcAllView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         adapter = (new MainFragment1_1Adapter(titles));

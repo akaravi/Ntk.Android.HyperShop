@@ -126,6 +126,26 @@
             android:layout_gravity="center_vertical|right"
             android:layout_marginRight="4dp"
             android:src="@drawable/location" />
+
+        <RelativeLayout
+            android:id="@+id/selectPin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/pin_fill"
+                app:tint="@color/colorPrimary" />
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/shopping"
+                app:tint="@color/colorAccent" />
+        </RelativeLayout>
     </FrameLayout>
 
     <FrameLayout
@@ -176,11 +196,11 @@
 
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/etPaymentType"
-                android:paddingRight="40dp"
-
                 android:layout_width="match_parent"
+
                 android:layout_height="wrap_content"
-                android:inputType="none" />
+                android:inputType="none"
+                android:paddingRight="40dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
