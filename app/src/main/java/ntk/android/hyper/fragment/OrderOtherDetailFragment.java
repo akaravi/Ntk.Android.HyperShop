@@ -1,5 +1,6 @@
 package ntk.android.hyper.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,10 +11,13 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
+import ntk.android.base.Extras;
 import ntk.android.base.fragment.BaseFragment;
 import ntk.android.hyper.R;
 import ntk.android.hyper.activity.CurrentLocationActivity;
@@ -23,7 +27,7 @@ import ntk.android.hyper.prefrense.OrderPref;
 
 public class OrderOtherDetailFragment extends BaseFragment {
     int type = -1;
-
+    LatLng orderLocation;
     @Override
     public void onCreateFragment() {
         setContentView(R.layout.order_other_detail);
@@ -48,13 +52,13 @@ public class OrderOtherDetailFragment extends BaseFragment {
         AutoCompleteTextView paymentType = (AutoCompleteTextView) findViewById(R.id.etPaymentType);
         paymentType.setAdapter(new ArrayAdapter(getContext(), R.layout.spinner_item, list));
         paymentType.setOnItemClickListener((adapterView, view12, i, l) -> {
-            type=i;
+            type = i;
         });
         findViewById(R.id.selectPin).setOnClickListener(view1 -> SelectLocation());
     }
 
     private void SelectLocation() {
-        startActivityForResult(new Intent(getContext(), CurrentLocationActivity.class),CurrentLocationActivity.REQ_CODE);
+        startActivityForResult(new Intent(getContext(), CurrentLocationActivity.class), CurrentLocationActivity.REQ_CODE);
     }
 
     private void submit() {
@@ -84,15 +88,29 @@ public class OrderOtherDetailFragment extends BaseFragment {
             hyperPref.setLastName(family.getText().toString());
             hyperPref.setMobile(mobile.getText().toString());
             hyperPref.setAddress(address.getText().toString());
+
             new OrderPref(getContext()).addDetails(
                     name.getText().toString(),
                     family.getText().toString(),
                     mobile.getText().toString(),
                     address.getText().toString(),
-                    type
+                    type,orderLocation
             );
+
             ((OrderActivity) getActivity()).addOrder();
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CurrentLocationActivity.REQ_CODE)
+            if (resultCode == Activity.RESULT_OK) {
+                orderLocation = (LatLng) data.getExtras().get(Extras.EXTRA_FIRST_ARG);
+            } else {
+                orderLocation =null;
+                Toasty.warning(getContext(), "مکانی توسط شما ثبت نشد").show();
+            }
     }
 }
 

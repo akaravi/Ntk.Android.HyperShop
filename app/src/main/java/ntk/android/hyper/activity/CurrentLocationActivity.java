@@ -217,23 +217,24 @@ public class CurrentLocationActivity extends FragmentActivity implements OnMapRe
     @Override
     public void onMapClick(LatLng latLng) {
         clickedLat = latLng;
-        if(marker!=null)
+        if (marker != null)
             marker.remove();
         marker = mMap.addMarker(new MarkerOptions().position(latLng).draggable(false));
         findViewById(R.id.selectLocation).setVisibility(View.VISIBLE);
-        findViewById(R.id.selectLocation).setOnClickListener(view -> goBack());
+        findViewById(R.id.selectLocation).setOnClickListener(view -> sendLocationResul());
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
         mMap.getUiSettings().setZoomControlsEnabled(true);
     }
 
-    private void goBack() {
+    private void sendLocationResul() {
         if (clickedLat != null) {
             Intent s = new Intent();
             s.putExtra(Extras.EXTRA_FIRST_ARG, clickedLat);
             setResult(REQ_CODE, s);
             finish();
-        }
+        } else
+            Toasty.error(this, "متاسفانه موقعیت مکان در دسترس نیست ، مجددا تلاش فرمایید", Toasty.LENGTH_SHORT).show();
     }
 }

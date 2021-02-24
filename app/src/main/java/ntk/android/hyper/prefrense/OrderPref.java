@@ -2,6 +2,7 @@ package ntk.android.hyper.prefrense;
 
 import android.content.Context;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -93,13 +94,17 @@ public class OrderPref {
         return HyperShopOrderModel;
     }
 
-    public void addDetails(String name, String family, String mobile, String address, int type) {
+    public void addDetails(String name, String family, String mobile, String address, int type, LatLng orderLocation) {
         HyperShopOrderModel order = getOrder();
         order.Name = name;
         order.Family = family;
         order.Mobile = mobile;
         order.Address = address;
         order.PaymentType = type;
+        if (orderLocation != null) {
+            order.GeoLocationLatitude = String.valueOf(orderLocation.latitude);
+            order.GeoLocationLongitude = String.valueOf(orderLocation.longitude);
+        }
         saveOrder(order);
     }
 
