@@ -75,38 +75,11 @@ public class MainActivity extends AbstractMainActivity {
                     }
                 })
                 .build();
-        getLastOrder();
+        MainFragment fragment = new MainFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
         setFont();
     }
 
-    private void getLastOrder() {
-        Long userId = Preferences.with(this).UserInfo().userId();
-        if (userId != null && userId > 0L) {
-            ServiceExecute.execute(new HyperShopOrderService(this).ServiceOrderAdd())
-                    .subscribe(new ErrorExceptionObserver<HyperShopOrderModel>(switcher::showErrorView) {
-                        @Override
-                        protected void SuccessResponse(ErrorException<HyperShopOrderModel> response) {
-                                if (response.Item != null && response.Item.Products != null && response.Item.Products.size() > 0) {
-                                    new OrderPref(MainActivity.this).lastOrder(response.Item);
-                                    UpdateCard();
-                                }
-                                MainFragment fragment = new MainFragment();
-                                getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
-                        }
-
-                        @Override
-                        protected Runnable tryAgainMethod() {
-                            return () -> {
-                            };
-                        }
-                    });
-        } else {
-
-            MainFragment fragment = new MainFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
-        }
-
-    }
 
     private void setFont() {
         Typeface t1_req = FontManager.T1_Typeface(this);

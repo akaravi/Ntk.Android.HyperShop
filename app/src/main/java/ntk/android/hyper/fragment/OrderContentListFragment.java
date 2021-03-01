@@ -6,15 +6,22 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 import io.reactivex.Observable;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.subjects.BehaviorSubject;
 import java9.util.function.Function;
-import ntk.android.base.entitymodel.hypershop.HyperShopOrderContentModel;
+import ntk.android.base.config.NtkObserver;
+import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.entitymodel.base.ErrorException;
-import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.entitymodel.base.FilterModel;
+import ntk.android.base.entitymodel.hypershop.HyperShopOrderContentModel;
+import ntk.android.base.entitymodel.hypershop.HyperShopOrderModel;
 import ntk.android.base.fragment.abstraction.AbstractionListFragment;
+import ntk.android.base.services.hypershop.HyperShopOrderService;
 import ntk.android.hyper.R;
 import ntk.android.hyper.activity.hyper.OrderActivity;
 import ntk.android.hyper.adapter.hyper.HyperOrderContentAdapter;
@@ -25,7 +32,35 @@ public class OrderContentListFragment extends AbstractionListFragment<HyperShopO
 
     @Override
     public Function<FilterModel, Observable<ErrorException<HyperShopOrderContentModel>>> getService() {
-        return dataModel -> new OrderPref(getContext()).getLastShopping();
+        return filterModel -> {
+            BehaviorSubject<ErrorException<HyperShopOrderContentModel>> lastOrder = BehaviorSubject.create();
+            ServiceExecute.execute(new HyperShopOrderService(getContext()).lastOrder())
+                    .subscribe(new NtkObserver<ErrorException<HyperShopOrderModel>>() {
+                        @Override
+                        public void onNext(@NonNull ErrorException<HyperShopOrderModel> req) {
+                            HyperShopOrderModel order = new OrderPref(getContext()).getOrder();
+                            List<HyperShopOrderContentModel> Product = new ArrayList<>(req.Item.Products);
+                            Product.addAll(order.Products);
+                            ErrorException<HyperShopOrderContentModel> models = new ErrorException<>();
+                            models.IsSuccess = req.IsSuccess;
+                            models.ErrorMessage = req.ErrorMessage;
+                            models.TotalRowCount = req.TotalRowCount;
+                            models.CurrentPageNumber = req.CurrentPageNumber;
+                            models.RowPerPage = req.RowPerPage;
+                            models.Status = req.Status;
+                            models.ListItems = Product;
+                            new OrderPref(getContext()).updateOrderWith(Product, -100);
+                            lastOrder.onNext(models);
+                        }
+
+                        @Override
+                        public void onError(@NonNull Throwable e) {
+                            lastOrder.onError(e);
+                        }
+
+                    });
+            return lastOrder;
+        };
     }
 
     @Override
