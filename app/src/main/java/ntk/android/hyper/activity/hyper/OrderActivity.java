@@ -83,7 +83,7 @@ public class OrderActivity extends BaseActivity {
 
     public void showOrderDetail() {
         stepNumber = 2;
-        title.setText("تایید نهایی");
+        title.setText("مشخصات");
         findViewById(R.id.imgDeleteOrder).setVisibility(View.GONE);
         findViewById(R.id.bottomLayout).setVisibility(View.GONE);
         OrderOtherDetailFragment fragment = new OrderOtherDetailFragment();
@@ -97,20 +97,7 @@ public class OrderActivity extends BaseActivity {
         long orderId = item.Id;
         BankPaymentListFragment fragment = new BankPaymentListFragment();
         Bundle b = new Bundle();
-        if (item.DelivaryPrice == null)
-            item.DelivaryPrice = 0f;
-        if (item.FeeTax == null)
-            item.FeeTax = 0f;
-        if (item.FeeTransport == null)
-            item.FeeTransport = 0f;
-        if (item.AmountPure == null)
-            item.AmountPure = 0f;
         b.putLong(Extras.EXTRA_FIRST_ARG, orderId);
-        b.putDouble(Extras.EXTRA_SECOND_ARG, item.Amount);
-        b.putDouble(Extras.Extra_THIRD_ARG, item.DelivaryPrice);
-        b.putDouble(Extras.Extra_4_ARG, item.FeeTax);
-        b.putDouble(Extras.Extra_5_ARG, item.FeeTransport);
-        b.putDouble(Extras.Extra_5_ARG, item.AmountPure);
 
         fragment.setArguments(b);
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
@@ -120,14 +107,13 @@ public class OrderActivity extends BaseActivity {
         HyperShopOrderModel order = new OrderPref(this).getOrder();
         switcher.showProgressView();
 
-        ServiceExecute.execute(order.Id == 0 ? new HyperShopOrderService(this).add(order) : new HyperShopOrderService(this).edit(order))
+        ServiceExecute.execute((order.Id==null||order.Id == 0) ? new HyperShopOrderService(this).add(order) : new HyperShopOrderService(this).edit(order))
                 .subscribe(new NtkObserver<ErrorException<HyperShopOrderModel>>() {
                     @Override
                     public void onNext(@NonNull ErrorException<HyperShopOrderModel> response) {
                         switcher.showContentView();
                         if (response.IsSuccess) {
                             new OrderPref(OrderActivity.this).clear();
-                            Toasty.success(OrderActivity.this, "سفارش شما ثبت شد").show();
                             if (response.Item.PaymentType == enumHyperShopPaymentType.Online.index() || response.Item.PaymentType == enumHyperShopPaymentType.OnlineAndOnPlace.index())
                                 showBankPayments(response.Item);
                             else

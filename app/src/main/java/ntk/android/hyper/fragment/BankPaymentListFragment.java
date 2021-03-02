@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
@@ -23,6 +24,7 @@ import ntk.android.base.entitymodel.bankpayment.BankPaymentPrivateSiteConfigMode
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.hypershop.BankPaymentInjectCalculateModel;
+import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.base.entitymodel.hypershop.HyperShopOrderCalculateModel;
 import ntk.android.base.fragment.BaseFragment;
 import ntk.android.base.services.bankpayment.BankPaymentPrivateSiteConfigService;
@@ -34,10 +36,6 @@ import ntk.android.hyper.adapter.BankSelectAdapter;
 public class BankPaymentListFragment extends BaseFragment {
     Long OrderId;
     long BankId;
-    double productsPrice;
-    double taxPrice;
-    double transportPrice;
-    double totalPrice;
 
     @Override
     public void onCreateFragment() {
@@ -49,9 +47,6 @@ public class BankPaymentListFragment extends BaseFragment {
         super.onCreated();
         assert getArguments() != null;
         OrderId = getArguments().getLong(Extras.EXTRA_FIRST_ARG, 0);
-        taxPrice = getArguments().getDouble(Extras.EXTRA_SECOND_ARG, 0);
-        transportPrice = getArguments().getDouble(Extras.Extra_THIRD_ARG, 0);
-        productsPrice = getArguments().getDouble(Extras.Extra_4_ARG, 0);
 
     }
 
@@ -103,7 +98,8 @@ public class BankPaymentListFragment extends BaseFragment {
     }
 
     private void hideCalculateOrderView() {
-        //todo hide price and submit button
+        showCalculate(null);
+
     }
 
     private void OrderCalculate() {
@@ -114,9 +110,11 @@ public class BankPaymentListFragment extends BaseFragment {
         ServiceExecute.execute(new HyperShopOrderService(getContext()).orderCalculate(req))
                 .subscribe(new ErrorExceptionObserver<BankPaymentInjectCalculateModel>((error, tryAgain) -> Toasty.error(getContext(), error).show()) {
                     @Override
-                    protected void SuccessResponse(ErrorException<BankPaymentInjectCalculateModel> bankPaymentInjectCalculateModelErrorException) {
-                        Toasty.success(getContext(), "shod").show();
-                        findViewById(R.id.btnSubmit).setVisibility(View.VISIBLE);
+                    protected void SuccessResponse(ErrorException<BankPaymentInjectCalculateModel> response) {
+                        if (response.IsSuccess) {
+                            showCalculate(response.Item);
+                            findViewById(R.id.btnSubmit).setVisibility(View.VISIBLE);
+                        }
                     }
 
                     @Override
@@ -124,6 +122,24 @@ public class BankPaymentListFragment extends BaseFragment {
                         return () -> OrderCalculate();
                     }
                 });
+    }
+
+    private void showCalculate(BankPaymentInjectCalculateModel item) {
+        if (item == null)
+            item = new BankPaymentInjectCalculateModel();
+        if (item.Amount == null)
+            item.Amount = 0f;
+        if (item.AmountPure == null)
+            item.AmountPure = 0f;
+        if (item.FeeTax == null)
+            item.FeeTax = 0f;
+        if (item.FeeTransport == null)
+            item.FeeTransport = 0f;
+
+        ((TextView) findViewById(R.id.txtProductSum)).setText(item.AmountPure + " " + HyperShopContentModel.CURRENCY_UNIT);
+        ((TextView) findViewById(R.id.txtShipFee)).setText(item.FeeTransport + " " + HyperShopContentModel.CURRENCY_UNIT);
+        ((TextView) findViewById(R.id.txtTax)).setText(item.FeeTax + " " + HyperShopContentModel.CURRENCY_UNIT);
+        ((TextView) findViewById(R.id.txtTotalFactor)).setText(item.Amount + " " + HyperShopContentModel.CURRENCY_UNIT);
     }
 
     private void callPayment() {

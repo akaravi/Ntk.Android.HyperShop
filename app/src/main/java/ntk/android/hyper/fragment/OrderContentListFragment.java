@@ -41,18 +41,18 @@ public class OrderContentListFragment extends AbstractionListFragment<HyperShopO
                             HyperShopOrderModel order = new OrderPref(getContext()).getOrder();
                             if (req.Item.Products == null)
                                 req.Item.Products = new ArrayList<>();
-                            List<HyperShopOrderContentModel> Product = new ArrayList<>(req.Item.Products);
+
                             for (HyperShopOrderContentModel p : order.Products)
                                 if (!req.Item.Products.contains(p))
                                     req.Item.Products.add(p);
                             ErrorException<HyperShopOrderContentModel> models = new ErrorException<>();
-                            models.IsSuccess = req.IsSuccess;
+                            models.IsSuccess = true;
                             models.ErrorMessage = req.ErrorMessage;
                             models.TotalRowCount = req.TotalRowCount;
                             models.CurrentPageNumber = req.CurrentPageNumber;
                             models.RowPerPage = req.RowPerPage;
                             models.Status = req.Status;
-                            models.ListItems = Product;
+                            models.ListItems =  req.Item.Products;
                             new OrderPref(getContext()).saveLastOrder(req.Item);
                             req.IsSuccess = true;
                             lastOrder.onNext(models);
