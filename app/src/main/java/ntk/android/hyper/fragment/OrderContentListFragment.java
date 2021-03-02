@@ -39,8 +39,12 @@ public class OrderContentListFragment extends AbstractionListFragment<HyperShopO
                         @Override
                         public void onNext(@NonNull ErrorException<HyperShopOrderModel> req) {
                             HyperShopOrderModel order = new OrderPref(getContext()).getOrder();
+                            if (req.Item.Products == null)
+                                req.Item.Products = new ArrayList<>();
                             List<HyperShopOrderContentModel> Product = new ArrayList<>(req.Item.Products);
-                            Product.addAll(order.Products);
+                            for (HyperShopOrderContentModel p : order.Products)
+                                if (!req.Item.Products.contains(p))
+                                    req.Item.Products.add(p);
                             ErrorException<HyperShopOrderContentModel> models = new ErrorException<>();
                             models.IsSuccess = req.IsSuccess;
                             models.ErrorMessage = req.ErrorMessage;
@@ -49,7 +53,7 @@ public class OrderContentListFragment extends AbstractionListFragment<HyperShopO
                             models.RowPerPage = req.RowPerPage;
                             models.Status = req.Status;
                             models.ListItems = Product;
-                            new OrderPref(getContext()).updateOrderWith(Product, -100);
+                            new OrderPref(getContext()).saveLastOrder(req.Item);
                             lastOrder.onNext(models);
                         }
 
@@ -60,7 +64,9 @@ public class OrderContentListFragment extends AbstractionListFragment<HyperShopO
 
                     });
             return lastOrder;
-        };
+        }
+
+                ;
     }
 
     @Override

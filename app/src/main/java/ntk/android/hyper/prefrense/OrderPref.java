@@ -81,7 +81,9 @@ public class OrderPref {
     private void saveOrder(HyperShopOrderModel model) {
         EasyPreference.with(c).addString("NTK_HyperShopOrder", new Gson().toJson(model));
     }
-
+    public void saveLastOrder(HyperShopOrderModel model) {
+        EasyPreference.with(c).addString("NTK_HyperShopOrder", new Gson().toJson(model));
+    }
     public HyperShopOrderModel getOrder() {
         String hypershopOrder = EasyPreference.with(c).getString("NTK_HyperShopOrder", "");
 

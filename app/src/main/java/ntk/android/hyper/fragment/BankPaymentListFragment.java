@@ -14,6 +14,7 @@ import es.dmoral.toasty.Toasty;
 import io.reactivex.annotations.NonNull;
 import ntk.android.base.Extras;
 import ntk.android.base.NTKApplication;
+import ntk.android.base.config.ErrorExceptionObserver;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
 import ntk.android.base.dtomodel.bankpayment.BankPaymentOnlineTransactionModel;
@@ -21,6 +22,8 @@ import ntk.android.base.dtomodel.hypershop.HyperShopOrderPaymentDtoModel;
 import ntk.android.base.entitymodel.bankpayment.BankPaymentPrivateSiteConfigModel;
 import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterModel;
+import ntk.android.base.entitymodel.hypershop.BankPaymentInjectCalculateModel;
+import ntk.android.base.entitymodel.hypershop.HyperShopOrderCalculateModel;
 import ntk.android.base.fragment.BaseFragment;
 import ntk.android.base.services.bankpayment.BankPaymentPrivateSiteConfigService;
 import ntk.android.base.services.hypershop.HyperShopOrderService;
@@ -83,10 +86,13 @@ public class BankPaymentListFragment extends BaseFragment {
         paymentType.setAdapter(new BankSelectAdapter(getContext(), listItems));
         paymentType.setOnItemClickListener((adapterView, view12, i, l) -> {
             BankId = ((BankPaymentPrivateSiteConfigModel) adapterView.getItemAtPosition(i)).Id;
-            if (i >= 0)
+            if (i >= 0) {
                 paymentType.setText(((BankPaymentPrivateSiteConfigModel) adapterView.getItemAtPosition(i)).Title);
-            else
+                OrderCalculate();
+            } else {
+                hideCalculateOrderView();
                 paymentType.setText("");
+            }
         });
         findViewById(R.id.btnSubmit).setOnClickListener(view -> {
             if (BankId <= 0)
@@ -94,6 +100,30 @@ public class BankPaymentListFragment extends BaseFragment {
             else
                 callPayment();
         });
+    }
+
+    private void hideCalculateOrderView() {
+        //todo hide price and submit button
+    }
+
+    private void OrderCalculate() {
+
+        HyperShopOrderCalculateModel req = new HyperShopOrderCalculateModel();
+        req.bankPaymentPrivateId = BankId;
+        req.linkOrderId = OrderId;
+        ServiceExecute.execute(new HyperShopOrderService(getContext()).orderCalculate(req))
+                .subscribe(new ErrorExceptionObserver<BankPaymentInjectCalculateModel>((error, tryAgain) -> Toasty.error(getContext(), error).show()) {
+                    @Override
+                    protected void SuccessResponse(ErrorException<BankPaymentInjectCalculateModel> bankPaymentInjectCalculateModelErrorException) {
+                        Toasty.success(getContext(), "shod").show();
+                        findViewById(R.id.btnSubmit).setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    protected Runnable tryAgainMethod() {
+                        return () -> OrderCalculate();
+                    }
+                });
     }
 
     private void callPayment() {

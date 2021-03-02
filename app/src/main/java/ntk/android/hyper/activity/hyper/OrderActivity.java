@@ -97,6 +97,14 @@ public class OrderActivity extends BaseActivity {
         long orderId = item.Id;
         BankPaymentListFragment fragment = new BankPaymentListFragment();
         Bundle b = new Bundle();
+        if (item.DelivaryPrice == null)
+            item.DelivaryPrice = 0f;
+        if (item.FeeTax == null)
+            item.FeeTax = 0f;
+        if (item.FeeTransport == null)
+            item.FeeTransport = 0f;
+        if (item.AmountPure == null)
+            item.AmountPure = 0f;
         b.putLong(Extras.EXTRA_FIRST_ARG, orderId);
         b.putDouble(Extras.EXTRA_SECOND_ARG, item.Amount);
         b.putDouble(Extras.Extra_THIRD_ARG, item.DelivaryPrice);
@@ -111,7 +119,8 @@ public class OrderActivity extends BaseActivity {
     public void addOrder() {
         HyperShopOrderModel order = new OrderPref(this).getOrder();
         switcher.showProgressView();
-        ServiceExecute.execute(new HyperShopOrderService(this).add(order))
+
+        ServiceExecute.execute(order.Id == 0 ? new HyperShopOrderService(this).add(order) : new HyperShopOrderService(this).edit(order))
                 .subscribe(new NtkObserver<ErrorException<HyperShopOrderModel>>() {
                     @Override
                     public void onNext(@NonNull ErrorException<HyperShopOrderModel> response) {
