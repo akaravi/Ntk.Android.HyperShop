@@ -54,6 +54,7 @@ public class OrderContentListFragment extends AbstractionListFragment<HyperShopO
                             models.Status = req.Status;
                             models.ListItems = Product;
                             new OrderPref(getContext()).saveLastOrder(req.Item);
+                            req.IsSuccess = true;
                             lastOrder.onNext(models);
                         }
 
