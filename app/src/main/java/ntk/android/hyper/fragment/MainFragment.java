@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -65,7 +66,17 @@ public class MainFragment extends BaseFragment {
         layoutManager.setJustifyContent(JustifyContent.FLEX_END);
         chipGroup.setLayoutManager(layoutManager);
         chipGroup.setAdapter(new MainTagAdapter(titles,
-                (t) -> ((RecyclerView) findViewById(R.id.rc)).scrollToPosition((Integer) t.getTag())));
+                (t) -> {
+                     float y = ((RecyclerView) findViewById(R.id.rc)).getChildAt((Integer) t.getTag()).getY();
+                    findViewById(R.id.nestedScrollView).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            NestedScrollView nsv = (NestedScrollView) findViewById(R.id.nestedScrollView);
+                            nsv.fling(0);
+                            nsv.smoothScrollTo(0, (int) y);
+                        }
+                    });
+                }));
 //        chipGroup.setOnCheckedChangeListener((group, checkedId) -> {
 //            for (int i = 0; i < group.getChildCount(); i++) {
 //                if (group.getChildAt(i).getId() == checkedId)

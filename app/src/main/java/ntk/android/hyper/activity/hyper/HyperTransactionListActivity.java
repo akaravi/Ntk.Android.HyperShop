@@ -15,10 +15,14 @@ import ntk.android.base.services.bankpayment.BankPaymentTransactionService;
 import ntk.android.hyper.R;
 import ntk.android.hyper.adapter.hyper.HyperTransitionAdapter;
 
+/**
+ * transactions of each member
+ */
 public class HyperTransactionListActivity extends BaseFilterModelListActivity<BankPaymentTransactionModel> {
     @Override
     public void afterInit() {
         super.afterInit();
+        //hide search button
         findViewById(R.id.imgSearch).setVisibility(View.GONE);
 
     }

@@ -10,11 +10,8 @@ import ntk.android.hyper.R;
 import ntk.android.hyper.fragment.ShopContentList_1_Fragment;
 
 /**
- * argument for shopContentActivity
- * Title : arg 1
- * Searchshow :arg 2
+ * activity for showing contentList base on filterModel
  */
-
 public class ShopContentListActivity extends BaseActivity {
 
     boolean showToolbar = false;

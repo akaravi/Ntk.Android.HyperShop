@@ -43,6 +43,9 @@ import ntk.android.hyper.fragment.MainFragment;
 import ntk.android.hyper.prefrense.OrderPref;
 import ntk.android.hyper.view.CartView;
 
+/**
+ * activity for showing main contents
+ */
 public class MainActivity extends AbstractMainActivity {
 
     private static final long RIPPLE_DURATION = 250;
@@ -53,10 +56,14 @@ public class MainActivity extends AbstractMainActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.panel_activity);
+        //create menu dynamically
         View guillotineMenu = LayoutInflater.from(this).inflate(R.layout.panel_drawer, null);
+        //add menu to root
         ((FrameLayout) findViewById(R.id.root)).addView(guillotineMenu);
         ButterKnife.bind(this);
+        //click listener for card Icon
         findViewById(R.id.cartView).setOnClickListener(view -> OrderActivity.START_ORDER_ACTIVITY(MainActivity.this));
+        //menu animation creating
         menuAnim = new GuillotineAnimation.GuillotineBuilder(guillotineMenu,
                 guillotineMenu.findViewById(R.id.guillotine_hamburger),
                 findViewById(R.id.content_hamburger))
@@ -75,6 +82,7 @@ public class MainActivity extends AbstractMainActivity {
                     }
                 })
                 .build();
+        //showing content
         MainFragment fragment = new MainFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
         setFont();

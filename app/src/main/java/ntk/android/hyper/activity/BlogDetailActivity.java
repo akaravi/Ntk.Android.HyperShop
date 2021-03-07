@@ -10,6 +10,9 @@ import ntk.android.base.entitymodel.blog.BlogContentOtherInfoModel;
 import ntk.android.hyper.adapter.BlogCommentAdapter;
 import ntk.android.hyper.adapter.TabBlogAdapter;
 
+/**
+ * activity for showing News list
+ */
 public class BlogDetailActivity extends BaseBlogDetail_1_Activity {
 
     @Override

@@ -38,6 +38,9 @@ import es.dmoral.toasty.Toasty;
 import ntk.android.base.Extras;
 import ntk.android.hyper.R;
 
+/**
+ * get current location of user
+ */
 public class CurrentLocationActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleMap.OnMarkerDragListener,
         GoogleMap.OnMapClickListener,

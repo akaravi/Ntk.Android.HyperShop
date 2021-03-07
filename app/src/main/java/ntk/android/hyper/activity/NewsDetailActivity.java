@@ -10,8 +10,10 @@ import ntk.android.base.entitymodel.news.NewsContentOtherInfoModel;
 import ntk.android.hyper.adapter.NewsCommentAdapter;
 import ntk.android.hyper.adapter.TabNewsAdapter;
 
-;
 
+/**
+ * details of each news
+ */
 public class NewsDetailActivity extends BaseNewsDetail_1_Activity {
 
 

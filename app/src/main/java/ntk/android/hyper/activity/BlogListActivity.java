@@ -14,10 +14,14 @@ import ntk.android.base.entitymodel.blog.BlogContentModel;
 import ntk.android.base.services.blog.BlogContentService;
 import ntk.android.hyper.adapter.BlogAdapter;
 
+/**
+ * blog list activity that extends from module baseActivity
+ */
 public class BlogListActivity extends BaseFilterModelListActivity<BlogContentModel> {
     @Override
     protected void onCreated( ) {
         super.onCreated();
+        //set title of activity
         LblTitle.setText("مقالات");
     }
 

@@ -19,14 +19,18 @@ import ntk.android.base.utill.FontManager;
 import ntk.android.base.view.ViewController;
 import ntk.android.hyper.activity.MainActivity;
 
+//main application of App
 public class MyApplication extends NTKApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        //@note should be comment  for release  (or false)
         DEBUG = true;
+        //create image cache folder
         if (!new File(getCacheDir(), "image").exists()) {
             new File(getCacheDir(), "image").mkdirs();
         }
+        //define default of Image Loader API
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
                 .diskCache(new UnlimitedDiskCache(new File(getCacheDir(), "image")))
                 .diskCacheFileNameGenerator(imageUri -> {
@@ -35,13 +39,15 @@ public class MyApplication extends NTKApplication {
                 })
                 .build();
         ImageLoader.getInstance().init(config);
-
+        //define default of toasty library
         Toasty.Config.getInstance()
                 .setToastTypeface(FontManager.GetTypeface(getApplicationContext(), FontManager.IranSans))
                 .setTextSize(14).apply();
+        //create style of application
         applicationStyle = new ApplicationStyle() {
             @Override
             public ViewController getViewController() {
+                //define app default views such as loading
                 ViewController vc = new ViewController() {
                 };
                 vc.setLoading_view(R.layout.sub_base_loading)
@@ -51,7 +57,7 @@ public class MyApplication extends NTKApplication {
                         .setError_label(R.id.tvError);
                 return vc;
             }
-
+            //define main Activity of app
             @Override
             public Class<?> getMainActivity() {
                 return MainActivity.class;
@@ -67,15 +73,18 @@ public class MyApplication extends NTKApplication {
 
     @Override
     protected ApplicationStaticParameter getConfig() {
+        //for change default parameters of application like api url ,
+        //@note should be comment  for release
         ApplicationStaticParameter applicationStaticParameter = new ApplicationStaticParameter();
 //         ApplicationStaticParameter.PACKAGE_NAME = "ntk.android.hypershop";
-//         ApplicationStaticParameter.URL = "https://07f2eabf7e50.ngrok.io/";
+//         ApplicationStaticParameter.URL = "https://47f2b488bf59.ngrok.io";
 
         return applicationStaticParameter;
     }
 
     @Override
     public ApplicationParameter getApplicationParameter() {
+        //default parameters for baseActivity
         return new ApplicationParameter(BuildConfig.APPLICATION_ID, BuildConfig.APPLICATION_ID, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE);
     }
 }

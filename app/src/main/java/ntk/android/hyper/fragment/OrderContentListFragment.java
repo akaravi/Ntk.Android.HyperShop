@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 import io.reactivex.Observable;
@@ -87,7 +86,7 @@ public class OrderContentListFragment extends AbstractionListFragment<HyperShopO
     protected void onListCreate() {
         if (models.size() > 0) {
             updateTotalPrice();
-            ((OrderActivity) getActivity()).showBottom();
+            ((OrderActivity) getActivity()).bottomView(View.VISIBLE);
         }
     }
 

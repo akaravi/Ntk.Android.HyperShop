@@ -38,7 +38,12 @@ public class MainTagAdapter extends BaseRecyclerAdapter<String, MainTagAdapter.V
         (c).setText(getItem(position));
         c.setTag(position);
         c.setOnCheckedChangeListener((compoundButton, b) ->{
-            if (b) {
+         if (position==selectPos)
+         {
+             compoundButton.setChecked(true);
+             r.onClick(compoundButton);
+         }
+          else  if (b) {
                 selectPos = position;
                 notifyDataSetChanged();
                 r.onClick(compoundButton);

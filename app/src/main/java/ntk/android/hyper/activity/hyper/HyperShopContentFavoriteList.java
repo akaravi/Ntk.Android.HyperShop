@@ -11,7 +11,10 @@ import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.base.services.hypershop.HyperShopContentService;
 import ntk.android.hyper.adapter.hyper.HyperShopContent_1_Adapter;
 
-class HyperContentFavoriteList extends BaseFilterModelListActivity<HyperShopContentModel> {
+/**
+ * favorite liste mahsoolate har karbar
+ */
+class HyperShopContentFavoriteList extends BaseFilterModelListActivity<HyperShopContentModel> {
     @Override
     public Function<FilterModel, Observable<ErrorException<HyperShopContentModel>>> getService() {
         return new HyperShopContentService(this)::getFavoriteList;

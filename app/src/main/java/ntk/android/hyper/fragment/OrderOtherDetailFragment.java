@@ -28,6 +28,7 @@ import ntk.android.hyper.prefrense.OrderPref;
 public class OrderOtherDetailFragment extends BaseFragment {
     int type = -1;
     LatLng orderLocation;
+
     @Override
     public void onCreateFragment() {
         setContentView(R.layout.order_other_detail);
@@ -69,16 +70,14 @@ public class OrderOtherDetailFragment extends BaseFragment {
         EditText desc = findViewById(R.id.etDescription);
         if (name.getText().toString().equalsIgnoreCase("")) {
             Toasty.warning(getContext(), "نام خود را وارد نمایید").show();
-            return;
         } else if (family.getText().toString().equalsIgnoreCase("")) {
             Toasty.warning(getContext(), "نام خانوادگی را وارد نمایید").show();
-            return;
         } else if (mobile.getText().toString().equalsIgnoreCase("")) {
             Toasty.warning(getContext(), "شماره تلفن همراه خود را وارد نمایید").show();
-            return;
+        } else if (!mobile.getText().toString().startsWith("09") || mobile.getText().toString().length() != 11) {
+            Toasty.warning(getContext(), "شماره تلفن همراه را به صورت صحیح وارد کنید", Toasty.LENGTH_LONG, true).show();
         } else if (address.getText().toString().equalsIgnoreCase("")) {
             Toasty.warning(getContext(), "آدرس خود را وارد نمایید").show();
-            return;
         } else if (type <= 0) {
             Toasty.warning(getContext(), "نوع پرداخت خود را انتخاب نمایید").show();
         } else {
@@ -94,7 +93,7 @@ public class OrderOtherDetailFragment extends BaseFragment {
                     family.getText().toString(),
                     mobile.getText().toString(),
                     address.getText().toString(),
-                    type,orderLocation
+                    type, orderLocation
             );
 
             ((OrderActivity) getActivity()).addOrder();
@@ -108,7 +107,7 @@ public class OrderOtherDetailFragment extends BaseFragment {
             if (resultCode == Activity.RESULT_OK) {
                 orderLocation = (LatLng) data.getExtras().get(Extras.EXTRA_FIRST_ARG);
             } else {
-                orderLocation =null;
+                orderLocation = null;
                 Toasty.warning(getContext(), "مکانی توسط شما ثبت نشد").show();
             }
     }

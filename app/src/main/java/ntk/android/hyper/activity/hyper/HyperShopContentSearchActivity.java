@@ -15,6 +15,9 @@ import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.base.services.hypershop.HyperShopContentService;
 import ntk.android.hyper.adapter.hyper.HyperShopContent_1_Adapter;
 
+/**
+ * hyper content search activity that search products base on Title
+ */
 public class HyperShopContentSearchActivity extends AbstractSearchActivity<HyperShopContentModel> {
     @Override
     protected RecyclerView.Adapter getAdapter() {

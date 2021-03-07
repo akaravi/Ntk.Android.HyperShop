@@ -14,10 +14,14 @@ import ntk.android.base.entitymodel.news.NewsContentModel;
 import ntk.android.base.services.news.NewsContentService;
 import ntk.android.hyper.adapter.NewsAdapter;
 
+/**
+ * activity for showing News list
+ */
 public class NewsListActivity extends BaseFilterModelListActivity<NewsContentModel> {
     @Override
     protected void onCreated() {
         super.onCreated();
+        //set custom title
         LblTitle.setText("اخبار");
     }
 

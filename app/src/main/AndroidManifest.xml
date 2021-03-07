@@ -82,9 +82,6 @@
             android:name=".activity.hyper.ShopContentListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.hyper.HyperListActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -105,9 +102,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.hyper.PaidOrderDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.Test"
             android:screenOrientation="portrait" />
 
         <provider

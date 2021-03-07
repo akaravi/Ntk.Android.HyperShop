@@ -11,6 +11,9 @@ import ntk.android.base.entitymodel.blog.BlogContentModel;
 import ntk.android.base.services.blog.BlogContentService;
 import ntk.android.hyper.adapter.BlogAdapter;
 
+/**
+ *  search blog activity that extends from module baseActivity
+ */
 public class BlogSearchActivity extends AbstractSearchActivity<BlogContentModel> {
 
     @Override

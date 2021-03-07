@@ -30,6 +30,7 @@ import ntk.android.hyper.view.CircleAnimationUtil;
 //import com.steelkiwi.library.IncrementProductView;
 //import com.steelkiwi.library.listener.OnStateListener;
 
+//seconds implement for conetnt
 public class ShopContentDetailDialog extends baseFragmentDialog {
 
     private String code;

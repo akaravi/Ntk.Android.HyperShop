@@ -22,10 +22,12 @@ public class HyperCategoryListActivity extends BaseFilterModelListActivity<Hyper
     @Override
     public void afterInit() {
         super.afterInit();
+        //hide search icon
         findViewById(R.id.imgSearch).setVisibility(View.GONE);
-//        findViewById(R.id.swipRefresh).setBackgroundColor(Color.parseColor("#F7F8FA"));
+        //add custom padding to recyclerView
         int i = NViewUtils.dpToPx(this, 8);
         findViewById(R.id.recycler).setPadding(i, i*2, i, i*2);
+        //add custom color to recycler
         findViewById(R.id.recycler).setBackgroundColor(Color.parseColor("#F7F8FA"));
 
     }

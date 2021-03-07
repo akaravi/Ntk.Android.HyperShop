@@ -11,8 +11,10 @@ import ntk.android.base.entitymodel.news.NewsContentModel;
 import ntk.android.base.services.news.NewsContentService;
 import ntk.android.hyper.adapter.NewsAdapter;
 
-;
 
+/**
+ * activity for search in news
+ */
 public class NewsSearchActivity extends AbstractSearchActivity<NewsContentModel> {
     @Override
     protected RecyclerView.Adapter getAdapter() {

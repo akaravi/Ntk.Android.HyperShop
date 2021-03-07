@@ -8,17 +8,20 @@ import io.reactivex.Observable;
 import java9.util.function.Function;
 import ntk.android.base.activity.common.BaseFilterModelListActivity;
 import ntk.android.base.entitymodel.base.ErrorException;
-import ntk.android.base.entitymodel.base.FilterDataModel;
 import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.hypershop.HyperShopOrderModel;
 import ntk.android.base.services.hypershop.HyperShopOrderService;
 import ntk.android.hyper.R;
 import ntk.android.hyper.adapter.hyper.OrderListAdapter;
 
+/**
+ * activity for showing orders of user with details such as date ,products in factor ,...
+ */
 public class OrderListActivity extends BaseFilterModelListActivity<HyperShopOrderModel> {
     @Override
     public void afterInit() {
         super.afterInit();
+        //hide search button
         findViewById(R.id.imgSearch).setVisibility(View.GONE);
     }
 
@@ -29,7 +32,7 @@ public class OrderListActivity extends BaseFilterModelListActivity<HyperShopOrde
 
     @Override
     public RecyclerView.Adapter createAdapter() {
-        return new OrderListAdapter(this,models);
+        return new OrderListAdapter(this, models);
     }
 
     @Override
