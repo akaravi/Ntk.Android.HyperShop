@@ -36,7 +36,7 @@ import ntk.android.hyper.R;
 import ntk.android.hyper.activity.AboutUsActivity;
 import ntk.android.hyper.activity.hyper.HyperShopContentSearchActivity;
 import ntk.android.hyper.adapter.MainFragment1_1Adapter;
-import ntk.android.hyper.adapter.hyper.MainTagAdapter;
+import ntk.android.base.adapter.common.MainTagAdapter;
 
 public class MainFragment extends BaseFragment {
     MainFragment1_1Adapter adapter;
