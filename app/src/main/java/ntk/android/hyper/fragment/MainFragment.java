@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
+import ntk.android.base.adapter.common.MainTagAdapter;
 import ntk.android.base.appclass.AboutUsClass;
 import ntk.android.base.config.NtkObserver;
 import ntk.android.base.config.ServiceExecute;
@@ -36,7 +37,7 @@ import ntk.android.hyper.R;
 import ntk.android.hyper.activity.AboutUsActivity;
 import ntk.android.hyper.activity.hyper.HyperShopContentSearchActivity;
 import ntk.android.hyper.adapter.MainFragment1_1Adapter;
-import ntk.android.base.adapter.common.MainTagAdapter;
+
 
 public class MainFragment extends BaseFragment {
     MainFragment1_1Adapter adapter;
