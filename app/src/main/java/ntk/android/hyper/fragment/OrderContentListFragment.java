@@ -86,6 +86,7 @@ public class OrderContentListFragment extends AbstractionListFragment<HyperShopO
     protected void onListCreate() {
         if (models.size() > 0) {
             updateTotalPrice();
+            //show view on activity
             ((OrderActivity) getActivity()).bottomView(View.VISIBLE);
         }
     }

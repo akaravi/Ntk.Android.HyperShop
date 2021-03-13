@@ -93,7 +93,7 @@ public class OrderActivity extends BaseActivity {
     public void showOrderDetail() {
         stepNumber = 2;
         title.setText("مشخصات");
-
+        bottomView(View.GONE);
         OrderOtherDetailFragment fragment = new OrderOtherDetailFragment();
         fragment.setArguments(getIntent().getExtras());
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commitNow();
