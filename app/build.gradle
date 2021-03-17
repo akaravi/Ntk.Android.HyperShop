@@ -101,7 +101,7 @@ dependencies {
     annotationProcessor 'androidx.room:room-compiler:2.2.6'
     implementation 'androidx.room:room-rxjava2:2.2.6'
     implementation 'com.daimajia.easing:library:2.0@aar'
-    implementation 'com.daimajia.androidanimations:library:2.3@aar'
+    implementation 'com.daimajia.androidanimations:library:2. 3@aar'
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
     //burnkern
@@ -126,7 +126,6 @@ dependencies {
 //    api project(path: ':baseActivity')
 
     api 'com.github.akaravi:Ntk.Android.BaseActivity:1.4.120'
-
 }
 repositories {
     mavenCentral()
