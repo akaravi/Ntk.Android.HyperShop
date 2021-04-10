@@ -61,7 +61,7 @@ public class TabBlogAdapter extends BaseRecyclerAdapter<BlogContentOtherInfoMode
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
-            Btn.setTypeface(FontManager.GetTypeface(context, FontManager.IranSans));
+            Btn.setTypeface(FontManager.T1_Typeface(context));
         }
     }
 }

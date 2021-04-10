@@ -92,7 +92,7 @@ public class BankSelectAdapter extends ArrayAdapter<BankPaymentPrivateSiteConfig
 //        public ViewHolder(View view) {
 //            super(view);
 //            ButterKnife.bind(this, view);
-//            LblTitle.setTypeface(FontManager.GetTypeface(context, FontManager.IranSans));
+//            LblTitle.setTypeface(FontManager.T1_Typeface(context));
 //        }
 //    }
 //}

@@ -41,7 +41,7 @@ public class MyApplication extends NTKApplication {
         ImageLoader.getInstance().init(config);
         //define default of toasty library
         Toasty.Config.getInstance()
-                .setToastTypeface(FontManager.GetTypeface(getApplicationContext(), FontManager.IranSans))
+                .setToastTypeface(FontManager.GetTypeface(getApplicationContext()))
                 .setTextSize(14).apply();
         //create style of application
         applicationStyle = new ApplicationStyle() {
