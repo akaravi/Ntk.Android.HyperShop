@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 
+def BaseVersion='1.4.137'
+def incrementalVersion='1'
 android {
     compileSdkVersion 29
     defaultConfig {
@@ -10,7 +12,7 @@ android {
         targetSdkVersion 29
         multiDexEnabled true
         versionCode 1  //Build Version NTK
-        versionName "1.0"//Splash Version Lable
+        versionName "${BaseVersion}${incrementalVersion}"//Splash Version Lable
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         vectorDrawables.useSupportLibrary = true
     }
@@ -125,7 +127,7 @@ dependencies {
 
 //    api project(path: ':baseActivity')
 
-    api 'com.github.akaravi:Ntk.Android.BaseActivity:1.4.125'
+    api "com.github.akaravi:Ntk.Android.BaseActivity:${BaseVersion}"
 }
 repositories {
     mavenCentral()

@@ -23,6 +23,25 @@ import ntk.android.hyper.activity.MainActivity;
 public class MyApplication extends NTKApplication {
     @Override
     public void onCreate() {
+        applicationStyle = new ApplicationStyle() {
+            @Override
+            public ViewController getViewController() {
+                //define app default views such as loading
+                ViewController vc = new ViewController() {
+                };
+                vc.setLoading_view(R.layout.sub_base_loading)
+                        .setEmpty_view(R.layout.sub_base_empty)
+                        .setError_view(R.layout.sub_base_error)
+                        .setError_button(R.id.btn_error_tryAgain)
+                        .setError_label(R.id.tvError);
+                return vc;
+            }
+            //define main Activity of app
+            @Override
+            public Class<?> getMainActivity() {
+                return MainActivity.class;
+            }
+        };
         super.onCreate();
         //@note should be comment  for release  (or false)
         DEBUG = true;
@@ -44,25 +63,7 @@ public class MyApplication extends NTKApplication {
                 .setToastTypeface(FontManager.T1_Typeface(getApplicationContext()))
                 .setTextSize(14).apply();
         //create style of application
-        applicationStyle = new ApplicationStyle() {
-            @Override
-            public ViewController getViewController() {
-                //define app default views such as loading
-                ViewController vc = new ViewController() {
-                };
-                vc.setLoading_view(R.layout.sub_base_loading)
-                        .setEmpty_view(R.layout.sub_base_empty)
-                        .setError_view(R.layout.sub_base_error)
-                        .setError_button(R.id.btn_error_tryAgain)
-                        .setError_label(R.id.tvError);
-                return vc;
-            }
-            //define main Activity of app
-            @Override
-            public Class<?> getMainActivity() {
-                return MainActivity.class;
-            }
-        };
+
     }
 
     @Override
