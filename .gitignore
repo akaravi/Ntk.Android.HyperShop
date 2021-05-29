@@ -18,3 +18,5 @@
 /app/app.iml
 /settings.gradle
 settings.gradle
+NtkCmsBuild.bat
+NtkCmsGitPull.bat
