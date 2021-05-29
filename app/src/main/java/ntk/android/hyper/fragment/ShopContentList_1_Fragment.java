@@ -11,12 +11,13 @@ import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.base.fragment.abstraction.AbstractionListFragment;
+import ntk.android.base.fragment.common.BaseFilterModelFragment;
 import ntk.android.base.services.hypershop.HyperShopContentService;
 import ntk.android.hyper.activity.hyper.HyperShopContentSearchActivity;
 import ntk.android.hyper.adapter.hyper.HyperShopContent_1_Adapter;
 
 
-public class ShopContentList_1_Fragment extends AbstractionListFragment<HyperShopContentModel> {
+public class ShopContentList_1_Fragment extends BaseFilterModelFragment<HyperShopContentModel> {
     @Override
     public Function<FilterModel, Observable<ErrorException<HyperShopContentModel>>> getService() {
         return new HyperShopContentService(getContext())::getAllMicroService;

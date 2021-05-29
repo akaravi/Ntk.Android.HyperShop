@@ -19,18 +19,19 @@ import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.hypershop.HyperShopOrderContentModel;
 import ntk.android.base.entitymodel.hypershop.HyperShopOrderModel;
-import ntk.android.base.fragment.abstraction.AbstractionListFragment;
+import ntk.android.base.fragment.common.BaseFilterModelFragment;
 import ntk.android.base.services.hypershop.HyperShopOrderService;
 import ntk.android.hyper.R;
 import ntk.android.hyper.activity.hyper.OrderActivity;
 import ntk.android.hyper.adapter.hyper.HyperOrderContentAdapter;
 import ntk.android.hyper.prefrense.OrderPref;
 
-public class OrderContentListFragment extends AbstractionListFragment<HyperShopOrderContentModel> {
+public class OrderContentListFragment extends BaseFilterModelFragment<HyperShopOrderContentModel> {
     float amountOrder;
-
+ 
     @Override
     public Function<FilterModel, Observable<ErrorException<HyperShopOrderContentModel>>> getService() {
+
         return filterModel -> {
             BehaviorSubject<ErrorException<HyperShopOrderContentModel>> lastOrder = BehaviorSubject.create();
             ServiceExecute.execute(new HyperShopOrderService(getContext()).lastOrder())
@@ -51,7 +52,7 @@ public class OrderContentListFragment extends AbstractionListFragment<HyperShopO
                             models.CurrentPageNumber = req.CurrentPageNumber;
                             models.RowPerPage = req.RowPerPage;
                             models.Status = req.Status;
-                            models.ListItems =  req.Item.Products;
+                            models.ListItems = req.Item.Products;
                             new OrderPref(getContext()).saveLastOrder(req.Item);
                             req.IsSuccess = true;
                             lastOrder.onNext(models);
@@ -90,6 +91,7 @@ public class OrderContentListFragment extends AbstractionListFragment<HyperShopO
             ((OrderActivity) getActivity()).bottomView(View.VISIBLE);
         }
     }
+
 
     @Override
     protected IntegrationView viewSyncOnScrolling() {
