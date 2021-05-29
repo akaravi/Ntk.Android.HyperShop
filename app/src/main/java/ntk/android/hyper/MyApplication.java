@@ -36,6 +36,7 @@ public class MyApplication extends NTKApplication {
                         .setError_label(R.id.tvError);
                 return vc;
             }
+
             //define main Activity of app
             @Override
             public Class<?> getMainActivity() {
@@ -68,6 +69,7 @@ public class MyApplication extends NTKApplication {
 
     @Override
     protected void attachBaseContext(Context base) {
+        instance = this;
         super.attachBaseContext(base);
         MultiDex.install(base);
     }
