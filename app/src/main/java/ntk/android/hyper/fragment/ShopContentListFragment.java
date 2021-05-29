@@ -8,15 +8,22 @@ import ntk.android.base.entitymodel.base.ErrorException;
 import ntk.android.base.entitymodel.base.FilterModel;
 import ntk.android.base.entitymodel.hypershop.HyperShopContentModel;
 import ntk.android.base.fragment.abstraction.AbstractionListFragment;
+import ntk.android.base.fragment.common.BaseFilterModelFragment;
 import ntk.android.base.services.hypershop.HyperShopContentService;
 import ntk.android.hyper.adapter.hyper.PrevHypershopContentAdapter;
 
 
-public class ShopContentListFragment extends AbstractionListFragment<HyperShopContentModel> {
+public class ShopContentListFragment extends BaseFilterModelFragment<HyperShopContentModel> {
+    @Override
+    protected void requestOnIntent() {
+
+    }
+
     @Override
     public Function<FilterModel, Observable<ErrorException<HyperShopContentModel>>> getService() {
         return new HyperShopContentService(getContext())::getAllMicroService;
     }
+
 
     @Override
     public boolean withToolbar() {
@@ -32,6 +39,8 @@ public class ShopContentListFragment extends AbstractionListFragment<HyperShopCo
     public void ClickSearch() {
 
     }
+
+
 //     ShopContentListAdapter adapter;
 //    /**
 //     * if activity recently has been get data from server set true
