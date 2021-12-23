@@ -19,7 +19,7 @@ import ntk.android.base.Extras;
 import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.enums.enumHyperShopPaymentType;
 import ntk.android.base.entitymodel.hypershop.HyperShopOrderModel;
-import ntk.android.base.utill.AppUtill;
+import ntk.android.base.utill.AppUtil;
 import ntk.android.base.utill.FontManager;
 import ntk.android.hyper.R;
 import ntk.android.hyper.activity.hyper.PaidOrderDetailActivity;
@@ -40,7 +40,7 @@ public class OrderListAdapter extends BaseRecyclerAdapter<HyperShopOrderModel, O
     public void onBindViewHolder(@NonNull VH holder, int position) {
         HyperShopOrderModel item = getItem(position);
         holder.title.setText("فاکتور # " + (position + 1));
-        holder.date.setText(AppUtill.GregorianToPersian(item.CreatedDate) + "");
+        holder.date.setText(AppUtil.GregorianToPersian(item.CreatedDate) + "");
         holder.time.setText(new SimpleDateFormat("HH:mm:ss").format(item.CreatedDate) + "");
         holder.totalPrice.setText("مجموع : " + item.Amount);
         holder.showPaymentType(item);

@@ -15,7 +15,7 @@ import ntk.android.base.adapter.BaseRecyclerAdapter;
 import ntk.android.base.entitymodel.bankpayment.BankPaymentTransactionModel;
 import ntk.android.base.entitymodel.enums.EnumTransactionBankStatus;
 import ntk.android.base.entitymodel.enums.EnumTransactionRecordStatus;
-import ntk.android.base.utill.AppUtill;
+import ntk.android.base.utill.AppUtil;
 import ntk.android.base.utill.FontManager;
 import ntk.android.hyper.R;
 
@@ -34,7 +34,7 @@ public class HyperTransitionAdapter extends BaseRecyclerAdapter<BankPaymentTrans
     public void onBindViewHolder(@NonNull VH holder, int position) {
         BankPaymentTransactionModel item = getItem(position);
         holder.title.setText("پرداخت مبلغ " + item.Amount + " " + item.CurrencyUnit);
-        holder.date.setText(AppUtill.GregorianToPersian(item.CreatedDate) + "");
+        holder.date.setText(AppUtil.GregorianToPersian(item.CreatedDate) + "");
         holder.time.setText(new SimpleDateFormat("HH:mm:ss").format(item.CreatedDate) + "");
         holder.totalPrice.setText(EnumTransactionRecordStatus.get(item.TransactionStatus) + "");
         holder.showPayState(item);

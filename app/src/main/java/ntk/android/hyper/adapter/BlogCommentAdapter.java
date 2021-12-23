@@ -26,7 +26,7 @@ import ntk.android.base.config.NtkObserver;
 import ntk.android.base.entitymodel.base.ErrorExceptionBase;
 import ntk.android.base.entitymodel.blog.BlogCommentModel;
 import ntk.android.base.services.blog.BlogCommentService;
-import ntk.android.base.utill.AppUtill;
+import ntk.android.base.utill.AppUtil;
 import ntk.android.base.utill.FontManager;
 
 public class BlogCommentAdapter extends BaseRecyclerAdapter<BlogCommentModel, BlogCommentAdapter.ViewHolder> {
@@ -48,7 +48,7 @@ public class BlogCommentAdapter extends BaseRecyclerAdapter<BlogCommentModel, Bl
         BlogCommentModel item = list.get(position);
         holder.Lbls.get(0).setText(item.Writer);
         if (item.CreatedDate != null) {
-            holder.Lbls.get(1).setText(AppUtill.GregorianToPersian(item.CreatedDate));
+            holder.Lbls.get(1).setText(AppUtil.GregorianToPersian(item.CreatedDate));
         } else {
             holder.Lbls.get(1).setText("");
         }
